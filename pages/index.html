@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../styles/style.css">
+    <title>Eduvo</title>
+</head>
+<body>
+    <div class="container">
+        <div class="loginForm">
+            <h1>Welcome Back To</h1>
+            <img class="logo" src="../assest/img/Eduvo.svg" alt="">
+            <p id="sologan">Your path to learning and career growth</p>
+    
+            <ul class="nav">
+                <li onclick="showLogin()">Login</li>
+                <li onclick="showSignUp()">Sign Up</li>
+            </ul>
+    
+    
+            <form action="">
+                <label for="email">Email</label>
+                <div class="email">
+                    <input type="email" placeholder="Enter your email adress" id="email" required>
+                    <img src="./assest/img/Email.png" alt="">
+                </div>
+                <label for="password">Password</label>
+                <div class="password">
+                    <input type="password" placeholder="Enter your password" id="password" required>
+                    <img src="./assest/img/Invisible.png" alt="">
+                </div>
+                
+                <a id="Forgot" href="./forgotPass.html">Forgot password?</a>
+                <button type="submit" class="Login">Login</button>
+            </form>
+    
+            <!-- <button class="Login">Login</button><br> -->
+    
+            <div class="separator">
+                <span>Or continue with</span>
+            </div>
+    
+            <div class="continue">
+                <button class="google">
+                    <img src="../assest/img/Google.png" alt="">
+                    <span>Google</span>
+                </button>
+    
+                <div class="pipe"></div>
+    
+                <button class="linkedin">
+                    <img src="../assest/img/LinkedIn.png" alt="">
+                    <span>LinkedIn</span>
+                </button>
+                
+            </div>
+            <p class="privacy">By signing in, you agree to our Terms of Service and <br>Privacy Policy</p></div>
+    
+
+
+            <!-- Sign up page  -->
+        
+            <div class="signupForm hidden" >
+                <h1>Welcome To</h1>
+                <img class="logo" src="../assest/img/Eduvo.svg" alt="">
+                <ul class="nav">
+                    <li onclick="showLogin()">Login</li>
+                    <li onclick="showSignUp()">Sign Up</li>
+                </ul>  
+
+                <form action="">
+                    <label for="fullName">Full Name</label>
+                    <div class="fullName">
+                        <input type="text" placeholder="Enter your Full Name" id="fullName">
+                        <img src="../assest/img/person.png" alt="">
+                    </div>
+                    <label for="email">Email</label>
+                    <div class="email">
+                        <input type="email" placeholder="Enter your email adress" id="email">
+                        <img src="../assest/img/Email.png" alt="">
+                    </div>
+                    <label for="password">Password</label>
+                    <div class="password">
+                        <input type="password" placeholder="Enter your password" id="password" required>
+                        <img src="../assest/img/Invisible.png" alt="">
+                    </div>
+                    
+                    <label for="confirmPassword">Confirm Password</label>
+                    <div class="password">
+                        <input type="password" placeholder="Enter your password" id="confirmPassword" required>
+                        <img src="../assest/img/Invisible.png" alt="">
+                    </div>
+
+                    <div class="Terms">
+                        <p>I agree to the Terms of Service and  Privacy Policy</p>
+                        <button class="toggle"></button>
+                    </div>
+
+                    <button class="createAcc">Create Account</button>
+                    
+                </form>
+
+                <div class="separator">
+                    <span>Or continue with</span>
+                </div>
+        
+
+                <div class="continue">
+                    <button class="google">
+                        <img src="../assest/img/Google.png" alt="">
+                        <span>Google</span>
+                    </button>
+        
+                    <div class="pipe"></div>
+        
+                    <button class="linkedin">
+                        <img src="../assest/img/LinkedIn.png" alt="">
+                        <span>LinkedIn</span>
+                    </button>
+                </div>
+
+            </div>
+        
+    </div>
+</body>
+<script>
+
+    function showLogin(){
+        document.querySelector(".signupForm").style.display="none";
+        document.querySelector(".loginForm").style.display="block";
+    }
+
+    function showSignUp(){
+        document.querySelector(".loginForm").style.display ="none";
+        document.querySelector(".signupForm").style.display ="block";
+    }
+
+</script>
+</html>
