@@ -94,7 +94,7 @@ a{
 } */
 
 
-body{
+body {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -102,18 +102,18 @@ body{
     /* background: #1F3C88F5; */
 }
 
-.separator{
+.separator {
     background: red;
     position: relative;
 }
 
-.separator span{
+.separator span {
     padding: 10px;
     position: relative;
     z-index: 1;
 }
 
-.separator ::after{
+.separator ::after {
     content: "";
     height: 5px;
     width: 100%;
