@@ -6,3 +6,4 @@ def index(request):
 def Forgot_Pass(request):
      return render(request, 'HTML_files/forgotPass.html')
 # Create your views here.
+
