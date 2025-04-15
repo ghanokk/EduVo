@@ -1,0 +1,90 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'CSS_files/style.css' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <title>Eduvo | Register & Login</title>
+</head>
+
+<body>
+  <div class="container">
+
+    <div class="left">
+      <h1 class="welcoming-header">Welcome Back</h1>
+      <img src="{% static 'assets/img/Eduvo.svg' %}" alt="Logo">
+      <p>Your path to learning and career growth</p>
+      <p class="welcome-p"></p>
+      <div class="divider">
+        <span class="welcome">Login with</span>
+      </div>
+
+      <div class="social-buttons">
+        <div class="social-btn google">
+          <i class="fab fa-google icon"></i>
+          <span class="text">Google</span>
+        </div>
+
+        <div class="social-btn linkedin">
+          <i class="icon fab fa-linkedin-in"></i>
+          <span class="text">LinkedIn</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="right">
+      <div class="tab-wrapper">
+        <div class="tab-group">
+          <div class="tab-bg"></div> <!-- le fond bleu qui glisse -->
+          <button class="tab-btn active"
+            onclick="activateTab(this, 'login', event); changeWelcoming('login')">Login</button>
+          <button class="tab-btn" onclick="activateTab(this, 'signup', event);  changeWelcoming('signup')">Sign
+            Up</button>
+        </div>
+      </div>
+
+      <div class="tab-wrraper">
+        <div class="tab-content active" id="login" onclick="switchTab('login')">
+          <label for="email">Email</label>
+          <input type="email" id="email" placeholder="Enter your email adress">
+          <label for="password">Password</label>
+          <input type="password" id="password" placeholder="Enter your password">
+          <a href="{% url 'forgotPass' %}">Forgot password?</a>
+          <button class="infos-btn">
+            Login
+            <span class="arrow">→</span>
+          </button>
+        </div>
+
+        <div class="tab-content" id="signup" onclick="switchTab('signup')">
+          <label for="fullname">Full Name</label>
+          <input type="text" id="fullname" placeholder="Enter your full name">
+          <label for="email">Email</label>
+          <input type="email" id="email" placeholder="Enter your email adress">
+          <label for="password">Password</label>
+          <input type="password" id="password" placeholder="Enter your password">
+          <label for="confirmation">Confirm password</label>
+          <input type="password" id="confirmation" placeholder="Confirm your password">
+          <div class="privacy">
+            <p>I agree to the Terms of Service and <br> Privacy Policy</p>
+            <div class="toggle-btn" onclick="toggleSwitch()">
+              <div class="circle "></div>
+            </div>
+          </div>
+          <button class="infos-btn disabled" id="signup-btn">
+            Sign Up
+            <span class="arrow">→</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script src="{% static './JS_files/script.js' %}"></script>
+</body>
+
+</html>
