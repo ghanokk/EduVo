@@ -1,10 +1,9 @@
 from django.shortcuts import render
 
-def forgotPass(request):
-     return render(request, 'HTML_files/forgotPass.html')
-from django.shortcuts import render
+def ForgotPass(request):
+     return render(request, 'HTML_files/ForgotPass.html')
 
-def register(request):
-     return render(request, 'HTML_files/register.html')
+def Register(request):
+     return render(request, 'HTML_files/Register.html')
 
 # Create your views here.
