@@ -3,11 +3,11 @@ from django.shortcuts import render
 def ForgotPass(request):
      return render(request, 'HTML_files/ForgotPass.html')
 
-def register(request):
-    return render(request, 'HTML_files/register.html')
+def Register(request):
+    return render(request, 'HTML_files/Register.html')
 
-def homePage(request):
-     return render(request, 'HTML_files/homePage.html')
+def HomePage(request):
+     return render(request, 'HTML_files/HomePage.html')
 
 
 # Create your views here.
