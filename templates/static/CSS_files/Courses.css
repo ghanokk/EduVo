@@ -1,0 +1,264 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+    body {
+      background: #EAF2FF;
+      padding: 0 50px;
+    }
+
+
+    #top-courses{
+        font-size: 54px;
+        margin-bottom: 60px;
+        text-align: center;
+    }
+    
+    .carousel-container {
+        width: 90%;
+        display: flex;
+        justify-content: center;
+        position: relative;
+        padding: 0 20px; /* Espace à gauche et à droite */
+        margin-bottom: 100px;
+      }
+      
+      .carousel {
+        display: flex;
+        overflow: ;
+        gap: 5px;
+        width: 60%;
+        transition: transform 0.5s ease; /* Animation de transition simple */
+      }
+      
+      .carousel-item {
+        min-width: 100%;
+        min-height:  200px;
+        height: fit-content;
+        box-sizing: border-box;
+        background-color: #f0f0f0;
+        text-align: center;;
+      }
+      
+      .carousel-item img{
+        height: 420px;
+        width: 100%;
+      }
+
+      .prev , .next{
+        position: absolute;
+        top: 40%;
+        height: 50px;
+        border-radius: 50%;
+        width: 50px;
+        background-color: rgba(0, 0, 0, 0.5);
+        color: white;
+        border: none;
+        padding: 10px;
+        cursor: pointer;
+      }
+      
+      button.prev {
+        left: 10px;
+      }
+      
+      button.next {
+        right: 10px;
+      }
+      
+      
+    
+     .search-wrraper{
+        display: flex;
+        justify-content: center;
+        width: 90%;
+        gap: 25px;
+        margin-bottom: 30px;
+     }
+
+    .clear {
+        height: 75px;
+        width: 150px;
+        font-size: 28px;
+        cursor: pointer;
+        border: none;
+        background: #FF4949DE;
+        margin-bottom: 50px;
+    }
+
+     .search-bar{
+        width: 60%;
+        position: relative;
+     }
+
+     .search-bar-input{
+        height: 75px;
+        border-radius: 100px;
+        border: none;
+        width: 90%;
+        padding: 0 20px;
+        font-size: 25px;
+        color: black;
+        outline: none;
+     }
+
+     .search-icon{
+        position: absolute;
+        top: 25%;
+        scale: 2;
+        left: 89%;
+        transform: translateX(-130%);
+     }
+
+     .search-wrraper button{
+        height: 75px;
+        width: 150px;
+        font-size: 28px;
+        cursor: pointer;
+        border: none;
+     }
+
+     .apply{
+        background: #56C288;
+     }
+     .all-courses{
+        height: 725px;
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+     }
+
+     .filter{
+        width: 30%;
+        /* background: blue; */
+        background: white;
+        padding: 10px;
+     }
+
+     .filter h2{
+font-size: 24px;
+     }
+
+     .filter h1{
+        text-align: center;
+        font-size: 32px;
+             }
+
+             .rating-filter , .level-filter,.price-filter{
+                margin-bottom: 30px;
+             }
+     .rating-item{
+        color: #FFD700;
+     }
+
+     .select{
+        display: flex;
+        justify-content: space-around;
+        margin-bottom: 30px;
+        gap: 5px;
+     }
+
+     .select-paid , .select-free{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 28px ;
+        font-weight: bold;
+        gap: 10px;
+     }
+
+     #price-range{
+        display: block;
+        width: 70%;
+        margin: auto;
+        height: 1px;
+        color: black;
+     }
+
+     .level-choices{
+        padding: 0 30px;
+     }
+
+     .select-level{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+     .select-level p{
+        font-size: 28px;
+        font-weight: bold;
+        
+     }
+
+     .filter h2{
+        margin-bottom: 20px;
+     }
+
+.check{
+    height: 25px;
+    width: 25px;
+}
+     
+
+     .courses-list{
+        width: 68%;
+        background: #EAF2FF;
+        overflow: scroll;
+     }
+
+     .course-list-box{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        height: 210px;
+        margin-bottom: 30px;
+        background: white;
+        
+         }
+
+    
+
+     .course-infos{
+        margin: auto;
+        width: 60%;
+        padding: 0 5px;
+        white-space: wrap;
+        text-overflow: ellipsis;
+        line-height: 1.5;
+    
+     }
+
+     .course-title{
+        font-size: 20px;
+        font-weight: bold;
+     }
+
+     .course-description , .course-teacher{
+        font-size: 16px;
+     }
+
+     .course-description{
+        color:#6B778C ;    }
+
+     .course-stats{
+        display: flex;
+        gap: 5px;
+        
+     }
+
+     .course-tags{
+        display: flex;
+        gap: 8px;
+        color: #6B778C;
+
+     }
+
+     .course-price{
+        font-size: 26px;
+        font-weight: bold;
+
+     }
