@@ -28,9 +28,9 @@
                 <h1 class="logo-txt">Eduvo</h1>
             </div>
             <div class="nav-links">
-                <a href="">Home <i class="fa-solid fa-angle-down"></i></a>
-                <a href="">Courses <i class="fa-solid fa-angle-down"></i></a>
-                <a href="">Jobs <i class="fa-solid fa-angle-down"></i></a>
+                <a href="{% url 'homePage' %}">Home <i class="fa-solid fa-angle-down"></i></a>
+                <a href="{% url 'Courses' %}">Courses <i class="fa-solid fa-angle-down"></i></a>
+                <a href="{% url 'Jobs' %}">Jobs <i class="fa-solid fa-angle-down"></i></a>
             </div>
             <div class="register">
                 <button class="register-btn login-btn"><a href="{% url 'login' %}"
@@ -58,9 +58,9 @@
             </div>
             <div class="explore">
                 <h1>Explore</h1>
-                <a href="">Home</a>
-                <a href="">Courses</a>
-                <a href="">Jobs</a>
+                <a href="{% url 'homePage'%}">Home</a>
+                <a href="{% url 'Courses' %}">Courses</a>
+                <a href="{% url 'Jobs' %}">Jobs</a>
             </div>
             <div class="company">
                 <h1>Company</h1>
@@ -82,7 +82,7 @@
             </div>
         </div>
 
-        <script src="{% static './JS_files/script1.js' %}"></script>
+        <!-- <script src="{% static './JS_files/script1.js' %}"></script> -->
     </body>
 
 </html>

@@ -1,0 +1,137 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+body {
+    margin: 0;
+    font-family: 'Outfit', sans-serif;
+    background-color: #f0f6ff;
+    font-family: 'Outfit', sans-serif;
+
+}
+
+/* Navbar */
+.navbar {
+    background-color: white;
+    padding: 15px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.nav-left {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+    padding: 0;
+    margin: 0;
+}
+
+.nav-links li {
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.nav-profile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.nav-user-img {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+}
+
+
+.container {
+    display: flex;
+    padding: 40px;
+    gap: 40px;
+}
+
+.historie-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    padding: 15px 20px;
+
+
+    width: fit-content;
+
+
+    margin-bottom: 10PX;
+    margin-top: 15PX;
+}
+
+.back-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    background-color: black;
+    color: white;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+    transition: background-color 0.3s;
+}
+
+.back-button:hover {
+    background-color: #333;
+}
+
+.logo {
+    width: 40px;
+    height: auto;
+}
+
+h1 {
+    font-size: 24px;
+    margin: 0;
+}
+
+.all-jobs-section {
+    padding: 30px;
+}
+
+.all-jobs-section h2 {
+    margin-bottom: 20px;
+}
+
+.all-job-card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.all-job-card img {
+    width: 40px;
+    height: 40px;
+}
+
+.apply-btn {
+    background: #3DB2FF40;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: bold;
+    color: #0b3d91;
+    cursor: pointer;
+}
