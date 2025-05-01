@@ -1,0 +1,326 @@
+{% load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{%static '../static/styles/Courses.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <title>Eduvo | Courses</title>
+</head>
+<body>
+    
+                <!-- top courses -->
+                 <h1 id="top-courses">Top Courses This week</h1>
+                <div class="all-carousel-container">
+                    <div class="carousel-container">
+                        <div class="carousel">
+                            
+                            <div class="carousel-item">
+                                <div class="item-img">
+                                    <img src="{%static '../static/assets/img/course-full-stack.png' %}" alt="">
+                                </div>
+                                <div class="item-info">
+                                    <p class="item-info-title">full course Javascript for beginners</p>
+                                    <p class="item-info-tch&ctg">Yacine Douga | Development</p>
+                                </div>
+                                
+                              </div>   
+                           
+                          
+                          
+                          <div class="carousel-item">
+                            <div class="item-img">
+                                <img src="{%static '../static/assets/img/course-js.png' %}" alt="">
+                            </div>
+                            <div class="item-info">
+                                <p class="item-info-title">full course Javascript for beginners</p>
+                                <p class="item-info-tch&ctg">Yacine Douga | Development</p>
+                            </div>
+                            
+                          </div>
+                          
+                          <div class="carousel-item">
+                            <div class="item-img">
+                                <img src="{%static '../static/assets/img/course-java.png' %}" alt="">
+                            </div>
+                            <div class="item-info">
+                                <p class="item-info-title">full course Javascript for beginners</p>
+                                <p class="item-info-tch&ctg">Yacine Douga | Development</p>
+                            </div>
+                          </div>
+                          
+                          
+                          <div class="carousel-item">
+                            <div class="item-img">
+                                <img src="{%static '../static/assets/img/premiere-pro-course.png' %}" alt="">
+                            </div>
+                            <div class="item-info">
+                                <p class="item-info-title">Full course Javascript for beginners</p>
+                                <!-- <p class="item-info-data">Yacine Douga | Development</p> -->
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                </div>
+                  
+                  <button class="prev">&#10094;</button>
+                  <button class="next">&#10095;</button>
+                  
+                
+                    <!-- search -->
+
+  <div class="search-wrraper">
+    <div class="search-bar">
+        <input type="text" class="search-bar-input" placeholder="Search courses , Category , Tags">
+        <img src="{%static '../static/assets/img/search.svg' %}" alt="" class="search-icon">
+
+    </div>
+    <button class="search-wrraper-button search-category-btn">Category <i class="fa-solid fa-angle-down arrow"></i>
+        <div class="search-category">
+            <h2>Category</h2>
+            <p>Business</p>
+            <p>Design</p>
+            <p>Developement</p>
+            <p>Finance</p>
+            <p>Fitness & Health</p>
+            <p>Marketing</p>
+            <p>Photography & Video</p>
+        </div>
+    </button>
+    
+    <button class="search-wrraper-button apply">Apply all</button>
+  </div>
+
+  
+  
+
+
+  <div class="all-courses">
+    <div class="filter">
+        <h1>Filter</h1>
+        <div class="rating-filter">
+            <h2>Rating</h2>
+            <div class="rating-wrraper">
+                <i class="fa-solid fa-star rating-item"></i>
+                <i class="fa-solid fa-star rating-item"></i>
+                <i class="fa-solid fa-star rating-item"></i>
+                <i class="fa-solid fa-star rating-item"></i>
+                <i class="fa-solid fa-star rating-item"></i>
+            </div>
+        </div>
+        <div class="price-filter">
+            <h2>Price</h2>
+            <div class="select">
+                <div class="select-paid">
+                    <label for="paid">Paid</label>
+                <input type="checkbox" name="" id="paid" class="check">
+                </div>
+                
+                <div class="select-free">
+                    <label for="free">Free</label>
+                    <input type="checkbox" name="" id="free" class="check">
+                </div>
+            </div>
+            <input type="range" min="0" max="1000" id="price-range">
+        </div>
+
+        
+        <div class="level-filter">
+            <h2>Level</h2>
+            <div class="level-choices">
+    
+                <div class="select-level">
+                    <p>Beginner</p>
+                    <input type="checkbox" name="" id="" class="check">
+                </div>
+    
+                <div class="select-level">
+                    <p>Intermediere</p>
+                    <input type="checkbox" name="" id="" class="check">
+                </div>
+    
+                <div class="select-level">
+                    <p>Professional</p>
+                    <input type="checkbox" name="" id="" class="check">
+                </div>
+            </div>
+
+            <div class="filter-actions">
+                <button class="submit-filter">Filter</button>
+                <button class="clear">Clear All</button>
+            </div>
+            
+            
+        </div>
+
+    </div>
+
+
+    <div class="courses-list">
+        <div class="course-list-box" onclick="window.location.href='Course-model.html'">
+
+            <div class="course-img">
+                <img src="{%static '../static/assets/img/course-full-stack.png' %}" alt="">
+            </div>
+
+            <div class="course-infos">
+                <p class="course-title">The Complete Full-Stack Web Development Bootcamp</p>
+                <p class="course-description">Become a Full-Stack Web Developer with just ONE course. HTML, CSS, Javascript, Node, React, PostgreSQL, Web3 and DApps</p>
+                <p class="course-teacher">Jonas Schmedtmann</p>
+                <div class="course-stats">
+                    <div class="course-rating">
+                        <i class="fa-solid fa-star rating-item"></i>
+                        <i class="fa-solid fa-star rating-item"></i>
+                        <i class="fa-solid fa-star rating-item"></i>
+                        <i class="fa-solid fa-star rating-item"></i>
+                        <i class="fa-solid fa-star rating-item"></i>
+                    </div>
+
+                    <div class="course-rating-number"> (432,745 ratings)</div>
+                    <div class="course-students"> (432,745 ratings)</div>
+                </div>
+    
+                <div class="course-tags">
+                    <p>Total hours</p>
+                    <p>Lectures</p>
+                    <p>Level</p>
+                </div>
+    
+                <div class="course-price">
+                    <p>Price: 4,200 DZD</p>
+                    <p class="go-into"><a href="#">→</a></p>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="course-list-box">
+            
+            <div class="course-img">
+                <img src="{%static '../static/assets/img/course-js.png' %}" alt="">
+            </div>
+
+            <div class="course-infos">
+                <p class="course-title">The Complete Full-Stack Web Development Bootcamp</p>
+                <p class="course-description">Become a Full-Stack Web Developer with just ONE course. HTML, CSS, Javascript, Node, React, PostgreSQL, Web3 and DApps</p>
+                <p class="course-teacher">Jonas Schmedtmann</p>
+                <div class="course-stats">
+                    <div class="course-rating">
+                        <i class="fa-solid fa-star rating-item"></i>
+                        <i class="fa-solid fa-star rating-item"></i>
+                        <i class="fa-solid fa-star rating-item"></i>
+                        <i class="fa-solid fa-star rating-item"></i>
+                        <i class="fa-solid fa-star rating-item"></i>
+                    </div>
+
+                    <div class="course-rating-number"> (432,745 ratings)</div>
+                    <div class="course-students"> (432,745 ratings)</div>
+                </div>
+    
+                <div class="course-tags">
+                    <p>Total hours</p>
+                    <p>Lectures</p>
+                    <p>Level</p>
+                </div>
+    
+                <div class="course-price">
+                    <p>Price: 4,200 DZD</p>
+                    <p class="go-into"><a href="#">→</a></p>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="course-list-box">
+            
+            <div class="course-img">
+                <img src="{%static '../static/assets/img/course-full-stack-1.png' %}" alt="">
+            </div>
+
+            <div class="course-infos">
+                <p class="course-title">The Complete Full-Stack Web Development Bootcamp</p>
+                <p class="course-description">Become a Full-Stack Web Developer with just ONE course. HTML, CSS, Javascript, Node, React, PostgreSQL, Web3 and DApps</p>
+                <p class="course-teacher">Jonas Schmedtmann</p>
+                <div class="course-stats">
+                    <div class="course-rating">
+                        <i class="fa-solid fa-star rating-item"></i>
+                        <i class="fa-solid fa-star rating-item"></i>
+                        <i class="fa-solid fa-star rating-item"></i>
+                        <i class="fa-solid fa-star rating-item"></i>
+                        <i class="fa-solid fa-star rating-item"></i>
+                    </div>
+
+                    <div class="course-rating-number"> (432,745 ratings)</div>
+                    <div class="course-students"> (432,745 ratings)</div>
+                </div>
+    
+                <div class="course-tags">
+                    <p>Total hours</p>
+                    <p>Lectures</p>
+                    <p>Level</p>
+                </div>
+    
+                <div class="course-price">
+                    <p>Price: 4,200 DZD</p>
+                    <p class="go-into"><a href="#">→</a></p>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="course-list-box">
+            
+            <div class="course-img">
+                <img src="{%static '../static/assets/img/premiere-pro-course.png' %}" alt="">
+            </div>
+
+            <div class="course-infos">
+                <p class="course-title">The Complete Full-Stack Web Development Bootcamp</p>
+                <p class="course-description">Become a Full-Stack Web Developer with just ONE course. HTML, CSS, Javascript, Node, React, PostgreSQL, Web3 and DApps</p>
+                <p class="course-teacher">Jonas Schmedtmann</p>
+                <div class="course-stats">
+                    <div class="course-rating">
+                        <i class="fa-solid fa-star rating-item"></i>
+                        <i class="fa-solid fa-star rating-item"></i>
+                        <i class="fa-solid fa-star rating-item"></i>
+                        <i class="fa-solid fa-star rating-item"></i>
+                        <i class="fa-solid fa-star rating-item"></i>
+                    </div>
+
+                    <div class="course-rating-number"> (432,745 ratings)</div>
+                    <div class="course-students"> (432,745 ratings)</div>
+                </div>
+    
+                <div class="course-tags">
+                    <p>Total hours</p>
+                    <p>Lectures</p>
+                    <p>Level</p>
+                </div>
+    
+                <div class="course-price">
+                    <p>Price: 4,200 DZD</p>
+                    <p class="go-into"><a href="#">→</a></p>
+                </div>
+
+                
+
+            </div>
+
+            
+        </div>
+        
+    </div>
+
+
+    
+  </div>
+
+  <script src="{%static '../static/scripts/Courses.js' %}"></script>
+</body>
+</html>
+
+
