@@ -4,8 +4,6 @@
 
 {% block content %}
 
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -28,19 +26,30 @@
         <div class="carousel-container">
             <div class="carousel">
 
+                {% for course in top_courses %}
                 <div class="carousel-item">
                     <div class="item-img">
-                        <img src="{% static 'assets/img/course-full-stack.png' %}" alt="">
+                        {% if course.video %}
+                        <video width="100%" height="auto" controls poster="{% if course.image %}{{ course.image.url }}{% else %}{% static 'assets/img/default-video-poster.jpg' %}{% endif %}">
+                            <source src="{{ course.video.url }}" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        {% else %}
+                        <img src="{% if course.image %}{{ course.image.url }}{% else %}{% static 'assets/img/default-course.png' %}{% endif %}" alt="{{ course.title }}">
+                        {% endif %}
                     </div>
                     <div class="item-info">
-                        <p class="item-info-title">full course Javascript for beginners</p>
-                        <p class="item-info-tch&ctg">Yacine Douga | Development</p>
+                        <p class="item-info-title">{{ course.title }}</p>
+                        <p class="item-info-tch&ctg">{{ course.teacher.username }} | {{ course.category }}</p>
+                        <!-- Display views count if available -->
+                        {% if course.views %}
+                        <p class="item-info-views">{{ course.views }} views</p>
+                        {% endif %}
                     </div>
-
                 </div>
+                {% endfor %}
 
-
-
+                <!-- Fallback static items (kept your original comments) -->
                 <div class="carousel-item">
                     <div class="item-img">
                         <img src="{% static 'assets/img/course-js.png' %}" alt="">
@@ -49,7 +58,6 @@
                         <p class="item-info-title">full course Javascript for beginners</p>
                         <p class="item-info-tch&ctg">Yacine Douga | Development</p>
                     </div>
-
                 </div>
 
                 <div class="carousel-item">
@@ -61,7 +69,6 @@
                         <p class="item-info-tch&ctg">Yacine Douga | Development</p>
                     </div>
                 </div>
-
 
                 <div class="carousel-item">
                     <div class="item-img">
@@ -81,7 +88,6 @@
 
 
     <!-- search -->
-
     <div class="search-wrraper">
         <div class="search-bar">
             <input type="text" class="search-bar-input" placeholder="Search courses , Category , Tags">
@@ -103,10 +109,6 @@
 
         <button class="search-wrraper-button apply">Apply all</button>
     </div>
-
-
-
-
 
     <div class="all-courses">
         <div class="filter">
@@ -137,7 +139,6 @@
                 <input type="range" min="0" max="1000" id="price-range">
             </div>
 
-
             <div class="level-filter">
                 <h2>Level</h2>
                 <div class="level-choices">
@@ -162,185 +163,52 @@
                     <button class="submit-filter">Filter</button>
                     <button class="clear">Clear All</button>
                 </div>
-
-
             </div>
-
         </div>
-
 
         <div class="courses-list">
-
-            <div class="course-list-box" onclick=window.location.href="{% url 'Course_model' %}">
-
-
-                <div class="course-img">
-                    <img src="{% static 'assets/img/course-full-stack.png' %}" alt="">
+            {% for course in all_courses %}
+            <div class="course-list-box" data-course-url="{% url 'course_detail' course.id %}" onclick="window.location.href=this.getAttribute('data-course-url')">
+                                    <div class="course-img">
+                    {% if course.video %}
+                    <video width="100%" height="auto" controls poster="{% if course.image %}{{ course.image.url }}{% else %}{% static 'assets/img/default-video-poster.jpg' %}{% endif %}">
+                        <source src="{{ course.video.url }}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    {% else %}
+                    <img src="{% if course.image %}{{ course.image.url }}{% else %}{% static 'assets/img/default-course.png' %}{% endif %}" alt="{{ course.title }}">
+                    {% endif %}
                 </div>
 
                 <div class="course-infos">
-                    <p class="course-title">The Complete Full-Stack Web Development Bootcamp</p>
-                    <p class="course-description">Become a Full-Stack Web Developer with just ONE course. HTML, CSS,
-                        Javascript, Node, React, PostgreSQL, Web3 and DApps</p>
-                    <p class="course-teacher">Jonas Schmedtmann</p>
+                    <p class="course-title">{{ course.title }}</p>
+                    <p class="course-description">{{ course.description|truncatechars:150 }}</p>
+                    <p class="course-teacher">{{ course.teacher.username }}</p>
                     <div class="course-stats">
                         <div class="course-rating">
-                            <i class="fa-solid fa-star rating-item"></i>
-                            <i class="fa-solid fa-star rating-item"></i>
-                            <i class="fa-solid fa-star rating-item"></i>
-                            <i class="fa-solid fa-star rating-item"></i>
-                            <i class="fa-solid fa-star rating-item"></i>
+                            {% with full_stars=course.rating|floatformat:0 %}
+                                {% for i in "12345" %}
+                                    <i class="fa-solid fa-star rating-item {% if forloop.counter <= full_stars %}checked{% endif %}"></i>
+                                {% endfor %}
+                            {% endwith %}
+                            <span class="rating-number">({{ course.rating|floatformat:1 }})</span>
                         </div>
-
-                        <div class="course-rating-number"> (432,745 ratings)</div>
-                        <div class="course-students"> (432,745 ratings)</div>
+                        {% if course.views %}
+                        <div class="course-views">{{ course.views }} views</div>
+                        {% endif %}
+                        <div class="course-price">
+                            <p>Price: {{ course.price }} DZD</p>
+                            <p class="go-into"><a href="{% url 'course_detail' course.id %}">→</a></p>
+                        </div>
                     </div>
-
-                    <div class="course-tags">
-                        <p>Total hours</p>
-                        <p>Lectures</p>
-                        <p>Level</p>
-                    </div>
-
-                    <div class="course-price">
-                        <p>Price: 4,200 DZD</p>
-                        <p class="go-into"><a href="#">→</a></p>
-                    </div>
-
                 </div>
             </div>
-
-
-            <div class="course-list-box">
-
-                <div class="course-img">
-                    <img src="{% static 'assets/img/course-js.png' %}" alt="">
-                </div>
-
-                <div class="course-infos">
-                    <p class="course-title">The Complete Full-Stack Web Development Bootcamp</p>
-                    <p class="course-description">Become a Full-Stack Web Developer with just ONE course. HTML, CSS,
-                        Javascript, Node, React, PostgreSQL, Web3 and DApps</p>
-                    <p class="course-teacher">Jonas Schmedtmann</p>
-                    <div class="course-stats">
-                        <div class="course-rating">
-                            <i class="fa-solid fa-star rating-item"></i>
-                            <i class="fa-solid fa-star rating-item"></i>
-                            <i class="fa-solid fa-star rating-item"></i>
-                            <i class="fa-solid fa-star rating-item"></i>
-                            <i class="fa-solid fa-star rating-item"></i>
-                        </div>
-
-                        <div class="course-rating-number"> (432,745 ratings)</div>
-                        <div class="course-students"> (432,745 ratings)</div>
-                    </div>
-
-                    <div class="course-tags">
-                        <p>Total hours</p>
-                        <p>Lectures</p>
-                        <p>Level</p>
-                    </div>
-
-                    <div class="course-price">
-                        <p>Price: 4,200 DZD</p>
-                        <p class="go-into"><a href="#">→</a></p>
-                    </div>
-
-                </div>
-            </div>
-
-
-            <div class="course-list-box">
-
-                <div class="course-img">
-                    <img src="{% static 'assets/img/course-full-stack-1.png' %}" alt="">
-                </div>
-
-                <div class="course-infos">
-                    <p class="course-title">The Complete Full-Stack Web Development Bootcamp</p>
-                    <p class="course-description">Become a Full-Stack Web Developer with just ONE course. HTML, CSS,
-                        Javascript, Node, React, PostgreSQL, Web3 and DApps</p>
-                    <p class="course-teacher">Jonas Schmedtmann</p>
-                    <div class="course-stats">
-                        <div class="course-rating">
-                            <i class="fa-solid fa-star rating-item"></i>
-                            <i class="fa-solid fa-star rating-item"></i>
-                            <i class="fa-solid fa-star rating-item"></i>
-                            <i class="fa-solid fa-star rating-item"></i>
-                            <i class="fa-solid fa-star rating-item"></i>
-                        </div>
-
-                        <div class="course-rating-number"> (432,745 ratings)</div>
-                        <div class="course-students"> (432,745 ratings)</div>
-                    </div>
-
-                    <div class="course-tags">
-                        <p>Total hours</p>
-                        <p>Lectures</p>
-                        <p>Level</p>
-                    </div>
-
-                    <div class="course-price">
-                        <p>Price: 4,200 DZD</p>
-                        <p class="go-into"><a href="#">→</a></p>
-                    </div>
-
-                </div>
-            </div>
-
-            <div class="course-list-box">
-
-                <div class="course-img">
-                    <img src="{%static 'assets/img/premiere-pro-course.png' %}" alt="">
-                </div>
-
-                <div class="course-infos">
-                    <p class="course-title">The Complete Full-Stack Web Development Bootcamp</p>
-                    <p class="course-description">Become a Full-Stack Web Developer with just ONE course. HTML, CSS,
-                        Javascript, Node, React, PostgreSQL, Web3 and DApps</p>
-                    <p class="course-teacher">Jonas Schmedtmann</p>
-                    <div class="course-stats">
-                        <div class="course-rating">
-                            <i class="fa-solid fa-star rating-item"></i>
-                            <i class="fa-solid fa-star rating-item"></i>
-                            <i class="fa-solid fa-star rating-item"></i>
-                            <i class="fa-solid fa-star rating-item"></i>
-                            <i class="fa-solid fa-star rating-item"></i>
-                        </div>
-
-                        <div class="course-rating-number"> (432,745 ratings)</div>
-                        <div class="course-students"> (432,745 ratings)</div>
-                    </div>
-
-                    <div class="course-tags">
-                        <p>Total hours</p>
-                        <p>Lectures</p>
-                        <p>Level</p>
-                    </div>
-
-                    <div class="course-price">
-                        <p>Price: 4,200 DZD</p>
-                        <p class="go-into"><a href="#">→</a></p>
-                    </div>
-
-
-
-                </div>
-
-
-            </div>
-
+            {% endfor %}
         </div>
-
-
-
     </div>
 
     <script src="{% static './JS_files/Courses.js' %}"></script>
-
 </body>
-
 </html>
-
 
 {% endblock content %}

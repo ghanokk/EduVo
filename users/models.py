@@ -10,12 +10,13 @@ class User(AbstractUser):
 class StudentProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)  #yetna7a koulch met3l9 bl user ida na7it m user
     bio = models.TextField(blank=True)  # السيرة الذاتية
-    skills = models.TextField(blank=True)  # المهارات
+    skills = models.JSONField(default=list)  # المهارات
 
 class TeacherProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     expertise = models.TextField(blank=True)  # التخصص
     bio = models.TextField(blank=True)  # السيرة الذاتية
+    reputation_score = models.IntegerField(default=0)
 
 class CompanyProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
