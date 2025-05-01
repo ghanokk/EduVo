@@ -31,6 +31,9 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'courses.apps.CoursesConfig',
+    'jobs.apps.JobsConfig',
+    'users.apps.UsersConfig',
     'website.apps.WebsiteConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -40,6 +43,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     
 ]
+
+AUTH_USER_MODEL = 'users.User'  # Tell Django to use your custom User model
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

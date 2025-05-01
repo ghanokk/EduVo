@@ -12,7 +12,4 @@ urlpatterns = [
     path('courses/Course_model/', views.Course_Model, name='Course_model'),
 
 
-
-
-
 ]
