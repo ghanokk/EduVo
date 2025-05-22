@@ -5,7 +5,7 @@ from django.conf.urls.static import static
 from . import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    # path('admin/', admin.site.urls)  -->   warning URL namespace 'admin' isn't unique
     path('', views.homePage, name='homePage'),
 
     path('forgotPass/', views.forgotPass, name='forgotPass'),
