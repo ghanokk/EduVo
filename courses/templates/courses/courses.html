@@ -1,0 +1,172 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {# had head ysavi fih lmeta tags w lCSS files #}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'CSS_files/courses.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <title>Eduvo | Courses</title>
+</head>
+
+<body>
+    {# had lsection ywari ltop courses t3 hadi semaine #}
+    <h1 id="top-courses">Top Courses This week</h1>
+    <div class="all-carousel-container">
+        <div class="carousel-container">
+            <div class="carousel">
+                {# had loop ywari ga3 top courses #}
+                {% for course in top_courses %}
+                <div class="carousel-item">
+                    <div class="item-img">
+                        {# had image tag ywari image t3 l'cours #}
+                        <img src="{{ course.image_url }}" alt="{{ course.title }}">
+                    </div>
+                    <div class="item-info">
+                        {# had div ysavi fih l'information t3 l'cours #}
+                        <p class="item-info-title">{{ course.title }}</p>
+                        <p class="item-info-tch&ctg">{{ course.teacher }} | {{ course.category }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    {# had lbuttons bach n7arko lcarousel #}
+    <button class="prev">&#10094;</button>
+    <button class="next">&#10095;</button>
+
+    {# had section ysavi fih l'search bar w lfilters #}
+    <div class="search-wrraper">
+        <div class="search-bar">
+            {# had input ysavi fih l'search query #}
+            <input type="text" class="search-bar-input" placeholder="Search courses, Category, Tags" value="{{ request.GET.search|default:'' }}">
+            <img src="{% static 'assets/img/search.svg' %}" alt="" class="search-icon">
+        </div>
+        {# had button ywari l'categories #}
+        <button class="search-wrraper-button search-category-btn">Category <i class="fa-solid fa-angle-down arrow"></i>
+            <div class="search-category">
+                <h2>Category</h2>
+                {# had loop kay3red ga3 lcategories #}
+                {% for category in categories %}
+                <p>{{ category }}</p>
+                {% endfor %}
+            </div>
+        </button>
+        <button class="search-wrraper-button apply">Apply all</button>
+    </div>
+
+    {# had section ysavi fih lfilters w lcourses list #}
+    <div class="all-courses">
+        {# had div ysavi fih l'filters #}
+        <div class="filter">
+            <h1>Filter</h1>
+            {# had div ysavi fih rating filter #}
+            <div class="rating-filter">
+                <h2>Rating</h2>
+                <div class="rating-wrraper">
+                    {# had stars y3tina l'rating value #}
+                    <i class="fa-solid fa-star rating-item" data-rating="1"></i>
+                    <i class="fa-solid fa-star rating-item" data-rating="2"></i>
+                    <i class="fa-solid fa-star rating-item" data-rating="3"></i>
+                    <i class="fa-solid fa-star rating-item" data-rating="4"></i>
+                    <i class="fa-solid fa-star rating-item" data-rating="5"></i>
+                </div>
+                <p class="selected-rating">Selected rating: <span>{{ request.GET.rating|default:'0' }}</span></p>
+            </div>
+            {# had div ysavi fih lprice filter #}
+            <div class="price-filter">
+                <h2>Price</h2>
+                <div class="select">
+                    {# had div ysavi fih lpaid courses #}
+                    <div class="select-paid">
+                        <label for="paid">Paid</label>
+                        <input type="radio" name="price_type" id="paid" value="paid" class="check" {% if request.GET.price_type == 'paid' %}checked{% endif %}>
+                    </div>
+
+                    {# had div ysavi fih lfree courses #}
+                    <div class="select-free">
+                        <label for="free">Free</label>
+                        <input type="radio" name="price_type" id="free" value="free" class="check" {% if request.GET.price_type == 'free' %}checked{% endif %}>
+                    </div>
+                </div>
+            </div>
+
+            {# had div ysavi fih level filter #}
+            <div class="level-filter">
+                <h2>Level</h2>
+                <div class="level-choices">
+                    {# had loop ywari ga3 levels #}
+                    {% for level_value, level_name in level_choices %}
+                    <div class="select-level">
+                        <p>{{ level_name }}</p>
+                        <input type="radio" name="level" value="{{ level_value }}" class="check" {% if request.GET.level == level_value %}checked{% endif %}>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                {# had div ysavi fih buttons t3 lfilter #}
+                <div class="filter-actions">
+                    <button class="submit-filter" onclick="filterCourses()">Filter</button>
+                    <button class="clear">Clear All</button>
+                </div>
+            </div>
+        </div>
+
+        {# had div ysavi fih courses list #}
+        <div class="courses-list">
+            {# had loop ywari ga3 courses #}
+            {% for course in courses %}
+            <div class="course-list-box" data-course-url="{% url 'course-model' course.id %}">
+                {# had div ysavi fih l'image ta3 lcours #}
+                <div class="course-img">
+                    <img src="{{ course.image_url }}" alt="{{ course.title }}">
+                </div>
+
+                {# had div ysavi fih l'information t3 cours #}
+                <div class="course-infos">
+                    <p class="course-title">{{ course.title }}</p>
+                    <p class="course-description">{{ course.description }}</p>
+                    <p class="course-teacher">{{ course.teacher }}</p>
+                    {# had div ysavi fih lstats t3 lcours #}
+                    <div class="course-stats">
+                        <div class="course-rating">
+                            {# had loop ywari lstars 3la 7sab rating #}
+                            {% for i in course.rating %}
+                            <i class="fa-solid fa-star rating-item"></i>
+                            {% endfor %}
+                        </div>
+                        <div class="course-rating-number">({{ course.rating_count }} ratings)</div>
+                        <div class="course-students">({{ course.student_count }} students)</div>
+                    </div>
+                    {# had div ysavi fih tags t3 lcours #}
+                    <div class="course-tags">
+                        <p>Total hours: {{ course.total_hours }}</p>
+                        <p>Lectures: {{ course.lectures }}</p>
+                        <p>Level: {{ course.level }}</p>
+                    </div>
+                    {# had div ysavi fih lprix w link t3 lcours #}
+                    <div class="course-price">
+                        <p>Price: {{ course.price }} DZD</p>
+                        <p class="go-into"><a href="{% url 'course-model' course.id %}">→</a></p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    {# had lscript kay3tina JavaScript dyal page #}
+    <script src="{% static 'JS_files/Courses.js' %}"></script>
+</body>
+</html>
+
+{% endblock content %}

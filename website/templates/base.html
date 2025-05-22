@@ -16,73 +16,73 @@
     <title>{% block title %}Eduvo{% endblock %}</title>
 </head>
 
+
+
 <body>
 
-    <body>
+    <!-- Navbar -->
+    <nav class="nav-bar">
+        <div class="logo">
+            <img class="logo-image" src="{% static './assets/image/Clippathgroup.png' %}"
+                style="filter: brightness(0) invert(1);" />
+            <h1 class="logo-txt">Eduvo</h1>
+        </div>
+        <div class="nav-links">
+            <a href="{% url 'homePage' %}">Home <i class="fa-solid fa-angle-down"></i></a>
+            <a href="{% url 'Courses' %}">Courses <i class="fa-solid fa-angle-down"></i></a>
+            <a href="{% url 'Jobs' %}">Jobs <i class="fa-solid fa-angle-down"></i></a>
+        </div>
+        <div class="register">
+            <button class="register-btn login-btn"><a href="{% url 'login' %}"
+                    style="color: inherit; text-decoration: none;">Log in</a></button>
+            <button class="register-btn signup-btn"><a href="{% url 'login' %}"
+                    style="color: inherit; text-decoration: none;">Sign up</a></button>
+        </div>
+    </nav>
 
-        <!-- Navbar -->
-        <nav class="nav-bar">
-            <div class="logo">
-                <img class="logo-image" src="{% static './assets/image/Clippathgroup.png' %}"
-                    style="filter: brightness(0) invert(1);" />
-                <h1 class="logo-txt">Eduvo</h1>
-            </div>
-            <div class="nav-links">
-                <a href="{% url 'homePage' %}">Home <i class="fa-solid fa-angle-down"></i></a>
-                <a href="{% url 'Courses' %}">Courses <i class="fa-solid fa-angle-down"></i></a>
-                <a href="{% url 'Jobs' %}">Jobs <i class="fa-solid fa-angle-down"></i></a>
-            </div>
-            <div class="register">
-                <button class="register-btn login-btn"><a href="{% url 'login' %}"
-                        style="color: inherit; text-decoration: none;">Log in</a></button>
-                <button class="register-btn signup-btn"><a href="{% url 'login' %}"
-                        style="color: inherit; text-decoration: none;">Sign up</a></button>
-            </div>
-        </nav>
+    <!-- Page content -->
+    {% block content %}{% endblock %}
 
-        <!-- Page content -->
-        {% block content %}{% endblock %}
-
-        <!-- Footer -->
-        <div class="footer">
-            <div class="footer-hero">
-                <div class="logo"><img src="{% static './assets/image/logo project.png' %}" alt=""></div>
-                <p>Eduvo is a smart e-learning platform connecting education <br>
-                    with employment. We offer hands-on courses, real-world projects, and <br>
-                    career guidance to help learners get job-ready.</p>
-                <div class="footer-hero-links">
-                    <a href="">terms of services</a>
-                    <a href="">Privacy policy</a>
-                    <a href="">Cookies settings</a>
-                </div>
-            </div>
-            <div class="explore">
-                <h1>Explore</h1>
-                <a href="{% url 'homePage'%}">Home</a>
-                <a href="{% url 'Courses' %}">Courses</a>
-                <a href="{% url 'Jobs' %}">Jobs</a>
-            </div>
-            <div class="company">
-                <h1>Company</h1>
-                <a href="">About us</a>
-                <a href="">Careers</a>
-                <a href="">Partnerships</a>
-                <a href="">Press & Media</a>
-                <a href="">Affiliate Program</a>
-            </div>
-            <div class="socials">
-                <h1>Socials</h1>
-                <div class="socials-wrraper">
-                    <i class="fab fa-x-twitter"></i>
-                    <i class="fab fa-facebook"></i>
-                    <i class="fab fa-youtube"></i>
-                    <i class="fab fa-instagram"></i>
-                    <i class="fab fa-linkedin"></i>
-                </div>
+    <!-- Footer -->
+    <div class="footer">
+        <div class="footer-hero">
+            <div class="logo"><img src="{% static './assets/image/logo project.png' %}" alt=""></div>
+            <p>Eduvo is a smart e-learning platform connecting education <br>
+                with employment. We offer hands-on courses, real-world projects, and <br>
+                career guidance to help learners get job-ready.</p>
+            <div class="footer-hero-links">
+                <a href="">terms of services</a>
+                <a href="">Privacy policy</a>
+                <a href="">Cookies settings</a>
             </div>
         </div>
+        <div class="explore">
+            <h1>Explore</h1>
+            <a href="{% url 'homePage'%}">Home</a>
+            <a href="{% url 'Courses' %}">Courses</a>
+            <a href="{% url 'Jobs' %}">Jobs</a>
+        </div>
+        <div class="company">
+            <h1>Company</h1>
+            <a href="">About us</a>
+            <a href="">Careers</a>
+            <a href="">Partnerships</a>
+            <a href="">Press & Media</a>
+            <a href="">Affiliate Program</a>
+        </div>
+        <div class="socials">
+            <h1>Socials</h1>
+            <div class="socials-wrraper">
+                <i class="fab fa-x-twitter"></i>
+                <i class="fab fa-facebook"></i>
+                <i class="fab fa-youtube"></i>
+                <i class="fab fa-instagram"></i>
+                <i class="fab fa-linkedin"></i>
+            </div>
+        </div>
+    </div>
 
-        <!-- <script src="{% static './JS_files/script1.js' %}"></script> -->
-    </body>
+    <!-- <script src="{% static './JS_files/script1.js' %}"></script> -->
+</body>
 
 </html>

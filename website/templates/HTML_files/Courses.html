@@ -20,7 +20,7 @@
 
 <body>
 
-    <!-- top courses -->
+
     <h1 id="top-courses">Top Courses This week</h1>
     <div class="all-carousel-container">
         <div class="carousel-container">
@@ -29,81 +29,37 @@
                 {% for course in top_courses %}
                 <div class="carousel-item">
                     <div class="item-img">
-                        {% if course.video %}
-                        <video width="100%" height="auto" controls poster="{% if course.image %}{{ course.image.url }}{% else %}{% static 'assets/img/default-video-poster.jpg' %}{% endif %}">
-                            <source src="{{ course.video.url }}" type="video/mp4">
-                            Your browser does not support the video tag.
-                        </video>
-                        {% else %}
-                        <img src="{% if course.image %}{{ course.image.url }}{% else %}{% static 'assets/img/default-course.png' %}{% endif %}" alt="{{ course.title }}">
-                        {% endif %}
+                        <img src="{{ course.image_url }}" alt="{{ course.title }}">
                     </div>
                     <div class="item-info">
                         <p class="item-info-title">{{ course.title }}</p>
-                        <p class="item-info-tch&ctg">{{ course.teacher.username }} | {{ course.category }}</p>
-                        <!-- Display views count if available -->
-                        {% if course.views %}
-                        <p class="item-info-views">{{ course.views }} views</p>
-                        {% endif %}
+                        <p class="item-info-tch&ctg">{{ course.teacher }} | {{ course.category }}</p>
                     </div>
                 </div>
                 {% endfor %}
-
-                <!-- Fallback static items (kept your original comments) -->
-                <div class="carousel-item">
-                    <div class="item-img">
-                        <img src="{% static 'assets/img/course-js.png' %}" alt="">
-                    </div>
-                    <div class="item-info">
-                        <p class="item-info-title">full course Javascript for beginners</p>
-                        <p class="item-info-tch&ctg">Yacine Douga | Development</p>
-                    </div>
-                </div>
-
-                <div class="carousel-item">
-                    <div class="item-img">
-                        <img src="{% static 'assets/img/course-java.png' %}" alt="">
-                    </div>
-                    <div class="item-info">
-                        <p class="item-info-title">full course Javascript for beginners</p>
-                        <p class="item-info-tch&ctg">Yacine Douga | Development</p>
-                    </div>
-                </div>
-
-                <div class="carousel-item">
-                    <div class="item-img">
-                        <img src="{% static 'assets/img/premiere-pro-course.png' %}" alt="">
-                    </div>
-                    <div class="item-info">
-                        <p class="item-info-title">Full course Javascript for beginners</p>
-                        <!-- <p class="item-info-data">Yacine Douga | Development</p> -->
-                    </div>
-                </div>
             </div>
+
         </div>
+
+        
     </div>
 
     <button class="prev">&#10094;</button>
     <button class="next">&#10095;</button>
 
 
-    <!-- search -->
+
     <div class="search-wrraper">
         <div class="search-bar">
-            <input type="text" class="search-bar-input" placeholder="Search courses , Category , Tags">
-            <img src="{%static 'assets/img/search.svg' %}" alt="" class="search-icon">
-
+            <input type="text" class="search-bar-input" placeholder="Search courses, Category, Tags" value="{{ request.GET.search|default:'' }}">
+            <img src="{% static 'assets/img/search.svg' %}" alt="" class="search-icon">
         </div>
         <button class="search-wrraper-button search-category-btn">Category <i class="fa-solid fa-angle-down arrow"></i>
             <div class="search-category">
                 <h2>Category</h2>
-                <p>Business</p>
-                <p>Design</p>
-                <p>Developement</p>
-                <p>Finance</p>
-                <p>Fitness & Health</p>
-                <p>Marketing</p>
-                <p>Photography & Video</p>
+                {% for category in categories %}
+                <p>{{ category }}</p>
+                {% endfor %}
             </div>
         </button>
 
@@ -116,90 +72,78 @@
             <div class="rating-filter">
                 <h2>Rating</h2>
                 <div class="rating-wrraper">
-                    <i class="fa-solid fa-star rating-item"></i>
-                    <i class="fa-solid fa-star rating-item"></i>
-                    <i class="fa-solid fa-star rating-item"></i>
-                    <i class="fa-solid fa-star rating-item"></i>
-                    <i class="fa-solid fa-star rating-item"></i>
+                    <i class="fa-solid fa-star rating-item" data-rating="1"></i>
+                    <i class="fa-solid fa-star rating-item" data-rating="2"></i>
+                    <i class="fa-solid fa-star rating-item" data-rating="3"></i>
+                    <i class="fa-solid fa-star rating-item" data-rating="4"></i>
+                    <i class="fa-solid fa-star rating-item" data-rating="5"></i>
                 </div>
+                <p class="selected-rating">Selected rating: <span>{{ request.GET.rating|default:'0' }}</span></p>
             </div>
             <div class="price-filter">
                 <h2>Price</h2>
                 <div class="select">
                     <div class="select-paid">
                         <label for="paid">Paid</label>
-                        <input type="checkbox" name="" id="paid" class="check">
+                        <input type="radio" name="price_type" id="paid" value="paid" class="check" {% if request.GET.price_type == 'paid' %}checked{% endif %}>
                     </div>
 
                     <div class="select-free">
                         <label for="free">Free</label>
-                        <input type="checkbox" name="" id="free" class="check">
+                        <input type="radio" name="price_type" id="free" value="free" class="check" {% if request.GET.price_type == 'free' %}checked{% endif %}>
                     </div>
                 </div>
-                <input type="range" min="0" max="1000" id="price-range">
+
             </div>
+
 
             <div class="level-filter">
                 <h2>Level</h2>
                 <div class="level-choices">
-
+                    {% for level_value, level_name in level_choices %}
                     <div class="select-level">
-                        <p>Beginner</p>
-                        <input type="checkbox" name="" id="" class="check">
+                        <p>{{ level_name }}</p>
+                        <input type="radio" name="level" value="{{ level_value }}" class="check" {% if request.GET.level == level_value %}checked{% endif %}>
                     </div>
-
-                    <div class="select-level">
-                        <p>Intermediere</p>
-                        <input type="checkbox" name="" id="" class="check">
-                    </div>
-
-                    <div class="select-level">
-                        <p>Professional</p>
-                        <input type="checkbox" name="" id="" class="check">
-                    </div>
+                    {% endfor %}
                 </div>
 
                 <div class="filter-actions">
-                    <button class="submit-filter">Filter</button>
+                    <button class="submit-filter" onclick="filterCourses()">Filter</button>
                     <button class="clear">Clear All</button>
                 </div>
             </div>
         </div>
 
         <div class="courses-list">
-            {% for course in all_courses %}
-            <div class="course-list-box" data-course-url="{% url 'course_detail' course.id %}" onclick="window.location.href=this.getAttribute('data-course-url')">
-                                    <div class="course-img">
-                    {% if course.video %}
-                    <video width="100%" height="auto" controls poster="{% if course.image %}{{ course.image.url }}{% else %}{% static 'assets/img/default-video-poster.jpg' %}{% endif %}">
-                        <source src="{{ course.video.url }}" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
-                    {% else %}
-                    <img src="{% if course.image %}{{ course.image.url }}{% else %}{% static 'assets/img/default-course.png' %}{% endif %}" alt="{{ course.title }}">
-                    {% endif %}
+            {% for course in courses %}
+            <div class="course-list-box" data-course-url="{% url 'course-model' course.id %}">
+                <div class="course-img">
+                    <img src="{{ course.image_url }}" alt="{{ course.title }}">
+
                 </div>
 
                 <div class="course-infos">
                     <p class="course-title">{{ course.title }}</p>
-                    <p class="course-description">{{ course.description|truncatechars:150 }}</p>
-                    <p class="course-teacher">{{ course.teacher.username }}</p>
+                    <p class="course-description">{{ course.description }}</p>
+                    <p class="course-teacher">{{ course.teacher }}</p>
                     <div class="course-stats">
                         <div class="course-rating">
-                            {% with full_stars=course.rating|floatformat:0 %}
-                                {% for i in "12345" %}
-                                    <i class="fa-solid fa-star rating-item {% if forloop.counter <= full_stars %}checked{% endif %}"></i>
-                                {% endfor %}
-                            {% endwith %}
-                            <span class="rating-number">({{ course.rating|floatformat:1 }})</span>
+                            {% for i in course.rating %}
+                            <i class="fa-solid fa-star rating-item"></i>
+                            {% endfor %}
                         </div>
-                        {% if course.views %}
-                        <div class="course-views">{{ course.views }} views</div>
-                        {% endif %}
-                        <div class="course-price">
-                            <p>Price: {{ course.price }} DZD</p>
-                            <p class="go-into"><a href="{% url 'course_detail' course.id %}">→</a></p>
-                        </div>
+                        <div class="course-rating-number">({{ course.rating_count }} ratings)</div>
+                        <div class="course-students">({{ course.student_count }} students)</div>
+                    </div>
+                    <div class="course-tags">
+                        <p>Total hours: {{ course.total_hours }}</p>
+                        <p>Lectures: {{ course.lectures }}</p>
+                        <p>Level: {{ course.level }}</p>
+                    </div>
+                    <div class="course-price">
+                        <p>Price: {{ course.price }} DZD</p>
+                        <p class="go-into"><a href="{% url 'course-model' course.id %}">→</a></p>
                     </div>
                 </div>
             </div>
@@ -207,7 +151,7 @@
         </div>
     </div>
 
-    <script src="{% static './JS_files/Courses.js' %}"></script>
+    <script src="{% static 'JS_files/Courses.js' %}"></script>
 </body>
 </html>
 

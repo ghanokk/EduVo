@@ -1,15 +1,20 @@
-from django.urls import path
+from django.contrib import admin
+from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
 from . import views
 
 urlpatterns = [
+    path('admin/', admin.site.urls),
     path('', views.homePage, name='homePage'),
 
     path('forgotPass/', views.forgotPass, name='forgotPass'),
     path('login/', views.register, name='login'),
-    path('courses/', views.Courses, name='Courses'),
+    
     path('jobs/', views.Jobs, name='Jobs'),
-    path('courses/historie/', views.Historie, name='Historie'),
-    path('courses/Course_model/', views.Course_Model, name='Course_model'),
-
-
+    path('jobs/historie/', views.Historie, name='Historie'),
+    path('courses/', include('courses.urls')),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

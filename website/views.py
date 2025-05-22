@@ -1,8 +1,8 @@
-from django.shortcuts import render 
- 
-
-
-
+from django.shortcuts import render, get_object_or_404
+from courses.models import Course, Rating
+from django.db.models import Q, Avg, Count
+from django.apps import apps
+from django.conf import settings
 
 def forgotPass(request):
      return render(request, 'HTML_files/forgotPass.html')
@@ -13,8 +13,9 @@ def register(request):
 def homePage(request):
      return render(request, 'HTML_files/homePage.html')
 
-def Courses(request):
-    return render(request, 'HTML_files/Courses.html')
+def courses(request):
+    return render(request, 'HTML_files/courses.html')
+
 
 def Jobs(request):
     return render(request, 'HTML_files/Jobs.html')
@@ -22,11 +23,5 @@ def Jobs(request):
 def Historie(request):
     return render(request, 'HTML_files/Historie.html')
 
-def Course_Model(request):
-    return render(request, 'HTML_files/Course-model.html')
-
-
-
-
-
-# Create your views here.
+def course_model(request, course_id):
+    return render(request, 'HTML_files/course-model.html')

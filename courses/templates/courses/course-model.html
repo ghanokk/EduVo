@@ -1,0 +1,155 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+{# had l'CSS file kay3tina l'style dyal l'page #}
+<link rel="stylesheet" href="{% static 'CSS_files/Course-model.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<script>
+    // Default image for course
+    const defaultImage = "{% static 'assets/img/default-course.jpg' %}";
+    // Default image for profile
+    const defaultProfileImage = "{% static 'assets/img/default-profile.jpg' %}";
+</script>
+
+{# had l'container kay7fed fih ga3 l'content dyal l'page #}
+<div class="hero">
+    {# had l'div kay7fed fih l'information dyal l'cours #}
+    <div class="hero-course">
+        <h1>{{ course.title }}</h1>
+        <p>{{ course.description|truncatewords:30 }}</p>
+        <div class="course-rating">
+            <div class="rating-items">
+                {# had l'loop kay3red l'stars 3la 7sab l'rating #}
+                {% for i in "12345" %}
+                    {% if forloop.counter <= course.rating|default:0 %}
+                        <i class="fa-solid fa-star rating-item"></i>
+                    {% else %}
+                        <i class="fa-regular fa-star rating-item"></i>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <p>({{ rating_count }} ratings)</p>
+            <p>({{ student_count }} students)</p>
+        </div>
+        <p>Created by <span class="teacher">{{ course.teacher }}</span>, {{ course.teacher_title }}</p>
+    </div>
+
+    {# had l'div kay7fed fih l'prix w l'buttons dyal l'cours #}
+    <div class="course-purchase">
+        <div class="course-box">
+            <img src="{{ course.image_url }}" alt="{{ course.title }}" onerror="this.src=defaultImage">
+            <div class="course-infos">
+                <p class="price">{{ course.price }} DZD</p>
+                {% if course.discount_price %}
+                <p class="warning"><i class="fas fa-exclamation-triangle"></i> {{ course.discount_duration }} left at this price!</p>
+                {% endif %}
+            </div>
+        </div>
+        <div class="purchase-btns">
+            <button class="purchase-btn add">Add to cart</button>
+            <button class="purchase-btn buy">Buy Now!</button>
+        </div>
+    </div>
+</div>
+
+<section>
+    {# had l'div kay7fed fih l'objectives dyal l'cours #}
+    <div class="learn">
+        <h2 id="learning">What you'll learn</h2>
+        <div class="two-columns learns">
+            {% for objective in course.objectives.all %}
+            <p>{{ objective.description }}</p>
+            {% endfor %}
+        </div>
+    </div>
+
+    {# had l'div kay7fed fih l'features dyal l'cours #}
+    <div class="include">
+        <h2 id="including">This course includes:</h2>
+        <div class="two-columns includes">
+            <div>
+                <p><img src="{% static 'assets/img/icons8-video-96 1.png' %}" alt="">{{ course.video_hours }} hours on-demand video</p>
+            </div>
+            <div>
+                <p><img src="{% static 'assets/img/icons8-coding-100 1.png' %}" alt="">{{ course.exercises_count }} coding exercises</p>
+            </div>
+            <div>
+                <p><img src="{% static 'assets/img/icons8-articles-100 1.png' %}" alt="">{{ course.articles_count }} articles</p>
+            </div>
+            <div>
+                <p><img src="{% static 'assets/img/icons8-file-100 1.png' %}" alt="">{{ course.resources_count }} downloadable resources</p>
+            </div>
+            <div>
+                <p><img src="{% static 'assets/img/icons8-pc-100 1.png' %}" alt="">Access on mobile and PC</p>
+            </div>
+            <div>
+                <p><img src="{% static 'assets/img/icons8-certificate-90 1.png' %}" alt="" style="transform: translateX(-5px); padding: 0;">Certificate of completion</p>
+            </div>
+        </div>
+    </div>
+
+    {# had l'div kay7fed fih l'content dyal l'cours #}
+    <div class="course-content">
+        <h2 id="content">Course content</h2>
+        <p id="course-content-details">{{ course.sections_count }} sections • {{ course.lessons_count }} lectures • {{ course.total_hours }} total length</p>
+
+        <div class="course-section-wrraper">
+            {% for section in course.sections.all %}
+            <div class="course-section {% if forloop.first %}active{% endif %}">
+                <div class="section-header" onclick="toggleSection(this)">
+                    <h1><img src="{% static 'assets/img/icons8-expand-arrow-96 1.png' %}" alt="">{{ section.title }}</h1>
+                </div>
+                <div class="section-content">
+                    {% for lesson in section.lessons.all %}
+                    <div class="session">{{ lesson.title }} ({{ lesson.duration }})</div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <button class="view-more">See all</button>
+    </div>
+
+    {# had l'div kay7fed fih l'description dyal l'cours #}
+    <div class="description">
+        <h2 id="description-h2">Description</h2>
+        {{ course.description|linebreaks }}
+    </div>
+
+    {# had l'div kay7fed fih l'feedbacks dyal l'cours #}
+    <div class="feedbacks">
+        <h1>Client Feedbacks</h1>
+        <div class="feedbacks-wrraper">
+            {% for rating in ratings %}
+            <div class="feedback-box">
+                <div class="feedback-rating">
+                    {% for i in "12345" %}
+                        {% if forloop.counter <= rating.rating_value %}
+                            <i class="fa-solid fa-star rating"></i>
+                        {% else %}
+                            <i class="fa-regular fa-star rating"></i>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <div class="feedback-msg">
+                    "{{ rating.comment }}"
+                </div>
+                <div class="feedback-profile">
+                    <img src="{{ rating.user.profile.image.url }}" alt="{{ rating.user.username }}" class="feedback-profile-pic" onerror="this.src=defaultProfileImage">
+                    <div class="feedback-profile-infos">
+                        <p>{{ rating.user.username }}</p>
+                        <p>{{ rating.user.profile.title }}</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<script src="{% static 'scripts/Course-model.js' %}"></script>
+{% endblock content %}

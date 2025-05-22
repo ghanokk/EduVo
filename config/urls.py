@@ -25,7 +25,7 @@ urlpatterns = [
     path('users/', include('users.urls')),
     path('jobs/', include('jobs.urls')),
     path('courses/', include('courses.urls')),
-
+    path('users/', include('users.urls')),  # Include the URLs of your users app
 ]
 
 if settings.DEBUG:  # تأكد تضيفه فقط ف وضع التطوير

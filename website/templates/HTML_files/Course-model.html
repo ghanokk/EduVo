@@ -3,412 +3,153 @@
 {% load static %}
 
 {% block content %}
+{# had l'CSS file kay3tina l'style dyal l'page #}
+<link rel="stylesheet" href="{% static 'CSS_files/Course-model.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
+<script>
+    // Default image for course
+    const defaultImage = "{% static 'assets/img/default-course.jpg' %}";
+    // Default image for profile
+    const defaultProfileImage = "{% static 'assets/img/default-profile.jpg' %}";
+</script>
 
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="{% static 'CSS_files/Course-model.css' %}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
-</head>
-
-<body>
-
-
-    <!-- ------------------HERO----------------- -->
-
-    <div class="hero">
-        <div class="hero-course">
-            <h1>The Complete Full-Stack Web Development Bootcamp</h1>
-            <p>Become a Full-Stack Web Developer with just ONE course. HTML, CSS, Javascript,
-                Node, React, PostgreSQL, Web3 and DApps</p>
-            <div class="course-rating">
-                <div class="rating-items">
-                    <i class="fa-solid fa-star rating-item"></i>
-                    <i class="fa-solid fa-star rating-item"></i>
-                    <i class="fa-solid fa-star rating-item"></i>
-                    <i class="fa-solid fa-star rating-item"></i>
-                    <i class="fa-solid fa-star rating-item"></i>
-                </div>
-                <p>(14,430 ratings)</p>
-                <p>(35,217 students)</p>
+{# had l'container kay7fed fih ga3 l'content dyal l'page #}
+<div class="hero">
+    {# had l'div kay7fed fih l'information dyal l'cours #}
+    <div class="hero-course">
+        <h1>{{ course.title }}</h1>
+        <p>{{ course.description|truncatewords:30 }}</p>
+        <div class="course-rating">
+            <div class="rating-items">
+                {# had l'loop kay3red l'stars 3la 7sab l'rating #}
+                {% for i in "12345" %}
+                    {% if forloop.counter <= course.rating|default:0 %}
+                        <i class="fa-solid fa-star rating-item"></i>
+                    {% else %}
+                        <i class="fa-regular fa-star rating-item"></i>
+                    {% endif %}
+                {% endfor %}
             </div>
-            <p>Created by <span class="teacher">Dr.angela YU</span> , Developer lead instructor </p>
+            <p>({{ rating_count }} ratings)</p>
+            <p>({{ student_count }} students)</p>
         </div>
-        <div class="course-purchase">
-            <div class="course-box">
-                <img src="{% static 'assets/img/course-full-stack.png' %}" alt="">
-                <div class="course-infos">
-                    <p class="price">4500 DZD</p>
-                    <p class="warning"><i class="fas fa-exclamation-triangle "></i> 3 hours left at this price!</p>
-                </div>
-            </div>
-            <div class="purchase-btns">
-                <button class="purchase-btn add">Add to chart</button>
-                <button class="purchase-btn buy">Buy Now !</button>
-            </div>
+        <p>Created by <span class="teacher">{{ course.teacher }}</span>, {{ course.teacher_title }}</p>
+    </div>
 
+    {# had l'div kay7fed fih l'prix w l'buttons dyal l'cours #}
+    <div class="course-purchase">
+        <div class="course-box">
+            <img src="{{ course.image_url }}" alt="{{ course.title }}" onerror="this.src=defaultImage">
+            <div class="course-infos">
+                <p class="price">{{ course.price }} DZD</p>
+                {% if course.discount_price %}
+                <p class="warning"><i class="fas fa-exclamation-triangle"></i> {{ course.discount_duration }} left at this price!</p>
+                {% endif %}
+            </div>
+        </div>
+        <div class="purchase-btns">
+            <button class="purchase-btn add">Add to cart</button>
+            <button class="purchase-btn buy">Buy Now!</button>
+        </div>
+    </div>
+</div>
+
+<section>
+    {# had l'div kay7fed fih l'objectives dyal l'cours #}
+    <div class="learn">
+        <h2 id="learning">What you'll learn</h2>
+        <div class="two-columns learns">
+            {% for objective in course.objectives.all %}
+            <p>{{ objective.description }}</p>
+            {% endfor %}
         </div>
     </div>
 
-    <section>
-        <div class="learn">
-            <h2 id="learning">What you'll learn</h2>
-            <div class="two-columns learns">
-                <p>Build 16 web development projects for your portfolio, ready to apply for junior developer jobs.</p>
-                <p>Learn the latest technologies, including Javascript, React, Node and even Web3 development.</p>
-                <p>After the course you will be able to build ANY website you want.</p>
-                <p>Build fully-fledged websites and web apps for your startup or business.</p>
-                <p>Master frontend development with React</p>
-                <p>Master backend development with Node</p>
-                <p>Learn professional developer best practices.</p>
+    {# had l'div kay7fed fih l'features dyal l'cours #}
+    <div class="include">
+        <h2 id="including">This course includes:</h2>
+        <div class="two-columns includes">
+            <div>
+                <p><img src="{% static 'assets/img/icons8-video-96 1.png' %}" alt="">{{ course.video_hours }} hours on-demand video</p>
             </div>
-
-
-        </div>
-
-
-
-        <div class="include">
-            <h2 id="including">This course includes :</h2>
-            <div class="two-columns includes">
-                <div>
-                    <p><img src="{% static 'assets/img/icons8-video-96 1.png' %}" alt="">61 hours on-demand video</p>
-                </div>
-
-                <div>
-                    <p><img src="{% static 'assets/img/icons8-coding-100 1.png' %}" alt="">7 coding exercises</p>
-                </div>
-
-                <div>
-                    <p><img src="{% static 'assets/img/icons8-articles-100 1.png' %}" alt="">66 articles</p>
-                </div>
-
-                <div>
-                    <p><img src="{% static 'assets/img/icons8-file-100 1.png' %}" alt="">194 downloadable resources</p>
-                </div>
-
-                <div>
-                    <p><img src="{% static 'assets/img/icons8-pc-100 1.png' %}" alt="">Access on mobile and PC</p>
-                </div>
-
-                <div>
-                    <p><img src="{% static 'assets/img/icons8-certificate-90 1.png' %}" alt="" style="transform: translateX(-5px);
-          padding: 0;">Certificate of completion</p>
-                </div>
+            <div>
+                <p><img src="{% static 'assets/img/icons8-coding-100 1.png' %}" alt="">{{ course.exercises_count }} coding exercises</p>
             </div>
-
-        </div>
-
-        <!-- ------------------------------content------------------------- -->
-
-        <div class="course-content">
-            <h2 id="content">Course content</h2>
-            <p id="course-content-details">44 sections • 374 lectures • 61h 44m total length</p>
-
-            <div class="course-section-wrraper">
-                <div class="course-section active">
-                    <div class="section-header" onclick="toggleSection(this)">
-                        <h1><img src="{% static 'assets/img/icons8-expand-arrow-96 1.png' %}" alt="">
-                            Front-End Web Development</h1>
-                    </div>
-                    <div class="section-content">
-                        <div class="session"> What You'll Get in This Course</div>
-                        <div class="session">Download the Course Syllabus</div>
-                        <div class="session">Download the 12 Rules to Learn to Code eBook [Latest Edition]</div>
-                        <div class="session">Download the 12 Rules to Learn to Code eBook [Latest Edition]</div>
-                        <div class="session"> Download the 12 Rules to Learn to Code eBook [Latest Edition]</div>
-                        <div class="session"> Download the 12 Rules to Learn to Code eBook [Latest Edition]</div>
-                        <div class="session"> Download the 12 Rules to Learn to Code eBook [Latest Edition]</div>
-
-                    </div>
-
-                </div>
-
-                <div class="course-section">
-                    <div class="section-header" onclick="toggleSection(this)">
-                        <h1><img src="{% static 'assets/img/icons8-expand-arrow-96 1.png' %}" alt="">
-                            Introduction to HTML</h1>
-                    </div>
-                    <div class="section-content">
-                        <div class="session"> Welcome to the course (2:34)</div>
-                        <div class="session"> How to use this course (4:12)</div>
-                    </div>
-
-                </div>
-
-                <div class="course-section">
-                    <div class="section-header" onclick="toggleSection(this)">
-                        <h1><img src="{% static 'assets/img/icons8-expand-arrow-96 1.png' %}" alt="">
-                            Intermediate HTML</h1>
-                    </div>
-                    <div class="section-content">
-                        <div class="session"> Welcome to the course (2:34)</div>
-                        <div class="session"> How to use this course (4:12)</div>
-                    </div>
-
-                </div>
-
-                <div class="course-section">
-                    <div class="section-header" onclick="toggleSection(this)">
-                        <h1><img src="{% static 'assets/img/icons8-expand-arrow-96 1.png' %}" alt="">
-                            Multi-Page Websites</h1>
-                    </div>
-                    <div class="section-content">
-                        <div class="session"> Welcome to the course (2:34)</div>
-                        <div class="session"> How to use this course (4:12)</div>
-                    </div>
-
-                </div>
-
-                <div class="course-section">
-                    <div class="section-header" onclick="toggleSection(this)">
-                        <h1><img src="{% static 'assets/img/icons8-expand-arrow-96 1.png' %}" alt="">
-                            Introduction to CSS</h1>
-                    </div>
-                    <div class="section-content">
-                        <div class="session"> Welcome to the course (2:34)</div>
-                        <div class="session"> How to use this course (4:12)</div>
-                    </div>
-
-                </div>
-
-                <div class="course-section">
-                    <div class="section-header" onclick="toggleSection(this)">
-                        <h1><img src="{% static 'assets/img/icons8-expand-arrow-96 1.png' %}" alt="">
-                            CSS Properties</h1>
-                    </div>
-                    <div class="section-content">
-                        <div class="session"> Welcome to the course (2:34)</div>
-                        <div class="session"> How to use this course (4:12)</div>
-                    </div>
-
-                </div>
-
-                <div class="course-section">
-                    <div class="section-header" onclick="toggleSection(this)">
-                        <h1><img src="{% static 'assets/img/icons8-expand-arrow-96 1.png' %}" alt="">
-                            Intermediate CSS</h1>
-                    </div>
-                    <div class="section-content">
-                        <div class="session"> Welcome to the course (2:34)</div>
-                        <div class="session"> How to use this course (4:12)</div>
-                    </div>
-
-                </div>
-
+            <div>
+                <p><img src="{% static 'assets/img/icons8-articles-100 1.png' %}" alt="">{{ course.articles_count }} articles</p>
             </div>
-
-            <button class="view-more">See all</button>
-
-        </div>
-
-        <!-- --------------------------Description----------------------- -->
-
-        <div class="description">
-            <h2 id="description-h2">Description</h2>
-            Welcome to the Complete Web Development Bootcamp, the only course you need to learn to code and become a
-            full-stack web developer. With 150,000+ ratings and a 4.8 average, my Web Development course is one of the
-            HIGHEST RATED courses in the history of Udemy!  <br>
-            At 62+ hours, this Web Development course is without a doubt the most comprehensive web development course
-            available online. Even if you have zero programming experience, this course will take you from beginner to
-            mastery. Here's why: <br>
-            The course is taught by the lead instructor at the App Brewery, London's leading in-person programming
-            bootcamp. <br>
-            The course has been updated to be 2024 ready and you'll be learning the latest tools and technologies used
-            at large companies such as Apple, Google and Netflix. <br>
-            This course doesn't cut any corners, there are beautiful animated explanation videos and tens of real-world
-            projects which you will get to build. <br>
-            The curriculum was developed over a period of four years, with comprehensive student testing and feedback.
-            <br>
-
-
-
-            We've taught over a million students how to code and many have gone on to change their lives by becoming
-            professional developers or starting their own tech startup. <br>
-            You'll save yourself over 12,000 USD by enrolling, but still get access to the same teaching materials and
-            learn from the same instructor and curriculum as our in-person programming bootcamp. <br>
-            The course is constantly updated with new content, with new projects and modules determined by students -
-            that's you!<br>
-
-            We'll take you step-by-step through engaging video tutorials and teach you everything you need to know to
-            succeed as a web developer.
-            The course includes over 62 hours of HD video tutorials and builds your programming knowledge while making
-            real-world websites and web apps. <br>
-
-            Throughout this comprehensive course, we cover a massive amount of tools and technologies, including: <br>
-            Front-End Web Development <br>
-            HTML 5 <br>
-            CSS 3 <br>
-            Flexbox <br>
-            Grid <br>
-            Bootstrap 5 <br>
-            Javascript ES6 <br>
-            DOM Manipulation <br>
-            jQuery <br>
-            Bash Command Line <br>
-            Git, GitHub and Version Control <br>
-            Backend Web Development <br>
-            Node.js <br>
-            NPM <br>
-            Express.js <br>
-            EJS <br>
-            REST <br>
-            APIs <br>
-            Databases <br>
-            SQL <br>
-            PostgreSQL <br>
-            Authentication <br>
-            React.js <br>
-            React Hooks <br>
-            Web Design<br>
-            Deployment with GitHub Pages <br>
-            Web3 Development on the Internet Computer <br>
-            Blockchain technology <br>
-            Token contract development <br>
-            NFT minting, buying and selling logic <br>
-            By the end of this course, you will be fluently programming and be ready to make any website you can dream
-            of. <br>
-
-        </div>
-
-        <div class="feedbacks">
-            <h1>Client FeedBacks</h1>
-            <div class="feedbacks-wrraper">
-                <div class="feedback-box">
-                    <div class="feedback-rating">
-                        <i class="fa-solid fa-star rating"></i>
-                        <i class="fa-solid fa-star rating"></i>
-                        <i class="fa-solid fa-star rating"></i>
-                        <i class="fa-solid fa-star rating"></i>
-                        <i class="fa-solid fa-star rating"></i>
-                    </div>
-                    <div class="feedback-msg">
-                        "Thanks to Eduvo, I finally built a
-                        portfolio that got me hired as a junior
-                        web developer. The career tips and mock
-                        interviews were game-changers!"
-                    </div>
-                    <div class="feedback-profile">
-                        <img src="{%static 'assets/img/kb9.jpg' %}" alt="" class="feedback-profile-pic">
-                        <div class="feedback-profile-infos">
-                            <p>karim benzema 9</p>
-                            <p>UI/UX Designer</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="feedback-box">
-                    <div class="feedback-rating">
-                        <i class="fa-solid fa-star rating"></i>
-                        <i class="fa-solid fa-star rating"></i>
-                        <i class="fa-solid fa-star rating"></i>
-                        <i class="fa-solid fa-star rating"></i>
-                        <i class="fa-solid fa-star rating"></i>
-                    </div>
-                    <div class="feedback-msg">
-                        "Thanks to Eduvo, I finally built a
-                        portfolio that got me hired as a junior
-                        web developer. The career tips and mock
-                        interviews were game-changers!"
-                    </div>
-                    <div class="feedback-profile">
-                        <img src="{%static 'assets/img/kb9.jpg' %}" alt="" class="feedback-profile-pic">
-                        <div class="feedback-profile-infos">
-                            <p>karim benzema 9</p>
-                            <p>UI/UX Designer</p>
-                        </div>
-                    </div>
-                </div>
-
-
-                <!-- <div class="feedback-box">
-          <div class="feedback-rating">
-            <i class="fa-solid fa-star rating"></i>
-            <i class="fa-solid fa-star rating"></i>
-            <i class="fa-solid fa-star rating"></i>
-            <i class="fa-solid fa-star rating"></i>
-            <i class="fa-solid fa-star rating"></i>
-          </div>
-          <div class="feedback-msg">
-            "Thanks to Eduvo, I finally built a 
-            portfolio that got me hired as a junior 
-            web developer. The career tips and mock
-             interviews were game-changers!"
-          </div>
-          <div class="feedback-profile">
-            <img src="../static/assets/img/kb9.jpg" alt="" class="feedback-profile-pic">
-            <div class="feedback-profile-infos">
-              <p>karim benzema 9</p>
-              <p>UI/UX Designer</p>
+            <div>
+                <p><img src="{% static 'assets/img/icons8-file-100 1.png' %}" alt="">{{ course.resources_count }} downloadable resources</p>
             </div>
-          </div>
-        </div> -->
-
-
-                <div class="feedback-box">
-                    <div class="feedback-rating">
-                        <i class="fa-solid fa-star rating"></i>
-                        <i class="fa-solid fa-star rating"></i>
-                        <i class="fa-solid fa-star rating"></i>
-                        <i class="fa-solid fa-star rating"></i>
-                        <i class="fa-solid fa-star rating"></i>
-                    </div>
-                    <div class="feedback-msg">
-                        "Thanks to Eduvo, I finally built a
-                        portfolio that got me hired as a junior
-                        web developer. The career tips and mock
-                        interviews were game-changers!"
-                    </div>
-                    <div class="feedback-profile">
-                        <img src="{%static 'assets/img/kb9.jpg' %}" alt="" class="feedback-profile-pic">
-                        <div class="feedback-profile-infos">
-                            <p>karim benzema 9</p>
-                            <p>UI/UX Designer</p>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="feedback-box">
-                    <div class="feedback-rating">
-                        <i class="fa-solid fa-star rating"></i>
-                        <i class="fa-solid fa-star rating"></i>
-                        <i class="fa-solid fa-star rating"></i>
-                        <i class="fa-solid fa-star rating"></i>
-                        <i class="fa-solid fa-star rating"></i>
-                    </div>
-                    <div class="feedback-msg">
-                        "Thanks to Eduvo, I finally built a
-                        portfolio that got me hired as a junior
-                        web developer. The career tips and mock
-                        interviews were game-changers!"
-                    </div>
-                    <div class="feedback-profile">
-                        <img src="{%static 'assets/img/kb9.jpg' %}" alt="" class="feedback-profile-pic">
-                        <div class="feedback-profile-infos">
-                            <p>karim benzema 9</p>
-                            <p>UI/UX Designer</p>
-                        </div>
-                    </div>
-                </div>
-
-
-
-
+            <div>
+                <p><img src="{% static 'assets/img/icons8-pc-100 1.png' %}" alt="">Access on mobile and PC</p>
+            </div>
+            <div>
+                <p><img src="{% static 'assets/img/icons8-certificate-90 1.png' %}" alt="" style="transform: translateX(-5px); padding: 0;">Certificate of completion</p>
             </div>
         </div>
-    </section>
-    <script src="{% static 'JS_files/Course-model.js' %}"></script>
-</body>
+    </div>
 
-</html>
+    {# had l'div kay7fed fih l'content dyal l'cours #}
+    <div class="course-content">
+        <h2 id="content">Course content</h2>
+        <p id="course-content-details">{{ course.sections_count }} sections • {{ course.lessons_count }} lectures • {{ course.total_hours }} total length</p>
 
+        <div class="course-section-wrraper">
+            {% for section in course.sections.all %}
+            <div class="course-section {% if forloop.first %}active{% endif %}">
+                <div class="section-header" onclick="toggleSection(this)">
+                    <h1><img src="{% static 'assets/img/icons8-expand-arrow-96 1.png' %}" alt="">{{ section.title }}</h1>
+                </div>
+                <div class="section-content">
+                    {% for lesson in section.lessons.all %}
+                    <div class="session">{{ lesson.title }} ({{ lesson.duration }})</div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
 
+        <button class="view-more">See all</button>
+    </div>
+
+    {# had l'div kay7fed fih l'description dyal l'cours #}
+    <div class="description">
+        <h2 id="description-h2">Description</h2>
+        {{ course.description|linebreaks }}
+    </div>
+
+    {# had l'div kay7fed fih l'feedbacks dyal l'cours #}
+    <div class="feedbacks">
+        <h1>Client Feedbacks</h1>
+        <div class="feedbacks-wrraper">
+            {% for rating in ratings %}
+            <div class="feedback-box">
+                <div class="feedback-rating">
+                    {% for i in "12345" %}
+                        {% if forloop.counter <= rating.rating_value %}
+                            <i class="fa-solid fa-star rating"></i>
+                        {% else %}
+                            <i class="fa-regular fa-star rating"></i>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <div class="feedback-msg">
+                    "{{ rating.comment }}"
+                </div>
+                <div class="feedback-profile">
+                    <img src="{{ rating.user.profile.image.url }}" alt="{{ rating.user.username }}" class="feedback-profile-pic" onerror="this.src=defaultProfileImage">
+                    <div class="feedback-profile-infos">
+                        <p>{{ rating.user.username }}</p>
+                        <p>{{ rating.user.profile.title }}</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<script src="{% static 'JS_files/Course-model.js' %}"></script>
 {% endblock content %}

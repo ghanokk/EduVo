@@ -1,27 +1,52 @@
+# users/models.py
+
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.utils import timezone
 
+# ✅ Classe principale des utilisateurs
+# hadi t'étend l'utilisateur standard dyal Django (AbstractUser)
 class User(AbstractUser):
-    # أنواع المستخدمين
-    is_student = models.BooleanField(default=False)
-    is_teacher = models.BooleanField(default=False)
-    is_company = models.BooleanField(default=False)
+    USER_TYPE_CHOICES = [
+        ('student', 'Student'),   # 👨‍🎓 étudiant
+        ('teacher', 'Teacher'),   # 👨‍🏫 enseignant
+        ('company', 'Company'),   # 🏢 entreprise
+    ]
+    user_type = models.CharField(max_length=10, choices=USER_TYPE_CHOICES)
 
-class StudentProfile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)  #yetna7a koulch met3l9 bl user ida na7it m user
-    bio = models.TextField(blank=True)  # السيرة الذاتية
-    skills = models.JSONField(default=list)  # المهارات
-
-class TeacherProfile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    expertise = models.TextField(blank=True)  # التخصص
-    bio = models.TextField(blank=True)  # السيرة الذاتية
-    reputation_score = models.IntegerField(default=0)
-
-class CompanyProfile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    company_name = models.CharField(max_length=255)  # اسم الشركة
-    description = models.TextField()  # وصف الشركة
+    # ✅ Fonction pour retourner le bon profil selon le type
+    def get_profile(self):
+        if self.user_type == 'student':
+            return self.studentprofile  # wch user student, rj3 profil ta3 étudiant
+        elif self.user_type == 'teacher':
+            return self.teacherprofile  # wch prof, rj3 profil ta3 prof
+        elif self.user_type == 'company':
+            return self.companyprofile  # wch entreprise, rj3 profil entreprise
+        return None
 
 
- # Create your models here.
+# ✅ Classe abstraite pour les profils (ta3 les users)
+# hadi makhdamnach biha direct, mais les autres profils héritent menha
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)  # chaque user andou profil unique
+    profile_picture = models.ImageField(upload_to='profile_pics/', blank=True, null=True)  # photo profil
+    bio = models.TextField(blank=True)  # un petit texte 3la l'utilisateur
+    created_at = models.DateTimeField(default=timezone.now)  # date de création
+
+    class Meta:
+        abstract = True  # 👈 ma ttsajelch f la base directement
+
+# ✅ Profil étudiant
+class StudentProfile(Profile):
+    skills = models.ManyToManyField('skills.Skill', through='skills.UserSkill')  # les compétences ta3 l'étudiant
+
+# ✅ Profil prof
+class TeacherProfile(Profile):
+    expertise = models.TextField(blank=True)  # domaine d'expertise
+    reputation_score = models.IntegerField(default=0)  # note de réputation (tbda 0)
+
+
+# ✅ Profil entreprise
+class CompanyProfile(Profile):
+    company_name = models.CharField(max_length=255)  # nom ta3 la société
+    description = models.TextField()  # un petit résumé 3la la boîte
