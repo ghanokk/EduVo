@@ -10,7 +10,7 @@ class Course(models.Model):
         ('all levels', 'All Levels'),
     ]
     
-    # had lchoices y3tina l'status t3 l'cours (msawd, mcharf, archivay)
+    # had lchoices y3tina l'status t3 l'cours (draft, published, archived)
     STATUS_CHOICES = [
         ('draft', 'Draft'),
         ('published', 'Published'),

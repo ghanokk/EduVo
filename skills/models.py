@@ -2,7 +2,7 @@ from django.db import models
 from users.models import StudentProfile
 
 class Skill(models.Model):
-    name = models.CharField(max_length=100, unique=True)
+    name = models.CharField(max_length=100, unique=True) # unique pour éviter les doublons genre "Python", "python"
     category = models.CharField(max_length=100)
     
     def __str__(self):
@@ -33,7 +33,8 @@ class UserSkill(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     
     class Meta:
-        unique_together = ('student_profile', 'skill')
+        unique_together = ('student_profile', 'skill') #pour éviter que l’étudiant y ajout même skill b deux fois)
+
     
     def __str__(self):
         return f"{self.student_profile.user.username} - {self.skill.name} ({self.get_proficiency_level_display()})"
