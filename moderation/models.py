@@ -29,7 +29,7 @@ class ModerationLog(models.Model):
         related_name='moderation_actions'
     )  # admin/modérateur li dar l'action
 
-    reason = models.TextField(blank=True)  # 3lach dar l'action (facultatif)
+    reason = models.TextField(blank=True, null=True)  # 3lach dar l'action (facultatif)
 
     timestamp = models.DateTimeField(default=timezone.now)  # date li dar l'action
 
