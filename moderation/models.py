@@ -1,29 +1,47 @@
 from django.db import models
 from django.contrib.auth import get_user_model
+from django.utils import timezone
 
 User = get_user_model()
 
 class ModerationLog(models.Model):
-    CONTENT_TYPE_CHOICES = [
-        ('course', 'Course'),
-        ('job', 'Job'),
-        ('profile', 'Profile'),
-    ]
-
+    # types d'actions li ydirha l'admin
     ACTION_CHOICES = [
-        ('approved', 'Approved'),
-        ('rejected', 'Rejected'),
-        ('flagged', 'Flagged'),
+        ('approve', 'Approved'),
+        ('reject', 'Rejected'),
+        ('ban_user', 'User Banned'),
+        ('delete_content', 'Content Deleted'),
+        ('warn_user', 'User Warned'),
     ]
 
-    content_type = models.CharField(max_length=20, choices=CONTENT_TYPE_CHOICES)
-    content_id = models.IntegerField()
-    action = models.CharField(max_length=20, choices=ACTION_CHOICES)
-    reason = models.TextField(blank=True, null=True)
-    action_date = models.DateTimeField(auto_now_add=True)
-    admin = models.ForeignKey(User, on_delete=models.CASCADE)
+    action = models.CharField(max_length=20, choices=ACTION_CHOICES)  # wesh dar l'admin
+    target_user = models.ForeignKey(
+        User,
+        on_delete=models.SET_NULL,
+        null=True,
+        related_name='moderated_logs'
+    )  # utilisateur concerné (ex: teacher, student...)
+    
+    performed_by = models.ForeignKey(
+        User,
+        on_delete=models.SET_NULL,
+        null=True,
+        related_name='moderation_actions'
+    )  # admin/modérateur li dar l'action
+
+    reason = models.TextField(blank=True)  # 3lach dar l'action (facultatif)
+
+    timestamp = models.DateTimeField(default=timezone.now)  # date li dar l'action
+
+    related_object = models.CharField(
+        max_length=255,
+        blank=True
+    )  # contenu concerné (ex: job#2, course#5)
+
+    class Meta:
+        ordering = ['-timestamp']  # yban l'action ml lakher lewl 
+        verbose_name = 'Journal de modération'
+        verbose_name_plural = 'Journaux de modération'
 
     def __str__(self):
-        return f"{self.content_type} #{self.content_id} - {self.action}"
-
-# Create your models here.
+        return f"{self.get_action_display()} - {self.target_user} by {self.performed_by}"
