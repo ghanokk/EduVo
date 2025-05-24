@@ -16,339 +16,137 @@
     <button class="hero-btn">Learn Now!</button>
 </div>
 
-<div class="about-us">
-    <h1>About us</h1>
-    <div class="about-us-wrraper">
-        <div class="courses about-us-box">
-            <h1>
-                Courses
-            </h1>
-            <h1>
-                +1000
-            </h1>
-            <p>Covering tech, <br> business, design and <br> more!
-            </p>
-        </div>
-        <div class="visitors about-us-box">
-            <h1>Visitors</h1>
-            <h1>+5000</h1>
-            <p>Exploring courses, <br> jobs and more <br>
-                daily!</p>
-        </div>
-        <div class="jobs about-us-box">
-            <h1>Jobs</h1>
-            <h1>+800</h1>
-            <p>Opportunities in tech, <br> business, design and <br> more!</p>
+    <div class="about-us">
+        <h1>About us</h1>
+        <div class="about-us-wrraper">
+            <div class="courses about-us-box">
+                <h1>
+                    Courses
+                </h1>
+                <h1>
+                    +42
+                </h1>
+                <p>Covering tech, <br> business, design and <br> more!
+                </p>
+            </div>
+            <div class="visitors about-us-box">
+                <h1>Visitors</h1>
+                <h1>+200 </h1>
+                <p>Exploring courses, <br> jobs and more <br>
+                    daily!</p>
+            </div>
+            <div class="jobs about-us-box">
+                <h1>Jobs</h1>
+                <h1>+35</h1>
+                <p>Opportunities in tech, <br> business, design and <br> more!</p>
+            </div>
         </div>
     </div>
-</div>
-
 <div class="top-courses">
     <h1 id="top-courses-h1">Top Courses</h1>
 
     <div class="courses-wrraper">
+        {% for course in top_courses %}
+        <style>
+    .title-course-link {
+        text-decoration: none;
+        color: inherit;
+    }
+    
+    .title-course-link:hover {
+        opacity: 0.8;
+    }
+</style>
         <div class="course-box">
-            <img src="{% static './assets/image/web-dev.png' %}" alt="" class="course-img">
+            <img src="{{ course.image_url }}" alt="{{ course.title }}" class="course-img">
             <div class="course-details">
                 <div class="course-badges-wrraper">
-                    <div class="course-badge" id="green-badge">Beginner</div>
-                    <div class="course-badge" id="blue-badge">Design</div>
+                    <div class="course-badge" id="green-badge">{{ course.level }}</div>
+                    <div class="course-badge" id="blue-badge">{{ course.category }}</div>
                     <div class="course-badge" id="yellow-badge">Popular</div>
                 </div>
-                <h1 class="title-course">Front-end developement</h1>
-                <p class="course">Learn modern UI priciples & Figma tools to ....</p>
-                <i class="fa-solid fa-star rating"></i>(1.2k reviews)
-                <div class="purchase">
-                    <h2>Price : 4200dzd</h2>
-                    <button class="purchase-btn">Buy Now !</button>
-                    <button class="purchase-btn">Add to cart</button>
+                <a href="{% url 'course-model' course.id %}" class="title-course-link">
+                    <h1 class="title-course">{{ course.title }}</h1>
+                </a>
+                <p class="course">{{ course.description|truncatechars:50 }}</p>
+                <div class="rating">
+                    {% for i in course.rating %}
+                    <i class="fa-solid fa-star rating"></i>
+                    {% endfor %}
+                    ({{ course.rating_count }} reviews)
                 </div>
             </div>
-        </div>
-
-        <div class="course-box">
-            <img src="{% static './assets/image/adobe-course.webp' %}" alt="" class="course-img">
-            <div class="course-details">
-                <div class="course-badges-wrraper">
-                    <div class="course-badge" id="green-badge">Beginner</div>
-                    <div class="course-badge" id="blue-badge">Design</div>
-                    <div class="course-badge" id="yellow-badge">Popular</div>
-                </div>
-                <h1 class="title-course">Adobe creative </h1>
-                <p class="course">Learn modern UI priciples & Figma tools to ....</p>
-                <i class="fa-solid fa-star rating"></i>(1.2k reviews)
-                <div class="purchase">
-                    <h2>Price : 4200dzd</h2>
-                    <button class="purchase-btn">Buy Now !</button>
-                    <button class="purchase-btn">Add to cart</button>
-                </div>
+            <div class="purchase">
+                <h2>Price: {{ course.price }} DZD</h2>
+                <button class="purchase-btn">Buy Now!</button>
+                <button class="purchase-btn">Add to cart</button>
             </div>
         </div>
-
-        <div class="course-box">
-            <img style="width: 100%; height: 230px; object-fit: cover; object-position: center;"
-                src="{% static './assets/image/kali-linux-courses.jpg' %}" alt="" class="course-img">
-            <div class="course-details">
-                <div class="course-badges-wrraper">
-                    <div class="course-badge" id="green-badge">Beginner</div>
-                    <div class="course-badge" id="blue-badge">Design</div>
-                    <div class="course-badge" id="yellow-badge">Popular</div>
-                </div>
-                <h1 class="title-course">Kali linux for begginers</h1>
-                <p class="course">Learn modern UI priciples & Figma tools to ....</p>
-                <i class="fa-solid fa-star rating"></i>(1.2k reviews)
-                <div class="purchase">
-                    <h2>Price : 4200dzd</h2>
-                    <button class="purchase-btn">Buy Now !</button>
-                    <button class="purchase-btn">Add to cart</button>
-                </div>
-            </div>
-        </div>
+        {% endfor %}
         <button class="prev">←</button>
         <button class="next">→</button>
     </div>
 </div>
 
 <div class="top-category">
-    <h1>Top Category</h1>
+    <h1>Top Categories</h1>
 
     <div class="category-wrraper">
-        <div class="category-box">
-            <img class="category-img" src="{% static './assets/image/category-web-dev.png' %}">
-            <h1>web developement</h1>
+        {% for category in top_categories %}
+        <div class="category-box" onclick=window.location.href="{% url 'Courses' %}?search={{ category.name }}" style="cursor: pointer;">
+            <img class="category-img" src="{% if category.image %}{{ category.image.url }}{% else %}assets/img/default-category.jpg{% endif %}" alt="{{ category.name }}">
+            <h1>{{ category.name }}</h1>
         </div>
-
-        <div class="category-box">
-            <img src="{% static './assets/image/category-design.png' %}" alt="" class="category-img">
-            <h1>design</h1>
-        </div>
-
-        <div class="category-box">
-            <img class="category-img" src="{% static './assets/image/category-data-science.png' %}" alt="">
-            <h1>data science</h1>
-        </div>
-
-        <div class="category-box">
-            <img src="{% static './assets/image/category-marketing.png' %}" alt="" class="category-img">
-            <h1>marketing</h1>
-        </div>
-
+        {% endfor %}
     </div>
 
-    <button class="see-all">See all</button>
+    <button class="see-all" onclick=window.location.href="{% url 'Courses' %}" style="cursor: pointer;">See all</button>
 </div>
 
 <div class="jobs">
-    <h1>Jobs disponible</h1>
+    <h1>Available Jobs</h1>
     <div class="jobs-wrraper">
+        {% for job in latest_jobs %}
         <div class="job-box">
-            <div class="job-badge asButton">software</div>
+            <div class="job-badge asButton">{{ job.category }}</div>
             <div class="job-details">
-                <p class="job-title">Front-end developer</p>
-                <p class="job-company">Eduvo</p>
-                <p class="location">Algeirs</p>
+                <p class="job-title">{{ job.title }}</p>
+                <p class="job-company">{{ job.company }}</p>
+                <p class="location">{{ job.location }}</p>
             </div>
             <div class="job-type asButton">
-                <span>remote</span>
+                <span>{{ job.job_type }}</span>
             </div>
         </div>
-
-        <div class="job-box">
-            <div class="job-badge asButton">software</div>
-            <div class="job-details">
-                <p class="job-title">Front-end developer</p>
-                <p class="job-company">Eduvo</p>
-                <p class="location">Algeirs</p>
-            </div>
-            <div class="job-type asButton">
-                <span>remote</span>
-            </div>
-        </div>
-
-
-        <div class="job-box">
-            <div class="job-badge asButton">software</div>
-            <div class="job-details">
-                <p class="job-title">Front-end developer</p>
-                <p class="job-company">Eduvo</p>
-                <p class="location">Algeirs</p>
-            </div>
-            <div class="job-type asButton">
-                <span>remote</span>
-            </div>
-        </div>
-
-
-        <div class="job-box">
-            <div class="job-badge asButton">software</div>
-            <div class="job-details">
-                <p class="job-title">Front-end developer</p>
-                <p class="jon-company">Eduvo</p>
-                <p class="location">Algeirs</p>
-            </div>
-            <div class="job-type asButton">
-                <span>remote</span>
-            </div>
-        </div>
-
-        <div class="job-box">
-            <div class="job-badge asButton">software</div>
-            <div class="job-details">
-                <p class="job-title">Front-end developer</p>
-                <p class="job-company">Eduvo</p>
-                <p class="location">Algeirs</p>
-            </div>
-            <div class="job-type asButton">
-                <span>remote</span>
-            </div>
-        </div>
-
-
-        <div class="job-box">
-            <div class="job-badge asButton">software</div>
-            <div class="job-details">
-                <p class="job-title">Front-end developer</p>
-                <p class="job-company">Eduvo</p>
-                <p class="job-location">Algeirs</p>
-            </div>
-            <div class="job-type asButton">
-                <span>remote</span>
-            </div>
-        </div>
-
+        {% endfor %}
     </div>
 </div>
 
 <div class="feedbacks">
-    <h1>Client FeedBacks</h1>
+    <h1>Client Feedbacks</h1>
     <div class="feedbacks-wrraper">
+        {% for testimonial in testimonials %}
         <div class="feedback-box">
             <div class="feedback-rating">
+                {% for i in "12345" %}
                 <i class="fa-solid fa-star rating"></i>
-                <i class="fa-solid fa-star rating"></i>
-                <i class="fa-solid fa-star rating"></i>
-                <i class="fa-solid fa-star rating"></i>
-                <i class="fa-solid fa-star rating"></i>
+                {% endfor %}
             </div>
             <div class="feedback-msg">
-                "Thanks to Eduvo, I finally built a
-                portfolio that got me hired as a junior
-                web developer. The career tips and mock
-                interviews were game-changers!"
+                "{{ testimonial.content }}"
             </div>
             <div class="feedback-profile">
-                <img src="{% static './assets/image/kb9.jpg' %}" alt="" class="feedback-profile-pic">
+                <img src="{{ testimonial.user.profile_image.url|default:'assets/img/default-profile.jpg' }}" alt="" class="feedback-profile-pic">
                 <div class="feedback-profile-infos">
-                    <p>karim benzema 9</p>
-                    <p>UI/UX Designer</p>
+                    <p>{{ testimonial.user.get_full_name }}</p>
+                    <p>{{ testimonial.user.job_title }}</p>
                 </div>
+
             </div>
+
+            
         </div>
-
-        <div class="feedback-box">
-            <div class="feedback-rating">
-                <i class="fa-solid fa-star rating"></i>
-                <i class="fa-solid fa-star rating"></i>
-                <i class="fa-solid fa-star rating"></i>
-                <i class="fa-solid fa-star rating"></i>
-                <i class="fa-solid fa-star rating"></i>
-            </div>
-            <div class="feedback-msg">
-                "Thanks to Eduvo, I finally built a
-                portfolio that got me hired as a junior
-                web developer. The career tips and mock
-                interviews were game-changers!"
-            </div>
-            <div class="feedback-profile">
-                <img src="{% static './assets/image/kb9.jpg' %}" alt="" class="feedback-profile-pic">
-                <div class="feedback-profile-infos">
-                    <p>karim benzema 9</p>
-                    <p>UI/UX Designer</p>
-                </div>
-            </div>
-        </div>
-
-
-        <!-- <div class="feedback-box">
-        <div class="feedback-rating">
-          <i class="fa-solid fa-star rating"></i>
-          <i class="fa-solid fa-star rating"></i>
-          <i class="fa-solid fa-star rating"></i>
-          <i class="fa-solid fa-star rating"></i>
-          <i class="fa-solid fa-star rating"></i>
-        </div>
-        <div class="feedback-msg">
-          "Thanks to Eduvo, I finally built a 
-          portfolio that got me hired as a junior 
-          web developer. The career tips and mock
-           interviews were game-changers!"
-        </div>
-        <div class="feedback-profile">
-          <img src="./assests/img/kb9.jpg" alt="" class="feedback-profile-pic">
-          <div class="feedback-profile-infos">
-            <p>karim benzema 9</p>
-            <p>UI/UX Designer</p>
-          </div>
-        </div>
-      </div> -->
-
-
-        <div class="feedback-box">
-            <div class="feedback-rating">
-                <i class="fa-solid fa-star rating"></i>
-                <i class="fa-solid fa-star rating"></i>
-                <i class="fa-solid fa-star rating"></i>
-                <i class="fa-solid fa-star rating"></i>
-                <i class="fa-solid fa-star rating"></i>
-            </div>
-            <div class="feedback-msg">
-                "Thanks to Eduvo, I finally built a
-                portfolio that got me hired as a junior
-                web developer. The career tips and mock
-                interviews were game-changers!"
-            </div>
-            <div class="feedback-profile">
-                <img src="{% static './assets/image/kb9.jpg' %}" alt="" class="feedback-profile-pic">
-                <div class="feedback-profile-infos">
-                    <p>karim benzema 9</p>
-                    <p>UI/UX Designer</p>
-                </div>
-            </div>
-        </div>
-
-
-        <div class="feedback-box">
-            <div class="feedback-rating">
-                <i class="fa-solid fa-star rating"></i>
-                <i class="fa-solid fa-star rating"></i>
-                <i class="fa-solid fa-star rating"></i>
-                <i class="fa-solid fa-star rating"></i>
-                <i class="fa-solid fa-star rating"></i>
-            </div>
-            <div class="feedback-msg">
-                "Thanks to Eduvo, I finally built a
-                portfolio that got me hired as a junior
-                web developer. The career tips and mock
-                interviews were game-changers!"
-            </div>
-            <div class="feedback-profile">
-                <img src="{% static './assets/image/kb9.jpg' %}" alt="" class="feedback-profile-pic">
-                <div class="feedback-profile-infos">
-                    <p>karim benzema 9</p>
-                    <p>UI/UX Designer</p>
-                </div>
-            </div>
-        </div>
-
-
-
-
+        {% endfor %}
     </div>
 </div>
-
-<script src="{% static './JS_files/script1.js' %}"></script>
-</body>
-
-</html>
-
 {% endblock content %}

@@ -13,6 +13,8 @@ class User(AbstractUser):
         ('company', 'Company'),   # 🏢 entreprise
     ]
     user_type = models.CharField(max_length=10, choices=USER_TYPE_CHOICES)
+    is_freelancer = models.BooleanField(default=False) 
+
 
     # ✅ Fonction pour retourner le bon profil selon le type
     def get_profile(self):
@@ -39,14 +41,20 @@ class Profile(models.Model):
 # ✅ Profil étudiant
 class StudentProfile(Profile):
     skills = models.ManyToManyField('skills.Skill', through='skills.UserSkill')  # les compétences ta3 l'étudiant
+    is_freelancer = models.BooleanField(default=False)
+    def __str__(self):
+        return f"{self.user.username}'s Student Profile"
 
 # ✅ Profil prof
 class TeacherProfile(Profile):
     expertise = models.TextField(blank=True)  # domaine d'expertise
     reputation_score = models.IntegerField(default=0)  # note de réputation (tbda 0)
-
+    is_freelancer = models.BooleanField(default=False)
+    def __str__(self):
+        return f"{self.user.username}'s Teacher Profile"
 
 # ✅ Profil entreprise
 class CompanyProfile(Profile):
     company_name = models.CharField(max_length=255)  # nom ta3 la société
     description = models.TextField()  # un petit résumé 3la la boîte
+    

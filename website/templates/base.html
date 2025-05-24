@@ -22,11 +22,13 @@
 
     <!-- Navbar -->
     <nav class="nav-bar">
-        <div class="logo">
-            <img class="logo-image" src="{% static './assets/image/Clippathgroup.png' %}"
-                style="filter: brightness(0) invert(1);" />
-            <h1 class="logo-txt">Eduvo</h1>
-        </div>
+        <a href="{% url 'homePage' %}" style="text-decoration: none; color: inherit;">
+            <div class="logo">
+                <img class="logo-image" src="{% static './assets/image/Clippathgroup.png' %}"
+                    style="filter: brightness(0) invert(1);" />
+                <h1 class="logo-txt">Eduvo</h1>
+            </div>
+        </a>
         <div class="nav-links">
             <a href="{% url 'homePage' %}">Home <i class="fa-solid fa-angle-down"></i></a>
             <a href="{% url 'Courses' %}">Courses <i class="fa-solid fa-angle-down"></i></a>
@@ -46,7 +48,9 @@
     <!-- Footer -->
     <div class="footer">
         <div class="footer-hero">
-            <div class="logo"><img src="{% static './assets/image/logo project.png' %}" alt=""></div>
+            <a href="{% url 'homePage' %}" style="text-decoration: none;">
+                <div class="logo"><img src="{% static './assets/image/logo project.png' %}" alt=""></div>
+            </a>
             <p>Eduvo is a smart e-learning platform connecting education <br>
                 with employment. We offer hands-on courses, real-world projects, and <br>
                 career guidance to help learners get job-ready.</p>

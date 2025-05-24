@@ -61,7 +61,20 @@
         <div class=" main">
             <h2>Explore New Job Opportunities</h2>
             <div class="job-list">
-                <div class="job-item">
+                {% for job in jobs %}
+<div class="job-item">
+    <img src="{% static 'assets/img/job-logo.png' %}" class="job-logo" alt="logo">
+    <div class="job-info job-grid">
+        <span>{{ job.company_name }}</span>
+        <span>{{ job.title }}</span>
+        <span>{{ job.location }}</span>
+        <span>{{ job.job_type }}</span>
+    </div>
+    <a href="{% url 'jobs:job_detail' job.id %}"><button class="job-button">voir l'offre</button></a>
+</div>
+{% endfor %}
+
+                <!-- <div class="job-item">
                     <img src="{% static 'assets/img//job-logo.png' %}" class="job-logo" alt="logo">
                     <div class="job-info job-grid">
                         <span>Webify Solutions</span>
@@ -98,7 +111,7 @@
                         <span>back-end developer</span>
                         <span>Algeria</span>
                         <span>Remote</span>
-                    </div>
+                    </div> -->
                     <button class="job-button">voir l'offre</button>
                 </div>
                 <button class="see-all-button">See All</button>
@@ -108,8 +121,20 @@
 
     <section class="all-jobs-section">
         <h2>Our Job offers</h2>
+        {% for job in jobs %}
+<div class="job-item">
+    <img src="{% static 'assets/img/job-logo.png' %}" class="job-logo" alt="logo">
+    <div class="job-info job-grid">
+        <span>{{ job.company_name }}</span>
+        <span>{{ job.title }}</span>
+        <span>{{ job.location }}</span>
+        <span>{{ job.job_type }}</span>
+    </div>
+    <a href="{% url 'job_detail' job.id %}"><button class="job-button">voir l'offre</button></a>
+</div>
+{% endfor %}
 
-        <div class="all-job-card">
+        <!-- <div class="all-job-card">
             <img src="{% static 'assets/img//accounting-logo.png' %}" alt="Company Logo">
             <span>Webify Solutions</span>
             <span>back-end developer</span>
@@ -208,7 +233,7 @@
             <span>Remote</span>
             <span>April 25</span>
             <button class="apply-btn">voir l'offre</button>
-        </div>
+        </div> -->
 
     </section>
 

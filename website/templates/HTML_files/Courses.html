@@ -27,7 +27,18 @@
             <div class="carousel">
 
                 {% for course in top_courses %}
-                <div class="carousel-item">
+                        <style>
+                           .title-course-link {
+                               text-decoration: none;
+                               color: inherit;
+                               color: #333;
+                            }
+    
+                            .title-course-link:hover {
+                             opacity: 0.8;
+                          }
+                        </style>
+                <a href="{% url 'course-model' course.id %}" class="carousel-item">
                     <div class="item-img">
                         <img src="{{ course.image_url }}" alt="{{ course.title }}">
                     </div>
@@ -35,7 +46,7 @@
                         <p class="item-info-title">{{ course.title }}</p>
                         <p class="item-info-tch&ctg">{{ course.teacher }} | {{ course.category }}</p>
                     </div>
-                </div>
+                </a>
                 {% endfor %}
             </div>
 
@@ -125,7 +136,7 @@
 
                 <div class="course-infos">
                     <p class="course-title">{{ course.title }}</p>
-                    <p class="course-description">{{ course.description }}</p>
+                    <p class="course-description">{{ course.description|truncatewords:15 }}</p>
                     <p class="course-teacher">{{ course.teacher }}</p>
                     <div class="course-stats">
                         <div class="course-rating">

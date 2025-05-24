@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<h2>{{ job.title }}</h2>
+<p>Company: {{ job.company_name }}</p>
+<p>Location: {{ job.location }}</p>
+<p>Work type: {{ job.work_type }}</p>
+<p>Description: {{ job.description }}</p>
+
+<a href="{% url 'jobs:job_list' %}">Back to jobs</a>
+
+{% endblock %}

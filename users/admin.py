@@ -6,4 +6,6 @@ admin.site.register(StudentProfile)
 admin.site.register(TeacherProfile)
 admin.site.register(CompanyProfile)
 
-# Register your models here.
+
+
+

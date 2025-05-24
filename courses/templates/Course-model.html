@@ -60,7 +60,7 @@
     <div class="learn">
         <h2 id="learning">What you'll learn</h2>
         <div class="two-columns learns">
-            {% for objective in course.objectives.all %}
+            {% for objective in course.what_you_learn.all %}
             <p>{{ objective.description }}</p>
             {% endfor %}
         </div>

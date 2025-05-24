@@ -1,6 +1,23 @@
 from django.db import models
 from django.db.models import Avg, Count
 
+class Category(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+    description = models.TextField(blank=True, null=True)
+    image = models.ImageField(upload_to='category_images/', blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = "Category"
+        verbose_name_plural = "Categories"
+        ordering = ['name']
+
+
+
 class Course(models.Model):
     # had l'choices y3tina levels li n9dro n7tuhom fl cours (débutant, moyen, avancé...)
     LEVEL_CHOICES = [
@@ -21,7 +38,7 @@ class Course(models.Model):
     title = models.CharField(max_length=255)  # lism t3 l'cours
     description = models.TextField()  # l'description  l'cours
     price = models.DecimalField(max_digits=10, decimal_places=2)  # l'prix dyal l'cours
-    category = models.CharField(max_length=100)  # l'catégorie dyal l'cours
+    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, related_name='courses')  # l'catégorie dyal l'cours
     duration = models.DurationField(blank=True, null=True)  # l'durée dyal l'cours
     level = models.CharField(max_length=12, choices=LEVEL_CHOICES, default='all levels')  # l'level dyal l'cours
     status = models.CharField(max_length=9, choices=STATUS_CHOICES, default='draft')  # l'status dyal l'cours
@@ -36,7 +53,6 @@ class Course(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)  # l'date li t3mer fih l'cours
     updated_at = models.DateTimeField(auto_now=True)  # l'date li tbedel fih l'cours
     skills = models.ManyToManyField('skills.Skill', related_name='courses')  # l'skills li kay3tina f'l'cours
-
     def __str__(self):
         # hadi bach tban l'ism dyal l'cours f'l'admin w f'l'affichage
         return self.title
@@ -154,7 +170,7 @@ class Rating(models.Model):
 class WhatYouLearn(models.Model):
     # had l'model kay7fed fih l'objectifs dyal l'cours
     course = models.ForeignKey(Course, related_name='what_you_learn', on_delete=models.CASCADE)  # l'cours
-    text = models.CharField(max_length=200)  # l'objectif li ghadi y3ref l'étudiant
+    description = models.TextField() # l'objectif li ghadi y3ref l'étudiant
 
     def __str__(self):
-        return self.text
+        return self.description
