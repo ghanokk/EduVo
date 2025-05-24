@@ -1,5 +1,21 @@
 from django.contrib import admin
-from .models import Course, Section, Lesson, Enrollment, Rating, WhatYouLearn
+from .models import Course, Section, Lesson, Enrollment, Rating, WhatYouLearn, Category
+
+@admin.register(Category)
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ('name', 'description', 'created_at', 'updated_at')
+    search_fields = ('name', 'description')
+    list_filter = ('created_at', 'updated_at')
+    readonly_fields = ('created_at', 'updated_at')
+    fieldsets = (
+        ('Basic Information', {
+            'fields': ('name', 'description', 'image')
+        }),
+        ('Timestamps', {
+            'fields': ('created_at', 'updated_at'),
+            'classes': ('collapse',)
+        }),
+    )
 
 @admin.register(Course)
 class CourseAdmin(admin.ModelAdmin):
@@ -70,7 +86,15 @@ class RatingAdmin(admin.ModelAdmin):
 
 @admin.register(WhatYouLearn)
 class WhatYouLearnAdmin(admin.ModelAdmin):
-    list_display = ('course',)
+    list_display = ('get_course_title', 'get_description')
     list_filter = ('course',)
-    search_fields = ('text', 'course__title')
+    search_fields = ('description', 'course__title')
     ordering = ('course',)
+
+    def get_course_title(self, obj):
+        return obj.course.title
+    get_course_title.short_description = 'Course'
+
+    def get_description(self, obj):
+        return obj.description
+    get_description.short_description = 'Learning Objective'

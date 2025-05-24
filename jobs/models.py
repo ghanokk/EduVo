@@ -1,6 +1,7 @@
 from django.db import models
 
 class Job(models.Model):
+    
     STATUS_CHOICES = [
     ('open', 'Open'),
     ('closed', 'Closed'),
@@ -14,9 +15,18 @@ class Job(models.Model):
         ('marketing', 'Marketing'),
         ('other', 'Other'),
     ]
+
+    WORK_MODE_CHOICES = [
+        ('REMOTE', 'Remote'),
+        ('ONSITE', 'On-site'),
+        ('HYBRID', 'Hybrid'),
+    ]
+    
     title = models.CharField(max_length=255)  # عنوان الوظيفة
     description = models.TextField()  # وصف الوظيفة
     posted_by = models.ForeignKey('users.User', on_delete=models.CASCADE)  # الشركة اللي ناضت الوظيفة
+    work_mode = models.CharField(max_length=10, choices=WORK_MODE_CHOICES, default='ONSITE')
+
     created_at = models.DateTimeField(auto_now_add=True)  # تاريخ النشر
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='open')
 #Pourquoi ? T9der tkoun khdemt 3la job mais mazel ma publicatehach (draft), oula skartha (closed).
@@ -46,6 +56,3 @@ class Proposal(models.Model):
         return f"{self.freelancer.username} - {self.job.title}"
     class Meta:
          ordering = ['-submitted_at']
-
-
-# Create your models here.

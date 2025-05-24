@@ -57,3 +57,4 @@ class TeacherProfile(Profile):
 class CompanyProfile(Profile):
     company_name = models.CharField(max_length=255)  # nom ta3 la société
     description = models.TextField()  # un petit résumé 3la la boîte
+    

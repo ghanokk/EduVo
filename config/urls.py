@@ -37,3 +37,4 @@ urlpatterns = [
 
 if settings.DEBUG:  # Hadi juste fi mode développement
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    

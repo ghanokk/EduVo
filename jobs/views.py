@@ -19,10 +19,3 @@ def job_detail(request, job_id):
     # Rendir template détail avec job wahed
     return render(request, 'jobs/job_detail.html', {'job': job})
 
-
-
-
-
-
-
-# Create your views here.
