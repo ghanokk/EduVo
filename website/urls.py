@@ -4,16 +4,9 @@ from django.conf.urls.static import static
 from . import views
 
 urlpatterns = [
-    # path('admin/', admin.site.urls)  -->   warning URL namespace 'admin' isn't unique
     path('', views.homePage, name='homePage'),
 
-    # path('forgotPass/', views.forgotPass, name='forgotPass'),
-    path('login/', views.register, name='login'),
-    
-    path('jobs/', views.Jobs, name='Jobs'),
-    path('jobs/historie/', views.Historie, name='Historie'),
-    path('courses/', views.courses, name='Courses'),
-    # path('courses/', include('courses.urls')),
+   
 ]
 
 if settings.DEBUG:

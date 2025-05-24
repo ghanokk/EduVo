@@ -21,7 +21,7 @@
 
 
     <div class="historie-header">
-        <a href="{% url 'Jobs' %}" class="back-button">
+        <a href="{% url 'jobs:jobs' %}" class="back-button">
             <i class="fas fa-arrow-left"></i>
         </a>
 
@@ -31,110 +31,21 @@
     </div>
 
     <section class="all-jobs-section">
-
-
+    {% for job in jobs %}
         <div class="all-job-card">
-            <img src="{% static 'assets/img//accounting-logo.png' %}" alt="Company Logo">
-            <span>Webify Solutions</span>
-            <span>back-end developer</span>
-            <span>Algeria</span>
-            <span>Remote</span>
-            <span>April 25</span>
+            <img src="{% static 'assets/img/accounting-logo.png' %}" alt="Company Logo">
+            <span>{{ job.company_name }}</span>
+            <span>{{ job.title }}</span>
+            <span>{{ job.location }}</span>
+            <span>{{ job.job_type }}</span>
+            <span>{{ job.created_at|date:"F d" }}</span>
             <button class="apply-btn">voir l'offre</button>
         </div>
+    {% empty %}
+        <p>Aucun job trouvé.</p>
+    {% endfor %}
+</section>
 
-        <div class="all-job-card">
-            <img src="{% static 'assets/img//accounting-logo.png' %}" alt="Company Logo">
-            <span>Webify Solutions</span>
-            <span>back-end developer</span>
-            <span>Algeria</span>
-            <span>Remote</span>
-            <span>April 25</span>
-            <button class="apply-btn">voir l'offre</button>
-        </div>
-
-        <div class="all-job-card">
-            <img src="{% static 'assets/img//accounting-logo.png' %}" alt="Company Logo">
-            <span>Webify Solutions</span>
-            <span>back-end developer</span>
-            <span>Algeria</span>
-            <span>Remote</span>
-            <span>April 25</span>
-            <button class="apply-btn">voir l'offre</button>
-        </div>
-
-        <div class="all-job-card">
-            <img src="{% static 'assets/img//accounting-logo.png' %}" alt="Company Logo">
-            <span>Webify Solutions</span>
-            <span>back-end developer</span>
-            <span>Algeria</span>
-            <span>Remote</span>
-            <span>April 25</span>
-            <button class="apply-btn">voir l'offre</button>
-        </div>
-
-        <div class="all-job-card">
-            <img src="{% static 'assets/img//accounting-logo.png' %}" alt="Company Logo">
-            <span>Webify Solutions</span>
-            <span>back-end developer</span>
-            <span>Algeria</span>
-            <span>Remote</span>
-            <span>April 25</span>
-            <button class="apply-btn">voir l'offre</button>
-        </div>
-
-        <div class="all-job-card">
-            <img src="{% static 'assets/img//accounting-logo.png' %}" alt="Company Logo">
-            <span>Webify Solutions</span>
-            <span>back-end developer</span>
-            <span>Algeria</span>
-            <span>Remote</span>
-            <span>April 25</span>
-            <button class="apply-btn">voir l'offre</button>
-        </div>
-
-        <div class="all-job-card">
-            <img src="{% static 'assets/img//accounting-logo.png' %}" alt="Company Logo">
-            <span>Webify Solutions</span>
-            <span>back-end developer</span>
-            <span>Algeria</span>
-            <span>Remote</span>
-            <span>April 25</span>
-            <button class="apply-btn">voir l'offre</button>
-        </div>
-
-        <div class="all-job-card">
-            <img src="{% static 'assets/img//accounting-logo.png' %}" alt="Company Logo">
-            <span>Webify Solutions</span>
-            <span>back-end developer</span>
-            <span>Algeria</span>
-            <span>Remote</span>
-            <span>April 25</span>
-            <button class="apply-btn">voir l'offre</button>
-        </div>
-
-        <div class="all-job-card">
-            <img src="{% static 'assets/img//accounting-logo.png' %}" alt="Company Logo">
-            <span>Webify Solutions</span>
-            <span>back-end developer</span>
-            <span>Algeria</span>
-            <span>Remote</span>
-            <span>April 25</span>
-            <button class="apply-btn">voir l'offre</button>
-        </div>
-
-
-        <div class="all-job-card">
-            <img src="{% static 'assets/img//accounting-logo.png' %}" alt="Company Logo">
-            <span>Webify Solutions</span>
-            <span>back-end developer</span>
-            <span>Algeria</span>
-            <span>Remote</span>
-            <span>April 25</span>
-            <button class="apply-btn">voir l'offre</button>
-        </div>
-
-    </section>
 
 </body>
 

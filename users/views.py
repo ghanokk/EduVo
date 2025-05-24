@@ -1,7 +1,7 @@
 from django.shortcuts import render
 
 def register(request):
-    return render(request, 'HTML_files/register.html')
+    return render(request, 'users/register.html')
 
 def forgotPass(request) :
     return render(request, 'users/forgotPass.html')

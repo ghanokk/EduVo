@@ -35,13 +35,13 @@
         </a>
         <div class="nav-links">
             <a href="{% url 'homePage' %}">Home <i class="fa-solid fa-angle-down"></i></a>
-            <a href="{% url 'Courses' %}">Courses <i class="fa-solid fa-angle-down"></i></a>
-            <a href="{% url 'Jobs' %}">Jobs <i class="fa-solid fa-angle-down"></i></a>
+            <a href="{% url 'courses:courses' %}">Courses <i class="fa-solid fa-angle-down"></i></a>
+            <a href="{% url 'jobs:jobs' %}">Jobs <i class="fa-solid fa-angle-down"></i></a>
         </div>
         <div class="register">
-            <button class="register-btn login-btn"><a href="{% url 'login' %}"
+            <button class="register-btn login-btn"><a href="{% url 'users:register' %}"
                     style="color: inherit; text-decoration: none;">Log in</a></button>
-            <button class="register-btn signup-btn"><a href="{% url 'login' %}"
+            <button class="register-btn signup-btn"><a href="{% url 'users:register' %}"
                     style="color: inherit; text-decoration: none;">Sign up</a></button>
         </div>
     </nav>
@@ -67,8 +67,8 @@
         <div class="explore">
             <h1>Explore</h1>
             <a href="{% url 'homePage'%}">Home</a>
-            <a href="{% url 'Courses' %}">Courses</a>
-            <a href="{% url 'Jobs' %}">Jobs</a>
+            <a href="{% url 'courses:courses' %}">Courses</a>
+            <a href="{% url 'jobs:jobs' %}">Jobs</a>
         </div>
         <div class="company">
             <h1>Company</h1>

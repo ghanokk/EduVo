@@ -93,14 +93,14 @@
 
     <div class="category-wrraper">
         {% for category in top_categories %}
-        <div class="category-box" onclick=window.location.href="{% url 'Courses' %}?search={{ category.name }}" style="cursor: pointer;">
+        <div class="category-box" onclick=window.location.href="{% url 'courses:courses' %}?search={{ category.name }}" style="cursor: pointer;">
             <img class="category-img" src="{% if category.image %}{{ category.image.url }}{% else %}assets/img/default-category.jpg{% endif %}" alt="{{ category.name }}">
             <h1>{{ category.name }}</h1>
         </div>
         {% endfor %}
     </div>
 
-    <button class="see-all" onclick=window.location.href="{% url 'Courses' %}" style="cursor: pointer;">See all</button>
+    <button class="see-all" onclick=window.location.href="{% url 'courses:courses' %}" style="cursor: pointer;">See all</button>
 </div>
 
 <div class="jobs">
