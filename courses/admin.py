@@ -70,7 +70,7 @@ class RatingAdmin(admin.ModelAdmin):
 
 @admin.register(WhatYouLearn)
 class WhatYouLearnAdmin(admin.ModelAdmin):
-    list_display = ('course', 'text')
+    list_display = ('course',)
     list_filter = ('course',)
     search_fields = ('text', 'course__title')
     ordering = ('course',)

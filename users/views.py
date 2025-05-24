@@ -3,6 +3,9 @@ from django.shortcuts import render
 def register(request):
     return render(request, 'HTML_files/register.html')
 
+def forgotPass(request) :
+    return render(request, 'users/forgotPass.html')
+
 def profile(request):
     return render(request, 'users/profile.html')
 

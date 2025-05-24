@@ -8,7 +8,7 @@ urlpatterns = [
     # path('admin/', admin.site.urls)  -->   warning URL namespace 'admin' isn't unique
     path('', views.homePage, name='homePage'),
 
-    path('forgotPass/', views.forgotPass, name='forgotPass'),
+    # path('forgotPass/', views.forgotPass, name='forgotPass'),
     path('login/', views.register, name='login'),
     
     path('jobs/', views.Jobs, name='Jobs'),

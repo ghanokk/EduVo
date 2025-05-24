@@ -26,10 +26,13 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('website.urls')),
     path('users/', include('users.urls')),
-    path('jobs/', include('jobs.urls', namespace='jobs')),
-    path('courses/', courses_view, name='courses'),  # 👈 on utilise views de l'app courses
-    # path('courses/', include('courses')),
-    path('users/', include('users.urls')),  # Include the URLs of your users app
+    path('courses/', include('courses.urls')),
+    path('jobs/', include('jobs.urls')),
+
+    # path('jobs/', include('jobs.urls', namespace='jobs')),
+    # path('courses/', courses_view, name='courses'),  # 👈 on utilise views de l'app courses
+    # # path('courses/', include('courses')),
+    # path('users/', include('users.urls')),  # Include the URLs of your users app
 ]
 
 if settings.DEBUG:  # Hadi juste fi mode développement
