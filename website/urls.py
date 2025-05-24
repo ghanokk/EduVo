@@ -13,7 +13,8 @@ urlpatterns = [
     
     path('jobs/', views.Jobs, name='Jobs'),
     path('jobs/historie/', views.Historie, name='Historie'),
-    path('courses/', include('courses.urls')),
+    path('courses/', views.courses, name='Courses'),
+    # path('courses/', include('courses.urls')),
 ]
 
 if settings.DEBUG:

@@ -1,245 +1,66 @@
 {% extends "base.html" %}
-
 {% load static %}
 
-{% block content %}
-
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Job Dashboard</title>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600&display=swap" rel="stylesheet">
+{% block head %}
     <link rel="stylesheet" href="{% static 'CSS_files/Jobs.css' %}">
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600&display=swap" rel="stylesheet">
+{% endblock %}
 
-</head>
-
-<body>
-
-
-    <div class="container">
-        <div class="sidebar">
-            <div class="profile-section">
-                <div style="text-align:center">
-                    <img src="{%static 'assets/img//profile-image.png' %}" alt="Profile" class="profile-img">
-                    <h3>Name Surname</h3>
-                    <p>Algeria, Blida</p>
-                </div>
-                <div class="skills">
-                    <div class="section-title">Your skills</div>
-                    <ul>
-                        <li>. ui/ux designer</li>
-                        <li>. ui/ux designer</li>
-                        <li>. ui/ux designer</li>
-                    </ul>
+{% block content %}
+<div class="container">
+    <div class="sidebar">
+        <div class="profile-section">
+            <div style="text-align:center">
+                <img src="{% static 'assets/img/profile-image.png' %}" alt="Profile" class="profile-img">
+                <h3>Name Surname</h3>
+                <p>Algeria, Blida</p>
+            </div>
+            <div class="skills">
+                <div class="section-title">Your skills</div>
+                <ul>
+                    <li>. ui/ux designer</li>
+                    <li>. ui/ux designer</li>
+                    <li>. ui/ux designer</li>
+                </ul>
+            </div>
+        </div>
+        <div class="history">
+            <div class="section-title">Historie</div>
+            <div class="history-item">
+                <img src="{% static 'assets/img/Ellipse 4.svg' %}" class="history-logo" alt="icon">
+                <div class="history-info">
+                    <div>back-end developer</div>
+                    <div>Algeria</div>
                 </div>
             </div>
-            <div class="history">
-                <div class="section-title">Historie</div>
-                <div class="history-item">
-                    <img src="{% static 'assets/img//Ellipse 4.svg' %}" class="history-logo" alt="icon">
-                    <div class="history-info">
-                        <div>back-end developer</div>
-                        <div>Algeria</div>
-                    </div>
+            <div class="history-item">
+                <img src="{% static 'assets/img/accounting-logo.png' %}" class="history-logo" alt="icon">
+                <div class="history-info">
+                    <div>back-end developer</div>
+                    <div>Algeria</div>
                 </div>
-                <div class="history-item">
-                    <img src="{% static 'assets/img//accounting-logo.png' %}" class="history-logo" alt="icon">
-                    <div class="history-info">
-                        <div>back-end developer</div>
-                        <div>Algeria</div>
-                    </div>
-                </div>
+            </div>
                 <button class="see-all-button" onclick=window.location.href="{% url 'Historie' %}">See All</button>
-            </div>
         </div>
-
-        <div class=" main">
-            <h2>Explore New Job Opportunities</h2>
-            <div class="job-list">
-                {% for job in jobs %}
-<div class="job-item">
-    <img src="{% static 'assets/img/job-logo.png' %}" class="job-logo" alt="logo">
-    <div class="job-info job-grid">
-        <span>{{ job.company_name }}</span>
-        <span>{{ job.title }}</span>
-        <span>{{ job.location }}</span>
-        <span>{{ job.job_type }}</span>
     </div>
-    <a href="{% url 'jobs:job_detail' job.id %}"><button class="job-button">voir l'offre</button></a>
+
+    <div class="main">
+        <h2>Explore New Job Opportunities</h2>
+        <div class="job-list">
+            {% for job in jobs %}
+                <div class="job-item">
+                    <img src="{% static 'assets/img/job-logo.png' %}" class="job-logo" alt="logo">
+                    <div class="job-info job-grid">
+                        <span>{{ job.posted_by.username }}</span>
+                        <span>{{ job.title }}</span>
+                        <span>{{ job.location }}</span>
+                        <span>{{ job.get_category_display }}</span>
+                    </div>
+                        <button class="job-button">voir l'offre</button>
+                    
+                </div>
+            {% endfor %}
+        </div>
+        <button class="see-all-button">See All</button>
+    </div>
 </div>
-{% endfor %}
-
-                <!-- <div class="job-item">
-                    <img src="{% static 'assets/img//job-logo.png' %}" class="job-logo" alt="logo">
-                    <div class="job-info job-grid">
-                        <span>Webify Solutions</span>
-                        <span>back-end developer</span>
-                        <span>Algeria</span>
-                        <span>Remote</span>
-                    </div>
-                    <button class="job-button">voir l'offre</button>
-                </div>
-                <div class="job-item">
-                    <img src="{% static 'assets/img//job-logo.png' %}" class="job-logo" alt="logo">
-                    <div class="job-info job-grid">
-                        <span>Webify Solutions</span>
-                        <span>back-end developer</span>
-                        <span>Algeria</span>
-                        <span>Remote</span>
-                    </div>
-                    <button class="job-button">voir l'offre</button>
-                </div>
-                <div class="job-item">
-                    <img src="{% static 'assets/img//job-logo.png' %}" class="job-logo" alt="logo">
-                    <div class="job-info job-grid">
-                        <span>Webify Solutions</span>
-                        <span>back-end developer</span>
-                        <span>Algeria</span>
-                        <span>Remote</span>
-                    </div>
-                    <button class="job-button">voir l'offre</button>
-                </div>
-                <div class="job-item">
-                    <img src="{% static 'assets/img//job-logo.png' %}" class="job-logo" alt="logo">
-                    <div class="job-info job-grid">
-                        <span>Webify Solutions</span>
-                        <span>back-end developer</span>
-                        <span>Algeria</span>
-                        <span>Remote</span>
-                    </div> -->
-                    <button class="job-button">voir l'offre</button>
-                </div>
-                <button class="see-all-button">See All</button>
-            </div>
-        </div>
-    </div>
-
-    <section class="all-jobs-section">
-        <h2>Our Job offers</h2>
-        {% for job in jobs %}
-<div class="job-item">
-    <img src="{% static 'assets/img/job-logo.png' %}" class="job-logo" alt="logo">
-    <div class="job-info job-grid">
-        <span>{{ job.company_name }}</span>
-        <span>{{ job.title }}</span>
-        <span>{{ job.location }}</span>
-        <span>{{ job.job_type }}</span>
-    </div>
-    <a href="{% url 'job_detail' job.id %}"><button class="job-button">voir l'offre</button></a>
-</div>
-{% endfor %}
-
-        <!-- <div class="all-job-card">
-            <img src="{% static 'assets/img//accounting-logo.png' %}" alt="Company Logo">
-            <span>Webify Solutions</span>
-            <span>back-end developer</span>
-            <span>Algeria</span>
-            <span>Remote</span>
-            <span>April 25</span>
-            <button class="apply-btn">voir l'offre</button>
-        </div>
-
-        <div class="all-job-card">
-            <img src="{% static 'assets/img//accounting-logo.png' %}" alt="Company Logo">
-            <span>Webify Solutions</span>
-            <span>back-end developer</span>
-            <span>Algeria</span>
-            <span>Remote</span>
-            <span>April 25</span>
-            <button class="apply-btn">voir l'offre</button>
-        </div>
-
-        <div class="all-job-card">
-            <img src="{% static 'assets/img//accounting-logo.png' %}" alt="Company Logo">
-            <span>Webify Solutions</span>
-            <span>back-end developer</span>
-            <span>Algeria</span>
-            <span>Remote</span>
-            <span>April 25</span>
-            <button class="apply-btn">voir l'offre</button>
-        </div>
-
-        <div class="all-job-card">
-            <img src="{% static 'assets/img//accounting-logo.png' %}" alt="Company Logo">
-            <span>Webify Solutions</span>
-            <span>back-end developer</span>
-            <span>Algeria</span>
-            <span>Remote</span>
-            <span>April 25</span>
-            <button class="apply-btn">voir l'offre</button>
-        </div>
-
-        <div class="all-job-card">
-            <img src="{% static 'assets/img//accounting-logo.png' %}" alt="Company Logo">
-            <span>Webify Solutions</span>
-            <span>back-end developer</span>
-            <span>Algeria</span>
-            <span>Remote</span>
-            <span>April 25</span>
-            <button class="apply-btn">voir l'offre</button>
-        </div>
-
-        <div class="all-job-card">
-            <img src="{% static 'assets/img//accounting-logo.png' %}" alt="Company Logo">
-            <span>Webify Solutions</span>
-            <span>back-end developer</span>
-            <span>Algeria</span>
-            <span>Remote</span>
-            <span>April 25</span>
-            <button class="apply-btn">voir l'offre</button>
-        </div>
-
-        <div class="all-job-card">
-            <img src="{% static 'assets/img//accounting-logo.png' %}" alt="Company Logo">
-            <span>Webify Solutions</span>
-            <span>back-end developer</span>
-            <span>Algeria</span>
-            <span>Remote</span>
-            <span>April 25</span>
-            <button class="apply-btn">voir l'offre</button>
-        </div>
-
-        <div class="all-job-card">
-            <img src="{% static 'assets/img//accounting-logo.png' %}" alt="Company Logo">
-            <span>Webify Solutions</span>
-            <span>back-end developer</span>
-            <span>Algeria</span>
-            <span>Remote</span>
-            <span>April 25</span>
-            <button class="apply-btn">voir l'offre</button>
-        </div>
-
-        <div class="all-job-card">
-            <img src="{% static 'assets/img//accounting-logo.png' %}" alt="Company Logo">
-            <span>Webify Solutions</span>
-            <span>back-end developer</span>
-            <span>Algeria</span>
-            <span>Remote</span>
-            <span>April 25</span>
-            <button class="apply-btn">voir l'offre</button>
-        </div>
-
-
-        <div class="all-job-card">
-            <img src="{% static 'assets/img//accounting-logo.png' %}" alt="Company Logo">
-            <span>Webify Solutions</span>
-            <span>back-end developer</span>
-            <span>Algeria</span>
-            <span>Remote</span>
-            <span>April 25</span>
-            <button class="apply-btn">voir l'offre</button>
-        </div> -->
-
-    </section>
-
-</body>
-
-</html>
-
-
-{% endblock content %}
+{% endblock %}

@@ -3,6 +3,7 @@ from courses.models import Course, Rating
 from django.db.models import Q, Avg, Count
 from django.apps import apps
 from django.conf import settings
+from jobs.models import Job
 
 def forgotPass(request):
      return render(request, 'HTML_files/forgotPass.html')
@@ -14,11 +15,13 @@ def homePage(request):
      return render(request, 'HTML_files/homePage.html')
 
 def courses(request):
-    return render(request, 'HTML_files/courses.html')
+    return render(request, 'HTML_files/Courses.html')
 
 
-def Jobs(request):
-    return render(request, 'HTML_files/Jobs.html')
+def Jobs(request): 
+    jobs = Job.objects.all()
+    return render(request, 'HTML_files/Jobs.html', {'jobs': jobs})
+        # return render(request, 'HTML_files/Jobs.html')
 
 def Historie(request):
     return render(request, 'HTML_files/Historie.html')

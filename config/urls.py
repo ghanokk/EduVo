@@ -18,13 +18,17 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from website import views as website_views
+from courses.views import courses as courses_view
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('website.urls')),
     path('users/', include('users.urls')),
-    path('jobs/', include('jobs.urls')),
-    path('courses/', include('courses.urls')),
+    path('jobs/', include('jobs.urls', namespace='jobs')),
+    path('courses/', courses_view, name='courses'),  # 👈 on utilise views de l'app courses
+    # path('courses/', include('courses')),
     path('users/', include('users.urls')),  # Include the URLs of your users app
 ]
 
