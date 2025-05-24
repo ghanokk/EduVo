@@ -4,15 +4,11 @@ from django.conf.urls.static import static
 from . import views
 
 urlpatterns = [
-
-    path('', views.homePage, name='homePage'),
-
-    path('forgotPass/', views.forgotPass, name='forgotPass'),
-    path('login/', views.register, name='login'),
     
-    path('jobs/', views.Jobs, name='Jobs'),
-    path('jobs/historie/', views.Historie, name='Historie'),
-    path('courses/', include('courses.urls')),
+    path('', views.homePage, name='homePage'),
+    path('courses/', include('courses.urls', namespace='courses')),
+    path('jobs/', include('jobs.urls', namespace='jobs')),
+    path('users/', include('users.urls', namespace='users')),
 ]
 
 if settings.DEBUG:

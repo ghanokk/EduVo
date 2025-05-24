@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 class Job(models.Model):
     
@@ -34,6 +35,9 @@ class Job(models.Model):
 
     def __str__(self):
         return f"{self.title} - {self.posted_by.username}"
+
+    def get_absolute_url(self):
+        return reverse('jobs:job_detail', args=[self.id])
 
     class Meta:
         ordering = ['-created_at']  # Yban l'offre mel lakher l lewl

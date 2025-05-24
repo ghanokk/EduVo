@@ -24,10 +24,7 @@ urlpatterns = [
     path('', include('website.urls')),
     path('users/', include('users.urls')),
     path('jobs/', include('jobs.urls')),
-
-    path('users/', include('users.urls')),  # Include the URLs of your users app
 ]
 
 if settings.DEBUG:  # Hadi juste fi mode développement
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-    

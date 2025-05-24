@@ -54,7 +54,7 @@
                         <div>Algeria</div>
                     </div>
                 </div>
-                <button class="see-all-button" onclick=window.location.href="{% url 'Historie' %}">See All</button>
+                <button class="see-all-button" onclick=window.location.href="{% url 'jobs:Historie' %}">See All</button>
             </div>
         </div>
 
@@ -70,7 +70,7 @@
         <span>{{ job.location }}</span>
         <span>{{ job.job_type }}</span>
     </div>
-    <a href="{% url 'jobs:job_detail' job.id %}"><button class="job-button">voir l'offre</button></a>
+    <button class="job-button">voir l'offre</button>
 </div>
 {% endfor %}
 
@@ -130,7 +130,7 @@
         <span>{{ job.location }}</span>
         <span>{{ job.job_type }}</span>
     </div>
-    <a href="{% url 'job_detail' job.id %}"><button class="job-button">voir l'offre</button></a>
+    <button class="job-button">voir l'offre</button>
 </div>
 {% endfor %}
 

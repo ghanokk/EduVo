@@ -1,5 +1,6 @@
+import os
 from django.shortcuts import render, get_object_or_404
-from courses.models import Course, Rating
+from courses.models import Course, Rating,Lesson,WhatYouLearn
 from django.db.models import Q, Avg, Count
 from django.apps import apps
 from django.conf import settings
@@ -27,7 +28,9 @@ def courses(request):
     # ki ykoun search: nfiltriw 3la titre, description, ou catégorie
     if search_query:
         # Split search terms and create conditions
-        search_terms = search_query.lower().split()
+        search_terms = search_query.lower().split() #split to two words and converts the string to lower case
+
+
         
         # Create conditions that match similar words
         title_conditions = []
@@ -141,7 +144,7 @@ def courses(request):
         'level_choices': Course.LEVEL_CHOICES,
     }
 
-    return render(request, 'HTML_files/courses.html', context)
+    return render(request, 'courses.html', context)
 
 # function li taffichi wahad lcourse selon l'id
 def course_model(request, course_id):
@@ -167,6 +170,12 @@ def course_model(request, course_id):
     # n7awlou avg_rating l étoiles (range)
     course.rating = range(int(avg_rating))
 
+    # Debug information
+    print(f"Course ID: {course.id}")
+    print(f"Course Title: {course.title}")
+    print(f"Sections count: {course.sections.count()}")
+    print(f"Lessons count: {Lesson.objects.filter(section__course=course).count()}")
+
     # nkhdmou context bach nb3atou les données l template
     context = {
         'course': course,
@@ -174,11 +183,13 @@ def course_model(request, course_id):
         'avg_rating': avg_rating,
         'rating_count': ratings.count(),
         'student_count': course.enrollments.count(),
-        'sections': course.sections.all(),
+        'sections': course.sections.prefetch_related('lessons').all(),
+        'lessons': Lesson.objects.filter(section__course=course).order_by('section__order', 'order'),
         'lessons_count': course.get_total_lessons(),
         'total_hours': course.get_total_duration(),
         'teacher': course.teacher,
         'teacher_title': getattr(course.teacher, 'profile', {}).get('title', ''),
+        'what_you_learn': course.what_you_learn.all(),
     }
 
     return render(request, 'Course-model.html', context)
