@@ -34,8 +34,6 @@ def register_view(request):
         username = str(uuid.uuid4())[:30]
         email = request.POST.get('email2')
         password = request.POST.get('password2')
-        x = request.POST.get('email2')
-        print(x)
         
         user = User(
             username=username,  # generate unique username,
