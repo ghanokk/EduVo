@@ -1,0 +1,95 @@
+*{
+    padding: 0;
+    margin: 0;
+    font-family: sans-serif;
+
+}
+
+body{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient( to bottom , #3e98d4 , #3DB2FF);
+}
+
+
+.container{
+    opacity: 0;
+    transform: translateY(30px);
+    background: #EDEDED;
+    border-radius: 50px;
+    padding: 20px 80px;
+    width: 40%;
+    max-width: 550px;
+    box-shadow: 0 0 20px 0 #c7c7c759;
+    animation: fadeInUp 1s ease-out forwards;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.container h1{
+    text-align: center;
+    font-size: 35px;
+    padding: 15px 90px;
+    color: #393979;
+
+}
+
+span{
+    margin-bottom: 10px;
+}
+
+a{
+    color: #3DB2FF;
+    text-decoration: none;
+}
+
+label{
+    font-size: 18px;
+}
+
+.dont-have-acc{
+    text-align: center;
+    font-size: 18px;
+}
+.container input{
+    width: 96%;
+    border: none;
+    height: 60px;
+    padding: 0 10px;
+    border-radius: 15px;
+    font-size: 16px;
+    margin-bottom: 20px;
+    margin-top: 5px;
+    outline: none;
+
+}
+
+
+
+.container button{
+    display: block;
+    margin: auto;
+    width: 100%;
+    border: none;
+    height: 60px;
+    padding: 0 10px;
+    border-radius: 15px;
+    font-size: 24px;
+    background: #3DB2FF;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s ease;
+    margin-bottom: 10px;
+}
+
+.container button:hover{
+    background: #3e98d4;
+    box-shadow: 0 0 10px 0 #3db1ff46;
+}
