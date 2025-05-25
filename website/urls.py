@@ -6,7 +6,7 @@ from . import views
 urlpatterns = [
     path('', views.homePage, name='homePage'),
 
-   
+
 ]
 
 if settings.DEBUG:
