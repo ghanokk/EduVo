@@ -10,7 +10,7 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    background: linear-gradient( to bottom , #3e98d4 , #3DB2FF);
+    background: url('../assets/img/background-blured.png')
     
 }
 
