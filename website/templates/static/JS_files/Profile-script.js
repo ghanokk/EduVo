@@ -276,12 +276,17 @@ function createSection(){
     
 }
 
+const showJobFormButton = document.getElementById('new-job-btn');
+  const addJobContainer = document.querySelector('.add-job');
 
-
+  showJobFormButton.addEventListener('click', () => {
+    addJobContainer.classList.toggle('expand');
+  });
 
 
 const addCourseBtn = document.getElementById("showPageBtn");
 const hiddenPage = document.getElementById("hiddenPage");
+
 const closeBtn = document.querySelector('.close')
 
 addCourseBtn.addEventListener("click", () => {
