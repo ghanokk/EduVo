@@ -3,10 +3,10 @@ from django.conf import settings
 from django.conf.urls.static import static
 from . import views
 
+app_name = 'website'
+
 urlpatterns = [
     path('', views.homePage, name='homePage'),
-
-
 ]
 
 if settings.DEBUG:

@@ -1,0 +1,32 @@
+{% include 'users/msg.html' %}
+<form method="post" action="{% url 'users:register0' %}">
+  {% csrf_token %}
+    {{ register_form.as_p }}
+
+  <label for="username">Username</label>
+  <input type="text" name="username" id="username" required>
+
+  <label for="email">Email</label>
+  <input type="email" name="email" id="email" required>
+
+  <label for="password1">Password</label>
+  <input type="password" name="password1" id="password1" required>
+
+  <label for="password2">Confirm Password</label>
+  <input type="password" name="password2" id="password2" required>
+
+  <!-- <label for="user_type">User Type</label>
+  <select name="user_type" id="user_type" required>
+    <option value="">Select a role</option>
+    <option value="student">Student</option>
+    <option value="teacher">Teacher</option>
+    <option value="company">Company</option>
+  </select> -->
+
+  <label>
+    <input type="checkbox" name="is_freelancer" />
+    Are you a freelancer?
+  </label>
+
+  <button type="submit">Sign Up</button>
+</form>

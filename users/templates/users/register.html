@@ -50,14 +50,15 @@
 
       <div class="tab-wrraper">
         <div class="tab-content active" id="login" onclick="switchTab('login')">
-          <form method="post" action="{% url 'users:login_view' %}"></form>
+          {% include 'users/msg.html' %}
+          <form method="post" action="{% url 'users:doLogin' %}">
               {% csrf_token %}
           <label for="email">Email</label>
-          <input type="email" id="email1" name="email1" placeholder="Enter your email adress">
+          <input type="email" id="email" name="email" placeholder="Enter your email adress">
           <label for="password">Password</label>
-          <input type="password" id="password1" name="password1" placeholder="Enter your password">
+          <input type="password" id="password" name="password" placeholder="Enter your password">
           <a href="{% url 'users:forgot_password' %}">Forgot password?</a>
-          <button class="infos-btn">
+          <button class="infos-btn" type="submit">
             Login
             <span class="arrow">→</span>
           </button>
@@ -66,14 +67,15 @@
         </div>
 
       <div class="tab-content" id="signup" onclick="switchTab('signup')">
-         <form method="post" action="{% url 'users:register_view' %}">
+         {% include 'users/msg.html' %}
+        <form method="post" action="{% url 'users:register0' %}">
           {% csrf_token %}
           <label for="fullname">Full Name</label>
           <input type="text" id="fullname" name="fullname" placeholder="Enter your full name">
           <label for="email">Email</label>
-          <input type="email" id="email2" name="email2" placeholder="Enter your email adress">
+          <input type="email" id="email" name="email" placeholder="Enter your email adress">
           <label for="password">Password</label>
-          <input type="password" id="password2" name="password2" placeholder="Enter your password">
+          <input type="password" id="password" name="password" placeholder="Enter your password">
           <label for="confirmation">Confirm password</label>
           <input type="password" id="confirmation" name="confirmation" placeholder="Confirm your password">
           <div class="privacy">
