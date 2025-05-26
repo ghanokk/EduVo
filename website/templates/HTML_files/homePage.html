@@ -107,20 +107,33 @@
     <h1>Available Jobs</h1>
     <div class="jobs-wrraper">
         {% for job in latest_jobs %}
-        <div class="job-box">
-            <div class="job-badge asButton">{{ job.category }}</div>
-            <div class="job-details">
-                <p class="job-title">{{ job.title }}</p>
-                <p class="job-company">{{ job.company }}</p>
-                <p class="location">{{ job.location }}</p>
+        <a href="{% url 'jobs:job-model' job.id %}" class="job-box-link">
+            <div class="job-box">
+                <div class="job-logo">
+                    {% with company_profile=job.posted_by.companyprofile|default_if_none:"" %}
+                        {% if company_profile.image %}
+                            <img src="{{ company_profile.image.url }}" alt="{{ job.company }} Logo">
+                        {% else %}
+                            <img src="{% static 'img/default-company-logo.png' %}" alt="{{ job.company }} Logo">
+                        {% endif %}
+                    {% endwith %}
+                </div>
+                <div class="job-badge asButton">{{ job.category }}</div>
+                <div class="job-details">
+                    <h3 class="job-title">{{ job.title }}</h3>
+                    <p class="job-company">{{ job.company }}</p>
+                    <p class="location">{{ job.location }}</p>
+                </div>
+                <div class="job-type asButton">
+                    <span>{{ job.job_type }}</span>
+                </div>
             </div>
-            <div class="job-type asButton">
-                <span>{{ job.job_type }}</span>
-            </div>
-        </div>
+        </a>
         {% endfor %}
     </div>
 </div>
+
+
 
 <div class="feedbacks">
     <h1>Client Feedbacks</h1>

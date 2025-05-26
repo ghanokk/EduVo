@@ -60,7 +60,7 @@
     <div class="learn">
         <h2 id="learning">What you'll learn</h2>
         <div class="two-columns learns">
-            {% for objective in course.what_you_learn.all %}
+            {% for objective in what_you_learn %}
             <p>{{ objective.description }}</p>
             {% endfor %}
         </div>
@@ -97,14 +97,19 @@
         <p id="course-content-details">{{ course.sections_count }} sections • {{ course.lessons_count }} lectures • {{ course.total_hours }} total length</p>
 
         <div class="course-section-wrraper">
-            {% for section in course.sections.all %}
+            {% for section in sections %}
             <div class="course-section {% if forloop.first %}active{% endif %}">
                 <div class="section-header" onclick="toggleSection(this)">
                     <h1><img src="{% static 'assets/img/icons8-expand-arrow-96 1.png' %}" alt="">{{ section.title }}</h1>
                 </div>
                 <div class="section-content">
                     {% for lesson in section.lessons.all %}
-                    <div class="session">{{ lesson.title }} ({{ lesson.duration }})</div>
+                    <div class="session">
+                        <h3>{{ lesson.title }}</h3>
+                        <p>{{ lesson.duration }}</p>
+                    </div>
+                    {% empty %}
+                    <p>No lessons available in this section</p>
                     {% endfor %}
                 </div>
             </div>
@@ -151,5 +156,5 @@
     </div>
 </section>
 
-<script src="{% static 'scripts/Course-model.js' %}"></script>
+<script src="{% static 'JS_files/Course-model.js' %}"></script>
 {% endblock content %}

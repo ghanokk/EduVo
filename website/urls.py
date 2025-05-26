@@ -5,10 +5,9 @@ from . import views
 
 urlpatterns = [
     
-    path('', views.homePage, name='homePage'),
-    path('courses/', include('courses.urls', namespace='courses')),
-    path('jobs/', include('jobs.urls', namespace='jobs')),
-    path('users/', include('users.urls', namespace='users')),
+    path('', views.homePage, name='homePage'),\
+
+
 ]
 
 if settings.DEBUG:

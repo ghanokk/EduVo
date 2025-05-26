@@ -24,6 +24,7 @@ urlpatterns = [
     path('', include('website.urls')),
     path('users/', include('users.urls')),
     path('jobs/', include('jobs.urls')),
+    path('courses/', include('courses.urls')),
 ]
 
 if settings.DEBUG:  # Hadi juste fi mode développement

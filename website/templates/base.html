@@ -21,6 +21,7 @@
 <body>
 
     <!-- Navbar -->
+
     <nav class="nav-bar">
         <a href="{% url 'homePage' %}" style="text-decoration: none; color: inherit;">
             <div class="logo">
@@ -33,14 +34,23 @@
             <a href="{% url 'homePage' %}">Home <i class="fa-solid fa-angle-down"></i></a>
             <a href="{% url 'courses:Courses' %}">Courses <i class="fa-solid fa-angle-down"></i></a>
             <a href="{% url 'jobs:Jobs' %}">Jobs <i class="fa-solid fa-angle-down"></i></a>
+            <a href="{% url 'user_accounts:profile' %}">Profile <i class="fa-solid-fa-angle-down"></i></a>
+            
+ 
         </div>
-        <div class="register">
-            <button class="register-btn login-btn"><a href="{% url 'users:login' %}"
+        <!-- <div class="register">
+            <button class="register-btn login-btn"><a href="{% url 'user_accounts:login' %}"
                     style="color: inherit; text-decoration: none;">Log in</a></button>
-            <button class="register-btn signup-btn"><a href="{% url 'users:login' %}"
+            <button class="register-btn signup-btn"><a href="{% url 'user_accounts:login' %}"
                     style="color: inherit; text-decoration: none;">Sign up</a></button>
+        </div> -->
+
+            <div class="register">
+            <p class="username">youcef moulai</p>
+            <img src="/profile.svg" alt="">
         </div>
     </nav>
+
 
     <!-- Page content -->
     {% block content %}{% endblock %}

@@ -18,7 +18,7 @@ def forgotPass(request):
     return render(request, 'users/forgotPass.html')
 
 def profile(request):
-    return render(request, 'users/profile.html')
+    return render(request, 'users/Profile.html')
 
 def teacher_profile(request):
     return render(request, 'users/teacher_profile.html')
