@@ -3,30 +3,32 @@ from .models import User
 from django.contrib import messages
 from users.EmailBackEnd import EmailBackEnd
 from django.contrib.auth import authenticate, login, logout
-def REGISTER(request):
+def DO_SIGNUP(request):
   if request.method == "POST":
-    # first_name = request.POST.get('username')
+    first_name = request.POST.get('first_name')
+    last_name = request.POST.get('last_name')
     username = request.POST.get('username')
     email = request.POST.get('email')
-    password = request.POST.get('password1')
-    print(username, email, password)
+    password = request.POST.get('password')
     #check eamil
     if User.objects.filter(email=email).exists():
       messages.warning(request, 'Email Are Already Exists !')
-      return redirect('users:register0')    
+      return redirect('users:Signup')    
     #check username
     if User.objects.filter(username=username).exists():
       messages.warning(request, 'Username Are Already Exists !')
-      return redirect('users:register0')
+      return redirect('users:Signup')
     
     user = User(
+      first_name = first_name,
+      last_name = last_name,
       username = username,
       email = email,
     )
     user.set_password(password)
     user.save()
-    return redirect('users:register1')
-  return render(request, 'users/register2.html')
+    return redirect('users:Login')
+  return render(request, 'users/Signup.html')
 
 def DO_LOGIN(request):
   if request.method == "POST":
@@ -40,4 +42,4 @@ def DO_LOGIN(request):
       return redirect('website:homePage')
     else:
       messages.error(request, 'Email And Password Are Invalid')
-      return redirect('users:register1')
+      return redirect('users:Login')
