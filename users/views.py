@@ -17,3 +17,6 @@ def Register(request):
 
 def Signup(request):
     return render(request, 'users/Signup.html')
+
+def Profile(request):
+    return render(request, 'users/Profile.html')
