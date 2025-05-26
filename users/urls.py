@@ -1,14 +1,17 @@
-from django.urls import path
-from . import views
+from django.urls import path, include
+from . import views, user_login
 
-app_name = 'user_accounts'
+app_name = 'users'
 
 urlpatterns = [
-    path('login/', views.login, name='login'),
-    path('profile/', views.profile, name='profile'),
-    path('forgotPass/', views.forgotPass, name='forgotPass'),
-
-    path('profile/teacher/', views.teacher_profile, name='teacher_profile'),
-    path('profile/student/', views.student_profile, name='student_profile'), 
-    path('profile/company/', views.company_profile, name='company_profile'),
+    # path('accounts/', include('django.contrib.auth.urls')),
+    path('forgot-password/', views.forgotPass, name='forgot_password'),
+    path('index/', views.index, name='index'),
+    path('doLogin',user_login.DO_LOGIN, name='doLogin'),
+    path('doSignup/', user_login.DO_SIGNUP, name='doSignup'),
+    path('Login/', views.Login, name='Login'),
+    path('Register/', views.Register, name='Register'),
+    path('Signup/', views.Signup, name='Signup'),
+    path('profile',views.Profile, name='profile'),
+    
 ]

@@ -672,7 +672,7 @@
             <div class="form-group" id="image-area">
                 <div class="image-upload-area">
                     
-                    <img src="{% static 'assets/img/Course cover preview.png' %}" 
+                    <img src="{% static 'assets/img/Course cover' %} " 
                          alt="Cover Image" 
                          style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px; border: 2px solid #e5e7eb;">
                     
@@ -954,6 +954,101 @@
                 </div>
             </div>
         </div>
+        <button id="new-job-btn">+ new jobs</button>
+
+<div class="add-job">
+<div class="add-job-page " id="JobForm">
+ <div class="bbb">
+    <h2 id="job-off-details">Job Offer Details</h2>
+ </div>
+  <form>
+    <div>
+      <label for="titre">Job Title</label>
+      <input type="text" id="titre" placeholder="e.g., Web Developer, HR Assistant...">
+    </div>
+
+    <div>
+      <label for="description">Job Description</label>
+      <textarea id="description" rows="5" placeholder="Describe the tasks, goals, and context"></textarea>
+    </div>
+
+    <div class="add-job-row">
+      <div>
+        <label for="contrat">Contract Type</label>
+        <select id="contrat">
+          <option>Internship</option>
+          <option>Fixed-term</option>
+          <option>Permanent</option>
+          <option>Freelance</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="add-job-row">
+      <div>
+        <label for="date">Expiration Date</label>
+        <input type="date" id="date">
+      </div>
+      <div>
+        <label for="lieu">Location</label>
+        <input type="text" id="lieu" placeholder="Remote or City">
+      </div>
+    </div>
+
+    <h3>Skills & Profile</h3>
+    <div>
+      <label for="competences">Required Skills</label>
+      <input type="text" id="competences" placeholder="List the skills (e.g., Python, project management...)">
+    </div>
+
+    <div>
+      <label for="secteur">Industry Sector</label>
+      <input type="text" id="secteur" placeholder="e.g., IT, Healthcare, Finance...">
+    </div>
+
+    <div class="add-job-row">
+      <div>
+        <label for="education">Education Level</label>
+        <input type="text" id="education" placeholder="e.g., Bachelor's, Master's, etc.">
+      </div>
+      <div>
+        <label for="level">Job Level</label>
+        <input type="text" id="level" placeholder="e.g., Junior, Mid, Senior">
+      </div>
+    </div>
+
+    <h3>Company / Organization</h3>
+    <div>
+      <label for="nom_entreprise">Company Name</label>
+      <input type="text" id="nom_entreprise" placeholder="Legal name or brand">
+    </div>
+
+    <div>
+      <label for="presentation">Introduction</label>
+      <textarea id="presentation" rows="3" placeholder="Brief description of the company or organization"></textarea>
+    </div>
+
+    <div>
+      <label for="email">Contact Email Address</label>
+      <input type="email" id="email" placeholder="contact@company.com">
+    </div>
+
+    <h3>Attachments</h3>
+    <div>
+      <label for="fichier">Brochure, visual or logo (PDF, JPG, PNG)</label><br>
+      <label class="add-job-custom-file-upload">
+        <input type="file" id="fichier" accept=".pdf,.jpg,.jpeg,.png">
+        Choose File
+      </label>
+    </div>
+
+    <button type="submit" class="add-job-button">Submit Offer</button>
+    <p class="add-job-info">
+      Your offer will be reviewed by the administrator before being published. You will receive a confirmation email.
+    </p>
+  </form>
+    </div>
+   </div> 
 
         <h1 id="jp">Posted jobs</h1>
         <div class="job-list">
@@ -1241,3 +1336,12 @@
                         </div>
 
                         
+
+                        
+
+                            
+                        
+        </div> -->
+
+
+        

@@ -18,13 +18,16 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from website import views as website_views
+from courses.views import courses as courses_view
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('website.urls')),
     path('users/', include('users.urls')),
-    path('jobs/', include('jobs.urls')),
     path('courses/', include('courses.urls')),
+    path('jobs/', include('jobs.urls')),
 ]
 
 if settings.DEBUG:  # Hadi juste fi mode développement

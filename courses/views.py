@@ -144,7 +144,7 @@ def courses(request):
         'level_choices': Course.LEVEL_CHOICES,
     }
 
-    return render(request, 'courses.html', context)
+    return render(request, 'Courses.html', context)
 
 # function li taffichi wahad lcourse selon l'id
 def course_model(request, course_id):

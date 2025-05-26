@@ -1,0 +1,43 @@
+{% load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'CSS_files/Signup.css' %}">
+    <title>Sign up</title>
+</head>
+<body>
+    <div class="container">
+        <form method="post" action="{% url 'users:doSignup' %}">
+          {% csrf_token %}
+        <h1>Sign up</h1>
+        <div class="names">
+            <div class="first">
+                <label for="first-name">First name</label>
+            <input type="text" placeholder="First name" id="first_name" name="first_name">
+            </div>
+            <div class="last">
+                <label for="Last-name">Last name</label>
+            <input type="text" placeholder="Last name" id="last_name" name="last_name">
+            </div>
+        </div>
+        <label for="Username">Username</label>
+        <input type="text" placeholder="username" id="username" name="username">
+        <label for="email">Email</label>
+        <input type="email" placeholder="Enter your email adress" id="email" name="email">
+        <label for="password">password</label>
+        <input type="password" placeholder="Enter your password" id="password" name="password">
+        {% include 'users/msg.html' %}
+        <button>
+            Sign up
+        </button>
+        </form>
+        <div class="dont-have-acc">
+        <span>Already have an account <a href="{% url 'users:Login' %}">Login</a></span>
+
+        </div>
+
+    </div>
+</body>
+</html>

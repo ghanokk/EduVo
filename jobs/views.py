@@ -20,6 +20,18 @@ def Jobs(request):
         'viewed_jobs': viewed_jobs
     })
 
+
+def job_history(request):
+    # Get all jobs from the database
+    jobs = Job.objects.all()
+    return render(request, 'jobs/Historie.html', {jobs: jobs})
+
+# def job_list(request):
+#     # Jib kol les jobs men la base de données
+#     jobs = Job.objects.all()
+#     # Rendir template avec les jobs
+#     return render(request, 'jobs/job_list.html', {'jobs': jobs})
+
 def Historie(request):
     return render(request, 'jobs/Historie.html')
 

@@ -276,12 +276,25 @@ function createSection(){
     
 }
 
+<<<<<<< HEAD
 
 
+=======
+const showJobFormButton = document.getElementById('new-job-btn');
+  const addJobContainer = document.querySelector('.add-job');
+
+  showJobFormButton.addEventListener('click', () => {
+    addJobContainer.classList.toggle('expand');
+  });
+>>>>>>> origin/Back2_latest
 
 
 const addCourseBtn = document.getElementById("showPageBtn");
 const hiddenPage = document.getElementById("hiddenPage");
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/Back2_latest
 const closeBtn = document.querySelector('.close')
 
 addCourseBtn.addEventListener("click", () => {
@@ -320,4 +333,7 @@ window.onload = () => {
 };
 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/Back2_latest

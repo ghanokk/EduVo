@@ -88,12 +88,18 @@ def profile(request):
         })
 
     return render(request, 'users/Profile.html', context)
+def index(request):
+    return render(request, 'users/index.html')
 
-def teacher_profile(request):
-    return render(request, 'users/teacher_profile.html')
 
-def student_profile(request):
-    return render(request, 'users/student_profile.html')
+def Login(request):
+    return render(request, 'users/Login.html')
 
-def company_profile(request):
-    return render(request, 'users/company_profile.html')
+def Register(request):
+    return render(request, 'users/Register.html')
+
+def Signup(request):
+    return render(request, 'users/Signup.html')
+
+def Profile(request):
+    return render(request, 'users/Profile.html')

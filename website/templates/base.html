@@ -13,8 +13,12 @@
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="{% static 'CSS_files/styl.css' %}">
+
+    {% block head %}{% endblock %}
+
     <title>{% block title %}Eduvo{% endblock %}</title>
 </head>
+
 
 
 
@@ -23,7 +27,7 @@
     <!-- Navbar -->
 
     <nav class="nav-bar">
-        <a href="{% url 'homePage' %}" style="text-decoration: none; color: inherit;">
+        <a href="{% url 'website:homePage' %}" style="text-decoration: none; color: inherit;">
             <div class="logo">
                 <img class="logo-image" src="{% static './assets/image/Clippathgroup.png' %}"
                     style="filter: brightness(0) invert(1);" />
@@ -31,17 +35,17 @@
             </div>
         </a>
         <div class="nav-links">
-            <a href="{% url 'homePage' %}">Home <i class="fa-solid fa-angle-down"></i></a>
-            <a href="{% url 'courses:Courses' %}">Courses <i class="fa-solid fa-angle-down"></i></a>
+            <a href="{% url 'website:homePage' %}">Home <i class="fa-solid fa-angle-down"></i></a>
+            <a href="{% url 'courses:courses' %}">Courses <i class="fa-solid fa-angle-down"></i></a>
             <a href="{% url 'jobs:Jobs' %}">Jobs <i class="fa-solid fa-angle-down"></i></a>
-            <a href="{% url 'user_accounts:profile' %}">Profile <i class="fa-solid-fa-angle-down"></i></a>
+            <a href="{% url 'users:profile' %}">Profile <i class="fa-solid-fa-angle-down"></i></a>
             
  
         </div>
         <div class="register">
-            <button class="register-btn login-btn"><a href="{% url 'user_accounts:login' %}"
+            <button class="register-btn login-btn"><a href="{% url 'users:Login' %}"
                     style="color: inherit; text-decoration: none;">Log in</a></button>
-            <button class="register-btn signup-btn"><a href="{% url 'user_accounts:login' %}"
+            <button class="register-btn signup-btn"><a href="{% url 'users:Signup' %}"
                     style="color: inherit; text-decoration: none;">Sign up</a></button>
         </div> 
 
@@ -58,7 +62,7 @@
     <!-- Footer -->
     <div class="footer">
         <div class="footer-hero">
-            <a href="{% url 'homePage' %}" style="text-decoration: none;">
+            <a href="{% url 'website:homePage' %}" style="text-decoration: none;">
                 <div class="logo"><img src="{% static './assets/image/logo project.png' %}" alt=""></div>
             </a>
             <p>Eduvo is a smart e-learning platform connecting education <br>
@@ -72,8 +76,9 @@
         </div>
         <div class="explore">
             <h1>Explore</h1>
-            <a href="{% url 'homePage'%}">Home</a>
-            <a href="{% url 'courses:Courses' %}">Courses</a>
+            <a href="{% url 'website:homePage'%}">Home</a>
+            <a href="{% url 'courses:courses' %}">Courses</a>
+            <a href="{% url 'jobs:Jobs' %}">Jobs</a>
         </div>
         <div class="company">
             <h1>Company</h1>

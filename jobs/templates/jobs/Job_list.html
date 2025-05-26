@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<h2>Explore New Job Opportunities</h2>
+
+<div class="job-list">
+    {% for job in jobs %}
+    <div class="job-item">
+        <img src="{% static 'assets/img/job-logo.png' %}" class="job-logo" alt="logo">
+        <div class="job-info job-grid">
+            <span>{{ job.company_name }}</span>
+            <span>{{ job.title }}</span>
+            <span>{{ job.location }}</span>
+            <span>{{ job.work_type }}</span>
+        </div>
+        <a href="{% url 'jobs:job_detail' job.id %}">
+            <button class="job-button">voir l'offre</button>
+        </a>
+    </div>
+    {% empty %}
+    <p>No job offers available.</p>
+    {% endfor %}
+</div>
+
+{% endblock %}

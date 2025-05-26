@@ -38,28 +38,24 @@
                     </ul>
                 </div>
             </div>
-            <div class="history">
-                <div class="section-title">Historie</div>
-                {% if viewed_jobs %}
-                    {% for job in viewed_jobs %}
-                        <div class="history-item">
-                            {% if job.posted_by.companyprofile.image %}
-                                <img src="{{ job.posted_by.companyprofile.image.url }}" class="history-logo" alt="{{ job.posted_by.companyprofile.company_name }} logo">
-                            {% else %}
-                                <img src="{% static 'assets/img/company-logo.png' %}" class="history-logo" alt="Company Logo">
-                            {% endif %}
-                            <div class="history-info">
-                                <div>{{ job.title }}</div>
-                                <div>{{ job.posted_by.location }}</div>
-                            </div>
-                        </div>
-                    {% endfor %}
-                {% else %}
-                    <div class="no-jobs-message">
-                        <p>No viewed jobs yet. Start exploring jobs to see them here!</p>
-                    </div>
-                {% endif %}
+                    <div class="history">
+            <div class="section-title">Historie</div>
+            <div class="history-item">
+                <img src="{% static 'assets/img/Ellipse 4.svg' %}" class="history-logo" alt="icon">
+                <div class="history-info">
+                    <div>back-end developer</div>
+                    <div>Algeria</div>
+                </div>
             </div>
+            <div class="history-item">
+                <img src="{% static 'assets/img/accounting-logo.png' %}" class="history-logo" alt="icon">
+                <div class="history-info">
+                    <div>back-end developer</div>
+                    <div>Algeria</div>
+                </div>
+            </div>
+                <button class="see-all-button" onclick=window.location.href="{% url 'jobs:job_history' %}">See All</button>
+        </div>
         </div>
 
         <div class=" main">
