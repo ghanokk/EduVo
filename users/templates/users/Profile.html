@@ -21,16 +21,13 @@
         <div class="profile">
             <div class="profile-grp1">
                 <div class="profile-pic">
-            <img id="" src="{% static 'assets/img/profile.svg' %}" alt="profile img">
+                <img src="{{ profile.profile_picture.url }}" alt="Profile Picture" id="pro-pic" width="300px">
             </div>
             <div class="profile-bio">
-            <h1 id="username1">Diaa messaoudi</h1>
+            <h1 id="username1">{{profile.user.username}}</h1>
             <p id="location1">Algeria , Blida</p>
             <p id="bio-field">
-                Je suis un UI/UX Designer et développeur
-                 front-end en formation basé à Blida, Algérie,
-                  passionné par la création d’expériences numériques 
-                  intuitives et esthétiques.
+            {% if profile.bio %}{{profile.bio}}{% endif %}
             </p>
             </div>
             </div>
@@ -86,10 +83,9 @@
                 <div class="skills">
                     <h1 id="scjc">Skills</h1>
                     <ul class="skill-wrraper">
-                        <li class="skill">CSS</li>
-                        <li class="skill">Figma</li>
-                        <li class="skill">ReactJs</li>
-                        <li class="skill">Django</li>
+                        {% for skill in skills %}
+                        <li class="skill">{{skill.skill.name}}</li>
+                        {% endfor %}
                     </ul>
                 </div>
                 
@@ -326,11 +322,11 @@
         </div>
         <div class="profile-wrapper">
             <div class="profile-pic-handler" onclick="showImgForm()">
-                <img src="{% static 'assets/img/profile.svg' %}" alt="" id="pro-pic">
+                <img src="{{ profile.profile_picture.url }}" alt="Profile Picture" id="pro-pic" width="300px">
                 <img src="{% static 'assets/img/edit gray.png' %}" alt="" id="edit-pen">
             </div>
             <div id="username">
-                <h1 id="username-value">Diaa messaoudi</h1>
+                <h1 id="username-value">{{profile.user.username}}</h1>
                 <img src="{% static 'assets/img/edit gray.png' %}" alt="" id="edit-username" onclick="showEditForm()">
             </div>
 
@@ -341,7 +337,7 @@
                 <div class="biographie">
                     <h1>Bio :</h1>
                 </div>
-                    <textarea name="" id="bio-space" placeholder="introduce yourself in few word !" readonly>Je suis un UI/UX Designer et développeur front-end en formation basé à Blida, Algérie, passionné par la création d’expériences numériques intuitives et esthétiques
+                    <textarea name="" id="bio-space" placeholder="introduce yourself in few word !" readonly>{% if profile.bio %}{{ profile.bio }}{% else %}Write your biography here...{% endif %}</textarea>
                     </textarea>
                 
             </div>
@@ -421,7 +417,7 @@
             </div>
 
             <textarea name="" id="biographie-field">
-                dqzdz
+                {{ profile.bio }}
             </textarea>
 
             <div class="edit-btn">
@@ -498,26 +494,40 @@
 
         <h1 id="jp">Courses im Learning</h1>
         <div class="learning-courses-container aqcuired">
-                        <div class="learning-course-box">
-                            <div class="learningcourse-box-infos">
-                                <div class="learning-course-img"><img src="{% static 'assets/img/courseJs.png' %}" alt="">
-                                </div>
-                                <div class="learning-course-details">
-                                <h1 class="title">The Complete Full-Stack Web Development Bootcamp</h1>
-                                <p class="tutor">By Jonas Schmedtmann</p>
-                                <div class="progression">
-                                    <p>20/40 Chapter</p>
-                                    <p class="l-progression-value">42%</p>
-                                </div>
-
-                                <div class="l-progression-container">
-                                    <div class="l-progression-bar" id="progress-bar">
-                                    
+                        {% for enrollment in enrolled_courses %}
+                            <div class="learning-course-box">
+                                <div class="learningcourse-box-infos">
+                                    <div class="learning-course-img">
+                                        <img src="{{ enrollment.course.image.url }}" alt="{{ enrollment.course.title }}">
+                                    </div>
+                                    <div class="learning-course-details">
+                                        <h1 class="title">{{ enrollment.course.title }}</h1>
+                                        {% comment %} <p class="tutor">By {{ enrollment.course.instructor.get_full_name|default:enrollment.course.instructor.username }}</p> {% endcomment %}
+                                        <div class="progression">
+                                            <p>
+                                                {% if enrollment.completed_chapters and enrollment.total_chapters %}
+                                                    {{ enrollment.completed_chapters }}/{{ enrollment.total_chapters }} Chapter
+                                                {% else %}
+                                                    Progress unavailable
+                                                {% endif %}
+                                            </p>
+                                            <p class="l-progression-value">
+                                                {% if enrollment.progress %}
+                                                    {{ enrollment.progress }}%
+                                                {% else %}
+                                                    0%
+                                                {% endif %}
+                                            </p>
+                                        </div>
+                                        <div class="l-progression-container">
+                                            <div class="l-progression-bar" id="progress-bar" style="width:{{ enrollment.progress|default:0 }}%"></div>
+                                        </div>
                                     </div>
                                 </div>
-                                </div>
                             </div>
-                        </div>
+                        {% empty %}
+                            <p>No enrolled courses found.</p>
+                        {% endfor %}
 
                             
 
