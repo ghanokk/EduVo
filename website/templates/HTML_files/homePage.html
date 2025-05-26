@@ -110,13 +110,11 @@
         <a href="{% url 'jobs:job-model' job.id %}" class="job-box-link">
             <div class="job-box">
                 <div class="job-logo">
-                    {% with company_profile=job.posted_by.companyprofile|default_if_none:"" %}
-                        {% if company_profile.image %}
-                            <img src="{{ company_profile.image.url }}" alt="{{ job.company }} Logo">
-                        {% else %}
-                            <img src="{% static 'img/default-company-logo.png' %}" alt="{{ job.company }} Logo">
-                        {% endif %}
-                    {% endwith %}
+                    {% if job.company_logo %}
+                        <img src="{{ job.company_logo.url }}" alt="{{ job.company_name }} Logo">
+                    {% else %}
+                        <img src="{% static 'img/default-company-logo.png' %}" alt="{{ job.company_name }} Logo">
+                    {% endif %}
                 </div>
                 <div class="job-badge asButton">{{ job.category }}</div>
                 <div class="job-details">

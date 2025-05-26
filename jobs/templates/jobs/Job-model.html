@@ -207,7 +207,7 @@
                 </div>
             </div>
             
-            <button type="submit" class="submit-btn">Submit Application</button>
+            <button type="submit" class="submit-btn" onclick="submitApplication(event)">Submit Application</button>
             
             <p class="info-text">
                 Your application will be sent directly to the recruiter. You'll receive a confirmation email after submission.
@@ -216,6 +216,62 @@
     </div>
 
     <script src="{% static 'JS_files/Job-model.js' %}"></script>
+    <script>
+        async function submitApplication(event) {
+            event.preventDefault();
+            
+            const formData = new FormData();
+            formData.append('fullName', document.getElementById('fullName').value);
+            formData.append('email', document.getElementById('email').value);
+            formData.append('phone', document.getElementById('phone').value);
+            formData.append('preferredContact', document.getElementById('preferredContact').value);
+            formData.append('coverLetter', document.getElementById('coverLetter').value);
+            
+            // Add files if they exist
+            const cvFile = document.getElementById('cv').files[0];
+            const certificatesFiles = document.getElementById('certificates').files[0];
+            
+            if (cvFile) formData.append('cv', cvFile);
+            if (certificatesFiles) formData.append('certificates', certificatesFiles);
+
+            try {
+                const response = await fetch(`/jobs/job/{{ job.id }}/submit-proposal/`, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'X-CSRFToken': getCookie('csrftoken')
+                    }
+                });
+
+                const data = await response.json();
+                
+                if (data.status === 'success') {
+                    alert(data.message);
+                    closeApplicationForm();
+                } else {
+                    alert('Error: ' + data.message);
+                }
+            } catch (error) {
+                alert('Error submitting application: ' + error);
+            }
+        }
+
+        // Helper function to get CSRF token
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+    </script>
 
    
 </body>

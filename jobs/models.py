@@ -65,6 +65,12 @@ class Job(models.Model):
     description = models.TextField()  # وصف الوظيفة
     posted_by = models.ForeignKey('users.User', on_delete=models.CASCADE)  # الشركة اللي ناضت الوظيفة
     company_name = models.CharField(max_length=255)  # اسم الشركة
+    company_logo = models.ImageField(
+        upload_to='company_logos/',
+        null=True,
+        blank=True,
+        help_text='Company logo image'
+    )
     company_industry = models.CharField(max_length=255)  # قطاع الشركة
     location = models.CharField(max_length=100)  # موقع العمل
     city = models.CharField(max_length=100)  # المدينة

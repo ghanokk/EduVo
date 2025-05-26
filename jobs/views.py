@@ -1,5 +1,7 @@
-from django.shortcuts import render, get_object_or_404
-from .models import Job
+from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
+from .models import Job, Proposal
 
 def Jobs(request):
     # Get the latest 5 jobs for "Explore New Job Opportunities"
@@ -24,4 +26,49 @@ def Historie(request):
 def job_model(request, job_id):
     job = get_object_or_404(Job, id=job_id)
     return render(request, 'jobs/Job-model.html', {'job': job})
+
+def submit_proposal(request, job_id):
+    if request.method == 'POST':
+        try:
+            job = get_object_or_404(Job, id=job_id)
+            
+            # Create new proposal
+            proposal = Proposal.objects.create(
+                job=job,
+                applicant=request.user,
+                full_name=request.POST.get('fullName'),
+                email=request.POST.get('email'),
+                phone=request.POST.get('phone'),
+                preferred_contact=request.POST.get('preferredContact'),
+                cover_letter=request.POST.get('coverLetter')
+            )
+
+            # Handle file uploads if present
+            if request.FILES.get('cv'):
+                proposal.cv = request.FILES['cv']
+            
+            if request.FILES.get('certificates'):
+                proposal.certificates = request.FILES['certificates']
+            
+            proposal.save()
+            
+            # Increment the applications count for the job
+            job.applications_count += 1
+            job.save()
+
+            return JsonResponse({
+                'status': 'success',
+                'message': 'Your application has been submitted successfully!'
+            })
+
+        except Exception as e:
+            return JsonResponse({
+                'status': 'error',
+                'message': str(e)
+            }, status=400)
+
+    return JsonResponse({
+        'status': 'error',
+        'message': 'Invalid request method'
+    }, status=405)
 
