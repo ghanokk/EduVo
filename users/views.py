@@ -17,8 +17,8 @@ def login(request):
             return redirect('homePage')
     return render(request, 'users/register.html')
 
-def forgotPass(request):
-    return render(request, 'users/forgotPass.html')
+def password_reset_form_beta(request):
+    return render(request, 'registration/password_reset_form_beta')
 
 def profile(request):
     user = request.user
@@ -103,3 +103,17 @@ def Signup(request):
 
 def Profile(request):
     return render(request, 'users/Profile.html')
+
+# def Password_confirm(request):
+#     return render(request, 'users/password_reset_confirm.html')
+
+# def Password_complete(request):
+#     return render(request, 'users/password_reset_complete.html')
+
+# def Password_done(request):
+#     return render(request, 'users/password_reset_done.html')
+
+# def Password_form(request):
+#     return render(request, 'users/password_reset_form.html')
+
+

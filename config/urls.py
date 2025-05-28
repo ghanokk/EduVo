@@ -25,7 +25,7 @@ from courses.views import courses as courses_view
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('website.urls')),
-    path('users/', include('users.urls')),
+    path('/', include('users.urls')),
     path('courses/', include('courses.urls')),
     path('jobs/', include('jobs.urls')),
 ]

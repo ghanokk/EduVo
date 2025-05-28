@@ -1,17 +1,47 @@
 from django.urls import path, include
 from . import views, user_login
-
+from django.contrib.auth import views as auth_views
+from django.urls import reverse_lazy
 app_name = 'users'
 
 urlpatterns = [
-    # path('accounts/', include('django.contrib.auth.urls')),
-    path('forgot-password/', views.forgotPass, name='forgot_password'),
+    path('users/', include('django.contrib.auth.urls')),
+    path('password_reset_form_beta/', views.password_reset_form_beta, name='password_reset_form_beta'),
     path('index/', views.index, name='index'),
     path('doLogin',user_login.DO_LOGIN, name='doLogin'),
     path('doSignup/', user_login.DO_SIGNUP, name='doSignup'),
+    path('password_reset/', user_login.FORGOT_PASS, name='password_reset'),
     path('Login/', views.Login, name='Login'),
     path('Register/', views.Register, name='Register'),
     path('Signup/', views.Signup, name='Signup'),
-    path('profile',views.Profile, name='profile'),
-    
+    path('Profile', views.Profile, name="Profile"),
+
+    path('password_reset/',
+         auth_views.PasswordResetView.as_view(
+             template_name='registration/password_reset_form.html',
+             email_template_name='registration/password_reset_email.html',
+             success_url=reverse_lazy('users:password_reset_done') 
+         ),
+         name='password_reset'),
+    path('password_reset/done/',
+         auth_views.PasswordResetDoneView.as_view(
+             template_name='registration/password_reset_done.html'
+         ),
+         name='password_reset_done'),
+    path('reset/<uidb64>/<token>/',
+         auth_views.PasswordResetConfirmView.as_view(
+             template_name='registration/password_reset_confirm.html',
+             success_url=reverse_lazy('users:password_reset_complete')  
+         ),
+         name='password_reset_confirm'),
+    path('reset/done/',
+         auth_views.PasswordResetCompleteView.as_view(
+             template_name='registration/password_reset_complete.html'
+         ),
+         name='password_reset_complete'),
+
+
 ]
+  
+  # template name: specifies the HTML template used to render
+ 

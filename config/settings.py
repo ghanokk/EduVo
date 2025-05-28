@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+
     'moderation.apps.ModerationConfig',
     'payments.apps.PaymentsConfig',
     'skills.apps.SkillsConfig',
@@ -44,8 +45,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    
+
 ]
+
 
 AUTH_USER_MODEL = 'users.User'  # Tell Django to use your custom User model
 LANGUAGE_CODE = 'fr'  # For French interface
@@ -60,7 +62,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-
 ROOT_URLCONF = 'config.urls'
 
 TEMPLATES = [
@@ -142,3 +143,15 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+LOGIN_REDIRECT_URL = 'website:homepgae'
+LOGOUT_REDIRECT_URL = 'users:Login'
+
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = '=YourEmail@gmail.com'
+EMAIL_HOST_PASSWORD = 'Your Password'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'  # SMTP backend for real emails

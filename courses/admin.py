@@ -28,7 +28,7 @@ class CourseAdmin(admin.ModelAdmin):
             'fields': ('title', 'description', 'teacher', 'price', 'category', 'level')
         }),
         ('Course Details', {
-            'fields': ('duration', 'skills')
+            'fields': ('duration', 'skills') 
         }),
         ('Media', {
             'fields': ('image', 'video')
