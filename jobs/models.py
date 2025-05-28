@@ -108,9 +108,9 @@ class Proposal(models.Model):
     preferred_contact = models.CharField(
         max_length=10,
         choices=[
-            ('email', 'البريد الإلكتروني'),
-            ('phone', 'الهاتف'),
-            ('both', 'الاثنين')
+            ('email', 'email'),
+            ('phone', 'phone'),
+            ('both', 'both')
         ],
         default='email'  # طريقة التواصل المفضلة
     )
@@ -120,10 +120,10 @@ class Proposal(models.Model):
     status = models.CharField(
         max_length=20,
         choices=[
-            ('pending', 'في انتظار'),  # في انتظار المراجعة
-            ('reviewed', 'تم المراجعة'),  # تم مراجعة الطلب
-            ('accepted', 'مقبول'),  # تم قبول الطلب
-            ('rejected', 'مرفوض')  # تم رفض الطلب
+            ('pending', 'pending'),  # في انتظار المراجعة
+            ('reviewed', 'reviewed'),  # تم مراجعة الطلب
+            ('accepted', 'accepted'),  # تم قبول الطلب
+            ('rejected', 'rejected')  # تم رفض الطلب
         ],
         default='pending'  # الحالة الافتراضية
     )

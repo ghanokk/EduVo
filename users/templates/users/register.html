@@ -1,90 +1,43 @@
 {% load static%}
 
 <!DOCTYPE html>
-<html lang="en">
 
+<html lang="en">
+    
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="{% static 'CSS_files/style.css' %}">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <title>Eduvo | Register & Login</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'CSS_files/Register.css' %}">
+    <title>Document</title>
 </head>
 
 <body>
-  <div class="container">
-
-    <div class="left">
-      <h1 class="welcoming-header">Welcome Back</h1>
-      <img src="{% static 'assets/img/Eduvo.svg' %}" alt="Logo">
-      <p>Your path to learning and career growth</p>
-      <p class="welcome-p"></p>
-      <div class="divider">
-        <span class="welcome">Login with</span>
-      </div>
-
-      <div class="social-buttons">
-        <div class="social-btn google">
-          <i class="fab fa-google icon"></i>
-          <span class="text">Google</span>
+    <div class="container">
+        
+        <div class="logo-img">
+            <img src="{% static 'assets/img/logo-project.png' %}" alt="">
         </div>
+        
+        <h1 class="welcoming">
+            Welcome To Eduvo 
+        </h1>
+        
+        <button class="btn">
+            <img src="{% static 'assets/img/Google.png' %}" alt="" id="google">
+            <p>Continue With Google</p>
+        </button>
+        
+        <button class="btn">
+            <img src="{% static 'assets/img/LinkedIn (2).png' %}" alt="" id="linkedin">
+            <p>Continue With LinkedIn</p>
+        </button>
 
-        <div class="social-btn linkedin">
-          <i class="icon fab fa-linkedin-in"></i>
-          <span class="text">LinkedIn</span>
-        </div>
-      </div>
-
+        <a class="btn" href="{% url 'users:Login'%}" style="text-decoration: none;">
+            <p>Continue With Email</p>
+        </a>
+       
     </div>
-
-    <div class="right">
-      <div class="tab-wrapper">
-        <div class="tab-group">
-          <div class="tab-bg"></div> <!-- le fond bleu qui glisse -->
-          <button class="tab-btn active"
-            onclick="activateTab(this, 'login', event); changeWelcoming('login')">Login</button>
-          <button class="tab-btn" onclick="activateTab(this, 'signup', event);  changeWelcoming('signup')">Sign
-            Up</button>
-        </div>
-      </div>
-
-      <div class="tab-wrraper">
-        <div class="tab-content active" id="login" onclick="switchTab('login')">
-          <label for="email">Email</label>
-          <input type="email" id="email" placeholder="Enter your email adress">
-          <label for="password">Password</label>
-          <input type="password" id="password" placeholder="Enter your password">
-          <a href="{% url 'user_accounts:forgotPass' %}">Forgot password?</a>
-          <button class="infos-btn">
-            Login
-            <span class="arrow">→</span>
-          </button>
-        </div>
-
-        <div class="tab-content" id="signup" onclick="switchTab('signup')">
-          <label for="fullname">Full Name</label>
-          <input type="text" id="fullname" placeholder="Enter your full name">
-          <label for="email">Email</label>
-          <input type="email" id="email" placeholder="Enter your email adress">
-          <label for="password">Password</label>
-          <input type="password" id="password" placeholder="Enter your password">
-          <label for="confirmation">Confirm password</label>
-          <input type="password" id="confirmation" placeholder="Confirm your password">
-          <div class="privacy">
-            <p>I agree to the Terms of Service and <br> Privacy Policy</p>
-            <div class="toggle-btn" onclick="toggleSwitch()">
-              <div class="circle "></div>
-            </div>
-          </div>
-          <button class="infos-btn disabled" id="signup-btn">
-            Sign Up
-            <span class="arrow">→</span>
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <script src="{% static './JS_files/script.js' %}"></script>
+    <script src="{% static 'JS_files/login.js' %}"></script>
 </body>
 
 </html>

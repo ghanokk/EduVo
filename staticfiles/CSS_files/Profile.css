@@ -142,7 +142,7 @@ body{
 }
 
 .summary-page{
-    padding: 70px;
+    padding: 20px 15%;
     display: block
 }
 
@@ -314,11 +314,11 @@ align-items: center;
 
 .jobs-container{
     background: white;
-    border-radius: 10px;
+    border-radius: 0.5rem;
     overflow: hidden;
     margin-bottom: 20px;
     width: 90%;
-        box-shadow: -1px 1px 20px #dbdbdb;
+    box-shadow: -1px 1px 20px #dbdbdb;
 }
 
 .job-img img{
@@ -826,13 +826,13 @@ input[type="file"] {
 
 
 .course-and-certifications{
-    padding: 0 10%;
+    padding: 0 2%;
     display: none;
-    overflow: hidden;
+
 }
 
 .course-and-certifications .courses-container{
-    width: 90%;
+    width: 100%;
     margin: auto;
 }
 
@@ -1016,7 +1016,7 @@ input[type="file"] {
 
 .jobs-page{
     /* background: #000; */
-    padding: 0 90px ;
+    padding: 0 10% ;
     display: none;
 }
 
@@ -1103,6 +1103,7 @@ margin-left: 25px;
 }
 
 .all-carousel-container{
+    padding: 0 10%;
     position: relative;
     margin: 0;
 }
@@ -1119,17 +1120,19 @@ margin-left: 25px;
 }
 
 .course-certificate-container{
+    padding: 0 10%;
     width: 100%;
     display: flex;
-    justify-content: baseline;
+    justify-content: flex-start;
     align-items: center;
-    gap: 30px;
+    gap:20px;
     /* height: 100px; */
     flex-wrap: wrap;
     /* margin-bottom: 150px; */
 }
 
 .course-certificate{
+    /* flex: 1 0 auto; */
     height: 100px;
     background: white;
     border-radius: 10px;
@@ -1138,9 +1141,11 @@ margin-left: 25px;
     justify-content: center;
     align-items: center;
     gap: 10px;
-    width: 30%;
+    /* width: 30%; */
     box-shadow: -1px 1px 20px #dbdbdb;
     border-left: #0369a1 3px solid;
+    /* max-width: 30%; */
+    width: calc((100% - 40px) / 3); /* 3 éléments par ligne avec 2 gaps de 10px */
 
 }
 
@@ -1171,10 +1176,7 @@ margin-left: 25px;
             margin-bottom: 24px;
         }
 
-        #croix{
-            transform: translateY(-35px);
-        }
-
+        
         .form-group {
             margin-bottom: 20px;
         }
@@ -1436,31 +1438,35 @@ margin-left: 25px;
 
 /* -----------Learning courses style--------------- */
 
-.learning-courses-container{
-    width: 100%;
+.learning-courses-container {
     display: flex;
-    justify-content: baseline;
-    gap: 50px;
     flex-wrap: wrap;
+    justify-content: flex-start; /* aligner chaque ligne à gauche */
+    gap: 40px;
+    width: 100%;
+    max-width: 1200px; /* optionnel, pour limiter la largeur totale */
+    margin: 0 auto;     /* centrer le bloc global */
+    padding: 0 5%;    /* un peu de respiration sur les côtés */
 }
 
-.learning-course-box{
+.learning-course-box {
+    width: calc((100% - 80px) / 3); /* 20px = 2 gaps de 10px entre 3 éléments */
+    min-width: 300px; /* optionnel, limite la taille d’un item */
+    max-width: 400px;
+    height: 360px;
     padding: 10px;
     border-radius: 0.3rem;
     background: white;
     display: flex;
     flex-direction: column;
-    width: calc(35% - 40px);
-    max-width: 350px;
-    justify-content: start;
-    align-items: center;
-    margin-bottom: 10px;
-    height:360px;
+    justify-content: center;
+    align-items: flex-start;
     box-shadow: -1px 2px 20px #dbdbdb;
     cursor: pointer;
     transition: 0.3s ease;
-
 }
+
+
 
 .learning-course-box:hover{
     scale: 1.01;
@@ -1520,42 +1526,41 @@ display: block;
 
 
 .carousel-container {
+    /* background: #000; */
     width: 100%;
-    margin: auto;
     overflow: hidden;
     position: relative;
-    padding: 0 160px;
+
 
     
 }
 
     .carousel-track {
-      padding-left:0 160px ;
       display: flex;
       justify-content: center;
-      gap: 15px;
       transition: transform 0.6s ease-in-out;
       width: 100%;
     }
 
     .carousel-item {
       flex: 0 0 33.3333%;
-      padding: 10px;
-      /* width: 100%; */
-      margin-left: 25px;
+      width: 100%;
+      padding: 20px 10px;
+      /* margin-left: 25px; */
+      overflow: hidden;
 
     }
 
     .carousel-card {
+        
       background: white;
       border-radius: 10px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.1);
       /* padding: 0 10px; */
       text-align: center;
       font-size: 16px;
-      height: 280px;
-      width: 360px;
-
+      height: 320px;
+      width: 98%;
     }
 
     .controls {

@@ -5,7 +5,9 @@
 {% block content %}
 
 
+
 <!DOCTYPE html>
+
 
 <html lang="en">
 
@@ -17,49 +19,49 @@
 </head>
 
 <body>
-
-
-    <!-- --------------------profile header----------------- -->
+    
+    
+<!-- --------------------profile header----------------- -->
 
     <div class="profile-header">
         <div class="profile">
             <div class="profile-grp1">
                 <div class="profile-pic">
-                    <img id="" src="{% static 'assets/img/profile.svg' %}" alt="profile img">
-                </div>
-                <div class="profile-bio">
-                    <h1 id="username1">Diaa messaoudi</h1>
-                    <p id="location1">Algeria , Blida</p>
-                    <p id="bio-field">
-                        Je suis un UI/UX Designer et développeur
-                        front-end en formation basé à Blida, Algérie,
-                        passionné par la création d’expériences numériques
-                        intuitives et esthétiques.
-                    </p>
-                </div>
+            <img id="" src="{% static 'assets/img/profile.svg' %}" alt="profile img">
+            </div>
+            <div class="profile-bio">
+            <h1 id="username1">Diaa messaoudi</h1>
+            <p id="location1">Algeria , Blida</p>
+            <p id="bio-field">
+                Je suis un UI/UX Designer et développeur
+                 front-end en formation basé à Blida, Algérie,
+                  passionné par la création d’expériences numériques 
+                  intuitives et esthétiques.
+            </p>
+            </div>
             </div>
 
             <div class="edit-wrraper">
-                <button id="parametres" onclick="showSettings()">
-                    <p>Settings</p>
-                    <img src="{% static 'assets/img/settings.png' %}" alt="">
-                </button>
-                <button id="edit-profile" onclick="showEdit()">
-                    <p>Edit profile</p>
-                    <img src="{% static 'assets/img/edit.png' %}" alt="">
-                </button>
+                    <button id="parametres" onclick="showSettings()">
+                        <p>Settings</p>
+                        <img src="{% static 'assets/img/settings.png' %}" alt="">
+                    </button>
+                    <button id="edit-profile" onclick="showEdit()">
+                        <p>Edit profile</p>
+                        <img src="{% static 'assets/img/edit.png' %}" alt="">
+                    </button>
             </div>
         </div>
         <div class="profile-stats">
-            <p class="clickable active" data-page="page1" onclick="showSS()">Summary & Statistics</p>
-            <p class="clickable" data-page="page2" onclick="showCC()">Courses & Certifications</p>
-            <p class="clickable" data-page="page3" onclick="showJS()"> Jobs & Skills </p>
+        <p class="clickable active" data-page="page1" onclick="showSS()">Summary & Statistics</p>
+        <p class="clickable" data-page="page2" onclick="showCC()">Courses & Certifications</p>
+        <p class="clickable" data-page="page3" onclick="showJS()" > Jobs & Skills </p>
         </div>
     </div>
 
     <div class="summary-page page yes" id="page1">
 
-        <div class="my-stats-shorted">
+            <div class="my-stats-shorted">
             <div class="box">
                 <div class="icone"><img src="{% static 'assets/img/Course.png' %}" alt=""></div>
                 <h1 class="value">20</h1>
@@ -96,205 +98,202 @@
                         <li class="skill">Django</li>
                     </ul>
                 </div>
-
+                
                 <div class="job-course-grp">
-                    <div class="courses">
+                <div class="courses">
 
-                        <h1 id="scjc">Learning</h1>
+                    <h1 id="scjc">Learning</h1>
 
-                        <div class="courses-container">
-                            <div class="course-box">
-                                <div class="course-box-infos">
-                                    <div class="course-img"><img src="{% static 'assets/img/courseJs.png' %}" alt="">
-                                    </div>
-                                    <div class="course-details">
-                                        <h1 class="title">The Complete Full-Stack Web Development Bootcamp</h1>
-                                        <p class="tutor">By Jonas Schmedtmann</p>
-                                        <div class="progression">
-                                            <p>20/40 Chapter</p>
-                                            <p class="progression-value">26%</p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="progression-container">
-                                    <div class="progression-bar" id="progress-bar">
-
-                                    </div>
+                    <div class="courses-container">
+                        <div class="course-box">
+                            <div class="course-box-infos">
+                                <div class="course-img"><img src="{% static 'assets/img/courseJs.png' %}" alt=""></div>
+                            <div class="course-details">
+                                <h1 class="title">The Complete Full-Stack Web Development Bootcamp</h1>
+                                <p class="tutor">By Jonas Schmedtmann</p>
+                                <div class="progression">
+                                    <p>20/40 Chapter</p>
+                                    <p class="progression-value">26%</p>
                                 </div>
                             </div>
-
-
-                            <div class="course-box">
-                                <div class="course-box-infos">
-                                    <div class="course-img"><img src="{% static 'assets/img/courseJs.png' %}" alt="">
-                                    </div>
-                                    <div class="course-details">
-                                        <h1 class="title">The Complete Full-Stack Web Development Bootcamp</h1>
-                                        <p class="tutor">By Jonas Schmedtmann</p>
-                                        <div class="progression">
-                                            <p>20/40 Chapter</p>
-                                            <p class="progression-value">09%</p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="progression-container">
-                                    <div class="progression-bar" id="progress-bar">
-
-                                    </div>
-                                </div>
                             </div>
 
-                            <div class="course-box">
-                                <div class="course-box-infos">
-                                    <div class="course-img"><img src="{% static 'assets/img/courseJs.png' %}" alt="">
-                                    </div>
-                                    <div class="course-details">
-                                        <h1 class="title">The Complete Full-Stack Web Development Bootcamp</h1>
-                                        <p class="tutor">By Jonas Schmedtmann</p>
-                                        <div class="progression">
-                                            <p>20/40 Chapter</p>
-                                            <p class="progression-value">42%</p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="progression-container">
-                                    <div class="progression-bar" id="progress-bar">
-
-                                    </div>
-                                </div>
+                            <div class="progression-container">
+                                <div class="progression-bar" id="progress-bar">
+                                    
                             </div>
-
-
-
-
+                            </div>
                         </div>
 
 
+                        <div class="course-box">
+                            <div class="course-box-infos">
+                                <div class="course-img"><img src="{% static 'assets/img/courseJs.png' %}" alt=""></div>
+                            <div class="course-details">
+                                <h1 class="title">The Complete Full-Stack Web Development Bootcamp</h1>
+                                <p class="tutor">By Jonas Schmedtmann</p>
+                                <div class="progression">
+                                    <p>20/40 Chapter</p>
+                                    <p class="progression-value">09%</p>
+                                </div>
+                            </div>
+                            </div>
+
+                            <div class="progression-container">
+                                <div class="progression-bar" id="progress-bar">
+                                    
+                            </div>
+                            </div>
+                        </div>
+
+                        <div class="course-box">
+                            <div class="course-box-infos">
+                                <div class="course-img"><img src="{% static 'assets/img/courseJs.png' %}" alt=""></div>
+                            <div class="course-details">
+                                <h1 class="title">The Complete Full-Stack Web Development Bootcamp</h1>
+                                <p class="tutor">By Jonas Schmedtmann</p>
+                                <div class="progression">
+                                    <p>20/40 Chapter</p>
+                                    <p class="progression-value">42%</p>
+                                </div>
+                            </div>
+                            </div>
+
+                            <div class="progression-container">
+                                <div class="progression-bar" id="progress-bar">
+                                    
+                            </div>
+                            </div>
+                        </div>
+                        
+                        
+
+                            
+                        </div>
+
+                        
 
 
+            
+                        <button id="see-all">see all</button>
+                    </div>
+                
+                    <div class="jobs">
+                    <h1 id="scjc">Job Postule</h1>
+                    <div class="jobs-container">
+                        <div class="job">
+                            <div class="job-img"><img src="{% static 'assets/img/company.svg' %}" alt=""></div>
+                            <div class="job-infos">
+                                <h1 class="job-title">Full-Stack Devoloper</h1>
+                                <p class="company-name">Webify Solutions</p>
+                                <p class="status">Accepted</p>
+                            </div>
+                        </div>
+
+                         <div class="job">
+                            <div class="job-img"><img src="{% static 'assets/img/company.svg' %}" alt=""></div>
+                            <div class="job-infos">
+                                <h1 class="job-title">Full-Stack Devoloper</h1>
+                                <p class="company-name">Webify Solutions</p>
+                                <p class="status">Accepted</p>
+                            </div>
+                        </div>
+
+                         <div class="job">
+                            <div class="job-img"><img src="{% static 'assets/img/company.svg' %}" alt=""></div>
+                            <div class="job-infos">
+                                <h1 class="job-title">Full-Stack Devoloper</h1>
+                                <p class="company-name">Webify Solutions</p>
+                                <p class="status">Accepted</p>
+                            </div>
+                        </div>
+
+                         <div class="job">
+                            <div class="job-img"><img src="{% static 'assets/img/company.svg' %}" alt=""></div>
+                            <div class="job-infos">
+                                <h1 class="job-title">Full-Stack Devoloper</h1>
+                                <p class="company-name">Webify Solutions</p>
+                                <p class="status">Accepted</p>
+                            </div>
+                        </div>
+                        
 
                         <button id="see-all">see all</button>
                     </div>
-
-                    <div class="jobs">
-                        <h1 id="scjc">Job Postule</h1>
-                        <div class="jobs-container">
-                            <div class="job">
-                                <div class="job-img"><img src="{% static 'assets/img/company.svg' %}" alt=""></div>
-                                <div class="job-infos">
-                                    <h1 class="job-title">Full-Stack Devoloper</h1>
-                                    <p class="company-name">Webify Solutions</p>
-                                    <p class="status">Accepted</p>
-                                </div>
-                            </div>
-
-                            <div class="job">
-                                <div class="job-img"><img src="{% static 'assets/img/company.svg' %}" alt=""></div>
-                                <div class="job-infos">
-                                    <h1 class="job-title">Full-Stack Devoloper</h1>
-                                    <p class="company-name">Webify Solutions</p>
-                                    <p class="status">Accepted</p>
-                                </div>
-                            </div>
-
-                            <div class="job">
-                                <div class="job-img"><img src="{% static 'assets/img/company.svg' %}" alt=""></div>
-                                <div class="job-infos">
-                                    <h1 class="job-title">Full-Stack Devoloper</h1>
-                                    <p class="company-name">Webify Solutions</p>
-                                    <p class="status">Accepted</p>
-                                </div>
-                            </div>
-
-                            <div class="job">
-                                <div class="job-img"><img src="{% static 'assets/img/company.svg' %}" alt=""></div>
-                                <div class="job-infos">
-                                    <h1 class="job-title">Full-Stack Devoloper</h1>
-                                    <p class="company-name">Webify Solutions</p>
-                                    <p class="status">Accepted</p>
-                                </div>
-                            </div>
-
-
-                            <button id="see-all">see all</button>
-                        </div>
-                    </div>
-
                 </div>
 
-
+                </div>
+                
+                
+                </div>
             </div>
-        </div>
-        <div class="right">
-
-            <div class="certificates">
-                <h1 id="scjc">📜Certificates</h1>
-                <div class="certificates-container">
-                    <div class="certificate">
-                        <div class="certificate-img"><img src="{% static 'assets/img/Certificate.png' %}" alt=""></div>
-                        <div class="certificate-infos">
-                            <h1 class="certif-title">
-                                build your first web site with HTML & CSS
-                            </h1>
-                            <p class="company">
-                                By web school
-                            </p>
+            <div class="right">
+                
+                <div class="certificates">
+                    <h1 id="scjc">📜Certificates</h1>
+                    <div class="certificates-container">
+                        <div class="certificate">
+                            <div class="certificate-img"><img src="{% static 'assets/img/Certificate.png' %}" alt=""></div>
+                            <div class="certificate-infos">
+                                <h1 class="certif-title">
+                                    build your first web site with HTML & CSS
+                                </h1>
+                                <p class="company">
+                                    By web school
+                                </p>
+                            </div>
                         </div>
+
+                        <div class="certificate">
+                            <div class="certificate-img"><img src="{% static 'assets/img/Certificate.png' %}" alt=""></div>
+                            <div class="certificate-infos">
+                                <h1 class="certif-title">
+                                    build your first web site with HTML & CSS
+                                </h1>
+                                <p class="company">
+                                    By web school
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="certificate">
+                            <div class="certificate-img"><img src="{% static 'assets/img/Certificate.png' %}" alt=""></div>
+                            <div class="certificate-infos">
+                                <h1 class="certif-title">
+                                    build your first web site with HTML & CSS
+                                </h1>
+                                <p class="company">
+                                    By web school
+                                </p>
+                            </div>
+                        </div>
+
+                        <button id="see-all">see all</button>
+
                     </div>
 
-                    <div class="certificate">
-                        <div class="certificate-img"><img src="{% static 'assets/img/Certificate.png' %}" alt=""></div>
-                        <div class="certificate-infos">
-                            <h1 class="certif-title">
-                                build your first web site with HTML & CSS
-                            </h1>
-                            <p class="company">
-                                By web school
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="certificate">
-                        <div class="certificate-img"><img src="{% static 'assets/img/Certificate.png' %}" alt=""></div>
-                        <div class="certificate-infos">
-                            <h1 class="certif-title">
-                                build your first web site with HTML & CSS
-                            </h1>
-                            <p class="company">
-                                By web school
-                            </p>
-                        </div>
-                    </div>
-
-                    <button id="see-all">see all</button>
+                    
 
                 </div>
-
-
-
             </div>
         </div>
-    </div>
 
     </div>
 
-
-
+    
+    
 
     <div class="settings-page hidden">
         <div class="back">
-            <img src="{% static 'assets/img/Back.png' %}" alt="" onclick="hideSettings()">
+            <img src="{% static 'assets/img/Back.png' %}" alt="" onclick="hideSettings()" >
             <h1>Settings</h1>
         </div>
 
         <div class="settings-wrapper">
             <div class="notifications">
                 <div class="params">
-                    <img src="{% static 'assets/img/Notifications.png' %}" alt="">
-                    <p>Notifications</p>
+                <img src="{% static 'assets/img/Notifications.png' %}" alt="">
+                <p>Notifications</p>
                 </div>
                 <div class="toggle">
                     <div class="toggle-btn disabled" onclick="toggleBtn(this)">
@@ -306,7 +305,7 @@
             <div class="language">
                 <div class="params">
                     <img style="margin: 0 10px;
-                                " src="{% static 'assets/img/Language.png' %}" alt="">
+                                " src="{% static 'assets/img/Language.png' %}" alt="" >
                     <p>Language</p>
                 </div>
                 <button id="btn">
@@ -315,11 +314,11 @@
                 </button>
             </div>
             <div class="password">
-                <div class="params">
+               <div class="params">
                     <img src="{% static 'assets/img/Lock.png' %}" alt="">
                     <p>Password</p>
-                </div>
-                <button id="btn">Change</button>
+               </div>
+               <button id="btn">Change</button>
             </div>
         </div>
     </div>
@@ -348,9 +347,9 @@
                 <div class="biographie">
                     <h1>Bio :</h1>
                 </div>
-                <textarea name="" id="bio-space" placeholder="introduce yourself in few word !" readonly>Je suis un UI/UX Designer et développeur front-end en formation basé à Blida, Algérie, passionné par la création d’expériences numériques intuitives et esthétiques
+                    <textarea name="" id="bio-space" placeholder="introduce yourself in few word !" readonly>Je suis un UI/UX Designer et développeur front-end en formation basé à Blida, Algérie, passionné par la création d’expériences numériques intuitives et esthétiques
                     </textarea>
-
+                
             </div>
             <button id="save-changes" onclick="saveEdit()">save</button>
         </div>
@@ -359,72 +358,72 @@
     <div class="edit-form-container hidden">
         <div class="edit-form">
             <input type="text" placeholder="new user name" id="user-input" class="item">
-
+            
             <div class="choice-input">
                 <select name="" id="country">
-                    <option value="DZ">Algeria</option>
-                </select>
-                <select id="wilaya" class="item">
-                    <option value="0">Blida</option>
-                    <option value="1">Adrar</option>
-                    <option value="2">Chlef</option>
-                    <option value="3">Laghouat</option>
-                    <option value="4">Oum El Bouaghi</option>
-                    <option value="5">Batna</option>
-                    <option value="6">Béjaïa</option>
-                    <option value="7">Biskra</option>
-                    <option value="8">Béchar</option>
-                    <option value="9">Blida</option>
-                    <option value="10">Bouira</option>
-                    <option value="11">Tamanrasset</option>
-                    <option value="12">Tébessa</option>
-                    <option value="13">Tlemcen</option>
-                    <option value="14">Tiaret</option>
-                    <option value="15">Tizi Ouzou</option>
-                    <option value="16">Alger</option>
-                    <option value="17">Djelfa</option>
-                    <option value="18">Jijel</option>
-                    <option value="19">Sétif</option>
-                    <option value="20">Saïda</option>
-                    <option value="21">Skikda</option>
-                    <option value="22">Sidi Bel Abbès</option>
-                    <option value="23">Annaba</option>
-                    <option value="24">Guelma</option>
-                    <option value="25">Constantine</option>
-                    <option value="26">Médéa</option>
-                    <option value="27">Mostaganem</option>
-                    <option value="28">M’Sila</option>
-                    <option value="29">Mascara</option>
-                    <option value="30">Ouargla</option>
-                    <option value="31">Oran</option>
-                    <option value="32">El Bayadh</option>
-                    <option value="33">Illizi</option>
-                    <option value="34">Bordj Bou Arréridj</option>
-                    <option value="35">Boumerdès</option>
-                    <option value="36">El Tarf</option>
-                    <option value="37">Tindouf</option>
-                    <option value="38">Tissemsilt</option>
-                    <option value="39">El Oued</option>
-                    <option value="40">Khenchela</option>
-                    <option value="41">Souk Ahras</option>
-                    <option value="42">Tipaza</option>
-                    <option value="43">Mila</option>
-                    <option value="44">Aïn Defla</option>
-                    <option value="45">Naâma</option>
-                    <option value="46">Aïn Témouchent</option>
-                    <option value="47">Ghardaïa</option>
-                    <option value="48">Relizane</option>
-                    <option value="49">Timimoun</option>
-                    <option value="50">Bordj Badji Mokhtar</option>
-                    <option value="51">Ouled Djellal</option>
-                    <option value="52">Béni Abbès</option>
-                    <option value="53">In Salah</option>
-                    <option value="54">In Guezzam</option>
-                    <option value="55">Touggourt</option>
-                    <option value="56">Djanet</option>
-                    <option value="57">El M'Ghair</option>
-                    <option value="58">El Meniaa</option>
-                </select>
+                <option value="DZ">Algeria</option>
+            </select>
+            <select id="wilaya" class="item">
+                <option value="0">Blida</option>
+                <option value="1">Adrar</option>
+                <option value="2">Chlef</option>
+                <option value="3">Laghouat</option>
+                <option value="4">Oum El Bouaghi</option>
+                <option value="5">Batna</option>
+                <option value="6">Béjaïa</option>
+                <option value="7">Biskra</option>
+                <option value="8">Béchar</option>
+                <option value="9">Blida</option>
+                <option value="10">Bouira</option>
+                <option value="11">Tamanrasset</option>
+                <option value="12">Tébessa</option>
+                <option value="13">Tlemcen</option>
+                <option value="14">Tiaret</option>
+                <option value="15">Tizi Ouzou</option>
+                <option value="16">Alger</option>
+                <option value="17">Djelfa</option>
+                <option value="18">Jijel</option>
+                <option value="19">Sétif</option>
+                <option value="20">Saïda</option>
+                <option value="21">Skikda</option>
+                <option value="22">Sidi Bel Abbès</option>
+                <option value="23">Annaba</option>
+                <option value="24">Guelma</option>
+                <option value="25">Constantine</option>
+                <option value="26">Médéa</option>
+                <option value="27">Mostaganem</option>
+                <option value="28">M’Sila</option>
+                <option value="29">Mascara</option>
+                <option value="30">Ouargla</option>
+                <option value="31">Oran</option>
+                <option value="32">El Bayadh</option>
+                <option value="33">Illizi</option>
+                <option value="34">Bordj Bou Arréridj</option>
+                <option value="35">Boumerdès</option>
+                <option value="36">El Tarf</option>
+                <option value="37">Tindouf</option>
+                <option value="38">Tissemsilt</option>
+                <option value="39">El Oued</option>
+                <option value="40">Khenchela</option>
+                <option value="41">Souk Ahras</option>
+                <option value="42">Tipaza</option>
+                <option value="43">Mila</option>
+                <option value="44">Aïn Defla</option>
+                <option value="45">Naâma</option>
+                <option value="46">Aïn Témouchent</option>
+                <option value="47">Ghardaïa</option>
+                <option value="48">Relizane</option>
+                <option value="49">Timimoun</option>
+                <option value="50">Bordj Badji Mokhtar</option>
+                <option value="51">Ouled Djellal</option>
+                <option value="52">Béni Abbès</option>
+                <option value="53">In Salah</option>
+                <option value="54">In Guezzam</option>
+                <option value="55">Touggourt</option>
+                <option value="56">Djanet</option>
+                <option value="57">El M'Ghair</option>
+                <option value="58">El Meniaa</option>
+            </select>
             </div>
 
             <textarea name="" id="biographie-field">
@@ -436,326 +435,322 @@
                 <button id="save-edit" class="blue" onclick="edit()">✓</button>
             </div>
 
-
+            
 
         </div>
     </div>
 
     <div class="add-picture hidden">
         <label class="custom-file-upload">
-            <input type="file" id="fileInput" />
+        <input type="file" id="fileInput" />
             Choisir un fichier
         </label>
         <p id="fileName">file name</p>
     </div>
-
+    
     <div class="course-and-certifications page" id="page2">
-
+        
         <h1 id="jp">Certifications i've got</h1>
         <div class="course-certificate-container">
+            
+                        <div class="course-certificate">
+                            <div class="certificate-img"><img src="{% static 'assets/img/Certificate.png' %}" alt=""></div>
+                            <div class="certificate-infos">
+                                <h1 class="certif-title">
+                                    build your first web site with HTML & CSS
+                                </h1>
+                                <p class="company">
+                                    By web school
+                                </p>
+                            </div>
+                        </div>
 
-            <div class="course-certificate">
-                <div class="certificate-img"><img src="{% static 'assets/img/Certificate.png' %}" alt=""></div>
-                <div class="certificate-infos">
-                    <h1 class="certif-title">
-                        build your first web site with HTML & CSS
-                    </h1>
-                    <p class="company">
-                        By web school
-                    </p>
-                </div>
-            </div>
+                        <div class="course-certificate">
+                            <div class="certificate-img"><img src="{% static 'assets/img/Certificate.png' %}" alt=""></div>
+                            <div class="certificate-infos">
+                                <h1 class="certif-title">
+                                    build your first web site with HTML & CSS
+                                </h1>
+                                <p class="company">
+                                    By web school
+                                </p>
+                            </div>
+                        </div>
 
-            <div class="course-certificate">
-                <div class="certificate-img"><img src="{% static 'assets/img/Certificate.png' %}" alt=""></div>
-                <div class="certificate-infos">
-                    <h1 class="certif-title">
-                        build your first web site with HTML & CSS
-                    </h1>
-                    <p class="company">
-                        By web school
-                    </p>
-                </div>
-            </div>
+                        <div class="course-certificate">
+                            <div class="certificate-img"><img src="{% static 'assets/img/Certificate.png' %}" alt=""></div>
+                            <div class="certificate-infos">
+                                <h1 class="certif-title">
+                                    build your first web site with HTML & CSS
+                                </h1>
+                                <p class="company">
+                                    By web school
+                                </p>
+                            </div>
+                        </div>
 
-            <div class="course-certificate">
-                <div class="certificate-img"><img src="{% static 'assets/img/Certificate.png' %}" alt=""></div>
-                <div class="certificate-infos">
-                    <h1 class="certif-title">
-                        build your first web site with HTML & CSS
-                    </h1>
-                    <p class="company">
-                        By web school
-                    </p>
-                </div>
-            </div>
-
-            <div class="course-certificate">
-                <div class="certificate-img"><img src="{% static 'assets/img/Certificate.png' %}" alt=""></div>
-                <div class="certificate-infos">
-                    <h1 class="certif-title">
-                        build your first web site with HTML & CSS
-                    </h1>
-                    <p class="company">
-                        By web school
-                    </p>
-                </div>
-            </div>
+                        <div class="course-certificate">
+                            <div class="certificate-img"><img src="{% static 'assets/img/Certificate.png' %}" alt=""></div>
+                            <div class="certificate-infos">
+                                <h1 class="certif-title">
+                                    build your first web site with HTML & CSS
+                                </h1>
+                                <p class="company">
+                                    By web school
+                                </p>
+                            </div>
+                        </div>
         </div>
 
         <h1 id="jp">Courses im Learning</h1>
         <div class="learning-courses-container aqcuired">
-            <div class="learning-course-box">
-                <div class="learningcourse-box-infos">
-                    <div class="learning-course-img"><img src="{% static 'assets/img/courseJs.png' %}" alt="">
-                    </div>
-                    <div class="learning-course-details">
-                        <h1 class="title">The Complete Full-Stack Web Development Bootcamp</h1>
-                        <p class="tutor">By Jonas Schmedtmann</p>
-                        <div class="progression">
-                            <p>20/40 Chapter</p>
-                            <p class="l-progression-value">42%</p>
-                        </div>
+                        <div class="learning-course-box">
+                            <div class="learningcourse-box-infos">
+                                <div class="learning-course-img"><img src="{% static 'assets/img/courseJs.png' %}" alt="">
+                                </div>
+                                <div class="learning-course-details">
+                                <h1 class="title">The Complete Full-Stack Web Development Bootcamp</h1>
+                                <p class="tutor">By Jonas Schmedtmann</p>
+                                <div class="progression">
+                                    <p>20/40 Chapter</p>
+                                    <p class="l-progression-value">42%</p>
+                                </div>
 
-                        <div class="l-progression-container">
-                            <div class="l-progression-bar" id="progress-bar">
-
+                                <div class="l-progression-container">
+                                    <div class="l-progression-bar" id="progress-bar">
+                                    
+                                    </div>
+                                </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
 
+                            
 
+                        <div class="learning-course-box">
+                            <div class="learningcourse-box-infos">
+                                <div class="learning-course-img"><img src="{% static 'assets/img/courseJs.png' %}" alt="">
+                                </div>
+                                <div class="learning-course-details">
+                                <h1 class="title">The Complete Full-Stack Web Development Bootcamp</h1>
+                                <p class="tutor">By Jonas Schmedtmann</p>
+                                <div class="progression">
+                                    <p>20/40 Chapter</p>
+                                    <p class="l-progression-value">26%</p>
+                                </div>
 
-            <div class="learning-course-box">
-                <div class="learningcourse-box-infos">
-                    <div class="learning-course-img"><img src="{% static 'assets/img/courseJs.png' %}" alt="">
-                    </div>
-                    <div class="learning-course-details">
-                        <h1 class="title">The Complete Full-Stack Web Development Bootcamp</h1>
-                        <p class="tutor">By Jonas Schmedtmann</p>
-                        <div class="progression">
-                            <p>20/40 Chapter</p>
-                            <p class="l-progression-value">26%</p>
-                        </div>
-
-                        <div class="l-progression-container">
-                            <div class="l-progression-bar" id="progress-bar">
-
+                                <div class="l-progression-container">
+                                    <div class="l-progression-bar" id="progress-bar">
+                                    
+                                    </div>
+                                </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
 
-            <div class="learning-course-box">
-                <div class="learningcourse-box-infos">
-                    <div class="learning-course-img"><img src="{% static 'assets/img/courseJs.png' %}" alt="">
-                    </div>
-                    <div class="learning-course-details">
-                        <h1 class="title">The Complete Full-Stack Web Development Bootcamp</h1>
-                        <p class="tutor">By Jonas Schmedtmann</p>
-                        <div class="progression">
-                            <p>20/40 Chapter</p>
-                            <p class="l-progression-value">09%</p>
-                        </div>
+                        <div class="learning-course-box">
+                            <div class="learningcourse-box-infos">
+                                <div class="learning-course-img"><img src="{% static 'assets/img/courseJs.png' %}" alt="">
+                                </div>
+                                <div class="learning-course-details">
+                                <h1 class="title">The Complete Full-Stack Web Development Bootcamp</h1>
+                                <p class="tutor">By Jonas Schmedtmann</p>
+                                <div class="progression">
+                                    <p>20/40 Chapter</p>
+                                    <p class="l-progression-value">09%</p>
+                                </div>
 
-                        <div class="l-progression-container">
-                            <div class="l-progression-bar" id="progress-bar">
-
+                                <div class="l-progression-container">
+                                    <div class="l-progression-bar" id="progress-bar">
+                                    
+                                    </div>
+                                </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
 
-            <div class="learning-course-box">
-                <div class="learningcourse-box-infos">
-                    <div class="learning-course-img"><img src="{% static 'assets/img/courseJs.png' %}" alt="">
-                    </div>
-                    <div class="learning-course-details">
-                        <h1 class="title">The Complete Full-Stack Web Development Bootcamp</h1>
-                        <p class="tutor">By Jonas Schmedtmann</p>
-                        <div class="progression">
-                            <p>20/40 Chapter</p>
-                            <p class="l-progression-value">09%</p>
-                        </div>
+                        <div class="learning-course-box">
+                            <div class="learningcourse-box-infos">
+                                <div class="learning-course-img"><img src="{% static 'assets/img/courseJs.png' %}" alt="">
+                                </div>
+                                <div class="learning-course-details">
+                                <h1 class="title">The Complete Full-Stack Web Development Bootcamp</h1>
+                                <p class="tutor">By Jonas Schmedtmann</p>
+                                <div class="progression">
+                                    <p>20/40 Chapter</p>
+                                    <p class="l-progression-value">09%</p>
+                                </div>
 
-                        <div class="l-progression-container">
-                            <div class="l-progression-bar" id="progress-bar">
-
+                                <div class="l-progression-container">
+                                    <div class="l-progression-bar" id="progress-bar">
+                                    
+                                    </div>
+                                </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
 
-
+                        
         </div>
 
-
+        
 
         <h1 id="jp">Posted courses</h1>
-        <button id="showPageBtn">+ new course</button>
-
+            <button id="showPageBtn">+ new course</button>
+        
         <div class="add-course hidden-page" id="hiddenPage">
-            <div class="container">
-
-                <div class="section">
-                    <div class="aaa">
-                        <h2 class="section-title">Course Details</h2>
-                        <div class="close" onclick="closeAddCourse()">
-                            <h2 class="section-title">&times;</h2>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="courseTitle">Course Title</label>
-                        <input type="text" id="courseTitle" placeholder="Enter course name">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="description">Description</label>
-                        <textarea id="description" placeholder="Brief course summary"></textarea>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="objectives">Learning Objectives</label>
-                        <textarea id="objectives" placeholder="List key outcomes (one per line)"></textarea>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="category">Category</label>
-                            <select id="category">
-                                <option value="">Select category</option>
-                                <option value="technology">Technology</option>
-                                <option value="business">Business</option>
-                                <option value="design">Design</option>
-                                <option value="marketing">Marketing</option>
-                                <option value="development">Development</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="level">Level</label>
-                            <select id="level">
-                                <option value="">Beginner, Intermediate, Advanced</option>
-                                <option value="beginner">Beginner</option>
-                                <option value="intermediate">Intermediate</option>
-                                <option value="advanced">Advanced</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="prerequisites">Prerequisites</label>
-                        <textarea id="prerequisites" placeholder="List key outcomes (one per line)"></textarea>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="duration">Estimated Duration</label>
-                        <div class="duration-container">
-                            <input type="text" id="duration" placeholder="e.g. 8 weeks, 10 hours">
-                        </div>
-                    </div>
+        <div class="container">
+        
+        <div class="section">
+            <div class="aaa">
+                <h2 class="section-title">Course Details</h2>
+                <div class="close" onclick="closeAddCourse()">
+                    <h2 class="section-title">&times;</h2>
                 </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="courseTitle">Course Title</label>
+                <input type="text" id="courseTitle" placeholder="Enter course name">
+            </div>
 
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea id="description" placeholder="Brief course summary"></textarea>
+            </div>
 
-                <div class="section">
-                    <h2 class="section-title">Course Media</h2>
+            <div class="form-group">
+                <label for="objectives">Learning Objectives</label>
+                <textarea id="objectives" placeholder="List key outcomes (one per line)"></textarea>
+            </div>
 
-                    <label for="">Cover Image</label>
-                    <div class="form-group" id="image-area">
-                        <div class="image-upload-area">
-
-                            <img src="{% static 'assets/img/Course cover' %} " alt="Cover Image"
-                                style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px; border: 2px solid #e5e7eb;">
-
-
-                            <div style="position: absolute; bottom: 16px; right: 16px;">
-                                <button type="button" class="btn btn-primary"
-                                    onclick="document.getElementById('coverImage').click()">
-                                    📝 Change Image
-                                </button>
-                                <input type="file" id="coverImage" class="hidden-input" accept="image/*">
-                            </div>
-
-                            <!-- <div style="position: absolute; top: 16px; left: 16px; background: rgba(59, 130, 246, 0.9); color: white; padding: 8px 12px; border-radius: 6px; font-size: 12px;">
-                        
-                    </div> -->
-                        </div>
-                    </div>
-
-
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="category">Category</label>
+                    <select id="category">
+                        <option value="">Select category</option>
+                        <option value="technology">Technology</option>
+                        <option value="business">Business</option>
+                        <option value="design">Design</option>
+                        <option value="marketing">Marketing</option>
+                        <option value="development">Development</option>
+                    </select>
                 </div>
-
-
-                <div class="bottom-section">
-                    <div class="left-column">
-                        <div class="form-group">
-                            <label for="creeSection">Create Section</label>
-                            <input type="text" id="creeSection" placeholder="e.g. 8 weeks, 10 hours">
-                        </div>
-
-                        <div class="create-btn-container">
-                            <button type="button" class="btn btn-primary" onclick="createSection()">Create</button>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="section">Section</label>
-                            <select id="section">
-                                <option value="">Select Section</option>
-
-                            </select>
-                        </div>
-
-
-                    </div>
-
-                    <div class="right-column">
-                        <div class="media-section">
-                            <div class="form-group">
-                                <label>Course Materials</label>
-                                <button type="button" class="btn btn-primary"
-                                    onclick="document.getElementById('courseMaterials').click()">
-                                    Upload files
-                                </button>
-                                <div class="file-info">PDF, DOCX, PPTX</div>
-                                <input type="file" id="courseMaterials" class="hidden-input" multiple
-                                    accept=".pdf,.docx,.pptx">
-                            </div>
-
-                            <div class="form-group">
-                                <label>Videos</label>
-                                <button type="button" class="btn btn-primary"
-                                    onclick="document.getElementById('videos').click()">
-                                    Upload video
-                                </button>
-                                <input type="file" id="videos" class="hidden-input" multiple accept="video/*">
-                            </div>
-
-                            <div class="form-group">
-                                <button type="button" class="btn btn-success">
-                                    Soumettre pour validation
-                                </button>
-                            </div>
-                        </div>
-                    </div>
+                <div class="form-group">
+                    <label for="level">Level</label>
+                    <select id="level">
+                        <option value="">Beginner, Intermediate, Advanced</option>
+                        <option value="beginner">Beginner</option>
+                        <option value="intermediate">Intermediate</option>
+                        <option value="advanced">Advanced</option>
+                    </select>
                 </div>
+            </div>
 
-                <div class="validation-note">
-                    Après soumission, votre cours sera examiné par notre équipe d'administration. Vous recevrez un
-                    e-mail une fois qu'il sera approuvé ou si des informations supplémentaires sont nécessaires.
+            <div class="form-group">
+                <label for="prerequisites">Prerequisites</label>
+                <textarea id="prerequisites" placeholder="List key outcomes (one per line)"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="duration">Estimated Duration</label>
+                <div class="duration-container">
+                    <input type="text" id="duration" placeholder="e.g. 8 weeks, 10 hours">
                 </div>
             </div>
         </div>
 
-        <div class="all-carousel-container">
+        
+        <div class="section">
+            <h2 class="section-title">Course Media</h2>
 
-            <!-- <button class="prev">&#10094;</button>
+                <label for="">Cover Image</label>
+            <div class="form-group" id="image-area">
+                <div class="image-upload-area">
+                    
+                    <img src="{% static 'assets/img/Course cover' %} " 
+                         alt="Cover Image" 
+                         style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px; border: 2px solid #e5e7eb;">
+                    
+                    
+                    <div style="position: absolute; bottom: 16px; right: 16px;">
+                        <button type="button" class="btn btn-primary" onclick="document.getElementById('coverImage').click()">
+                            📝 Change Image
+                        </button>
+                        <input type="file" id="coverImage" class="hidden-input" accept="image/*">
+                    </div>
+                    
+                    <!-- <div style="position: absolute; top: 16px; left: 16px; background: rgba(59, 130, 246, 0.9); color: white; padding: 8px 12px; border-radius: 6px; font-size: 12px;">
+                        
+                    </div> -->
+                </div>
+            </div>
+
+            
+        </div>
+
+        
+        <div class="bottom-section">
+            <div class="left-column">
+                <div class="form-group">
+                    <label for="creeSection">Create Section</label>
+                    <input type="text" id="creeSection" placeholder="e.g. 8 weeks, 10 hours">
+                </div>
+                
+                <div class="create-btn-container">
+                    <button type="button" class="btn btn-primary" onclick="createSection()">Create</button>
+                </div>
+
+                <div class="form-group">
+                    <label for="section">Section</label>
+                    <select id="section">
+                        <option value="">Select Section</option>
+                        
+                    </select>
+                </div>
+
+                
+            </div>
+
+            <div class="right-column">
+                <div class="media-section">
+                    <div class="form-group">
+                        <label>Course Materials</label>
+                        <button type="button" class="btn btn-primary" onclick="document.getElementById('courseMaterials').click()">
+                            Upload files
+                        </button>
+                        <div class="file-info">PDF, DOCX, PPTX</div>
+                        <input type="file" id="courseMaterials" class="hidden-input" multiple accept=".pdf,.docx,.pptx">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Videos</label>
+                        <button type="button" class="btn btn-primary" onclick="document.getElementById('videos').click()">
+                            Upload video
+                        </button>
+                        <input type="file" id="videos" class="hidden-input" multiple accept="video/*">
+                    </div>
+
+                    <div class="form-group">
+                        <button type="button" class="btn btn-success">
+                            Soumettre pour validation
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="validation-note">
+            Après soumission, votre cours sera examiné par notre équipe d'administration. Vous recevrez un e-mail une fois qu'il sera approuvé ou si des informations supplémentaires sont nécessaires.
+        </div>
+    </div>
+    </div>
+
+    <div class="all-carousel-container">
+                
+                <!-- <button class="prev">&#10094;</button>
                 <button class="next">&#10095;</button> -->
-            <!-- <div class="carousel-container">
+                    <!-- <div class="carousel-container">
                         <div class="carousel">
                             
                             <div class="carousel-item">
@@ -810,443 +805,435 @@
                         </div>
                     </div> -->
 
-            <div class="carousel-container">
+        <div class="carousel-container">
 
 
-                <div class="controls">
-                    <button onclick="prev()" id="prevBtn"> ← </button>
-                    <button onclick="next()" id="nextBtn"> → </button>
-                </div>
+            <div class="controls">
+                <button onclick="prev()" id="prevBtn"> ← </button>
+                <button onclick="next()" id="nextBtn"> → </button>
+            </div>
 
-
-                <div class="carousel-track" id="carouselTrack">
-                    <div class="carousel-item">
-                        <div class="carousel-card">
-                            <div class="p-course-box">
-                                <div class="p-course-box-img"><img src="{% static 'assets/img/courseJs.png' %}" alt=""></div>
-                                <div class="p-course-details">
-                                    <h1 class="p-title">front-end Development</h1>
-                                    <div class="p-views">
-                                        <p id="status" class="a">Accepted</p>
-                                        <p id="viewers">215 vues</p>
-                                        <p id="ratings">72 ratings</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="carousel-card">
-                            <div class="p-course-box">
-                                <div class="p-course-box-img"><img src="{% static 'assets/img/courseJs.png' %}" alt=""></div>
-                                <div class="p-course-details">
-                                    <h1 class="p-title">front-end Development</h1>
-                                    <div class="p-views">
-                                        <p id="status" class="a">Accepted</p>
-                                        <p id="viewers">215 vues</p>
-                                        <p id="ratings">72 ratings</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="carousel-card">
-                            <div class="p-course-box">
-                                <div class="p-course-box-img"><img src="{% static 'assets/img/courseJs.png' %}" alt=""></div>
-                                <div class="p-course-details">
-                                    <h1 class="p-title">front-end Development</h1>
-                                    <div class="p-views">
-                                        <p id="status" class="a">Accepted</p>
-                                        <p id="viewers">215 vues</p>
-                                        <p id="ratings">72 ratings</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="carousel-card">
-                            <div class="p-course-box">
-                                <div class="p-course-box-img"><img src="{% static 'assets/img/courseJs.png' %}" alt=""></div>
-                                <div class="p-course-details">
-                                    <h1 class="p-title">front-end Development</h1>
-                                    <div class="p-views">
-                                        <p id="status" class="a">Accepted</p>
-                                        <p id="viewers">215 vues</p>
-                                        <p id="ratings">72 ratings</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div class="carousel-item">
-                        <div class="carousel-card">
-                            <div class="p-course-box">
-                                <div class="p-course-box-img"><img src="{% static 'assets/img/courseJs.png' %}" alt=""></div>
-                                <div class="p-course-details">
-                                    <h1 class="p-title">front-end Development</h1>
-                                    <div class="p-views">
-                                        <p id="status" class="a">Accepted</p>
-                                        <p id="viewers">215 vues</p>
-                                        <p id="ratings">72 ratings</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
+      
+  <div class="carousel-track" id="carouselTrack">
+      <div class="carousel-item">
+        <div class="carousel-card">
+            <div class="p-course-box">
+                <div class="p-course-box-img"><img src="{% static 'assets/img/courseJs.png' %}" alt=""></div>
+            <div class="p-course-details">
+                <h1 class="p-title">front-end Development</h1>
+                <div class="p-views">
+                    <p id="status" class="a">Accepted</p>
+                    <p id="viewers">215 vues</p>
+                    <p id="ratings">72 ratings</p>
                 </div>
             </div>
         </div>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <div class="carousel-card">
+            <div class="p-course-box">
+                <div class="p-course-box-img"><img src="{% static 'assets/img/courseJs.png' %}" alt=""></div>
+            <div class="p-course-details">
+                <h1 class="p-title">front-end Development</h1>
+                <div class="p-views">
+                    <p id="status" class="a">Accepted</p>
+                    <p id="viewers">215 vues</p>
+                    <p id="ratings">72 ratings</p>
+                </div>
+            </div>
+        </div>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <div class="carousel-card">
+            <div class="p-course-box">
+                <div class="p-course-box-img"><img src="{% static 'assets/img/courseJs.png' %}" alt=""></div>
+            <div class="p-course-details">
+                <h1 class="p-title">front-end Development</h1>
+                <div class="p-views">
+                    <p id="status" class="a">Accepted</p>
+                    <p id="viewers">215 vues</p>
+                    <p id="ratings">72 ratings</p>
+                </div>
+            </div>
+        </div>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <div class="carousel-card">
+            <div class="p-course-box">
+                <div class="p-course-box-img"><img src="{% static 'assets/img/courseJs.png' %}" alt=""></div>
+            <div class="p-course-details">
+                <h1 class="p-title">front-end Development</h1>
+                <div class="p-views">
+                    <p id="status" class="a">Accepted</p>
+                    <p id="viewers">215 vues</p>
+                    <p id="ratings">72 ratings</p>
+                </div>
+            </div>
+        </div>
+        </div>
+      </div>
 
+
+      <div class="carousel-item">
+        <div class="carousel-card">
+            <div class="p-course-box">
+                <div class="p-course-box-img"><img src="{% static 'assets/img/courseJs.png' %}" alt=""></div>
+            <div class="p-course-details">
+                <h1 class="p-title">front-end Development</h1>
+                <div class="p-views">
+                    <p id="status" class="a">Accepted</p>
+                    <p id="viewers">215 vues</p>
+                    <p id="ratings">72 ratings</p>
+                </div>
+            </div>
+        </div>
+        </div>
+      </div>
 
     </div>
+  </div>
+                </div>
+
+    
+        </div>
 
 
     <div class="jobs-page" id="page3">
         <div class="job-left">
 
             <div class="job-skills">
-                <h1 id="jp">Skills</h1>
-                <ul class="skill-wrraper">
-                    <li class="skill">CSS</li>
-                    <li class="skill">Figma</li>
-                    <li class="skill">ReactJs</li>
-                    <li class="skill">Django</li>
-                    <div class="add">+</div>
-                </ul>
-            </div>
+                    <h1 id="jp">Skills</h1>
+                    <ul class="skill-wrraper">
+                        <li class="skill">CSS</li>
+                        <li class="skill">Figma</li>
+                        <li class="skill">ReactJs</li>
+                        <li class="skill">Django</li>
+                        <div class="add">+</div>
+                    </ul>
+                </div>
 
             <h1 id="jp">Jobs I've applied to</h1>
-            <div class="job-container">
-                <div class="job-item">
-                    <div class="job-item-img">
-                        <img src="{% static 'assets/img/company.svg' %}" alt="">
-                    </div>
-                    <div class="job-item-details">
-                        <h1 id="title">ui/ux designer</h1>
-                        <h1 id="salary">921$</h1>
-                        <p class="status a">Accepted</p>
-                    </div>
+        <div class="job-container">
+            <div class="job-item">
+                <div class="job-item-img">
+                    <img src="{% static 'assets/img/company.svg' %}" alt="">
                 </div>
-
-                <div class="job-item">
-                    <div class="job-item-img">
-                        <img src="{% static 'assets/img/company.svg' %}" alt="">
-                    </div>
-                    <div class="job-item-details">
-                        <h1 id="title">video editor</h1>
-                        <h1 id="salary">100$</h1>
-                        <p class="status r">rejected</p>
-                    </div>
-                </div>
-
-                <div class="job-item">
-                    <div class="job-item-img">
-                        <img src="{% static 'assets/img/company.svg' %}" alt="">
-                    </div>
-                    <div class="job-item-details">
-                        <h1 id="title">front-end developper</h1>
-                        <h1 id="salary">50$</h1>
-                        <p class="status p">pending</p>
-                    </div>
-                </div>
-            </div>
-            <button id="new-job-btn">+ new jobs</button>
-
-            <div class="add-job">
-                <div class="add-job-page " id="JobForm">
-                    <div class="bbb">
-                        <h2 id="job-off-details">Job Offer Details</h2>
-                    </div>
-                    <form>
-                        <div>
-                            <label for="titre">Job Title</label>
-                            <input type="text" id="titre" placeholder="e.g., Web Developer, HR Assistant...">
-                        </div>
-
-                        <div>
-                            <label for="description">Job Description</label>
-                            <textarea id="description" rows="5"
-                                placeholder="Describe the tasks, goals, and context"></textarea>
-                        </div>
-
-                        <div class="add-job-row">
-                            <div>
-                                <label for="contrat">Contract Type</label>
-                                <select id="contrat">
-                                    <option>Internship</option>
-                                    <option>Fixed-term</option>
-                                    <option>Permanent</option>
-                                    <option>Freelance</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="add-job-row">
-                            <div>
-                                <label for="date">Expiration Date</label>
-                                <input type="date" id="date">
-                            </div>
-                            <div>
-                                <label for="lieu">Location</label>
-                                <input type="text" id="lieu" placeholder="Remote or City">
-                            </div>
-                        </div>
-
-                        <h3>Skills & Profile</h3>
-                        <div>
-                            <label for="competences">Required Skills</label>
-                            <input type="text" id="competences"
-                                placeholder="List the skills (e.g., Python, project management...)">
-                        </div>
-
-                        <div>
-                            <label for="secteur">Industry Sector</label>
-                            <input type="text" id="secteur" placeholder="e.g., IT, Healthcare, Finance...">
-                        </div>
-
-                        <div class="add-job-row">
-                            <div>
-                                <label for="education">Education Level</label>
-                                <input type="text" id="education" placeholder="e.g., Bachelor's, Master's, etc.">
-                            </div>
-                            <div>
-                                <label for="level">Job Level</label>
-                                <input type="text" id="level" placeholder="e.g., Junior, Mid, Senior">
-                            </div>
-                        </div>
-
-                        <h3>Company / Organization</h3>
-                        <div>
-                            <label for="nom_entreprise">Company Name</label>
-                            <input type="text" id="nom_entreprise" placeholder="Legal name or brand">
-                        </div>
-
-                        <div>
-                            <label for="presentation">Introduction</label>
-                            <textarea id="presentation" rows="3"
-                                placeholder="Brief description of the company or organization"></textarea>
-                        </div>
-
-                        <div>
-                            <label for="email">Contact Email Address</label>
-                            <input type="email" id="email" placeholder="contact@company.com">
-                        </div>
-
-                        <h3>Attachments</h3>
-                        <div>
-                            <label for="fichier">Brochure, visual or logo (PDF, JPG, PNG)</label><br>
-                            <label class="add-job-custom-file-upload">
-                                <input type="file" id="fichier" accept=".pdf,.jpg,.jpeg,.png">
-                                Choose File
-                            </label>
-                        </div>
-
-                        <button type="submit" class="add-job-button">Submit Offer</button>
-                        <p class="add-job-info">
-                            Your offer will be reviewed by the administrator before being published. You will receive a
-                            confirmation email.
-                        </p>
-                    </form>
+                <div class="job-item-details">
+                    <h1 id="title">ui/ux designer</h1>
+                    <h1 id="salary">921$</h1>
+                    <p class="status a">Accepted</p>
                 </div>
             </div>
 
-            <h1 id="jp">Posted jobs</h1>
-            <div class="job-list">
-                <div class="job-elm">
-                    <div class="job-elm-details">
-                        <h1 id="title">full-stack developper</h1>
-                        <h1 id="salary">921$</h1>
-                        <div class="views">
-                            <p id="viewers">208 views</p>
-                            <p id="applications">72 applied</p>
-                        </div>
-                    </div>
+            <div class="job-item">
+                <div class="job-item-img">
+                    <img src="{% static 'assets/img/company.svg' %}" alt="">
                 </div>
-
-                <div class="job-elm">
-                    <div class="job-elm-details">
-                        <h1 id="title">English teacher</h1>
-                        <h1 id="salary">250$</h1>
-                        <div class="views">
-                            <p id="viewers">208 views</p>
-                            <p id="applications">72 applied</p>
-                        </div>
-                    </div>
+                <div class="job-item-details">
+                    <h1 id="title">video editor</h1>
+                    <h1 id="salary">100$</h1>
+                    <p class="status r">rejected</p>
                 </div>
+            </div>
 
-                <div class="job-elm">
-                    <div class="job-elm-details">
-                        <h1 id="title">Community manager</h1>
-                        <h1 id="salary">150$</h1>
-                        <div class="views">
-                            <p id="viewers">208 views</p>
-                            <p id="applications">72 applied</p>
-                        </div>
+            <div class="job-item">
+                <div class="job-item-img">
+                    <img src="{% static 'assets/img/company.svg' %}" alt="">
+                </div>
+                <div class="job-item-details">
+                    <h1 id="title">front-end developper</h1>
+                    <h1 id="salary">50$</h1>
+                    <p class="status p">pending</p>
+                </div>
+            </div>
+        </div>
+        <button id="new-job-btn">+ new jobs</button>
+
+<div class="add-job">
+<div class="add-job-page " id="JobForm">
+ <div class="bbb">
+    <h2 id="job-off-details">Job Offer Details</h2>
+ </div>
+  <form>
+    <div>
+      <label for="titre">Job Title</label>
+      <input type="text" id="titre" placeholder="e.g., Web Developer, HR Assistant...">
+    </div>
+
+    <div>
+      <label for="description">Job Description</label>
+      <textarea id="description" rows="5" placeholder="Describe the tasks, goals, and context"></textarea>
+    </div>
+
+    <div class="add-job-row">
+      <div>
+        <label for="contrat">Contract Type</label>
+        <select id="contrat">
+          <option>Internship</option>
+          <option>Fixed-term</option>
+          <option>Permanent</option>
+          <option>Freelance</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="add-job-row">
+      <div>
+        <label for="date">Expiration Date</label>
+        <input type="date" id="date">
+      </div>
+      <div>
+        <label for="lieu">Location</label>
+        <input type="text" id="lieu" placeholder="Remote or City">
+      </div>
+    </div>
+
+    <h3>Skills & Profile</h3>
+    <div>
+      <label for="competences">Required Skills</label>
+      <input type="text" id="competences" placeholder="List the skills (e.g., Python, project management...)">
+    </div>
+
+    <div>
+      <label for="secteur">Industry Sector</label>
+      <input type="text" id="secteur" placeholder="e.g., IT, Healthcare, Finance...">
+    </div>
+
+    <div class="add-job-row">
+      <div>
+        <label for="education">Education Level</label>
+        <input type="text" id="education" placeholder="e.g., Bachelor's, Master's, etc.">
+      </div>
+      <div>
+        <label for="level">Job Level</label>
+        <input type="text" id="level" placeholder="e.g., Junior, Mid, Senior">
+      </div>
+    </div>
+
+    <h3>Company / Organization</h3>
+    <div>
+      <label for="nom_entreprise">Company Name</label>
+      <input type="text" id="nom_entreprise" placeholder="Legal name or brand">
+    </div>
+
+    <div>
+      <label for="presentation">Introduction</label>
+      <textarea id="presentation" rows="3" placeholder="Brief description of the company or organization"></textarea>
+    </div>
+
+    <div>
+      <label for="email">Contact Email Address</label>
+      <input type="email" id="email" placeholder="contact@company.com">
+    </div>
+
+    <h3>Attachments</h3>
+    <div>
+      <label for="fichier">Brochure, visual or logo (PDF, JPG, PNG)</label><br>
+      <label class="add-job-custom-file-upload">
+        <input type="file" id="fichier" accept=".pdf,.jpg,.jpeg,.png">
+        Choose File
+      </label>
+    </div>
+
+    <button type="submit" class="add-job-button">Submit Offer</button>
+    <p class="add-job-info">
+      Your offer will be reviewed by the administrator before being published. You will receive a confirmation email.
+    </p>
+  </form>
+    </div>
+   </div> 
+
+        <h1 id="jp">Posted jobs</h1>
+        <div class="job-list">
+            <div class="job-elm">
+                <div class="job-elm-details">
+                    <h1 id="title">full-stack developper</h1>
+                    <h1 id="salary">921$</h1>
+                    <div class="views">
+                        <p id="viewers">208 views</p>
+                        <p id="applications">72 applied</p>
                     </div>
                 </div>
             </div>
+
+            <div class="job-elm">
+                <div class="job-elm-details">
+                    <h1 id="title">English teacher</h1>
+                    <h1 id="salary">250$</h1>
+                    <div class="views">
+                        <p id="viewers">208 views</p>
+                        <p id="applications">72 applied</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="job-elm">
+                <div class="job-elm-details">
+                    <h1 id="title">Community manager</h1>
+                    <h1 id="salary">150$</h1>
+                    <div class="views">
+                        <p id="viewers">208 views</p>
+                        <p id="applications">72 applied</p>
+                    </div>
+                </div>
+            </div>
+        </div>
         </div>
 
     </div>
 
     <div class="add-course hidden-page" id="hiddenPage">
         <div class="container">
+        
+        <div class="section">
+            <h2 class="section-title">Course Details</h2>
+            
+            <div class="form-group">
+                <label for="courseTitle">Course Title</label>
+                <input type="text" id="courseTitle" placeholder="Enter course name">
+            </div>
 
-            <div class="section">
-                <h2 class="section-title">Course Details</h2>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea id="description" placeholder="Brief course summary"></textarea>
+            </div>
 
+            <div class="form-group">
+                <label for="objectives">Learning Objectives</label>
+                <textarea id="objectives" placeholder="List key outcomes (one per line)"></textarea>
+            </div>
+
+            <div class="form-row">
                 <div class="form-group">
-                    <label for="courseTitle">Course Title</label>
-                    <input type="text" id="courseTitle" placeholder="Enter course name">
+                    <label for="category">Category</label>
+                    <select id="category">
+                        <option value="">Select category</option>
+                        <option value="technology">Technology</option>
+                        <option value="business">Business</option>
+                        <option value="design">Design</option>
+                        <option value="marketing">Marketing</option>
+                        <option value="development">Development</option>
+                    </select>
                 </div>
-
                 <div class="form-group">
-                    <label for="description">Description</label>
-                    <textarea id="description" placeholder="Brief course summary"></textarea>
-                </div>
-
-                <div class="form-group">
-                    <label for="objectives">Learning Objectives</label>
-                    <textarea id="objectives" placeholder="List key outcomes (one per line)"></textarea>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="category">Category</label>
-                        <select id="category">
-                            <option value="">Select category</option>
-                            <option value="technology">Technology</option>
-                            <option value="business">Business</option>
-                            <option value="design">Design</option>
-                            <option value="marketing">Marketing</option>
-                            <option value="development">Development</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="level">Level</label>
-                        <select id="level">
-                            <option value="">Beginner, Intermediate, Advanced</option>
-                            <option value="beginner">Beginner</option>
-                            <option value="intermediate">Intermediate</option>
-                            <option value="advanced">Advanced</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="prerequisites">Prerequisites</label>
-                    <textarea id="prerequisites" placeholder="List key outcomes (one per line)"></textarea>
-                </div>
-
-                <div class="form-group">
-                    <label for="duration">Estimated Duration</label>
-                    <div class="duration-container">
-                        <input type="text" id="duration" placeholder="e.g. 8 weeks, 10 hours">
-                    </div>
+                    <label for="level">Level</label>
+                    <select id="level">
+                        <option value="">Beginner, Intermediate, Advanced</option>
+                        <option value="beginner">Beginner</option>
+                        <option value="intermediate">Intermediate</option>
+                        <option value="advanced">Advanced</option>
+                    </select>
                 </div>
             </div>
 
-
-            <div class="section">
-                <h2 class="section-title">Course Media</h2>
-
-                <label for="">Cover Image</label>
-                <div class="form-group" id="image-area">
-                    <div class="image-upload-area">
-
-                        <img src="{% static 'assets/img/Course cover preview.png' %}" alt="Cover Image"
-                            style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px; border: 2px solid #e5e7eb;">
-
-
-                        <div style="position: absolute; bottom: 16px; right: 16px;">
-                            <button type="button" class="btn btn-primary"
-                                onclick="document.getElementById('coverImage').click()">
-                                📝 Change Image
-                            </button>
-                            <input type="file" id="coverImage" class="hidden-input" accept="image/*">
-                        </div>
-
-                        <!-- <div style="position: absolute; top: 16px; left: 16px; background: rgba(59, 130, 246, 0.9); color: white; padding: 8px 12px; border-radius: 6px; font-size: 12px;">
-                        
-                    </div> -->
-                    </div>
-                </div>
-
-
+            <div class="form-group">
+                <label for="prerequisites">Prerequisites</label>
+                <textarea id="prerequisites" placeholder="List key outcomes (one per line)"></textarea>
             </div>
 
-
-            <div class="bottom-section">
-                <div class="left-column">
-                    <div class="form-group">
-                        <label for="creeSection">Create Section</label>
-                        <input type="text" id="creeSection" placeholder="e.g. 8 weeks, 10 hours">
-                    </div>
-
-                    <div class="create-btn-container">
-                        <button type="button" class="btn btn-primary" onclick="createSection()">Create</button>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="section">Section</label>
-                        <select id="section">
-                            <option value="">Select Section</option>
-
-                        </select>
-                    </div>
-
-
+            <div class="form-group">
+                <label for="duration">Estimated Duration</label>
+                <div class="duration-container">
+                    <input type="text" id="duration" placeholder="e.g. 8 weeks, 10 hours">
                 </div>
-
-                <div class="right-column">
-                    <div class="media-section">
-                        <div class="form-group">
-                            <label>Course Materials</label>
-                            <button type="button" class="btn btn-primary"
-                                onclick="document.getElementById('courseMaterials').click()">
-                                Upload files
-                            </button>
-                            <div class="file-info">PDF, DOCX, PPTX</div>
-                            <input type="file" id="courseMaterials" class="hidden-input" multiple
-                                accept=".pdf,.docx,.pptx">
-                        </div>
-
-                        <div class="form-group">
-                            <label>Videos</label>
-                            <button type="button" class="btn btn-primary"
-                                onclick="document.getElementById('videos').click()">
-                                Upload video
-                            </button>
-                            <input type="file" id="videos" class="hidden-input" multiple accept="video/*">
-                        </div>
-
-                        <div class="form-group">
-                            <button type="button" class="btn btn-success">
-                                Soumettre pour validation
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="validation-note">
-                Après soumission, votre cours sera examiné par notre équipe d'administration. Vous recevrez un e-mail
-                une fois qu'il sera approuvé ou si des informations supplémentaires sont nécessaires.
             </div>
         </div>
+
+        
+        <div class="section">
+            <h2 class="section-title">Course Media</h2>
+
+                <label for="">Cover Image</label>
+            <div class="form-group" id="image-area">
+                <div class="image-upload-area">
+                    
+                    <img src="{% static 'assets/img/Course cover preview.png' %}" 
+                         alt="Cover Image" 
+                         style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px; border: 2px solid #e5e7eb;">
+                    
+                    
+                    <div style="position: absolute; bottom: 16px; right: 16px;">
+                        <button type="button" class="btn btn-primary" onclick="document.getElementById('coverImage').click()">
+                            📝 Change Image
+                        </button>
+                        <input type="file" id="coverImage" class="hidden-input" accept="image/*">
+                    </div>
+                    
+                    <!-- <div style="position: absolute; top: 16px; left: 16px; background: rgba(59, 130, 246, 0.9); color: white; padding: 8px 12px; border-radius: 6px; font-size: 12px;">
+                        
+                    </div> -->
+                </div>
+            </div>
+
+            
+        </div>
+
+        
+        <div class="bottom-section">
+            <div class="left-column">
+                <div class="form-group">
+                    <label for="creeSection">Create Section</label>
+                    <input type="text" id="creeSection" placeholder="e.g. 8 weeks, 10 hours">
+                </div>
+                
+                <div class="create-btn-container">
+                    <button type="button" class="btn btn-primary" onclick="createSection()">Create</button>
+                </div>
+
+                <div class="form-group">
+                    <label for="section">Section</label>
+                    <select id="section">
+                        <option value="">Select Section</option>
+                        
+                    </select>
+                </div>
+
+                
+            </div>
+
+            <div class="right-column">
+                <div class="media-section">
+                    <div class="form-group">
+                        <label>Course Materials</label>
+                        <button type="button" class="btn btn-primary" onclick="document.getElementById('courseMaterials').click()">
+                            Upload files
+                        </button>
+                        <div class="file-info">PDF, DOCX, PPTX</div>
+                        <input type="file" id="courseMaterials" class="hidden-input" multiple accept=".pdf,.docx,.pptx">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Videos</label>
+                        <button type="button" class="btn btn-primary" onclick="document.getElementById('videos').click()">
+                            Upload video
+                        </button>
+                        <input type="file" id="videos" class="hidden-input" multiple accept="video/*">
+                    </div>
+
+                    <div class="form-group">
+                        <button type="button" class="btn btn-success">
+                            Soumettre pour validation
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="validation-note">
+            Après soumission, votre cours sera examiné par notre équipe d'administration. Vous recevrez un e-mail une fois qu'il sera approuvé ou si des informations supplémentaires sont nécessaires.
+        </div>
     </div>
-
-
+    </div>
+    
+   
     <!-- -------------------------------add job-------------------------- -->
+   
+    
 
-
-
-
+     
 
 
     <script src="{% static 'JS_files/Profile-script.js' %}"></script>
@@ -1319,8 +1306,8 @@
                         
         </div> -->
 
-
-<!-- <div class="published pending">
+        
+        <!-- <div class="published pending">
                         <div class="published-course-box">
                             <div class="published-course-box-infos">
                                 <div class="published-course-img"><img src="../static/assets/img/course-p.png" alt=""></div>
@@ -1356,3 +1343,6 @@
                             
                         
         </div> -->
+
+
+        

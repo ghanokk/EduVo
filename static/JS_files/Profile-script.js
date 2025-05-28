@@ -17,6 +17,17 @@ const bioField = document.querySelector('#bio-field')
 const usernameSaved = document.querySelector('#username1')
 const localisationSaved = document.querySelector('#location1')
 
+// Initialize progress bars
+document.addEventListener('DOMContentLoaded', function() {
+    const progressBars = document.querySelectorAll('.l-progression-bar');
+    progressBars.forEach(bar => {
+        const progress = bar.getAttribute('data-progress');
+        if (progress) {
+            bar.style.width = progress + '%';
+        }
+    });
+});
+
 
 
 
