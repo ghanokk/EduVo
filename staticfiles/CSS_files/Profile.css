@@ -181,16 +181,16 @@ body{
 .my-stats-extended{
 }
 
-.left{
-width: 100%;
+.cert-job-grp{
+    margin: auto;
+    border-radius: 20px;
+    width: 90%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
 }
 
-.right{
-width: 100%;
-display: flex;
-justify-content: center;
-align-items: center;
-}
+
 
 
 .skill-wrraper{
@@ -212,25 +212,35 @@ align-items: center;
 }
 
 .courses{
-    width: 60%;
 }
 
 .jobs{
-    width: 40%
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .courses-container{
-    width: 100%;
-    padding: 10px;
+    margin: auto;
+    width: 90%;
+    padding: 50px 10px;
+    background: white;
+    border-radius: 20px;
+    margin-bottom: 50px;
 }
 
 .course-box{
+    display: block;
+    margin: auto;
+    width: 80%;
     padding: 10px;
     margin-bottom: 20px;
     background: white;
     border-radius: 5px;
-    /* height: 0px; */
-        box-shadow: -1px 1px 20px #dbdbdb;
+    height: 180px;
+    box-shadow: -1px 1px 20px #dbdbdb;
 }
 
 .course-box-infos{
@@ -314,36 +324,35 @@ align-items: center;
 
 .jobs-container{
     background: white;
-    border-radius: 0.5rem;
-    overflow: hidden;
-    margin-bottom: 20px;
-    width: 90%;
-    box-shadow: -1px 1px 20px #dbdbdb;
+    border-radius: 10px;
+    padding: 10px;
+    width: 100%;
 }
 
 .job-img img{
-height: 80px;
+height: 67px;
+margin: auto;
 }
 
 .job{
-    width:100%;
+    width:40%;
     padding: 10px;
     display: flex;
     justify-content: space-evenly;
     gap: 30px;
-    border-bottom: 0.2px solid gray;
-    margin-bottom: 15px;
 }
 
 .job-infos{
+    padding: 0 5px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 15px;
+    gap: 3px;
 }
 
 .job-infos h1{
-    font-size: 20px;
+    font-size: 18px;
+    white-space: nowrap;
 }
 
 .status , .company-name{
@@ -360,6 +369,8 @@ height: 80px;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 40%;
+    
 
 }
 
@@ -368,16 +379,16 @@ background: white;
 border-radius: 10px;
 padding: 10px;
 width: 100%;
-margin: auto;
 }
 
 .certificate{
+    width: 100%;
     display: flex;
     justify-content: center;
     gap: 8px;
     padding: 10px;
     overflow: hidden;
-    margin-bottom: 10px;
+
 }
 
 .certificate-img img{
@@ -527,10 +538,11 @@ margin: auto;
 }
 
 #scjc{
+    text-align: center;
     margin-right: 20px;
     margin-left: 20px;
     margin-bottom: 20px;
-    font-size: 48px;
+    font-size: 38px;
 }
 
 
@@ -544,18 +556,15 @@ margin: auto;
     display: none;
 }
 
-.hidden-page{
-    opacity: 0;
-  visibility: hidden;
-  transform: translateY(20px);
-  transition: opacity 0.6s ease, transform 0.6s ease, visibility 0s linear 0.6s;
+.add-course{
+display: none;
 }
 
-.hidden-page.active {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
-  transition-delay: 0s;
+
+
+
+#croix{
+    transform: translateY(-35px);
 }
 
 .edit-back{
@@ -828,7 +837,6 @@ input[type="file"] {
 .course-and-certifications{
     padding: 0 2%;
     display: none;
-
 }
 
 .course-and-certifications .courses-container{
@@ -1176,7 +1184,6 @@ margin-left: 25px;
             margin-bottom: 24px;
         }
 
-        
         .form-group {
             margin-bottom: 20px;
         }
@@ -1409,13 +1416,9 @@ margin-left: 25px;
     box-shadow: 0 8px 32px rgba(51, 121, 212, 0.1)
 }
 
-.add-course{
-    display: block;
-    /* position: absolute; */
-    top: 90%;
-    left: 20%;
-    max-height: 0;
-}
+
+
+
 
 .aaa{
     display: flex;
@@ -1622,21 +1625,69 @@ width: 100%;
     padding: 0 10px;
 }
 
-.job-course-grp{
-    display: flex;
-    gap: 20px;
+.course-grp{
 }
 
 
 
+.see-more{
+    padding: 10px;
+    gap: 10px;
+    justify-content: center;
+    display: flex;
+    margin: auto;
+    cursor: pointer;
+    opacity: 1;
+    text-align: center;
+    font-size: 24px;
+    max-width: 200px;
 
+}
+
+#txt{
+    transform: translateX(0);
+    transition: 0.2s ease;
+}
+
+
+#arrow{
+    opacity: 0;
+    transform: translateX(-30px);
+    transition: 0.3s ease;
+    max-width: 0;
+}
+
+.see-more:hover{
+    #arrow{
+        opacity: 1;
+        transform: translateX(0);
+        max-width: none;
+    }
+
+    #txt{
+        transform: translateX(-10px);
+    }
+}
+
+
+#title{
+    font-size: 22px;
+}
 
 .add-job-page{
-    padding: 20px 0;
+    padding: 10px 40px;
     background: white;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
     border-radius: 20px;
+    pointer-events: fill;
+}
 
+
+
+.bbb{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 #job-off-details{
@@ -1737,12 +1788,11 @@ width: 100%;
 
 
     .add-job{
+        display: none;
         padding: 0 20%;
-        max-height: 0;
-        opacity: 0;
-        transition: 0.5s ease;
+        transition: 0.2s ease;
         z-index: -6;
-        pointer-events: none ;
+        pointer-events: none;
     }
 
 

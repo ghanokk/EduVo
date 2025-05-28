@@ -128,23 +128,45 @@ class Enrollment(models.Model):
         ('in_progress', 'In Progress'),  # kay dir l'cours
         ('completed', 'Completed'),  # kammel l'cours
     ]
-
-    # had l'model kay7fed fih l'inscriptions dyal l'étudiants f'l'cours
-    student = models.ForeignKey('users.User', on_delete=models.CASCADE, related_name='enrollments')  # l'étudiant
-    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='enrollments')  # l'cours
-    enrollment_date = models.DateTimeField(auto_now_add=True)  # l'date dyal l'inscription
-    completion_status = models.CharField(max_length=12, choices=STATUS_CHOICES, default='enrolled')  # l'status dyal l'inscription
-    completion_date = models.DateTimeField(blank=True, null=True)  # l'date li kammel fih l'cours
-    progress = models.IntegerField(default=0)  # Percentage of course completion (0-100)
-
-    def __str__(self):
-        return f"{self.student.username} enrolled in {self.course.title}"
-
+    student = models.ForeignKey('users.User', on_delete=models.CASCADE, related_name='enrollments')
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='enrollments')
+    enrollment_date = models.DateTimeField(auto_now_add=True)
+    completion_status = models.CharField(max_length=12, choices=STATUS_CHOICES, default='enrolled')
+    completion_date = models.DateTimeField(blank=True, null=True)
+    progress = models.IntegerField(default=0)
+    
     class Meta:
         # hadi bach l'étudiant ma ydirch inscription marra w7da f'nfs l'cours
         unique_together = ('student', 'course')
         # hadi bach l'inscriptions jdod ybanu l'awel
         ordering = ['-enrollment_date']
+
+
+class Certificate(models.Model):
+    student = models.ForeignKey('users.User', on_delete=models.CASCADE, related_name='certificates')
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='certificates')
+    certificate_file = models.FileField(upload_to='certificates/', null=True, blank=True)
+    issue_date = models.DateTimeField(auto_now_add=True)
+    expiration_date = models.DateField(null=True, blank=True)
+    is_verified = models.BooleanField(default=True)
+    
+    class Meta:
+        unique_together = ('student', 'course')
+        ordering = ['-issue_date']
+    
+    def __str__(self):
+        return f"{self.student.username} - {self.course.title} Certificate"
+
+
+class CourseProgress(models.Model):
+    enrollment = models.OneToOneField(Enrollment, on_delete=models.CASCADE, related_name='course_progress')
+    current_lesson = models.ForeignKey('Lesson', on_delete=models.SET_NULL, null=True, blank=True)
+    last_activity = models.DateTimeField(auto_now=True)
+    certificate = models.OneToOneField(Certificate, on_delete=models.SET_NULL, null=True, blank=True, related_name='course_progress')
+    certificate_issued = models.BooleanField(default=False)
+    
+    def __str__(self):
+        return f"{self.enrollment.student.username} - {self.enrollment.course.title} Progress"
 
 
 class Rating(models.Model):

@@ -17,16 +17,7 @@ const bioField = document.querySelector('#bio-field')
 const usernameSaved = document.querySelector('#username1')
 const localisationSaved = document.querySelector('#location1')
 
-// Initialize progress bars
-document.addEventListener('DOMContentLoaded', function() {
-    const progressBars = document.querySelectorAll('.l-progression-bar');
-    progressBars.forEach(bar => {
-        const progress = bar.getAttribute('data-progress');
-        if (progress) {
-            bar.style.width = progress + '%';
-        }
-    });
-});
+
 
 
 
@@ -91,36 +82,218 @@ function hideEditForm(){
 }
 
 
-function edit(){
-    if(userInput.value == ""){
-        userInput.value = username.textContent
+document.getElementById('edit-profile-form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    const username = userInput.value;
+    const wilaya = document.getElementById('wilaya').value;
+    const bio = bioField.value;
+
+    try {
+        // Validate username first
+        const isValidUsername = await validateUsername(username);
+        if (!isValidUsername) return;
+
+        // Prepare data to send
+        const formData = new FormData();
+        formData.append('username', username);
+        formData.append('wilaya', wilaya);
+        formData.append('bio', bio);
+
+        // Send update request
+        const response = await fetch('/profile/update-profile/', {
+            method: 'POST',
+            headers: {
+                'X-CSRFToken': document.querySelector('input[name="csrfmiddlewaretoken"]').value
+            },
+            body: formData
+        });
+        const data = await response.json();
+
+        if (data.success) {
+            // Update the UI
+            username.textContent = username;
+            localisation.textContent = `Algeria, ${data.wilaya_display}`;
+            bioField.textContent = bio;
+            hideEditForm();
+        } else {
+            alert('Error updating profile');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        alert('Error updating profile');
+    }
+});
+
+async function edit() {
+    const username = document.getElementById('user-input').value;
+    const wilaya = document.getElementById('wilaya').value;
+    const bio = document.getElementById('biographie-field').value;
+
+    try {
+        // Validate username first
+        const isValidUsername = await validateUsername(username);
+        if (!isValidUsername) return;
+
+        // Prepare data to send
+        const formData = new FormData();
+        formData.append('username', username);
+        formData.append('wilaya', wilaya);
+        formData.append('bio', bio);
+
+        // Send update request
+        const response = await fetch('/profile/update-profile/', {
+            method: 'POST',
+            headers: {
+                'X-CSRFToken': document.querySelector('input[name="csrfmiddlewaretoken"]').value
+            },
+            body: formData
+        });
+        const data = await response.json();
+
+        if (data.success) {
+            // Update the UI
+            document.getElementById('username-value').textContent = username;
+            document.getElementById('loc').textContent = data.wilaya_display;
+            document.getElementById('bio-space').textContent = bio;
+            hideEditForm();
+        } else {
+            alert('Error updating profile');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        alert('Error updating profile');
+    }
+}
+
+// Username validation
+let usernameValidationTimeout;
+
+// Add real-time username validation
+document.getElementById('user-input').addEventListener('input', async function(e) {
+    const username = e.target.value;
+    if (username.length < 3) return; // Don't validate if username is too short
+
+    // Clear previous timeout if exists
+    if (usernameValidationTimeout) {
+        clearTimeout(usernameValidationTimeout);
     }
 
-    if(bioField.value == ""){
-        bioField.value = bio.textContent
-    }
-    
-    
-    username.textContent =inputForm.value ; 
-    localisation.textContent = country.textContent +', ' + wilaya.options[wilaya.selectedIndex].textContent;
-    // bioField = bio
-    hideEditForm()
+    // Wait for user to stop typing for 500ms
+    usernameValidationTimeout = setTimeout(async () => {
+        try {
+            const response = await fetch('/profile/validate-username/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': document.querySelector('input[name="csrfmiddlewaretoken"]').value
+                },
+                body: JSON.stringify({ username: username })
+            });
+            const data = await response.json();
+            
+            const validationMessage = document.getElementById('username-validation');
+            if (data.exists) {
+                validationMessage.textContent = 'Username already exists';
+                validationMessage.style.color = 'red';
+            } else {
+                validationMessage.textContent = 'Username available';
+                validationMessage.style.color = 'green';
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    }, 500);
+});
 
-    
+async function validateUsername(username) {
+    try {
+        const response = await fetch('/profile/validate-username/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': document.querySelector('input[name="csrfmiddlewaretoken"]').value
+            },
+            body: JSON.stringify({ username: username })
+        });
+        const data = await response.json();
+        return !data.exists;
+    } catch (error) {
+        console.error('Error:', error);
+        return false;
+    }
+}
+
+// Utility function to get CSRF token
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
 }
 
 function showImgForm(){
-    
-    if(imgForm.classList.contains('hidden')){
-        imgForm.classList.remove('hidden')
-        imgForm.classList.add('shown')
+    document.querySelector('.add-picture').classList.remove('hidden');
+}
+
+// Handle file selection
+document.getElementById('fileInput').addEventListener('change', function(e) {
+    const file = e.target.files[0];
+    if (file) {
+        document.getElementById('fileName').textContent = file.name;
+        
+        // Show file preview
+        const previewImg = document.getElementById('preview-img');
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            previewImg.src = e.target.result;
+            previewImg.style.display = 'block';
+        }
+        reader.readAsDataURL(file);
+    }
+});
+
+function uploadProfilePicture() {
+    const file = document.getElementById('fileInput').files[0];
+    if (!file) {
+        alert('Please select a file first');
+        return;
     }
 
-    else{
-        hideImgForm()
-    }
-
+    const formData = new FormData();
+    formData.append('profile_picture', file);
     
+    fetch('/profile/update-picture/', {
+        method: 'POST',
+        headers: {
+            'X-CSRFToken': document.querySelector('input[name="csrfmiddlewaretoken"]').value
+        },
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            // Update the profile picture in the UI
+            document.getElementById('pro-pic').src = data.image_url;
+            document.querySelector('.add-picture').classList.add('hidden');
+            document.getElementById('preview-img').style.display = 'none';
+            document.getElementById('fileName').textContent = 'No file chosen';
+        } else {
+            alert('Error updating profile picture');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Error uploading profile picture');
+    });
 }
 
 function hideImgForm(){
@@ -287,30 +460,24 @@ function createSection(){
     
 }
 
-const showJobFormButton = document.getElementById('new-job-btn');
-  const addJobContainer = document.querySelector('.add-job');
+const addJobForm = document.querySelector('.add-job')
+function showJobForm(){
+  addJobForm.style.display ='block'
+}
 
-  showJobFormButton.addEventListener('click', () => {
-    addJobContainer.classList.toggle('expand');
-  });
+function closeJobForm(){
+  addJobForm.style.display = 'none'
+}
 
 
-const addCourseBtn = document.getElementById("showPageBtn");
-const hiddenPage = document.getElementById("hiddenPage");
+const addCourseForm = document.querySelector('.add-course')
+function showCourseForm(){
+addCourseForm.style.display='block'
+}
 
-const closeBtn = document.querySelector('.close')
-
-addCourseBtn.addEventListener("click", () => {
-  hiddenPage.classList.add("active");
-  hiddenPage.style.minHeight ='1700px';
-
-//   document.body.style.overflow = 'hidden'
-});
-
-closeBtn.addEventListener("click" , ()=>{
-    hiddenPage.classList.remove("active");
-  hiddenPage.style.minHeight ='0';
-})
+function closeCourseForm(){
+  addCourseForm.style.display='none'
+}
 
 
 window.onload = () => {
@@ -334,6 +501,7 @@ window.onload = () => {
     }
   });
 };
+
 
 
 

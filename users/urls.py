@@ -13,7 +13,7 @@ urlpatterns = [
     path('Signup/', views.Signup, name='Signup'),
     path('doLogin',user_login.DO_LOGIN, name='doLogin'),
     path('doSignup/', user_login.DO_SIGNUP, name='doSignup'),
-    path('profile',views.Profile, name='profile'),
+    path('profile',views.profile, name='profile'),
     path('logout/', views.logout_view, name='logout'),
     path('forgot-password/', views.forgotPass, name='forgot_password'),
     
@@ -41,4 +41,7 @@ urlpatterns = [
              template_name='registration/password_reset_complete.html'
          ),
          name='password_reset_complete'),
+    path('profile/update-picture/', views.update_profile_picture, name='update_profile_picture'),
+    path('profile/validate-username/', views.validate_username, name='validate_username'),
+    path('profile/update-profile/', views.update_profile, name='update_profile'),
 ]

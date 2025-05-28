@@ -1,8 +1,9 @@
-{% extends "base.html" %}
+
 
 {% load static %}
 
-{% block content %}
+
+
 
 
 
@@ -10,6 +11,7 @@
 
 
 <html lang="en">
+
 
 <head>
     <meta charset="UTF-8">
@@ -27,16 +29,13 @@
         <div class="profile">
             <div class="profile-grp1">
                 <div class="profile-pic">
-            <img id="" src="{% static 'assets/img/profile.svg' %}" alt="profile img">
+                <img id="" {% if user.profile.profile_picture %}src="{{ user.profile.profile_picture.url }}"{% else %}src="{% static 'assets/img/default-profile.png' %}"{% endif %} alt="profile img" style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover; margin: 10px;">
             </div>
             <div class="profile-bio">
-            <h1 id="username1">Diaa messaoudi</h1>
-            <p id="location1">Algeria , Blida</p>
+            <h1 id="username1">{{ user.username }}</h1>
+            <p id="location1">{% if user.get_profile.wilaya %}Algeria, {{ user.get_profile.get_wilaya_display }}{% else %}No location set{% endif %}</p>
             <p id="bio-field">
-                Je suis un UI/UX Designer et développeur
-                 front-end en formation basé à Blida, Algérie,
-                  passionné par la création d’expériences numériques 
-                  intuitives et esthétiques.
+                {% if user.get_profile.bio %}{{ user.get_profile.bio }}{% else %}No bio yet{% endif %}
             </p>
             </div>
             </div>
@@ -88,7 +87,7 @@
         </div>
 
         <div class="my-stats-extended">
-            <div class="left">
+
                 <div class="skills">
                     <h1 id="scjc">Skills</h1>
                     <ul class="skill-wrraper">
@@ -99,7 +98,7 @@
                     </ul>
                 </div>
                 
-                <div class="job-course-grp">
+                <div class="course-grp">
                 <div class="courses">
 
                     <h1 id="scjc">Learning</h1>
@@ -167,70 +166,24 @@
                         </div>
                         
                         
-
+                            <div class="see-more">
+                                <p id="txt">see more</p>
+                                <div id="arrow">→</div>
+                            </div>
                             
                         </div>
 
                         
-
-
-            
-                        <button id="see-all">see all</button>
+                       
                     </div>
                 
-                    <div class="jobs">
-                    <h1 id="scjc">Job Postule</h1>
-                    <div class="jobs-container">
-                        <div class="job">
-                            <div class="job-img"><img src="{% static 'assets/img/company.svg' %}" alt=""></div>
-                            <div class="job-infos">
-                                <h1 class="job-title">Full-Stack Devoloper</h1>
-                                <p class="company-name">Webify Solutions</p>
-                                <p class="status">Accepted</p>
-                            </div>
-                        </div>
-
-                         <div class="job">
-                            <div class="job-img"><img src="{% static 'assets/img/company.svg' %}" alt=""></div>
-                            <div class="job-infos">
-                                <h1 class="job-title">Full-Stack Devoloper</h1>
-                                <p class="company-name">Webify Solutions</p>
-                                <p class="status">Accepted</p>
-                            </div>
-                        </div>
-
-                         <div class="job">
-                            <div class="job-img"><img src="{% static 'assets/img/company.svg' %}" alt=""></div>
-                            <div class="job-infos">
-                                <h1 class="job-title">Full-Stack Devoloper</h1>
-                                <p class="company-name">Webify Solutions</p>
-                                <p class="status">Accepted</p>
-                            </div>
-                        </div>
-
-                         <div class="job">
-                            <div class="job-img"><img src="{% static 'assets/img/company.svg' %}" alt=""></div>
-                            <div class="job-infos">
-                                <h1 class="job-title">Full-Stack Devoloper</h1>
-                                <p class="company-name">Webify Solutions</p>
-                                <p class="status">Accepted</p>
-                            </div>
-                        </div>
-                        
-
-                        <button id="see-all">see all</button>
-                    </div>
-                </div>
+                    
 
                 </div>
-                
-                
-                </div>
-            </div>
-            <div class="right">
+            <div class="cert-job-grp">
                 
                 <div class="certificates">
-                    <h1 id="scjc">📜Certificates</h1>
+                    <h1 id="scjc">Certificates</h1>
                     <div class="certificates-container">
                         <div class="certificate">
                             <div class="certificate-img"><img src="{% static 'assets/img/Certificate.png' %}" alt=""></div>
@@ -268,12 +221,56 @@
                             </div>
                         </div>
 
-                        <button id="see-all">see all</button>
+                        <div class="see-more">
+                                <p id="txt">see more</p>
+                                <div id="arrow">→</div>
+                            </div>
 
                     </div>
 
                     
 
+                </div>
+                
+
+                <div class="jobs">
+                    <h1 id="scjc">Job Postule</h1>
+                    <div class="jobs-container">
+                        <div class="job">
+                            <div class="job-img"><img src="{% static 'assets/img/company.svg' %}" alt=""></div>
+                            <div class="job-infos">
+                                <h1 class="job-title">Full-Stack Devoloper</h1>
+                                <p class="company-name">Webify Solutions</p>
+                                <p class="status">Accepted</p>
+                            </div>
+                        </div>
+
+                         <div class="job">
+                            <div class="job-img"><img src="{% static 'assets/img/company.svg' %}" alt=""></div>
+                            <div class="job-infos">
+                                <h1 class="job-title">Full-Stack Devoloper</h1>
+                                <p class="company-name">Webify Solutions</p>
+                                <p class="status">Accepted</p>
+                            </div>
+                        </div>
+
+                         <div class="job">
+                            <div class="job-img"><img src="{% static 'assets/img/company.svg' %}" alt=""></div>
+                            <div class="job-infos">
+                                <h1 class="job-title">Full-Stack Devoloper</h1>
+                                <p class="company-name">Webify Solutions</p>
+                                <p class="status">Accepted</p>
+                            </div>
+                        </div>
+
+                         
+                        
+
+                        <div class="see-more">
+                                <p id="txt">see more</p>
+                                <div id="arrow">→</div>
+                            </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -332,23 +329,25 @@
         </div>
         <div class="profile-wrapper">
             <div class="profile-pic-handler" onclick="showImgForm()">
-                <img src="{% static 'assets/img/profile.svg' %}" alt="" id="pro-pic">
+                <img src="{% if user.get_profile.profile_picture %}{{ user.get_profile.profile_picture.url }}{% else %}{% static 'assets/img/default-profile.png' %}{% endif %}" 
+                     alt="profile img" 
+                     id="pro-pic"
+                     style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover;">
                 <img src="{% static 'assets/img/edit gray.png' %}" alt="" id="edit-pen">
             </div>
             <div id="username">
-                <h1 id="username-value">Diaa messaoudi</h1>
+                <h1 id="username-value">{{ user.username }} </h1>>
                 <img src="{% static 'assets/img/edit gray.png' %}" alt="" id="edit-username" onclick="showEditForm()">
             </div>
 
             <div id="location">
-                <p id="loc">Algeria , blida</p>
+                <p id="loc">{{ user.get_profile.wilaya }}</p>
             </div>
             <div class="details">
                 <div class="biographie">
                     <h1>Bio :</h1>
                 </div>
-                    <textarea name="" id="bio-space" placeholder="introduce yourself in few word !" readonly>Je suis un UI/UX Designer et développeur front-end en formation basé à Blida, Algérie, passionné par la création d’expériences numériques intuitives et esthétiques
-                    </textarea>
+                <textarea name="" id="bio-space" placeholder="introduce yourself in few word !" readonly>{{ user.get_profile.bio }}</textarea>
                 
             </div>
             <button id="save-changes" onclick="saveEdit()">save</button>
@@ -357,8 +356,13 @@
 
     <div class="edit-form-container hidden">
         <div class="edit-form">
-            <input type="text" placeholder="new user name" id="user-input" class="item">
-            
+            <form method="post" action="{%url 'users:validate_username' %}" >         
+            <div class="username-input-container">
+                
+                <input type="text" placeholder="new user name" id="user-input" class="item" name="new_username">
+                <p id="username-validation" class="validation-message"></p>
+            </div>
+            </form>
             <div class="choice-input">
                 <select name="" id="country">
                 <option value="DZ">Algeria</option>
@@ -509,12 +513,15 @@
                                 <div class="learning-course-img"><img src="{% static 'assets/img/courseJs.png' %}" alt="">
                                 </div>
                                 <div class="learning-course-details">
-                                <h1 class="title">The Complete Full-Stack Web Development Bootcamp</h1>
-                                <p class="tutor">By Jonas Schmedtmann</p>
-                                <div class="progression">
+
+                                    <h1 class="title">The Complete Full-Stack Web Development Bootcamp</h1>
+
+                                    <p> class="tutor">By Jonas Schmedtmann</p>
+
+                                  <div class="progression">
                                     <p>20/40 Chapter</p>
                                     <p class="l-progression-value">42%</p>
-                                </div>
+                                  </div>
 
                                 <div class="l-progression-container">
                                     <div class="l-progression-bar" id="progress-bar">
@@ -596,16 +603,18 @@
         
 
         <h1 id="jp">Posted courses</h1>
-            <button id="showPageBtn">+ new course</button>
+            <button id="showPageBtn" onclick="showCourseForm()">+ new course</button>
         
-        <div class="add-course hidden-page" id="hiddenPage">
+        <div class="add-course">
         <div class="container">
         
         <div class="section">
             <div class="aaa">
                 <h2 class="section-title">Course Details</h2>
-                <div class="close" onclick="closeAddCourse()">
-                    <h2 class="section-title">&times;</h2>
+                <div class="close">
+
+                    <h2 id="croix" onclick="closeCourseForm()" class="section-title">&times;</h2>
+
                 </div>
             </div>
             
@@ -950,12 +959,17 @@
                 </div>
             </div>
         </div>
-        <button id="new-job-btn">+ new jobs</button>
+        <button id="new-job-btn" onclick="showJobForm()">+ new jobs</button>
 
 <div class="add-job">
 <div class="add-job-page " id="JobForm">
  <div class="bbb">
-    <h2 id="job-off-details">Job Offer Details</h2>
+    <h2 id="job-off-details">
+        <h2>Job Offer Details</h2>
+        <div class="close">
+                    <h2 id="croix" onclick="closeJobForm()" class="section-title">&times;</h2>
+                </div>
+    </h2>
  </div>
   <form>
     <div>
@@ -1085,148 +1099,7 @@
 
     </div>
 
-    <div class="add-course hidden-page" id="hiddenPage">
-        <div class="container">
-        
-        <div class="section">
-            <h2 class="section-title">Course Details</h2>
-            
-            <div class="form-group">
-                <label for="courseTitle">Course Title</label>
-                <input type="text" id="courseTitle" placeholder="Enter course name">
-            </div>
-
-            <div class="form-group">
-                <label for="description">Description</label>
-                <textarea id="description" placeholder="Brief course summary"></textarea>
-            </div>
-
-            <div class="form-group">
-                <label for="objectives">Learning Objectives</label>
-                <textarea id="objectives" placeholder="List key outcomes (one per line)"></textarea>
-            </div>
-
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="category">Category</label>
-                    <select id="category">
-                        <option value="">Select category</option>
-                        <option value="technology">Technology</option>
-                        <option value="business">Business</option>
-                        <option value="design">Design</option>
-                        <option value="marketing">Marketing</option>
-                        <option value="development">Development</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="level">Level</label>
-                    <select id="level">
-                        <option value="">Beginner, Intermediate, Advanced</option>
-                        <option value="beginner">Beginner</option>
-                        <option value="intermediate">Intermediate</option>
-                        <option value="advanced">Advanced</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label for="prerequisites">Prerequisites</label>
-                <textarea id="prerequisites" placeholder="List key outcomes (one per line)"></textarea>
-            </div>
-
-            <div class="form-group">
-                <label for="duration">Estimated Duration</label>
-                <div class="duration-container">
-                    <input type="text" id="duration" placeholder="e.g. 8 weeks, 10 hours">
-                </div>
-            </div>
-        </div>
-
-        
-        <div class="section">
-            <h2 class="section-title">Course Media</h2>
-
-                <label for="">Cover Image</label>
-            <div class="form-group" id="image-area">
-                <div class="image-upload-area">
-                    
-                    <img src="{% static 'assets/img/Course cover preview.png' %}" 
-                         alt="Cover Image" 
-                         style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px; border: 2px solid #e5e7eb;">
-                    
-                    
-                    <div style="position: absolute; bottom: 16px; right: 16px;">
-                        <button type="button" class="btn btn-primary" onclick="document.getElementById('coverImage').click()">
-                            📝 Change Image
-                        </button>
-                        <input type="file" id="coverImage" class="hidden-input" accept="image/*">
-                    </div>
-                    
-                    <!-- <div style="position: absolute; top: 16px; left: 16px; background: rgba(59, 130, 246, 0.9); color: white; padding: 8px 12px; border-radius: 6px; font-size: 12px;">
-                        
-                    </div> -->
-                </div>
-            </div>
-
-            
-        </div>
-
-        
-        <div class="bottom-section">
-            <div class="left-column">
-                <div class="form-group">
-                    <label for="creeSection">Create Section</label>
-                    <input type="text" id="creeSection" placeholder="e.g. 8 weeks, 10 hours">
-                </div>
-                
-                <div class="create-btn-container">
-                    <button type="button" class="btn btn-primary" onclick="createSection()">Create</button>
-                </div>
-
-                <div class="form-group">
-                    <label for="section">Section</label>
-                    <select id="section">
-                        <option value="">Select Section</option>
-                        
-                    </select>
-                </div>
-
-                
-            </div>
-
-            <div class="right-column">
-                <div class="media-section">
-                    <div class="form-group">
-                        <label>Course Materials</label>
-                        <button type="button" class="btn btn-primary" onclick="document.getElementById('courseMaterials').click()">
-                            Upload files
-                        </button>
-                        <div class="file-info">PDF, DOCX, PPTX</div>
-                        <input type="file" id="courseMaterials" class="hidden-input" multiple accept=".pdf,.docx,.pptx">
-                    </div>
-
-                    <div class="form-group">
-                        <label>Videos</label>
-                        <button type="button" class="btn btn-primary" onclick="document.getElementById('videos').click()">
-                            Upload video
-                        </button>
-                        <input type="file" id="videos" class="hidden-input" multiple accept="video/*">
-                    </div>
-
-                    <div class="form-group">
-                        <button type="button" class="btn btn-success">
-                            Soumettre pour validation
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="validation-note">
-            Après soumission, votre cours sera examiné par notre équipe d'administration. Vous recevrez un e-mail une fois qu'il sera approuvé ou si des informations supplémentaires sont nécessaires.
-        </div>
-    </div>
-    </div>
+    
     
    
     <!-- -------------------------------add job-------------------------- -->
@@ -1241,7 +1114,13 @@
 
 </html>
 
-{% endblock content %}
+
+
+
+
+
+
+
 
 
 <!-- <div class="published accepted">
