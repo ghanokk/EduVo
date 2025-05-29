@@ -80,7 +80,9 @@ def submit_application(request, job_id):
             experience=experience,
             skills=skills,
             availability=availability,
-            location=location
+            location=location,
+            status='pending',  # Set initial status to pending
+            applicant=request.user if request.user.is_authenticated else None
         )
         application.save()
         messages.success(request, "Application submitted successfully!")

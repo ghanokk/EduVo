@@ -10,6 +10,15 @@ STATUS_CHOICES = [
     ('draft', 'Draft'),      # Job is in draft mode
 ]
 
+# Application Status choices
+APPLICATION_STATUS_CHOICES = [
+    ('pending', 'Pending'),
+    ('reviewing', 'Reviewing'),
+    ('shortlisted', 'Shortlisted'),
+    ('rejected', 'Rejected'),
+    ('accepted', 'Accepted')
+]
+
 # Category choices
 CATEGORY_CHOICES = [
     ('web', 'Web Development'),
@@ -115,6 +124,17 @@ class JobApplication(models.Model):
     location = models.CharField(max_length=100, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)  
     updated_at = models.DateTimeField(auto_now=True) 
+    status=models.CharField(max_length=20, choices=APPLICATION_STATUS_CHOICES, default='pending')
+    
+    def get_status_display(self):
+        return dict(APPLICATION_STATUS_CHOICES).get(self.status, 'Unknown')
+
+    def __str__(self):
+        applicant_name = getattr(self.applicant, 'username', None) if self.applicant else self.full_name or "WITHOUT NAME"
+        return f"Applied to {self.job.title} from {applicant_name}" 
+
+    class Meta:
+        ordering = ['-created_at']
 
     def __str__(self):
         applicant_name = getattr(self.applicant, 'username', None) if self.applicant else self.full_name or "WITHOUT NAME"

@@ -52,7 +52,7 @@ def profile(request):
         student_profile = StudentProfile.objects.get(user=user)
         enrollments = Enrollment.objects.filter(student=user)
         user_skills = UserSkill.objects.filter(student_profile=student_profile)
-        job_applications = Proposal.objects.filter(applicant=user)
+        job_applications = JobApplication.objects.filter(applicant=user)
 
         # nupdateou l'context men les données dyal l'student
         context.update({
@@ -67,7 +67,7 @@ def profile(request):
                 'course': enrollment.course,
             } for enrollment in enrollments[:3]],  # 3 les derniers cours
             'skills': user_skills,
-            'job_applications': job_applications[:3]  # 3 les dernières applications
+            'job_applications': job_applications  # Pass all applications
         })
         for course in context['enrolled_courses']:
             # print l'title dyal l'cours
