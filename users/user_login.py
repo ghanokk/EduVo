@@ -90,22 +90,3 @@ def FORGOT_PASS(request):
     return PasswordResetView.as_view(
         template_name='registration/password_reset_form.html'
     )(request)
-
-# had l'function li tjkhdm m3a login ta3 l'users
-def DO_LOGIN(request):
-  if request.method == "POST":
-    # njibou l'email w l'password ta3 l'user
-    email = request.POST.get('email')
-    password = request.POST.get('password')
-
-    # nverifio l'authentification ta3 l'user
-    user = EmailBackEnd.authenticate(request, username=email, password=password)
-
-    if user != None:
-      # ki l'user ykoun valid, nloginouh w ndirou redirect l'homepage
-      login(request, user)
-      return redirect('homePage')
-    else:
-      # ki l'email w l'password makaynch valid, n'affichi message dyal l'error
-      messages.error(request, 'Email And Password Are Invalid')
-      return redirect('users:Login')

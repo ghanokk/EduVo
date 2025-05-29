@@ -42,4 +42,5 @@ urlpatterns = [
          ),
          name='password_reset_complete'),
          
+    path('update-profile/', views.update_profile, name='update_profile'),
 ]
