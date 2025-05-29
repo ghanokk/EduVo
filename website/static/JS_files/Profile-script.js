@@ -21,8 +21,6 @@ const localisationSaved = document.querySelector('#location1')
 
 
 
-
-
 function showSettings(){
 settingPage.classList.add('shown')
 settingPage.classList.remove('hidden')
@@ -278,24 +276,38 @@ function createSection(){
     
 }
 
-const addJobForm = document.querySelector('.add-job')
-function showJobForm(){
-  addJobForm.style.display ='block'
-}
-
-function closeJobForm(){
-  addJobForm.style.display = 'none'
-}
+<<<<<<< HEAD
 
 
-const addCourseForm = document.querySelector('.add-course')
-function showCourseForm(){
-addCourseForm.style.display='block'
-}
+=======
+const showJobFormButton = document.getElementById('new-job-btn');
+  const addJobContainer = document.querySelector('.add-job');
 
-function closeCourseForm(){
-  addCourseForm.style.display='none'
-}
+  showJobFormButton.addEventListener('click', () => {
+    addJobContainer.classList.toggle('expand');
+  });
+>>>>>>> origin/Back2_latest
+
+
+const addCourseBtn = document.getElementById("showPageBtn");
+const hiddenPage = document.getElementById("hiddenPage");
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/Back2_latest
+const closeBtn = document.querySelector('.close')
+
+addCourseBtn.addEventListener("click", () => {
+  hiddenPage.classList.add("active");
+  hiddenPage.style.minHeight ='1700px';
+
+//   document.body.style.overflow = 'hidden'
+});
+
+closeBtn.addEventListener("click" , ()=>{
+    hiddenPage.classList.remove("active");
+  hiddenPage.style.minHeight ='0';
+})
 
 
 window.onload = () => {
@@ -321,5 +333,7 @@ window.onload = () => {
 };
 
 
+<<<<<<< HEAD
 
-
+=======
+>>>>>>> origin/Back2_latest

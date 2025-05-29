@@ -5,22 +5,21 @@ from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
 
 from courses.models import Course, Enrollment
-from jobs.models import Job, Proposal
+from jobs.models import Job, JobApplication
 from skills.models import Skill, UserSkill
 from users.models import User, StudentProfile, TeacherProfile, CompanyProfile
 
 # had l'function li t3aml m3a l'login
 def login(request):
     if request.method == 'POST':
-        # njibou l'username w l'password men l'form
         username = request.POST['username']
         password = request.POST['password']
-        # nverifio l'authentification
         user = authenticate(request, username=username, password=password)
         if user is not None:
-            # ki l'user valid, nloginouh w ndirou redirect l'homepage
             login(request, user)
             return redirect('homePage')
+    return render(request, 'users/register.html')
+
     # ki ykoun GET, n'affichi l'form dyal l'login
     return render(request, 'users/register.html')
 
@@ -96,7 +95,7 @@ def profile(request):
         })
 
     elif user.user_type == 'company':
-        # njibou les données dyal l'company
+        # Get company specific data
         company_profile = CompanyProfile.objects.get(user=user)
         posted_jobs = Job.objects.filter(posted_by=user)
         
@@ -105,11 +104,11 @@ def profile(request):
             'profile': company_profile,
             'stats': {
                 'jobs_count': posted_jobs.count(),
-                'total_applications': sum(job.proposal_set.count() for job in posted_jobs)
+                'total_applications': sum(job.JobApplication_set.count() for job in posted_jobs)
             },
             'posted_jobs': [{
                 'job': job,
-                'applications_count': job.proposal_set.count(),
+                'applications_count': job.JobApplication_set.count(),
                 'views': job.views_count if hasattr(job, 'views_count') else 0
             } for job in posted_jobs]
         })

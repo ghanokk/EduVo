@@ -1,157 +1,124 @@
 from django.db import models
 from django.urls import reverse
+from django.conf import settings
 from django.contrib.auth.models import User
 
-# خيارات الحالة
+# Status choices
 STATUS_CHOICES = [
-    ('open', 'Open'),  # الوظيفة مفتوحة للتقديم
-    ('closed', 'Closed'),  # الوظيفة مغلقة
-    ('draft', 'Draft'),  # الوظيفة في طور المسودة
+    ('open', 'Open'),        # Job is open for applications
+    ('closed', 'Closed'),    # Job is closed
+    ('draft', 'Draft'),      # Job is in draft mode
 ]
 
-# خيارات التصنيف
+# Category choices
 CATEGORY_CHOICES = [
-    ('web', 'Web Development'),  # تطوير مواقع ويب
-    ('design', 'Graphic Design'),  # تصميم
-    ('data', 'Data Entry'),  # إدخال وتنظيم البيانات
-    ('writing', 'Content Writing'),  # كتابة المحتوى
-    ('marketing', 'Marketing'),  # تسويق
-    ('other', 'Other'),  # تصنيفات أخرى
+    ('web', 'Web Development'),
+    ('design', 'Graphic Design'),
+    ('data', 'Data Entry'),
+    ('writing', 'Content Writing'),
+    ('marketing', 'Marketing'),
+    ('other', 'Other'),
 ]
 
-# خيارات نمط العمل
+# Work mode choices
 WORK_MODE_CHOICES = [
-    ('REMOTE', 'Remote'),  # العمل عن بعد
-    ('ONSITE', 'On-site'),  # العمل في المكتب
-    ('HYBRID', 'Hybrid'),  # مزيج بين العمل في المكتب والعمل عن بعد
+    ('REMOTE', 'Remote'),
+    ('ONSITE', 'On-site'),
+    ('HYBRID', 'Hybrid'),
 ]
 
-# خيارات مستوى الخبرة
+# Experience level choices
 EXPERIENCE_LEVEL_CHOICES = [
-    ('junior', 'Junior'),  # متدرب جديد
-    ('confirmed', 'Confirmed'),  # لديه خبرة متوسطة
-    ('expert', 'Expert'),  # خبير
+    ('junior', 'Junior'),        # Entry-level
+    ('confirmed', 'Confirmed'),  # Mid-level
+    ('expert', 'Expert'),        # Expert
 ]
 
-# خيارات نوع العقد
+# Contract type choices
 CONTRACT_TYPE_CHOICES = [
-    ('cdi', 'CDI'),  # عقد دائم (CDI)
-    ('cdd', 'CDD'),  # عقد مؤقت (CDD)
-    ('internship', 'Internship'),  # فترة تدريب
-    ('freelance', 'Freelance'),  # عمل حر
+    ('cdi', 'CDI'),              # Permanent contract
+    ('cdd', 'CDD'),              # Fixed-term contract
+    ('internship', 'Internship'),
+    ('freelance', 'Freelance'),
 ]
 
-# خيارات القطاع
+# Sector choices
 SECTOR_CHOICES = [
-    ('it', 'IT'),  # تكنولوجيا المعلومات
-    ('telecoms', 'Telecoms'),  # قطاع الاتصالات
-    ('internet', 'Internet'),  # خدمات الإنترنت
-    ('finance', 'Finance'),  # قطاع المالي
-    ('other', 'Other'),  # قطاعات أخرى
+    ('it', 'IT'),
+    ('telecoms', 'Telecoms'),
+    ('internet', 'Internet'),
+    ('finance', 'Finance'),
+    ('other', 'Other'),
 ]
 
-# خيارات المستوى الدراسي
+# Education level choices
 EDUCATION_LEVEL_CHOICES = [
-    ('bachelor', 'Bachelor'),  # شهادة الليسانس
-    ('master', 'Master'),  # شهادة الماجستير
-    ('phd', 'PhD'),  # شهادة الدكتوراه
-    ('other', 'Other'),  # شهادات أخرى
+    ('bachelor', 'Bachelor'),
+    ('master', 'Master'),
+    ('phd', 'PhD'),
+    ('other', 'Other'),
 ]
 
-# نموذج الوظيفة
+# Job model
 class Job(models.Model):
-    # معلومات الوظيفة الأساسية
-    title = models.CharField(max_length=255)  # عنوان الوظيفة
-    description = models.TextField()  # وصف الوظيفة
-    posted_by = models.ForeignKey('users.User', on_delete=models.CASCADE)  # الشركة اللي ناضت الوظيفة
-    company_name = models.CharField(max_length=255)  # اسم الشركة
-    company_industry = models.CharField(max_length=255)  # قطاع الشركة
-    location = models.CharField(max_length=100)  # موقع العمل
-    city = models.CharField(max_length=100)  # المدينة
-    country = models.CharField(max_length=100, default='Algeria')  # الدولة
-    work_mode = models.CharField(max_length=10, choices=WORK_MODE_CHOICES, default='ONSITE')  # نمط العمل
-    remote_option = models.BooleanField(default=False)  # هل العمل عن بعد ممكن؟
-    category = models.CharField(max_length=50, choices=CATEGORY_CHOICES, default='other')  # التصنيف
-    sector = models.CharField(max_length=100, choices=SECTOR_CHOICES, default='other')  # القطاع
-    experience_level = models.CharField(max_length=50, choices=EXPERIENCE_LEVEL_CHOICES, default='junior')  # مستوى الخبرة المطلوب
-    contract_type = models.CharField(max_length=50, choices=CONTRACT_TYPE_CHOICES, default='cdi')  # نوع العقد
-    education_level = models.CharField(max_length=50, choices=EDUCATION_LEVEL_CHOICES, default='other')  # المستوى الدراسي المطلوب
-    number_of_positions = models.IntegerField(default=1)  # عدد الشواغر
-    created_at = models.DateTimeField(auto_now_add=True)  # تاريخ إنشاء الوظيفة
-    expiration_date = models.DateField(blank=True, null=True)  # تاريخ انتهاء صلاحية الوظيفة
-    applications_count = models.IntegerField(default=0)  # عدد الطلبات
-    accepted_applications = models.IntegerField(default=0)  # عدد الطلبات المقبولة
-    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='open')  # حالة الوظيفة
-    main_missions = models.TextField()  # المهام الرئيسية
-    commercial_support = models.TextField()  # دعم تجاري
-    development_tasks = models.TextField()  # مهام التطوير
-    requirements = models.TextField()  # المتطلبات
-    additional_responsibilities = models.TextField()  # المسؤوليات الإضافية
+    # Basic job information
+    title = models.CharField(max_length=255)  # Job title
+    description = models.TextField()  # Job description
+    posted_by = models.ForeignKey('users.User', on_delete=models.CASCADE)  # User who posted the job
+    company_name = models.CharField(max_length=255)  # Company name
+    company_industry = models.CharField(max_length=255)  # Company industry
+    location = models.CharField(max_length=100)  # Work location
+    city = models.CharField(max_length=100)  # City
+    country = models.CharField(max_length=100, default='Algeria')  # Country
+    work_mode = models.CharField(max_length=10, choices=WORK_MODE_CHOICES, default='ONSITE')  # Work mode
+    remote_option = models.BooleanField(default=False)  # Is remote work possible?
+    category = models.CharField(max_length=50, choices=CATEGORY_CHOICES, default='other')  # Category
+    sector = models.CharField(max_length=100, choices=SECTOR_CHOICES, default='other')  # Sector
+    experience_level = models.CharField(max_length=50, choices=EXPERIENCE_LEVEL_CHOICES, default='junior')  # Required experience level
+    contract_type = models.CharField(max_length=50, choices=CONTRACT_TYPE_CHOICES, default='cdi')  # Contract type
+    education_level = models.CharField(max_length=50, choices=EDUCATION_LEVEL_CHOICES, default='other')  # Required education level
+    number_of_positions = models.IntegerField(default=1)  # Number of positions
+    created_at = models.DateTimeField(auto_now_add=True)  # Creation date
+    expiration_date = models.DateField(blank=True, null=True)  # Expiration date
+    applications_count = models.IntegerField(default=0)  # Number of applications
+    accepted_applications = models.IntegerField(default=0)  # Number of accepted applications
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='open')  # Job status
+    main_missions = models.TextField()  # Main missions
+    commercial_support = models.TextField()  # Commercial support
+    development_tasks = models.TextField()  # Development tasks
+    requirements = models.TextField()  # Requirements
+    additional_responsibilities = models.TextField()  # Additional responsibilities
 
     def __str__(self):
-        return f"{self.title} - {self.company_name}"  # عرض عنوان الوظيفة واسم الشركة
+        return f"{self.title} - {self.company_name}"  # Show job title and company name
 
     def get_absolute_url(self):
-        return reverse('jobs:job_detail', args=[self.id])  # الرابط المباشر للوظيفة
+        return reverse('jobs:job_detail', args=[self.id])  # Direct link to the job
 
     class Meta:
-        ordering = ['-created_at']  # ترتيب حسب التاريخ (الأحدث أولاً)
+        ordering = ['-created_at']  # Order by creation date (newest first)
 
-# نموذج التقديم
+# Job application model
 class JobApplication(models.Model):
-    applicant = models.ForeignKey('users.User', on_delete=models.CASCADE, related_name='job_applications')
-    job = models.ForeignKey('Job', on_delete=models.CASCADE, related_name='applications')
-    application_date = models.DateTimeField(auto_now_add=True)
-    status = models.CharField(max_length=20, choices=[
-        ('pending', 'Pending'),
-        ('accepted', 'Accepted'),
-        ('rejected', 'Rejected')
-    ], default='pending')
+    job = models.ForeignKey('Job', on_delete=models.CASCADE)
+    full_name = models.CharField(max_length=255, null=True, blank=True)
+    applicant = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='applications', null=True, blank=True)
+    email = models.EmailField(null=True, blank=True)
+    phone = models.CharField(max_length=50, blank=True)
+    preferred_contact = models.CharField(max_length=20, blank=True)
+    cv = models.FileField(upload_to='cvs/', null=True, blank=True)
     cover_letter = models.TextField(blank=True)
-    resume = models.FileField(upload_to='resumes/', blank=True, null=True)
-    
-    class Meta:
-        unique_together = ('applicant', 'job')
-        ordering = ['-application_date']
-    
-    def __str__(self):
-        return f"{self.applicant.username} - {self.job.title}"
-
-# نموذج التقديم
-class Proposal(models.Model):
-    # معلومات التقديم
-    job = models.ForeignKey(Job, on_delete=models.CASCADE)  # الوظيفة اللي تقدم عليها
-    applicant = models.ForeignKey('users.User', on_delete=models.CASCADE)  # الشخص اللي تقدم
-    full_name = models.CharField(max_length=255)  # الاسم الكامل
-    email = models.EmailField()  # البريد الإلكتروني
-    phone = models.CharField(max_length=20, blank=True, null=True)  # رقم الهاتف (اختياري)
-    preferred_contact = models.CharField(
-        max_length=10,
-        choices=[
-            ('email', 'email'),
-            ('phone', 'phone'),
-            ('both', 'both')
-        ],
-        default='email'  # طريقة التواصل المفضلة
-    )
-    certificates = models.FileField(upload_to='certificates/', blank=True, null=True)  # الشهادات والشهادات
-    cover_letter = models.TextField()  # رسالة التقديم
-    cv = models.FileField(upload_to='cvs/', blank=True, null=True)  # السيرة الذاتية
-    status = models.CharField(
-        max_length=20,
-        choices=[
-            ('pending', 'pending'),  # في انتظار المراجعة
-            ('reviewed', 'reviewed'),  # تم مراجعة الطلب
-            ('accepted', 'accepted'),  # تم قبول الطلب
-            ('rejected', 'rejected')  # تم رفض الطلب
-        ],
-        default='pending'  # الحالة الافتراضية
-    )
-    created_at = models.DateTimeField(auto_now_add=True)  # تاريخ التقديم
-    updated_at = models.DateTimeField(auto_now=True)  # آخر تحديث للحالة
+    certificates = models.FileField(upload_to='certificates/', blank=True, null=True)
+    experience = models.TextField(blank=True)
+    skills = models.CharField(max_length=255, blank=True)
+    availability = models.CharField(max_length=100, blank=True)
+    location = models.CharField(max_length=100, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)  
+    updated_at = models.DateTimeField(auto_now=True) 
 
     def __str__(self):
-        return f"Application for {self.job.title} by {self.applicant.username}"  # Display job title and applicant username
+        applicant_name = getattr(self.applicant, 'username', None) if self.applicant else self.full_name or "WITHOUT NAME"
+        return f"Applied to {self.job.title} from {applicant_name}" 
 
     class Meta:
-        ordering = ['-created_at']  # ترتيب حسب تاريخ التقديم (الأحدث أولاً)
+        ordering = ['-created_at']

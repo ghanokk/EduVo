@@ -142,7 +142,7 @@ body{
 }
 
 .summary-page{
-    padding: 20px 15%;
+    padding: 70px;
     display: block
 }
 
@@ -181,16 +181,16 @@ body{
 .my-stats-extended{
 }
 
-.cert-job-grp{
-    margin: auto;
-    border-radius: 20px;
-    width: 90%;
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
+.left{
+width: 100%;
 }
 
-
+.right{
+width: 100%;
+display: flex;
+justify-content: center;
+align-items: center;
+}
 
 
 .skill-wrraper{
@@ -212,35 +212,25 @@ body{
 }
 
 .courses{
+    width: 60%;
 }
 
 .jobs{
-    width: 40%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    width: 40%
 }
 
 .courses-container{
-    margin: auto;
-    width: 90%;
-    padding: 50px 10px;
-    background: white;
-    border-radius: 20px;
-    margin-bottom: 50px;
+    width: 100%;
+    padding: 10px;
 }
 
 .course-box{
-    display: block;
-    margin: auto;
-    width: 80%;
     padding: 10px;
     margin-bottom: 20px;
     background: white;
     border-radius: 5px;
-    height: 180px;
-    box-shadow: -1px 1px 20px #dbdbdb;
+    /* height: 0px; */
+        box-shadow: -1px 1px 20px #dbdbdb;
 }
 
 .course-box-infos{
@@ -325,34 +315,35 @@ body{
 .jobs-container{
     background: white;
     border-radius: 10px;
-    padding: 10px;
-    width: 100%;
+    overflow: hidden;
+    margin-bottom: 20px;
+    width: 90%;
+        box-shadow: -1px 1px 20px #dbdbdb;
 }
 
 .job-img img{
-height: 67px;
-margin: auto;
+height: 80px;
 }
 
 .job{
-    width:40%;
+    width:100%;
     padding: 10px;
     display: flex;
     justify-content: space-evenly;
     gap: 30px;
+    border-bottom: 0.2px solid gray;
+    margin-bottom: 15px;
 }
 
 .job-infos{
-    padding: 0 5px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 3px;
+    gap: 15px;
 }
 
 .job-infos h1{
-    font-size: 18px;
-    white-space: nowrap;
+    font-size: 20px;
 }
 
 .status , .company-name{
@@ -369,8 +360,6 @@ margin: auto;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 40%;
-    
 
 }
 
@@ -379,16 +368,16 @@ background: white;
 border-radius: 10px;
 padding: 10px;
 width: 100%;
+margin: auto;
 }
 
 .certificate{
-    width: 100%;
     display: flex;
     justify-content: center;
     gap: 8px;
     padding: 10px;
     overflow: hidden;
-
+    margin-bottom: 10px;
 }
 
 .certificate-img img{
@@ -416,10 +405,17 @@ width: 100%;
     width: 60%;
     margin: auto auto;
     scale: 0.7;
+<<<<<<< HEAD
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    z-index: 999;
+=======
     opacity: 0;
     transition: opacity 0.3s ease, visibility 0.3s ease;
     z-index: 5;
 
+>>>>>>> origin/Back2_latest
 }
 
 .back{
@@ -538,11 +534,10 @@ width: 100%;
 }
 
 #scjc{
-    text-align: center;
     margin-right: 20px;
     margin-left: 20px;
     margin-bottom: 20px;
-    font-size: 38px;
+    font-size: 48px;
 }
 
 
@@ -556,15 +551,18 @@ width: 100%;
     display: none;
 }
 
-.add-course{
-display: none;
+.hidden-page{
+    opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease, visibility 0s linear 0.6s;
 }
 
-
-
-
-#croix{
-    transform: translateY(-35px);
+.hidden-page.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  transition-delay: 0s;
 }
 
 .edit-back{
@@ -835,12 +833,12 @@ input[type="file"] {
 
 
 .course-and-certifications{
-    padding: 0 2%;
+    /* padding: 70px; */
     display: none;
 }
 
 .course-and-certifications .courses-container{
-    width: 100%;
+    width: 90%;
     margin: auto;
 }
 
@@ -1024,16 +1022,22 @@ input[type="file"] {
 
 .jobs-page{
     /* background: #000; */
-    padding: 0 10% ;
+    padding: 0 90px ;
     display: none;
 }
 
 .job-container{
     display: flex;
     justify-content: baseline;
+<<<<<<< HEAD
+    gap: 50px;
+    flex-wrap: wrap;
+    /* padding: 0 100px; */
+=======
     gap: 10px;
     flex-wrap: wrap;
     /* padding: 0 10%; */
+>>>>>>> origin/Back2_latest
     margin-bottom: 25px;
 }
 
@@ -1047,7 +1051,11 @@ input[type="file"] {
     display: flex;
     justify-content: baseline;
     gap: 50px;
+<<<<<<< HEAD
+    border-radius: 20px;
+=======
     border-radius: 10px;
+>>>>>>> origin/Back2_latest
     width: 45%;
     box-shadow: -1px 1px 20px #dbdbdb;
     
@@ -1088,7 +1096,11 @@ input[type="file"] {
     margin-bottom: 50px;
     justify-content: baseline;
     flex-wrap: wrap;
+<<<<<<< HEAD
+    gap: 50px;
+=======
     gap: 20px;
+>>>>>>> origin/Back2_latest
 }
 
 .job-elm{
@@ -1098,7 +1110,11 @@ height: 120px;
 display: flex;
 justify-content: baseline;
 gap: 50px;
+<<<<<<< HEAD
+border-radius: 20px;
+=======
 border-radius: 10px;
+>>>>>>> origin/Back2_latest
 padding: 20px;
 box-shadow: -1px 1px 20px #dbdbdb;
 margin-left: 25px;
@@ -1111,7 +1127,6 @@ margin-left: 25px;
 }
 
 .all-carousel-container{
-    padding: 0 10%;
     position: relative;
     margin: 0;
 }
@@ -1128,19 +1143,18 @@ margin-left: 25px;
 }
 
 .course-certificate-container{
-    padding: 0 10%;
+    padding: 0 160px;
     width: 100%;
     display: flex;
-    justify-content: flex-start;
+    justify-content: baseline;
     align-items: center;
-    gap:20px;
+    gap: 25px;
     /* height: 100px; */
     flex-wrap: wrap;
     /* margin-bottom: 150px; */
 }
 
 .course-certificate{
-    /* flex: 1 0 auto; */
     height: 100px;
     background: white;
     border-radius: 10px;
@@ -1149,11 +1163,9 @@ margin-left: 25px;
     justify-content: center;
     align-items: center;
     gap: 10px;
-    /* width: 30%; */
+    width: 30%;
     box-shadow: -1px 1px 20px #dbdbdb;
     border-left: #0369a1 3px solid;
-    /* max-width: 30%; */
-    width: calc((100% - 40px) / 3); /* 3 éléments par ligne avec 2 gaps de 10px */
 
 }
 
@@ -1416,9 +1428,13 @@ margin-left: 25px;
     box-shadow: 0 8px 32px rgba(51, 121, 212, 0.1)
 }
 
-
-
-
+.add-course{
+    display: block;
+    /* position: absolute; */
+    top: 90%;
+    left: 20%;
+    max-height: 0;
+}
 
 .aaa{
     display: flex;
@@ -1441,35 +1457,32 @@ margin-left: 25px;
 
 /* -----------Learning courses style--------------- */
 
-.learning-courses-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start; /* aligner chaque ligne à gauche */
-    gap: 40px;
+.learning-courses-container{
     width: 100%;
-    max-width: 1200px; /* optionnel, pour limiter la largeur totale */
-    margin: 0 auto;     /* centrer le bloc global */
-    padding: 0 5%;    /* un peu de respiration sur les côtés */
+    padding: 0 calc(160px);
+    display: flex;
+    justify-content: baseline;
+    gap: 30px;
+    flex-wrap: wrap;
 }
 
-.learning-course-box {
-    width: calc((100% - 80px) / 3); /* 20px = 2 gaps de 10px entre 3 éléments */
-    min-width: 300px; /* optionnel, limite la taille d’un item */
-    max-width: 400px;
-    height: 360px;
+.learning-course-box{
     padding: 10px;
     border-radius: 0.3rem;
     background: white;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
+    width: calc(35% - 40px);
+    max-width: 350px;
+    justify-content: start;
+    align-items: center;
+    margin-bottom: 10px;
+    height:360px;
     box-shadow: -1px 2px 20px #dbdbdb;
     cursor: pointer;
     transition: 0.3s ease;
+
 }
-
-
 
 .learning-course-box:hover{
     scale: 1.01;
@@ -1529,41 +1542,45 @@ display: block;
 
 
 .carousel-container {
-    /* background: #000; */
     width: 100%;
+    margin: auto;
     overflow: hidden;
     position: relative;
-
 
     
 }
 
     .carousel-track {
+<<<<<<< HEAD
+      display: flex;
+      justify-content: space-evenly;
+=======
+      padding-left:50px ;
       display: flex;
       justify-content: center;
+>>>>>>> origin/Back2_latest
       transition: transform 0.6s ease-in-out;
       width: 100%;
     }
 
     .carousel-item {
       flex: 0 0 33.3333%;
-      width: 100%;
-      padding: 20px 10px;
-      /* margin-left: 25px; */
-      overflow: hidden;
+      padding: 10px;
+      /* width: 100%; */
+      margin-left: 25px;
 
     }
 
     .carousel-card {
-        
       background: white;
       border-radius: 10px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.1);
       /* padding: 0 10px; */
       text-align: center;
       font-size: 16px;
-      height: 320px;
-      width: 98%;
+      height: 280px;
+      width: 360px;
+
     }
 
     .controls {
@@ -1625,69 +1642,23 @@ width: 100%;
     padding: 0 10px;
 }
 
-.course-grp{
-}
-
-
-
-.see-more{
-    padding: 10px;
-    gap: 10px;
-    justify-content: center;
+.job-course-grp{
     display: flex;
-    margin: auto;
-    cursor: pointer;
-    opacity: 1;
-    text-align: center;
-    font-size: 24px;
-    max-width: 200px;
-
-}
-
-#txt{
-    transform: translateX(0);
-    transition: 0.2s ease;
+    gap: 20px;
+<<<<<<< HEAD
+=======
 }
 
 
-#arrow{
-    opacity: 0;
-    transform: translateX(-30px);
-    transition: 0.3s ease;
-    max-width: 0;
-}
-
-.see-more:hover{
-    #arrow{
-        opacity: 1;
-        transform: translateX(0);
-        max-width: none;
-    }
-
-    #txt{
-        transform: translateX(-10px);
-    }
-}
 
 
-#title{
-    font-size: 22px;
-}
 
 .add-job-page{
-    padding: 10px 40px;
+    padding: 20px 0;
     background: white;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
     border-radius: 20px;
-    pointer-events: fill;
-}
 
-
-
-.bbb{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
 }
 
 #job-off-details{
@@ -1788,11 +1759,12 @@ width: 100%;
 
 
     .add-job{
-        display: none;
         padding: 0 20%;
-        transition: 0.2s ease;
+        max-height: 0;
+        opacity: 0;
+        transition: 0.5s ease;
         z-index: -6;
-        pointer-events: none;
+        pointer-events: none ;
     }
 
 
@@ -1823,4 +1795,5 @@ width: 100%;
 #new-job-btn:hover{
     background-color: #2a53b4;
     box-shadow: 0 8px 32px rgba(51, 121, 212, 0.1)
+>>>>>>> origin/Back2_latest
 }

@@ -1,71 +1,6 @@
-# users/models.py
-
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils import timezone
-
-# Wilaya choices
-WILAYA_CHOICES = [
-    ('0', 'Blida'),
-    ('1', 'Adrar'),
-    ('2', 'Chlef'),
-    ('3', 'Laghouat'),
-    ('4', 'Oum El Bouaghi'),
-    ('5', 'Batna'),
-    ('6', 'Béjaïa'),
-    ('7', 'Biskra'),
-    ('8', 'Béchar'),
-    ('9', 'Blida'),
-    ('10', 'Bouira'),
-    ('11', 'Tamanrasset'),
-    ('12', 'Tébessa'),
-    ('13', 'Tlemcen'),
-    ('14', 'Tiaret'),
-    ('15', 'Tizi Ouzou'),
-    ('16', 'Alger'),
-    ('17', 'Djelfa'),
-    ('18', 'Jijel'),
-    ('19', 'Sétif'),
-    ('20', 'Saïda'),
-    ('21', 'Skikda'),
-    ('22', 'Sidi Bel Abbès'),
-    ('23', 'Annaba'),
-    ('24', 'Guelma'),
-    ('25', 'Constantine'),
-    ('26', 'Médéa'),
-    ('27', 'Mostaganem'),
-    ('28', 'M’Sila'),
-    ('29', 'Mascara'),
-    ('30', 'Ouargla'),
-    ('31', 'Oran'),
-    ('32', 'El Bayadh'),
-    ('33', 'Illizi'),
-    ('34', 'Bordj Bou Arréridj'),
-    ('35', 'Boumerdès'),
-    ('36', 'El Tarf'),
-    ('37', 'Tindouf'),
-    ('38', 'Tissemsilt'),
-    ('39', 'El Oued'),
-    ('40', 'Khenchela'),
-    ('41', 'Souk Ahras'),
-    ('42', 'Tipaza'),
-    ('43', 'Mila'),
-    ('44', 'Aïn Defla'),
-    ('45', 'Naâma'),
-    ('46', 'Aïn Témouchent'),
-    ('47', 'Ghardaïa'),
-    ('48', 'Relizane'),
-    ('49', 'Timimoun'),
-    ('50', 'Bordj Badji Mokhtar'),
-    ('51', 'Ouled Djellal'),
-    ('52', 'Béni Abbès'),
-    ('53', 'In Salah'),
-    ('54', 'In Guezzam'),
-    ('55', 'Touggourt'),
-    ('56', 'Djanet'),
-    ('57', 'El M Ghair'),
-    ('58', 'El Meniaa'),
-]
 
 # ✅ Classe principale des utilisateurs
 # hadi t'étend l'utilisateur standard dyal Django (AbstractUser)
@@ -93,12 +28,19 @@ class User(AbstractUser):
 # ✅ Classe abstraite pour les profils (ta3 les users)
 # hadi makhdamnach biha direct, mais les autres profils héritent menha
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)  # chaque user andou profil unique
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="%(class)s")#to avoid clashes and make reverse lookups easier
     profile_picture = models.ImageField(upload_to='profile_pics/', blank=True, null=True)  # photo profil
-    wilaya = models.CharField(max_length=2, choices=WILAYA_CHOICES, blank=True)  # wilaya of the user
     bio = models.TextField(blank=True)  # un petit texte 3la l'utilisateur
     created_at = models.DateTimeField(default=timezone.now)  # date de création
 
+    def get_full_name(self):
+        return self.user.get_full_name() or self.user.username
+
+    def get_location(self):
+        # You can add a location field to Profile or its children if needed
+        if hasattr(self, 'country'):
+            return self.country
+        return "Not set"
 
     class Meta:
         abstract = True  # 👈 ma ttsajelch f la base directement
@@ -109,6 +51,9 @@ class StudentProfile(Profile):
     is_freelancer = models.BooleanField(default=False)
     def __str__(self):
         return f"{self.user.username}'s Student Profile"
+    
+    def get_skills(self):
+        return self.skills.all()
 
 # ✅ Profil prof
 class TeacherProfile(Profile):
@@ -117,6 +62,10 @@ class TeacherProfile(Profile):
     is_freelancer = models.BooleanField(default=False)
     def __str__(self):
         return f"{self.user.username}'s Teacher Profile"
+    
+    def get_skills(self):
+        # If you want to show expertise as a skill
+        return [self.expertise] if self.expertise else []
 
 # ✅ Profil entreprise
 class CompanyProfile(Profile):
@@ -124,4 +73,9 @@ class CompanyProfile(Profile):
     description = models.TextField()  # un petit résumé 3la la boîte
     image = models.ImageField(upload_to='company_pics/', blank=True, null=True)
     country=models.CharField(max_length=10,null=False)
+
+    def __str__(self):
+        return f"{self.company_name} ({self.user.username})"
     
+    def get_skills(self):
+        return []
