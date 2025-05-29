@@ -25,36 +25,43 @@
         <div class="sidebar">
             <div class="profile-section">
                 <div style="text-align:center">
-                    <img src="{%static 'assets/img//profile-image.png' %}" alt="Profile" class="profile-img">
-                    <h3>Name Surname</h3>
-                    <p>Algeria, Blida</p>
+                    {% if profile.profile_picture %}
+                        <img src="{{ profile.profile_picture.url }}" alt="Profile" class="profile-img">
+                    {% else %}
+                        <img src="https://ui-avatars.com/api/?name=Eduvo&background=3B82F6&color=ffffff&size=128&rounded=true" alt="Default Avatar" class="profile-img">
+                    {% endif %}
+                    <h3>{{ profile.get_full_name }}</h3>
+                    <p>{{ location }}</p>
                 </div>
                 <div class="skills">
                     <div class="section-title">Your skills</div>
                     <ul>
-                        <li>. ui/ux designer</li>
-                        <li>. ui/ux designer</li>
-                        <li>. ui/ux designer</li>
+                        {% for skill in skills %}
+                            <li>. {{ skill }}</li>
+                        {% empty %}
+                            <li>No skills listed</li>
+                        {% endfor %}
                     </ul>
                 </div>
             </div>
                     <div class="history">
             <div class="section-title">Historie</div>
-            <div class="history-item">
-                <img src="{% static 'assets/img/Ellipse 4.svg' %}" class="history-logo" alt="icon">
-                <div class="history-info">
-                    <div>back-end developer</div>
-                    <div>Algeria</div>
+            {% for application in history_jobs %}
+                <div class="history-item">
+                    {% if application.job.posted_by.companyprofile.image %}
+                        <img src="{{ application.job.posted_by.companyprofile.image.url }}" class="history-logo" alt="icon">
+                    {% else %}
+                        <img src="{% static 'assets/img/job-logo.png' %}" class="history-logo" alt="icon">
+                    {% endif %}
+                    <div class="history-info">
+                        <div>{{ application.job.title }}</div>
+                        <div>{{ application.job.location }}</div>
+                    </div>
                 </div>
-            </div>
-            <div class="history-item">
-                <img src="{% static 'assets/img/accounting-logo.png' %}" class="history-logo" alt="icon">
-                <div class="history-info">
-                    <div>back-end developer</div>
-                    <div>Algeria</div>
-                </div>
-            </div>
-                <button class="see-all-button" onclick=window.location.href="{% url 'jobs:job_history' %}">See All</button>
+            {% empty %}
+                <div>No recent history</div>
+            {% endfor %}
+            <button class="see-all-button" onclick="window.location.href='{% url 'jobs:Historie' %}'">See All</button>
         </div>
         </div>
 

@@ -1,4 +1,4 @@
-        * {
+* {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -429,6 +429,26 @@
         
         .modal-content .section {
             margin-bottom: 30px;
+        }
+
+        .field-error {
+            color: #e74c3c !important;
+            font-size: 14px;
+            margin-top: 4px;
+            margin-bottom: 0;
+            font-weight: 500;
+            letter-spacing: 0.01em;
+            padding-left: 2px;
+            display: block;
+        }
+
+        .alert-success {
+            color: #155724;
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            padding: 10px 16px;
+            border-radius: 4px;
+            margin-bottom: 16px;
         }
 
         @media (max-width: 768px) {

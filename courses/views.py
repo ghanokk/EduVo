@@ -10,7 +10,7 @@ from django.conf import settings
 # Count: tcalculi nombre d'objets (ex: nombre d'étudiants ou de ratings)
 
 def courses(request):
-    # njiبو les paramètres de filtre men URL (GET)
+    # njibo les paramètres de filtre men URL (GET)
     search_query = request.GET.get('search', '').strip()
     categories = request.GET.getlist('category')
     rating = request.GET.get('rating', '')
@@ -25,62 +25,12 @@ def courses(request):
         student_count=Count('enrollments')
     )
 
-    # ki ykoun search: nfiltriw 3la titre, description, ou catégorie
+    # Search only by course title and category name
     if search_query:
-        # Split search terms and create conditions
-        search_terms = search_query.lower().split() #split to two words and converts the string to lower case
-
-
-        
-        # Create conditions that match similar words
-        title_conditions = []
-        desc_conditions = []
-        category_conditions = []
-        
-        for term in search_terms:
-            # Create dynamic variations based on common confusions
-            variations = [
-                term,  # original term
-                # Vowel variations
-                term.replace('a', 'e'), term.replace('e', 'a'),
-                term.replace('i', 'y'), term.replace('y', 'i'),
-                term.replace('o', 'u'), term.replace('u', 'o'),
-                # Consonant variations
-                term.replace('r', 'l'), term.replace('l', 'r'),
-                term.replace('w', 'v'), term.replace('v', 'w'),
-                term.replace('c', 'k'), term.replace('k', 'c'),
-                term.replace('s', 'z'), term.replace('z', 's'),
-                # Double letter variations
-                term.replace('ss', 's'), term.replace('ee', 'e'),
-                term.replace('ll', 'l'), term.replace('rr', 'r'),
-                # Common misspellings
-                term.replace('th', 't'), term.replace('ph', 'f'),
-                term.replace('ch', 'c'), term.replace('sh', 's'),
-            ]
-            
-            # Remove duplicates
-            variations = list(set(variations))
-            
-            # Add all variations to conditions
-            for variation in variations:
-                title_conditions.append(Q(title__icontains=variation))
-                desc_conditions.append(Q(description__icontains=variation))
-                category_conditions.append(Q(category__name__icontains=variation))
-        
-        # Combine conditions using OR within each field
-        title_q = Q(title_conditions[0]) if title_conditions else Q()
-        desc_q = Q(desc_conditions[0]) if desc_conditions else Q()
-        category_q = Q(category_conditions[0]) if category_conditions else Q()
-        
-        for cond in title_conditions[1:]:
-            title_q |= cond
-        for cond in desc_conditions[1:]:
-            desc_q |= cond
-        for cond in category_conditions[1:]:
-            category_q |= cond
-        
-        # Combine all fields using OR
-        courses = courses.filter(title_q | desc_q | category_q)
+        courses = courses.filter(
+            Q(title__icontains=search_query) |
+            Q(category__name__icontains=search_query)
+        )
     
     # ki ykounu catégories mkhtarin
     if categories:
@@ -89,10 +39,31 @@ def courses(request):
         if category_ids:
             courses = courses.filter(category_id__in=category_ids)
 
-    # ki ykoun rating m3ayin (min): ndirou filtre b avg_rating >= rating
+    # Filter by rating if selected
     if rating:
-        rating = int(rating)
-        courses = courses.filter(avg_rating__gte=rating)
+        try:
+            rating = float(rating)
+            if rating == 0:
+                # Show all courses
+                pass
+            elif rating == 1:
+                # Show courses with rating 0.1-1.0
+                courses = courses.filter(avg_rating__gte=0.1, avg_rating__lte=1.0)
+            elif rating == 2:
+                # Show courses with rating 1.1-2.0
+                courses = courses.filter(avg_rating__gt=1.0, avg_rating__lte=2.0)
+            elif rating == 3:
+                # Show courses with rating 2.1-3.0
+                courses = courses.filter(avg_rating__gt=2.0, avg_rating__lte=3.0)
+            elif rating == 4:
+                # Show courses with rating 3.1-4.0
+                courses = courses.filter(avg_rating__gt=3.0, avg_rating__lte=4.0)
+            elif rating == 5:
+                # Show courses with rating 4.1-5.0
+                courses = courses.filter(avg_rating__gt=4.0, avg_rating__lte=5.0)
+        except ValueError:
+            # Invalid rating value, ignore it
+            pass
 
     # filtrage 3la les prix: gratuit ou payant
     if price_type == 'paid':
@@ -143,7 +114,6 @@ def courses(request):
         'selected_level': level,
         'level_choices': Course.LEVEL_CHOICES,
     }
-
     return render(request, 'Courses.html', context)
 
 # function li taffichi wahad lcourse selon l'id
@@ -191,5 +161,4 @@ def course_model(request, course_id):
         'teacher_title': getattr(course.teacher, 'profile', {}).get('title', ''),
         'what_you_learn': course.what_you_learn.all(),
     }
-
     return render(request, 'Course-model.html', context)

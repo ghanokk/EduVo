@@ -3,7 +3,7 @@ from django.contrib.auth import authenticate, login
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
 from courses.models import Course, Enrollment
-from jobs.models import Job, Proposal
+from jobs.models import Job, JobApplication
 from skills.models import Skill, UserSkill
 from users.models import User, StudentProfile, TeacherProfile, CompanyProfile
 
@@ -31,7 +31,7 @@ def profile(request):
         student_profile = StudentProfile.objects.get(user=user)
         enrollments = Enrollment.objects.filter(student=user)
         user_skills = UserSkill.objects.filter(student_profile=student_profile)
-        job_applications = Proposal.objects.filter(applicant=user)
+        job_applications = JobApplication.objects.filter(applicant=user)
 
         context.update({
             'profile': student_profile,
@@ -78,11 +78,11 @@ def profile(request):
             'profile': company_profile,
             'stats': {
                 'jobs_count': posted_jobs.count(),
-                'total_applications': sum(job.proposal_set.count() for job in posted_jobs)
+                'total_applications': sum(job.JobApplication_set.count() for job in posted_jobs)
             },
             'posted_jobs': [{
                 'job': job,
-                'applications_count': job.proposal_set.count(),
+                'applications_count': job.JobApplication_set.count(),
                 'views': job.views_count if hasattr(job, 'views_count') else 0
             } for job in posted_jobs]
         })

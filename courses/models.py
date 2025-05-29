@@ -40,8 +40,9 @@ class Course(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2)  # l'prix dyal l'cours
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, related_name='courses')  # l'catégorie dyal l'cours
     duration = models.DurationField(blank=True, null=True)  # l'durée dyal l'cours
-    level = models.CharField(max_length=12, choices=LEVEL_CHOICES, default='all levels')  # l'level dyal l'cours
-    status = models.CharField(max_length=9, choices=STATUS_CHOICES, default='draft')  # l'status dyal l'cours
+    image = models.ImageField(upload_to='course_images/', blank=True, null=True)  # l'image dyal l'cours
+    level = models.CharField(max_length=20, choices=LEVEL_CHOICES, default='Beginner')  # l'level dyal l'cours
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='draft')  # l'status dyal l'cours
     teacher = models.ForeignKey(  # l'professeur li kay3lem l'cours
         'users.User',
         on_delete=models.CASCADE,
@@ -134,6 +135,7 @@ class Enrollment(models.Model):
     enrollment_date = models.DateTimeField(auto_now_add=True)  # l'date dyal l'inscription
     completion_status = models.CharField(max_length=12, choices=STATUS_CHOICES, default='enrolled')  # l'status dyal l'inscription
     completion_date = models.DateTimeField(blank=True, null=True)  # l'date li kammel fih l'cours
+    progress = models.IntegerField(default=0)  # Percentage of course completion (0-100)
 
     def __str__(self):
         return f"{self.student.username} enrolled in {self.course.title}"

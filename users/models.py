@@ -28,10 +28,19 @@ class User(AbstractUser):
 # ✅ Classe abstraite pour les profils (ta3 les users)
 # hadi makhdamnach biha direct, mais les autres profils héritent menha
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)  # chaque user andou profil unique
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="%(class)s")#to avoid clashes and make reverse lookups easier
     profile_picture = models.ImageField(upload_to='profile_pics/', blank=True, null=True)  # photo profil
     bio = models.TextField(blank=True)  # un petit texte 3la l'utilisateur
     created_at = models.DateTimeField(default=timezone.now)  # date de création
+
+    def get_full_name(self):
+        return self.user.get_full_name() or self.user.username
+
+    def get_location(self):
+        # You can add a location field to Profile or its children if needed
+        if hasattr(self, 'country'):
+            return self.country
+        return "Not set"
 
     class Meta:
         abstract = True  # 👈 ma ttsajelch f la base directement
@@ -42,6 +51,9 @@ class StudentProfile(Profile):
     is_freelancer = models.BooleanField(default=False)
     def __str__(self):
         return f"{self.user.username}'s Student Profile"
+    
+    def get_skills(self):
+        return self.skills.all()
 
 # ✅ Profil prof
 class TeacherProfile(Profile):
@@ -50,6 +62,10 @@ class TeacherProfile(Profile):
     is_freelancer = models.BooleanField(default=False)
     def __str__(self):
         return f"{self.user.username}'s Teacher Profile"
+    
+    def get_skills(self):
+        # If you want to show expertise as a skill
+        return [self.expertise] if self.expertise else []
 
 # ✅ Profil entreprise
 class CompanyProfile(Profile):
@@ -57,4 +73,9 @@ class CompanyProfile(Profile):
     description = models.TextField()  # un petit résumé 3la la boîte
     image = models.ImageField(upload_to='company_pics/', blank=True, null=True)
     country=models.CharField(max_length=10,null=False)
+
+    def __str__(self):
+        return f"{self.company_name} ({self.user.username})"
     
+    def get_skills(self):
+        return []
