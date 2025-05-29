@@ -1,25 +1,11 @@
-
-
-{% load static %}
-
-
-
-
-
-
 <!DOCTYPE html>
-
-
 <html lang="en">
-
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'CSS_files/Profile.css' %}">
+    <link rel="stylesheet" href="../static/CSS_files/Profile.css">
     <title>Profile</title>
 </head>
-
 <body>
     
     
@@ -29,13 +15,16 @@
         <div class="profile">
             <div class="profile-grp1">
                 <div class="profile-pic">
-                <img id="" {% if user.profile.profile_picture %}src="{{ user.profile.profile_picture.url }}"{% else %}src="{% static 'assets/img/default-profile.png' %}"{% endif %} alt="profile img" style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover; margin: 10px;">
+            <img id="" src="../static/assets/img/profile.svg" alt="profile img">
             </div>
             <div class="profile-bio">
-            <h1 id="username1">{{ user.username }}</h1>
-            <p id="location1">{% if user.get_profile.wilaya %}Algeria, {{ user.get_profile.get_wilaya_display }}{% else %}No location set{% endif %}</p>
+            <h1 id="username1">Diaa messaoudi</h1>
+            <p id="location1">Algeria , Blida</p>
             <p id="bio-field">
-                {% if user.get_profile.bio %}{{ user.get_profile.bio }}{% else %}No bio yet{% endif %}
+                Je suis un UI/UX Designer et développeur
+                 front-end en formation basé à Blida, Algérie,
+                  passionné par la création d’expériences numériques 
+                  intuitives et esthétiques.
             </p>
             </div>
             </div>
@@ -43,11 +32,11 @@
             <div class="edit-wrraper">
                     <button id="parametres" onclick="showSettings()">
                         <p>Settings</p>
-                        <img src="{% static 'assets/img/settings.png' %}" alt="">
+                        <img src="../static/assets/img/settings.png" alt="">
                     </button>
                     <button id="edit-profile" onclick="showEdit()">
                         <p>Edit profile</p>
-                        <img src="{% static 'assets/img/edit.png' %}" alt="">
+                        <img src="../static/assets/img/edit.png" alt="">
                     </button>
             </div>
         </div>
@@ -62,41 +51,38 @@
 
             <div class="my-stats-shorted">
             <div class="box">
-                <div class="icone"><img src="{% static 'assets/img/Course.png' %}" alt=""></div>
+                <div class="icone"><img src="../static/assets/img/Course.png" alt=""></div>
                 <h1 class="value">20</h1>
                 <p class="content">Tracked course</p>
             </div>
 
             <div class="box">
-                <div class="icone"><img src="{% static 'assets/img/Certificate.png' %}" alt=""></div>
+                <div class="icone"><img src="../static/assets/img/Certificate.png" alt=""></div>
                 <h1 class="value">15</h1>
                 <p class="content">Certificate</p>
             </div>
 
             <div class="box">
-                <div class="icone"><img src="{% static 'assets/img/New Job.png' %}" alt=""></div>
+                <div class="icone"><img src="../static/assets/img/New Job.png" alt=""></div>
                 <h1 class="value">3</h1>
                 <p class="content">Jobs postule</p>
             </div>
 
             <div class="box">
-                <div class="icone"><img src="{% static 'assets/img/skills.png' %}" alt=""></div>
+                <div class="icone"><img src="../static/assets/img/skills.png" alt=""></div>
                 <h1 class="value">5</h1>
                 <p class="content">Skills</p>
             </div>
         </div>
 
         <div class="my-stats-extended">
-
                 <div class="skills">
                     <h1 id="scjc">Skills</h1>
                     <ul class="skill-wrraper">
-                        {% for skill in user.studentprofile.skill_proficiencies.all %}
-                            <li class="skill">
-                                <span class="skill-name">{{ skill.skill.name }}</span>
-                                <span class="skill-level">{{ skill.get_proficiency_level_display }}</span>
-                            </li>
-                        {% endfor %}
+                        <li class="skill">CSS</li>
+                        <li class="skill">Figma</li>
+                        <li class="skill">ReactJs</li>
+                        <li class="skill">Django</li>
                     </ul>
                 </div>
                 
@@ -106,30 +92,66 @@
                     <h1 id="scjc">Learning</h1>
 
                     <div class="courses-container">
-                        {% for enrollment in user.enrollments.all %}
                         <div class="course-box">
                             <div class="course-box-infos">
-                                <div class="course-img">
-                                    <img src="{{ enrollment.course.image.url }}" alt="{{ enrollment.course.title }}">
-                                </div>
-                                <div class="course-details">
-                                    <h1 class="title">{{ enrollment.course.title }}</h1>
-                                    <p class="tutor">By {{ enrollment.course.teacher.get_full_name }}</p>
-                                    <div class="progression">
-                                        <p>{{ enrollment.progress }}% Complete</p>
-                                        <p class="progression-value">{{ enrollment.progress }}%</p>
-                                    </div>
+                                <div class="course-img"><img src="../static/assets/img/courseJs.png" alt=""></div>
+                            <div class="course-details">
+                                <h1 class="title">The Complete Full-Stack Web Development Bootcamp</h1>
+                                <p class="tutor">By Jonas Schmedtmann</p>
+                                <div class="progression">
+                                    <p>20/40 Chapter</p>
+                                    <p class="progression-value">26%</p>
                                 </div>
                             </div>
+                            </div>
+
                             <div class="progression-container">
-                                <div class="progression-bar" data-progress="{{ enrollment.progress }}">
-                                </div>
+                                <div class="progression-bar" id="progress-bar">
+                                    
+                            </div>
                             </div>
                         </div>
-                        {% endfor %}
-                    </div>
-                </div>
-            </div>
+
+
+                        <div class="course-box">
+                            <div class="course-box-infos">
+                                <div class="course-img"><img src="../static/assets/img/courseJs.png" alt=""></div>
+                            <div class="course-details">
+                                <h1 class="title">The Complete Full-Stack Web Development Bootcamp</h1>
+                                <p class="tutor">By Jonas Schmedtmann</p>
+                                <div class="progression">
+                                    <p>20/40 Chapter</p>
+                                    <p class="progression-value">09%</p>
+                                </div>
+                            </div>
+                            </div>
+
+                            <div class="progression-container">
+                                <div class="progression-bar" id="progress-bar">
+                                    
+                            </div>
+                            </div>
+                        </div>
+
+                        <div class="course-box">
+                            <div class="course-box-infos">
+                                <div class="course-img"><img src="../static/assets/img/courseJs.png" alt=""></div>
+                            <div class="course-details">
+                                <h1 class="title">The Complete Full-Stack Web Development Bootcamp</h1>
+                                <p class="tutor">By Jonas Schmedtmann</p>
+                                <div class="progression">
+                                    <p>20/40 Chapter</p>
+                                    <p class="progression-value">42%</p>
+                                </div>
+                            </div>
+                            </div>
+
+                            <div class="progression-container">
+                                <div class="progression-bar" id="progress-bar">
+                                    
+                            </div>
+                            </div>
+                        </div>
                         
                         
                             <div class="see-more">
@@ -140,7 +162,10 @@
                         </div>
 
                         
-                       
+
+
+            
+                        
                     </div>
                 
                     
@@ -151,26 +176,41 @@
                 <div class="certificates">
                     <h1 id="scjc">Certificates</h1>
                     <div class="certificates-container">
-                        {% for enrollment in user.enrollments.all %}
-                        {% if enrollment.progress == 100 %}
                         <div class="certificate">
-                            <div class="certificate-img">
-                                <img src="{% static 'assets/img/Certificate.png' %}" alt="{{ enrollment.course.title }} Certificate">
-                            </div>
+                            <div class="certificate-img"><img src="../static/assets/img/Certificate.png" alt=""></div>
                             <div class="certificate-infos">
-                                <h1 class="certif-title">{{ enrollment.course.title }}</h1>
-                                <p class="company">By {{ enrollment.course.teacher.get_full_name }}</p>
-                                <p class="issue-date">Completed: {{ enrollment.completion_date|date:"F j, Y" }}</p>
+                                <h1 class="certif-title">
+                                    build your first web site with HTML & CSS
+                                </h1>
+                                <p class="company">
+                                    By web school
+                                </p>
                             </div>
                         </div>
-                        {% endif %}
-                        {% endfor %}
-                        
-                        {% if not user.enrollments.all|length > 0 %}
-                        <div class="no-certificates">
-                            <p>No certificates yet. Complete courses to earn your certificates!</p>
+
+                        <div class="certificate">
+                            <div class="certificate-img"><img src="../static/assets/img/Certificate.png" alt=""></div>
+                            <div class="certificate-infos">
+                                <h1 class="certif-title">
+                                    build your first web site with HTML & CSS
+                                </h1>
+                                <p class="company">
+                                    By web school
+                                </p>
+                            </div>
                         </div>
-                        {% endif %}
+
+                        <div class="certificate">
+                            <div class="certificate-img"><img src="../static/assets/img/Certificate.png" alt=""></div>
+                            <div class="certificate-infos">
+                                <h1 class="certif-title">
+                                    build your first web site with HTML & CSS
+                                </h1>
+                                <p class="company">
+                                    By web school
+                                </p>
+                            </div>
+                        </div>
 
                         <div class="see-more">
                                 <p id="txt">see more</p>
@@ -187,25 +227,32 @@
                 <div class="jobs">
                     <h1 id="scjc">Job Postule</h1>
                     <div class="jobs-container">
-                        {% for application in user.job_applications.all %}
                         <div class="job">
-                            <div class="job-img">
-                                <img src="{% static 'assets/img/company.svg' %}" alt="{{ application.job.company_name }} Logo">
-                            </div>
+                            <div class="job-img"><img src="../static/assets/img/company.svg" alt=""></div>
                             <div class="job-infos">
-                                <h1 class="job-title">{{ application.job.title }}</h1>
-                                <p class="company-name">{{ application.job.company_name }}</p>
-                                <p class="status">
-                                    <span class="{{ application.status }}">{{ application.get_status_display }}</span>
-                                </p>
-                                <p class="application-date">Applied: {{ application.application_date|date:"F j, Y" }}</p>
+                                <h1 class="job-title">Full-Stack Devoloper</h1>
+                                <p class="company-name">Webify Solutions</p>
+                                <p class="status">Accepted</p>
                             </div>
                         </div>
-                        {% empty %}
-                        <div class="no-applications">
-                            <p>No job applications yet. Apply to jobs to track your applications!</p>
+
+                         <div class="job">
+                            <div class="job-img"><img src="../static/assets/img/company.svg" alt=""></div>
+                            <div class="job-infos">
+                                <h1 class="job-title">Full-Stack Devoloper</h1>
+                                <p class="company-name">Webify Solutions</p>
+                                <p class="status">Accepted</p>
+                            </div>
                         </div>
-                        {% endfor %}
+
+                         <div class="job">
+                            <div class="job-img"><img src="../static/assets/img/company.svg" alt=""></div>
+                            <div class="job-infos">
+                                <h1 class="job-title">Full-Stack Devoloper</h1>
+                                <p class="company-name">Webify Solutions</p>
+                                <p class="status">Accepted</p>
+                            </div>
+                        </div>
 
                          
                         
@@ -226,14 +273,14 @@
 
     <div class="settings-page hidden">
         <div class="back">
-            <img src="{% static 'assets/img/Back.png' %}" alt="" onclick="hideSettings()" >
+            <img src="../static/assets/img/Back.png" alt="" onclick="hideSettings()" >
             <h1>Settings</h1>
         </div>
 
         <div class="settings-wrapper">
             <div class="notifications">
                 <div class="params">
-                <img src="{% static 'assets/img/Notifications.png' %}" alt="">
+                <img src="../static/assets/img/Notifications.png" alt="">
                 <p>Notifications</p>
                 </div>
                 <div class="toggle">
@@ -246,17 +293,17 @@
             <div class="language">
                 <div class="params">
                     <img style="margin: 0 10px;
-                                " src="{% static 'assets/img/Language.png' %}" alt="" >
+                                " src="../static/assets/img/Language.png" alt="" >
                     <p>Language</p>
                 </div>
                 <button id="btn">
                     <p>english</p>
-                    <img id="reversed" src="{% static 'assets/img/Back.png' %}" alt="">
+                    <img id="reversed" src="../static/assets/img/Back.png" alt="">
                 </button>
             </div>
             <div class="password">
                <div class="params">
-                    <img src="{% static 'assets/img/Lock.png' %}" alt="">
+                    <img src="../static/assets/img/Lock.png" alt="">
                     <p>Password</p>
                </div>
                <button id="btn">Change</button>
@@ -267,49 +314,38 @@
     <div class="edit-profile-page hidden">
         <div class="edit-container">
             <div class="edit-back">
-                <img src="{% static 'assets/img/Back.png' %}" alt="" onclick="hideEdit()" id="backbtn">
+                <img src="../static/assets/img/Back.png" alt="" onclick="hideEdit()" id="backbtn">
                 <h1>Edit profile</h1>
             </div>
         </div>
         <div class="profile-wrapper">
             <div class="profile-pic-handler" onclick="showImgForm()">
-                <img src="{% if user.get_profile.profile_picture %}{{ user.get_profile.profile_picture.url }}{% else %}{% static 'assets/img/default-profile.png' %}{% endif %}" 
-                     alt="profile img" 
-                     id="pro-pic"
-                     style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover;">
-                <img src="{% static 'assets/img/edit gray.png' %}" alt="" id="edit-pen">
+                <img src="../static/assets/img/profile.svg" alt="" id="pro-pic">
+                <img src="../static/assets/img/edit gray.png" alt="" id="edit-pen">
             </div>
             <div id="username">
-                <h1 id="username-value">{{ username }}</h1>
-                <img src="{% static 'assets/img/edit gray.png' %}" alt="" id="edit-username" onclick="showEditForm()">
+                <h1 id="username-value">Diaa messaoudi</h1>
+                <img src="../static/assets/img/edit gray.png" alt="" id="edit-username" onclick="showEditForm()">
             </div>
 
             <div id="location">
-                <p id="loc">{{ user.get_profile.wilaya }}</p>
+                <p id="loc">Algeria , blida</p>
             </div>
             <div class="details">
                 <div class="biographie">
                     <h1>Bio :</h1>
                 </div>
-                <textarea name="" id="bio-space" placeholder="introduce yourself in few words!" readonly>{{ user.get_profile.bio }}</textarea>
+                    <textarea name="" id="bio-space" placeholder="introduce yourself in few word !" readonly>Je suis un UI/UX Designer et développeur front-end en formation basé à Blida, Algérie, passionné par la création d’expériences numériques intuitives et esthétiques
+                    </textarea>
+                
             </div>
-            <div class="validation-messages">
-                <p id="save-message" class="message"></p>
-            </div>
-            <div class="edit-btn">
-                <button id="save-changes" onclick="saveEdit()" class="blue">Save</button>
-            </div>
+            <button id="save-changes" onclick="saveEdit()">save</button>
         </div>
     </div>
 
     <div class="edit-form-container hidden">
         <div class="edit-form">
-
-            <div class="username-input-container">
-                
-                <input type="text" placeholder="new user name" id="user-input" class="item" name="new_username">
-                <p id="username-validation" class="validation-message"></p>
-            </div>
+            <input type="text" placeholder="new user name" id="user-input" class="item">
             
             <div class="choice-input">
                 <select name="" id="country">
@@ -398,21 +434,6 @@
             Choisir un fichier
         </label>
         <p id="fileName">file name</p>
-        <style>
-        /* Add your existing styles here */
-        
-        .validation-messages {
-            margin: 10px 0;
-            text-align: center;
-        }
-        
-        .message {
-            padding: 8px 16px;
-            border-radius: 4px;
-            font-size: 14px;
-            font-weight: 500;
-        }
-    </style>
     </div>
     
     <div class="course-and-certifications page" id="page2">
@@ -421,7 +442,7 @@
         <div class="course-certificate-container">
             
                         <div class="course-certificate">
-                            <div class="certificate-img"><img src="{% static 'assets/img/Certificate.png' %}" alt=""></div>
+                            <div class="certificate-img"><img src="../static/assets/img/Certificate.png" alt=""></div>
                             <div class="certificate-infos">
                                 <h1 class="certif-title">
                                     build your first web site with HTML & CSS
@@ -433,7 +454,7 @@
                         </div>
 
                         <div class="course-certificate">
-                            <div class="certificate-img"><img src="{% static 'assets/img/Certificate.png' %}" alt=""></div>
+                            <div class="certificate-img"><img src="../static/assets/img/Certificate.png" alt=""></div>
                             <div class="certificate-infos">
                                 <h1 class="certif-title">
                                     build your first web site with HTML & CSS
@@ -445,7 +466,7 @@
                         </div>
 
                         <div class="course-certificate">
-                            <div class="certificate-img"><img src="{% static 'assets/img/Certificate.png' %}" alt=""></div>
+                            <div class="certificate-img"><img src="../static/assets/img/Certificate.png" alt=""></div>
                             <div class="certificate-infos">
                                 <h1 class="certif-title">
                                     build your first web site with HTML & CSS
@@ -457,7 +478,7 @@
                         </div>
 
                         <div class="course-certificate">
-                            <div class="certificate-img"><img src="{% static 'assets/img/Certificate.png' %}" alt=""></div>
+                            <div class="certificate-img"><img src="../static/assets/img/Certificate.png" alt=""></div>
                             <div class="certificate-infos">
                                 <h1 class="certif-title">
                                     build your first web site with HTML & CSS
@@ -473,18 +494,15 @@
         <div class="learning-courses-container aqcuired">
                         <div class="learning-course-box">
                             <div class="learningcourse-box-infos">
-                                <div class="learning-course-img"><img src="{% static 'assets/img/courseJs.png' %}" alt="">
+                                <div class="learning-course-img"><img src="../static/assets/img/courseJs.png" alt="">
                                 </div>
                                 <div class="learning-course-details">
-
-                                    <h1 class="title">The Complete Full-Stack Web Development Bootcamp</h1>
-
-                                    <p> class="tutor">By Jonas Schmedtmann</p>
-
-                                  <div class="progression">
+                                <h1 class="title">The Complete Full-Stack Web Development Bootcamp</h1>
+                                <p class="tutor">By Jonas Schmedtmann</p>
+                                <div class="progression">
                                     <p>20/40 Chapter</p>
                                     <p class="l-progression-value">42%</p>
-                                  </div>
+                                </div>
 
                                 <div class="l-progression-container">
                                     <div class="l-progression-bar" id="progress-bar">
@@ -499,7 +517,7 @@
 
                         <div class="learning-course-box">
                             <div class="learningcourse-box-infos">
-                                <div class="learning-course-img"><img src="{% static 'assets/img/courseJs.png' %}" alt="">
+                                <div class="learning-course-img"><img src="../static/assets/img/courseJs.png" alt="">
                                 </div>
                                 <div class="learning-course-details">
                                 <h1 class="title">The Complete Full-Stack Web Development Bootcamp</h1>
@@ -520,7 +538,7 @@
 
                         <div class="learning-course-box">
                             <div class="learningcourse-box-infos">
-                                <div class="learning-course-img"><img src="{% static 'assets/img/courseJs.png' %}" alt="">
+                                <div class="learning-course-img"><img src="../static/assets/img/courseJs.png" alt="">
                                 </div>
                                 <div class="learning-course-details">
                                 <h1 class="title">The Complete Full-Stack Web Development Bootcamp</h1>
@@ -541,7 +559,7 @@
 
                         <div class="learning-course-box">
                             <div class="learningcourse-box-infos">
-                                <div class="learning-course-img"><img src="{% static 'assets/img/courseJs.png' %}" alt="">
+                                <div class="learning-course-img"><img src="../static/assets/img/courseJs.png" alt="">
                                 </div>
                                 <div class="learning-course-details">
                                 <h1 class="title">The Complete Full-Stack Web Development Bootcamp</h1>
@@ -566,7 +584,7 @@
         
 
         <h1 id="jp">Posted courses</h1>
-            <button id="showPageBtn" onclick="showCourseForm()">+ new course</button>
+            <button id="showPageBtn">+ new course</button>
         
         <div class="add-course">
         <div class="container">
@@ -575,9 +593,7 @@
             <div class="aaa">
                 <h2 class="section-title">Course Details</h2>
                 <div class="close">
-
-                    <h2 id="croix" onclick="closeCourseForm()" class="section-title">&times;</h2>
-
+                    <h2 id="croix" class="section-title">&times;</h2>
                 </div>
             </div>
             
@@ -640,7 +656,7 @@
             <div class="form-group" id="image-area">
                 <div class="image-upload-area">
                     
-                    <img src="{% static 'assets/img/Course cover' %} " 
+                    <img src="../static/assets/img/Course cover " 
                          alt="Cover Image" 
                          style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px; border: 2px solid #e5e7eb;">
                     
@@ -790,7 +806,7 @@
       <div class="carousel-item">
         <div class="carousel-card">
             <div class="p-course-box">
-                <div class="p-course-box-img"><img src="{% static 'assets/img/courseJs.png' %}" alt=""></div>
+                <div class="p-course-box-img"><img src="../static/assets/img/courseJs.png" alt=""></div>
             <div class="p-course-details">
                 <h1 class="p-title">front-end Development</h1>
                 <div class="p-views">
@@ -805,7 +821,7 @@
       <div class="carousel-item">
         <div class="carousel-card">
             <div class="p-course-box">
-                <div class="p-course-box-img"><img src="{% static 'assets/img/courseJs.png' %}" alt=""></div>
+                <div class="p-course-box-img"><img src="../static/assets/img/courseJs.png" alt=""></div>
             <div class="p-course-details">
                 <h1 class="p-title">front-end Development</h1>
                 <div class="p-views">
@@ -820,7 +836,7 @@
       <div class="carousel-item">
         <div class="carousel-card">
             <div class="p-course-box">
-                <div class="p-course-box-img"><img src="{% static 'assets/img/courseJs.png' %}" alt=""></div>
+                <div class="p-course-box-img"><img src="../static/assets/img/courseJs.png" alt=""></div>
             <div class="p-course-details">
                 <h1 class="p-title">front-end Development</h1>
                 <div class="p-views">
@@ -835,7 +851,7 @@
       <div class="carousel-item">
         <div class="carousel-card">
             <div class="p-course-box">
-                <div class="p-course-box-img"><img src="{% static 'assets/img/courseJs.png' %}" alt=""></div>
+                <div class="p-course-box-img"><img src="../static/assets/img/courseJs.png" alt=""></div>
             <div class="p-course-details">
                 <h1 class="p-title">front-end Development</h1>
                 <div class="p-views">
@@ -852,7 +868,7 @@
       <div class="carousel-item">
         <div class="carousel-card">
             <div class="p-course-box">
-                <div class="p-course-box-img"><img src="{% static 'assets/img/courseJs.png' %}" alt=""></div>
+                <div class="p-course-box-img"><img src="../static/assets/img/courseJs.png" alt=""></div>
             <div class="p-course-details">
                 <h1 class="p-title">front-end Development</h1>
                 <div class="p-views">
@@ -891,7 +907,7 @@
         <div class="job-container">
             <div class="job-item">
                 <div class="job-item-img">
-                    <img src="{% static 'assets/img/company.svg' %}" alt="">
+                    <img src="../static/assets/img/company.svg" alt="">
                 </div>
                 <div class="job-item-details">
                     <h1 id="title">ui/ux designer</h1>
@@ -902,7 +918,7 @@
 
             <div class="job-item">
                 <div class="job-item-img">
-                    <img src="{% static 'assets/img/company.svg' %}" alt="">
+                    <img src="../static/assets/img/company.svg" alt="">
                 </div>
                 <div class="job-item-details">
                     <h1 id="title">video editor</h1>
@@ -913,7 +929,7 @@
 
             <div class="job-item">
                 <div class="job-item-img">
-                    <img src="{% static 'assets/img/company.svg' %}" alt="">
+                    <img src="../static/assets/img/company.svg" alt="">
                 </div>
                 <div class="job-item-details">
                     <h1 id="title">front-end developper</h1>
@@ -922,16 +938,14 @@
                 </div>
             </div>
         </div>
-        <button id="new-job-btn" onclick="showJobForm()">+ new jobs</button>
+        <button id="new-job-btn">+ new jobs</button>
 
 <div class="add-job">
 <div class="add-job-page " id="JobForm">
  <div class="bbb">
     <h2 id="job-off-details">
         <h2>Job Offer Details</h2>
-        <div class="close">
-                    <h2 id="croix" onclick="closeJobForm()" class="section-title">&times;</h2>
-                </div>
+        <h2></h2&times;</h2>
     </h2>
  </div>
   <form>
@@ -1072,17 +1086,9 @@
      
 
 
-    <script src="{% static 'JS_files/Profile-script.js' %}"></script>
+    <script src="../static/JS_files/Profile-script.js"></script>
 </body>
-
 </html>
-
-
-
-
-
-
-
 
 
 

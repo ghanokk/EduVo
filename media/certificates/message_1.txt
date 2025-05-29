@@ -1,0 +1,178 @@
+            </div>
+
+            
+        </div>
+
+        
+        <div class="bottom-section">
+            <div class="left-column">
+                <div class="form-group">
+                    <label for="creeSection">Create Section</label>
+                    <input type="text" id="creeSection" placeholder="e.g. 8 weeks, 10 hours">
+                </div>
+                
+                <div class="create-btn-container">
+                    <button type="button" class="btn btn-primary" onclick="createSection()">Create</button>
+                </div>
+
+                <div class="form-group">
+                    <label for="section">Section</label>
+                    <select id="section">
+                        <option value="">Select Section</option>
+                        
+                    </select>
+                </div>
+
+                
+            </div>
+
+            <div class="right-column">
+                <div class="media-section">
+                    <div class="form-group">
+                        <label>Course Materials</label>
+                        <button type="button" class="btn btn-primary" onclick="document.getElementById('courseMaterials').click()">
+                            Upload files
+                        </button>
+                        <div class="file-info">PDF, DOCX, PPTX</div>
+                        <input type="file" id="courseMaterials" class="hidden-input" multiple accept=".pdf,.docx,.pptx">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Videos</label>
+                        <button type="button" class="btn btn-primary" onclick="document.getElementById('videos').click()">
+                            Upload video
+                        </button>
+                        <input type="file" id="videos" class="hidden-input" multiple accept="video/*">
+                    </div>
+
+                    <div class="form-group">
+                        <button type="button" class="btn btn-success">
+                            Soumettre pour validation
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="validation-note">
+            Après soumission, votre cours sera examiné par notre équipe d'administration. Vous recevrez un e-mail une fois qu'il sera approuvé ou si des informations supplémentaires sont nécessaires.
+        </div>
+    </div>
+    </div>
+    
+   
+    <!-- -------------------------------add job-------------------------- -->
+   
+    
+
+     
+
+
+    <script src="../static/JS_files/Profile-script.js"></script>
+</body>
+</html>
+
+
+
+<!-- <div class="published accepted">
+                        <div class="published-course-box">
+                            <div class="published-course-box-infos">
+                                <div class="published-course-img"><img src="../static/assets/img/course-p.png" alt=""></div>
+                            <div class="published-course-details">
+                                <h1 class="title">The Complete Full-Stack Web Development Bootcamp</h1>
+                                <div class="views">
+                                    <p id="viewers">10K Views</p>
+                                    <p id="ratings">2347 ratings</p>
+                                    <p id="status">accepted</p>    
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+
+                        <div class="published-course-box">
+                            <div class="published-course-box-infos">
+                                <div class="published-course-img"><img src="../static/assets/img/course-p.png" alt=""></div>
+                            <div class="published-course-details">
+                                <h1 class="title">The Complete Full-Stack Web Development Bootcamp</h1>
+                                <div class="views">
+                                    <p id="viewers">10K Views</p>
+                                    <p id="ratings">2347 ratings</p>
+                                    <p id="status">accepted</p>    
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+
+                        <div class="published-course-box">
+                            <div class="published-course-box-infos">
+                                <div class="published-course-img"><img src="../static/assets/img/course-p.png" alt=""></div>
+                            <div class="published-course-details">
+                                <h1 class="title">The Complete Full-Stack Web Development Bootcamp</h1>
+                                <div class="views">
+                                    <p id="viewers">10K Views</p>
+                                    <p id="ratings">2347 ratings</p>
+                                    <p id="status">accepted</p>    
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+
+
+                        <div class="published-course-box">
+                            <div class="published-course-box-infos">
+                                <div class="published-course-img"><img src="../static/assets/img/course-p.png" alt=""></div>
+                            <div class="published-course-details">
+                                <h1 class="title">The Complete Full-Stack Web Development Bootcamp</h1>
+                                <div class="views">
+                                    <p id="viewers">10K Views</p>
+                                    <p id="ratings">2347 ratings</p>
+                                    <p id="status">accepted</p>    
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+
+                            
+                        
+        </div> -->
+
+        
+        <!-- <div class="published pending">
+                        <div class="published-course-box">
+                            <div class="published-course-box-infos">
+                                <div class="published-course-img"><img src="../static/assets/img/course-p.png" alt=""></div>
+                            <div class="published-course-details">
+                                <h1 class="title">The Complete Full-Stack Web Development Bootcamp</h1>
+                                <div class="views">
+                                    <p id="viewers">10K Views</p>
+                                    <p id="ratings">2347 ratings</p>
+                                    <p id="status">accepted</p>    
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+
+                        <div class="published-course-box">
+                            <div class="published-course-box-infos">
+                                <div class="published-course-img"><img src="../static/assets/img/course-p.png" alt=""></div>
+                            <div class="published-course-details">
+                                <h1 class="title">The Complete Full-Stack Web Development Bootcamp</h1>
+                                <div class="views">
+                                    <p id="viewers">10K Views</p>
+                                    <p id="ratings">2347 ratings</p>
+                                    <p id="status">accepted</p>    
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+
+                        
+
+                        
+
+                            
+                        
+        </div> -->
+
+
+        

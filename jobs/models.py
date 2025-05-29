@@ -104,7 +104,6 @@ class JobApplication(models.Model):
     application_date = models.DateTimeField(auto_now_add=True)
     status = models.CharField(max_length=20, choices=[
         ('pending', 'Pending'),
-        ('reviewed', 'Reviewed'),
         ('accepted', 'Accepted'),
         ('rejected', 'Rejected')
     ], default='pending')
@@ -152,7 +151,7 @@ class Proposal(models.Model):
     updated_at = models.DateTimeField(auto_now=True)  # آخر تحديث للحالة
 
     def __str__(self):
-        return f"تقديم على {self.job.title} من {self.applicant.username}"  # عرض اسم الوظيفة والمستخدم
+        return f"Application for {self.job.title} by {self.applicant.username}"  # Display job title and applicant username
 
     class Meta:
         ordering = ['-created_at']  # ترتيب حسب تاريخ التقديم (الأحدث أولاً)

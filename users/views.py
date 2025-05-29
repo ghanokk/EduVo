@@ -1,24 +1,27 @@
-# Imports
+# had l'imports dyal l'views
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
+from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
-from django.http import JsonResponse
-from django.core.exceptions import ValidationError
-from django.contrib.auth import get_user_model
+
 from courses.models import Course, Enrollment
 from jobs.models import Job, Proposal
 from skills.models import Skill, UserSkill
-from users.models import User, StudentProfile, TeacherProfile, CompanyProfile, WILAYA_CHOICES
+from users.models import User, StudentProfile, TeacherProfile, CompanyProfile
 
-# Login view
+# had l'function li t3aml m3a l'login
 def login(request):
     if request.method == 'POST':
+        # njibou l'username w l'password men l'form
         username = request.POST['username']
         password = request.POST['password']
+        # nverifio l'authentification
         user = authenticate(request, username=username, password=password)
         if user is not None:
+            # ki l'user valid, nloginouh w ndirou redirect l'homepage
             login(request, user)
             return redirect('homePage')
+    # ki ykoun GET, n'affichi l'form dyal l'login
     return render(request, 'users/register.html')
 
 # Logout view
@@ -26,28 +29,33 @@ def logout_view(request):
     logout(request)
     return redirect('homePage')
 
-# Forgot password view
+# had l'function li t3aml m3a l'forgot password
 def forgotPass(request):
     return render(request, 'users/forgotPass.html')
 
-# Register view
+
+
 def Register(request):
     return render(request, 'users/Register.html')
 
-# Profile view
+# had l'function li t3aml m3a l'profile dyal l'user
 def profile(request):
     user = request.user
+    # nkhdmou context bach nb3atou les données l template
     context = {
         'user': user,
-        'WILAYA_CHOICES': WILAYA_CHOICES,
+
     }
 
+    # nverifio l'type dyal l'user (student, teacher, company)
     if user.user_type == 'student':
+        # njibou les données dyal l'student
         student_profile = StudentProfile.objects.get(user=user)
         enrollments = Enrollment.objects.filter(student=user)
         user_skills = UserSkill.objects.filter(student_profile=student_profile)
         job_applications = Proposal.objects.filter(applicant=user)
 
+        # nupdateou l'context men les données dyal l'student
         context.update({
             'profile': student_profile,
             'stats': {
@@ -58,17 +66,20 @@ def profile(request):
             },
             'enrolled_courses': [{
                 'course': enrollment.course,
-            } for enrollment in enrollments[:3]],
+            } for enrollment in enrollments[:3]],  # 3 les derniers cours
             'skills': user_skills,
-            'job_applications': job_applications[:3]
+            'job_applications': job_applications[:3]  # 3 les dernières applications
         })
         for course in context['enrolled_courses']:
+            # print l'title dyal l'cours
             print(course['course'].title)
-
+            
     elif user.user_type == 'teacher':
+        # njibou les données dyal l'teacher
         teacher_profile = TeacherProfile.objects.get(user=user)
         taught_courses = Course.objects.filter(teacher=user)
         
+        # nupdateou l'context men les données dyal l'teacher
         context.update({
             'profile': teacher_profile,
             'stats': {
@@ -85,116 +96,54 @@ def profile(request):
         })
 
     elif user.user_type == 'company':
+        # njibou les données dyal l'company
         company_profile = CompanyProfile.objects.get(user=user)
         posted_jobs = Job.objects.filter(posted_by=user)
         
+        # nupdateou l'context men les données dyal l'company
         context.update({
             'profile': company_profile,
             'stats': {
                 'jobs_count': posted_jobs.count(),
-                'total_applications': sum(job.applications.count() for job in posted_jobs)
+                'total_applications': sum(job.proposal_set.count() for job in posted_jobs)
             },
             'posted_jobs': [{
                 'job': job,
-                'applications_count': job.applications.count()
+                'applications_count': job.proposal_set.count(),
+                'views': job.views_count if hasattr(job, 'views_count') else 0
             } for job in posted_jobs]
         })
 
+    # nreturnou l'template men les données
     return render(request, 'users/Profile.html', context)
 
-# Homepage view
+# had l'function li t3aml m3a l'homepage
 def index(request):
     return render(request, 'users/index.html')
 
-# Login page view
+# had l'function li t3aml m3a l'login page
 def Login(request):
     return render(request, 'users/Login.html')
 
-# Signup page view
+# had l'function li t3aml m3a l'signup page
 def Signup(request):
     return render(request, 'users/Signup.html')
 
-# Profile page view
+# had l'function li t3aml m3a l'profile page
+
 def Profile(request):
     return render(request, 'users/Profile.html')
 
-# Get User model
-User = get_user_model()
 
-# Update profile picture
-def update_profile_picture(request):
-    if request.method == 'POST' and request.user.is_authenticated:
-        try:
-            profile = request.user.get_profile()
-            if request.FILES.get('profile_picture'):
-                profile.profile_picture = request.FILES['profile_picture']
-                profile.save()
-                return JsonResponse({
-                    'success': True,
-                    'image_url': profile.profile_picture.url
-                })
-        except Exception as e:
-            print(f"Error updating profile picture: {str(e)}")
-    return JsonResponse({'success': False})
 
-# Validate username
-def validate_username(request):
-    if request.method == 'POST':
-        try:
-            new_username = request.POST.get('new_username')
-            current_user = request.user.username if request.user.is_authenticated else None
-
-            exists = User.objects.filter(username=new_username).exists()
-            is_current_user = (current_user == new_username)
-
-            return JsonResponse({
-                'exists': exists and not is_current_user,
-                'is_valid': not exists or is_current_user,
-                'message': 'Username available' if (not exists or is_current_user) else 'Username already exists'
-            })
-        except Exception as e:
-            print(f"Error validating username: {str(e)}")
-            return JsonResponse({'exists': False, 'is_valid': False, 'message': 'Error checking username'})
-    return JsonResponse({'exists': False, 'is_valid': False, 'message': 'Invalid request'})
-
-# Update profile
-def update_profile(request):
-    if request.method == 'POST' and request.user.is_authenticated:
-        try:
-            username = request.POST.get('username')
-            wilaya = request.POST.get('wilaya')
-            bio = request.POST.get('bio')
-            
-            if username and username != request.user.username:
-                if User.objects.filter(username=username).exclude(id=request.user.id).exists():
-                    return JsonResponse({'success': False, 'error': 'Username already exists'})
-                request.user.username = username
-                request.user.save()
-            
-            profile = request.user.get_profile()
-            if wilaya:
-                profile.wilaya = wilaya
-            if bio:
-                profile.bio = bio
-            profile.save()
-            
-            return JsonResponse({
-                'success': True,
-                'wilaya_display': dict(WILAYA_CHOICES).get(wilaya, '')
-            })
-        except Exception as e:
-            print(f"Error updating profile: {str(e)}")
-    return JsonResponse({'success': False})
-
-# Password_confirm view
 # def Password_confirm(request):
 #     return render(request, 'users/password_reset_confirm.html')
 
-# Password_complete view
+
 # def Password_complete(request):
+
 #     return render(request, 'users/password_reset_complete.html')
 
-# Password_done view
 # def Password_done(request):
 #     return render(request, 'users/password_reset_done.html')
 

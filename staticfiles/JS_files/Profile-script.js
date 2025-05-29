@@ -125,15 +125,37 @@ document.getElementById('edit-profile-form').addEventListener('submit', async fu
     }
 });
 
-async function edit() {
+async function saveEdit() {
     const username = document.getElementById('user-input').value;
     const wilaya = document.getElementById('wilaya').value;
     const bio = document.getElementById('biographie-field').value;
+    const messageElement = document.getElementById('save-message');
+
+    if (!username.trim()) {
+        messageElement.textContent = 'Username cannot be empty';
+        messageElement.style.color = 'red';
+        return;
+    }
 
     try {
         // Validate username first
-        const isValidUsername = await validateUsername(username);
-        if (!isValidUsername) return;
+        const response = await fetch('/profile/validate-username/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'X-CSRFToken': document.querySelector('input[name="csrfmiddlewaretoken"]').value
+            },
+            body: new URLSearchParams({
+                username: username
+            })
+        });
+        const data = await response.json();
+
+        if (!data.is_valid) {
+            messageElement.textContent = data.message;
+            messageElement.style.color = 'red';
+            return;
+        }
 
         // Prepare data to send
         const formData = new FormData();
@@ -142,86 +164,53 @@ async function edit() {
         formData.append('bio', bio);
 
         // Send update request
-        const response = await fetch('/profile/update-profile/', {
+        const updateResponse = await fetch('/profile/update-profile/', {
             method: 'POST',
             headers: {
                 'X-CSRFToken': document.querySelector('input[name="csrfmiddlewaretoken"]').value
             },
             body: formData
         });
-        const data = await response.json();
+        const updateData = await updateResponse.json();
 
-        if (data.success) {
+        if (updateData.success) {
             // Update the UI
-            document.getElementById('username-value').textContent = username;
-            document.getElementById('loc').textContent = data.wilaya_display;
-            document.getElementById('bio-space').textContent = bio;
+            document.getElementById('username-value').textContent = updateData.username;
+            document.getElementById('loc').textContent = updateData.wilaya_display;
+            document.getElementById('bio-space').textContent = updateData.bio;
             hideEditForm();
+            messageElement.textContent = updateData.message;
+            messageElement.style.color = 'green';
+            setTimeout(() => {
+                messageElement.textContent = '';
+            }, 3000);
         } else {
-            alert('Error updating profile');
+            messageElement.textContent = updateData.error || 'Error updating profile';
+            messageElement.style.color = 'red';
         }
     } catch (error) {
         console.error('Error:', error);
-        alert('Error updating profile');
+        messageElement.textContent = 'Error updating profile';
+        messageElement.style.color = 'red';
     }
 }
 
 // Username validation
-let usernameValidationTimeout;
-
-// Add real-time username validation
-document.getElementById('user-input').addEventListener('input', async function(e) {
-    const username = e.target.value;
-    if (username.length < 3) return; // Don't validate if username is too short
-
-    // Clear previous timeout if exists
-    if (usernameValidationTimeout) {
-        clearTimeout(usernameValidationTimeout);
-    }
-
-    // Wait for user to stop typing for 500ms
-    usernameValidationTimeout = setTimeout(async () => {
-        try {
-            const response = await fetch('/profile/validate-username/', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRFToken': document.querySelector('input[name="csrfmiddlewaretoken"]').value
-                },
-                body: JSON.stringify({ username: username })
-            });
-            const data = await response.json();
-            
-            const validationMessage = document.getElementById('username-validation');
-            if (data.exists) {
-                validationMessage.textContent = 'Username already exists';
-                validationMessage.style.color = 'red';
-            } else {
-                validationMessage.textContent = 'Username available';
-                validationMessage.style.color = 'green';
-            }
-        } catch (error) {
-            console.error('Error:', error);
-        }
-    }, 500);
-});
-
 async function validateUsername(username) {
-    try {
-        const response = await fetch('/profile/validate-username/', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRFToken': document.querySelector('input[name="csrfmiddlewaretoken"]').value
-            },
-            body: JSON.stringify({ username: username })
-        });
-        const data = await response.json();
-        return !data.exists;
-    } catch (error) {
-        console.error('Error:', error);
+    const response = await fetch('/profile/validate-username/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': getCookie('csrftoken')
+        },
+        body: JSON.stringify({ username: username })
+    });
+    const data = await response.json();
+    if (data.exists) {
+        alert('Username already exists');
         return false;
     }
+    return true;
 }
 
 // Utility function to get CSRF token

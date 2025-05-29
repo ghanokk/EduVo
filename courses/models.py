@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db.models import Avg, Count
 
 class Category(models.Model):
@@ -133,7 +134,13 @@ class Enrollment(models.Model):
     enrollment_date = models.DateTimeField(auto_now_add=True)
     completion_status = models.CharField(max_length=12, choices=STATUS_CHOICES, default='enrolled')
     completion_date = models.DateTimeField(blank=True, null=True)
-    progress = models.IntegerField(default=0)
+    progress = models.IntegerField(
+        default=0,
+        validators=[
+            MinValueValidator(0),
+            MaxValueValidator(100)
+        ]
+    )
     
     class Meta:
         # hadi bach l'étudiant ma ydirch inscription marra w7da f'nfs l'cours
