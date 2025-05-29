@@ -285,7 +285,9 @@
                 <img src="{% static 'assets/img/Lock.png' %}" alt="">
                 <p>Password</p>
            </div>
-           <button id="btn">Change</button>
+           <a href="{% url 'users:forgot_password' %}" id="btn" style="display:inline-block;text-decoration:none;">
+            Change
+           </a>
         </div>
     </div>
 </div>
