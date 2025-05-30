@@ -1,0 +1,122 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+body{
+    background: #EAF2FF;
+    padding: 20px 20%;
+}
+
+h2{
+    margin-bottom: 20px;
+}
+
+.container{
+    border-radius: 20px;
+    box-shadow: 0 0 9px 0 #0000001f;
+    background: white;
+    padding: 30px 50px;
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-img{
+    height: 250px;
+    margin-bottom: 150px;
+}
+
+.edit-img{
+    gap: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+#filename{
+    width: 70%;
+    height: 50px;
+    padding: 10px 15px;
+    font-size: 18px;
+    border-radius: 0.3rem;
+    outline: none;
+    border: 1px solid black;
+    margin-bottom: 20px;
+}
+
+#add-file{
+    width: 30%;
+    height: 50px;
+    padding: 10px 15px;
+    font-size: 18px;
+    border-radius: 0.3rem;
+    outline: none;
+    border: none;
+    background:#3DB2FF;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+label{
+    cursor: pointer;
+}
+
+#add-file:hover{
+      background: #3e98d4;
+}
+
+.profile-img img{
+    border-radius: 100%;
+    display: block;
+    margin: auto;
+    height: 100%;
+    margin-bottom: 20px;
+}
+
+.informations input ,textarea , #location , #language , .cancel button , .save button{
+    height: 50px;
+    width: 100%;
+    padding: 10px 15px;
+    font-size: 18px;
+    border-radius: 0.3rem;
+    outline: none;
+    border: 1px solid black;
+    margin-bottom: 20px;
+}
+
+#bio{
+     width: 100%;
+      min-height: 60px;
+      overflow: hidden;      
+      resize: none; 
+      line-height: 1.5;
+      transition: border 0.2s ease;
+}
+
+.save button{
+     background:#3DB2FF;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.save button:hover{
+    background: #3e98d4;
+}
+
+
+.cancel button{
+    background: rgb(252, 80, 0);
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+
+.cancel button:hover{
+    background: red;
+}

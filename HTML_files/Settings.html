@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/CSS_files/Settings.css">
+    <title>Eduvo | Settings</title>
+</head>
+<body>
+    <div class="container">
+        <h2>Profile image</h2>
+        <div class="profile-img">
+            <img src="../static/assets/img/profile.png" alt="profile-img">
+            <h2>edit image profile</h2>
+            <div class="edit-img">
+                <input id="filename" type="text" readonly placeholder="no file selected">
+                <button id="add-file"><label for="file">upload image</label></button>
+                <input type="file" id="file" style="display: none;">
+            </div>
+        </div>
+        <h2>informations</h2>
+        <div class="informations">
+            <input type="text" placeholder="username">
+            <input type="email" placeholder="email">
+            <select name="" id="location">
+                <option value="">Select a wilaya</option>
+                <option value="01">Adrar</option>
+                <option value="02">Chlef</option>
+                <option value="03">Laghouat</option>
+                <option value="04">Oum El Bouaghi</option>
+                <option value="05">Batna</option>
+                <option value="06">Béjaïa</option>
+                <option value="07">Biskra</option>
+                <option value="08">Béchar</option>
+                <option value="09">Blida</option>
+                <option value="10">Bouira</option>
+                <option value="11">Tamanrasset</option>
+                <option value="12">Tébessa</option>
+                <option value="13">Tlemcen</option>
+                <option value="14">Tiaret</option>
+                <option value="15">Tizi Ouzou</option>
+                <option value="16">Alger</option>
+                <option value="17">Djelfa</option>
+                <option value="18">Jijel</option>
+                <option value="19">Sétif</option>
+                <option value="20">Saïda</option>
+                <option value="21">Skikda</option>
+                <option value="22">Sidi Bel Abbès</option>
+                <option value="23">Annaba</option>
+                <option value="24">Guelma</option>
+                <option value="25">Constantine</option>
+                <option value="26">Médéa</option>
+                <option value="27">Mostaganem</option>
+                <option value="28">M'Sila</option>
+                <option value="29">Mascara</option>
+                <option value="30">Ouargla</option>
+                <option value="31">Oran</option>
+                <option value="32">El Bayadh</option>
+                <option value="33">Illizi</option>
+                <option value="34">Bordj Bou Arréridj</option>
+                <option value="35">Boumerdès</option>
+                <option value="36">El Tarf</option>
+                <option value="37">Tindouf</option>
+                <option value="38">Tissemsilt</option>
+                <option value="39">El Oued</option>
+                <option value="40">Khenchela</option>
+                <option value="41">Souk Ahras</option>
+                <option value="42">Tipaza</option>
+                <option value="43">Mila</option>
+                <option value="44">Aïn Defla</option>
+                <option value="45">Naâma</option>
+                <option value="46">Aïn Témouchent</option>
+                <option value="47">Ghardaïa</option>
+                <option value="48">Relizane</option>
+                <option value="49">Timimoun</option>
+                <option value="50">Bordj Badji Mokhtar</option>
+                <option value="51">Ouled Djellal</option>
+                <option value="52">Beni Abbès</option>
+                <option value="53">In Salah</option>
+                <option value="54">In Guezzam</option>
+                <option value="55">Touggourt</option>
+                <option value="56">Djanet</option>
+                <option value="57">El M'Ghair</option>
+                <option value="58">El Menia</option>
+            </select>
+        </div>
+        <h2>Biographie</h2>
+        <div class="biographie">
+            <textarea name="" rows="1" id="bio" placeholder="Biographie"></textarea>
+        </div>
+        <h2>Language</h2>
+        <div class="language">
+            <select name="" id="language">
+                <option value="en">English (USA)</option>
+            </select>
+        </div>
+        <div class="save">
+            <button>Save changes</button>
+        </div>
+        <div class="cancel">
+            <button>Cancel changes</button>
+        </div>
+    </div>
+
+    <script src="../static/JS_files/Settings.js"></script>
+</body>
+</html>
