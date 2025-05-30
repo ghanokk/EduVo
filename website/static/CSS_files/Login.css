@@ -93,3 +93,20 @@ label{
     background: #3e98d4;
     box-shadow: 0 0 10px 0 #3db1ff46;
 }
+
+.forgot-pass {
+    text-align: right;
+    margin-bottom: 15px;
+}
+
+.forgot-pass a {
+    color: #3DB2FF;
+    font-size: 15px;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.forgot-pass a:hover {
+    color: #2566a6;
+    text-decoration: underline;
+}

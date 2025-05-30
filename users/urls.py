@@ -14,9 +14,8 @@ urlpatterns = [
     path('doLogin',user_login.DO_LOGIN, name='doLogin'),
     path('doSignup/', user_login.DO_SIGNUP, name='doSignup'),
     path('profile',views.Profile, name='profile'),
-    path('logout/', views.logout_view, name='logout'),
-    path('forgot-password/', views.forgotPass, name='forgot_password'),
-    
+    path('logout/', views.logout_view, name='logout'),  
+    path('password_reset/', user_login.FORGOT_PASS, name='password_reset'),  
 
     path('password_reset/',
          auth_views.PasswordResetView.as_view(
