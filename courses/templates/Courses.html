@@ -32,8 +32,7 @@
 </head>
 
 <body>
-
-
+    
     <h1 id="top-courses">Top Courses This week</h1>
     <div class="all-carousel-container">
         <div class="carousel-container">
@@ -179,8 +178,6 @@
                     <img src="{{ course.image_url }}" alt="{{ course.title }}">
 
                 </div>
-
-
                 <div class="course-infos">
                     <p class="course-title">{{ course.title }}</p>
                     <p class="course-description">{{ course.description|truncatewords:15 }}</p>
@@ -209,9 +206,12 @@
                     </div>
                 </div>
             </div>
+            {% empty %}
+                <p>No courses available.</p>
             {% endfor %}
         </div>
     </div>
+
 
     <script src="{% static 'JS_files/Courses.js' %}"></script>
 </body>
