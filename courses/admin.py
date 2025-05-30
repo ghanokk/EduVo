@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Course, Section, Lesson, Enrollment, Rating, WhatYouLearn, Category
+from .models import Course, Section, Lesson, Enrollment, Rating, WhatYouLearn, Category, Video, CourseMaterial
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
@@ -98,3 +98,13 @@ class WhatYouLearnAdmin(admin.ModelAdmin):
     def get_description(self, obj):
         return obj.description
     get_description.short_description = 'Learning Objective'
+
+@admin.register(Video)
+class VideoAdmin(admin.ModelAdmin):
+    list_display = ('title', 'section', 'file')
+    search_fields = ('title', 'section__title')
+
+@admin.register(CourseMaterial)
+class CourseMaterialAdmin(admin.ModelAdmin):
+    list_display = ('title', 'section', 'file')
+    search_fields = ('title', 'section__title')
