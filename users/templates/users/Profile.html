@@ -15,43 +15,43 @@
     <!-- if profile updated -->
 
     {% if messages %}
-      <div style="margin: 20px auto; max-width: 400px;">
-        {% for message in messages %}
-          <div style="
-            display: flex;
-            align-items: center;
-            padding: 12px 20px;
-            border-radius: 6px;
-            margin-bottom: 12px;
-            font-size: 16px;
-            font-weight: 500;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
-            {% if message.tags == 'success' %}
-              background: #e8f5e9; color: #256029; border-left: 5px solid #4CAF50;
-            {% elif message.tags == 'error' or message.tags == 'danger' %}
-              background: #ffebee; color: #b71c1c; border-left: 5px solid #f44336;
-            {% elif message.tags == 'warning' %}
-              background: #fff8e1; color: #b26a00; border-left: 5px solid #ff9800;
-            {% else %}
-              background: #f0f4f8; color: #222; border-left: 5px solid #2196F3;
-            {% endif %}
-          ">
-            <span style="font-size: 22px; margin-right: 12px;">
-              {% if message.tags == "success" %}
-                ✔️
-              {% elif message.tags == "error" or message.tags == "danger" %}
-                ❌
-              {% elif message.tags == "warning" %}
-                ⚠️
-              {% else %}
-                ℹ️
-              {% endif %}
-            </span>
-            <span>{{ message }}</span>
-          </div>
-        {% endfor %}
+  <div style="margin: 20px auto; max-width: 400px;">
+    {% for message in messages %}
+      <div style="
+        display: flex;
+        align-items: center;
+        padding: 12px 20px;
+        border-radius: 6px;
+        margin-bottom: 12px;
+        font-size: 16px;
+        font-weight: 500;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+        {% if message.tags == 'success' %}
+          background: #e8f5e9; color: #256029; border-left: 5px solid #4CAF50;
+        {% elif message.tags == 'error' or message.tags == 'danger' %}
+          background: #ffebee; color: #b71c1c; border-left: 5px solid #f44336;
+        {% elif message.tags == 'warning' %}
+          background: #fff8e1; color: #b26a00; border-left: 5px solid #ff9800;
+        {% else %}
+          background: #f0f4f8; color: #222; border-left: 5px solid #2196F3;
+        {% endif %}
+      ">
+        <span style="font-size: 22px; margin-right: 12px;">
+          {% if message.tags == "success" %}
+            ✔️
+          {% elif message.tags == "error" or message.tags == "danger" %}
+            ❌
+          {% elif message.tags == "warning" %}
+            ⚠️
+          {% else %}
+            ℹ️
+          {% endif %}
+        </span>
+        <span>{{ message }}</span>
       </div>
-    {% endif %}
+    {% endfor %}
+  </div>
+{% endif %}
 
     <!-- --------------------profile header----------------- -->
 
@@ -362,64 +362,64 @@
             </select>
             <label for="wilaya"></label>
     <select name="wilaya" id="wilaya">
-        <option value="0">Adrar</option>
-        <option value="1">Chlef</option>
-        <option value="2">Laghouat</option>
-        <option value="3">Oum El Bouaghi</option>
-        <option value="4">Batna</option>
-        <option value="5">Béjaïa</option>
-        <option value="6">Biskra</option>
-        <option value="7">Béchar</option>
-        <option value="8">Blida</option>
-        <option value="9">Bouira</option>
-        <option value="10">Tamanrasset</option>
-        <option value="11">Tébessa</option>
-        <option value="12">Tlemcen</option>
-        <option value="13">Tiaret</option>
-        <option value="14">Tizi Ouzou</option>
-        <option value="15">Alger</option>
-        <option value="16">Djelfa</option>
-        <option value="17">Jijel</option>
-        <option value="18">Sétif</option>
-        <option value="19">Saïda</option>
-        <option value="20">Skikda</option>
-        <option value="21">Sidi Bel Abbès</option>
-        <option value="22">Annaba</option>
-        <option value="23">Guelma</option>
-        <option value="24">Constantine</option>
-        <option value="25">Médéa</option>
-        <option value="26">Mostaganem</option>
-        <option value="27">M’Sila</option>
-        <option value="28">Mascara</option>
-        <option value="29">Ouargla</option>
-        <option value="30">Oran</option>
-        <option value="31">El Bayadh</option>
-        <option value="32">Illizi</option>
-        <option value="33">Bordj Bou Arréridj</option>
-        <option value="34">Boumerdès</option>
-        <option value="35">El Tarf</option>
-        <option value="36">Tindouf</option>
-        <option value="37">Tissemsilt</option>
-        <option value="38">El Oued</option>
-        <option value="39">Khenchela</option>
-        <option value="40">Souk Ahras</option>
-        <option value="41">Tipaza</option>
-        <option value="42">Mila</option>
-        <option value="43">Aïn Defla</option>
-        <option value="44">Naâma</option>
-        <option value="45">Aïn Témouchent</option>
-        <option value="46">Ghardaïa</option>
-        <option value="47">Relizane</option>
-        <option value="48">Timimoun</option>
-        <option value="49">Bordj Badji Mokhtar</option>
-        <option value="50">Ouled Djellal</option>
-        <option value="51">Béni Abbès</option>
-        <option value="52">In Salah</option>
-        <option value="53">In Guezzam</option>
-        <option value="54">Touggourt</option>
-        <option value="55">Djanet</option>
-        <option value="56">El M'Ghair</option>
-        <option value="57">El Meniaa</option>
+        <option value="1">Adrar</option>
+        <option value="2">Chlef</option>
+        <option value="3">Laghouat</option>
+        <option value="4">Oum El Bouaghi</option>
+        <option value="5">Batna</option>
+        <option value="6">Béjaïa</option>
+        <option value="7">Biskra</option>
+        <option value="8">Béchar</option>
+        <option value="9">Blida</option>
+        <option value="10">Bouira</option>
+        <option value="11">Tamanrasset</option>
+        <option value="12">Tébessa</option>
+        <option value="13">Tlemcen</option>
+        <option value="14">Tiaret</option>
+        <option value="15">Tizi Ouzou</option>
+        <option value="16">Alger</option>
+        <option value="17">Djelfa</option>
+        <option value="18">Jijel</option>
+        <option value="19">Sétif</option>
+        <option value="20">Saïda</option>
+        <option value="21">Skikda</option>
+        <option value="22">Sidi Bel Abbès</option>
+        <option value="23">Annaba</option>
+        <option value="24">Guelma</option>
+        <option value="25">Constantine</option>
+        <option value="26">Médéa</option>
+        <option value="27">Mostaganem</option>
+        <option value="28">M’Sila</option>
+        <option value="29">Mascara</option>
+        <option value="30">Ouargla</option>
+        <option value="31">Oran</option>
+        <option value="32">El Bayadh</option>
+        <option value="33">Illizi</option>
+        <option value="34">Bordj Bou Arréridj</option>
+        <option value="35">Boumerdès</option>
+        <option value="36">El Tarf</option>
+        <option value="37">Tindouf</option>
+        <option value="38">Tissemsilt</option>
+        <option value="39">El Oued</option>
+        <option value="40">Khenchela</option>
+        <option value="41">Souk Ahras</option>
+        <option value="42">Tipaza</option>
+        <option value="43">Mila</option>
+        <option value="44">Aïn Defla</option>
+        <option value="45">Naâma</option>
+        <option value="46">Aïn Témouchent</option>
+        <option value="47">Ghardaïa</option>
+        <option value="48">Relizane</option>
+        <option value="49">Timimoun</option>
+        <option value="50">Bordj Badji Mokhtar</option>
+        <option value="51">Ouled Djellal</option>
+        <option value="52">Béni Abbès</option>
+        <option value="53">In Salah</option>
+        <option value="54">In Guezzam</option>
+        <option value="55">Touggourt</option>
+        <option value="56">Djanet</option>
+        <option value="57">El M'Ghair</option>
+        <option value="58">El Meniaa</option>
     </select>
         </div>
         <textarea name="bio" id="biographie-field" placeholder="Introduce yourself in a few words!">{{ user.profile.bio }}</textarea>
@@ -598,410 +598,139 @@
                             </div>
                         </div>
                     </div>
-
                     
     </div>
 
+
+    <!-- -------------------------------add course-------------------------- -->
     
 
     <h1 id="jp">Posted courses</h1>
         <button id="showPageBtn" onclick="showCourseForm()">+ new course</button>
     
-    <div class="add-course">
+    <div class="add-course" style="display:none;">
     <div class="container">
-    
-    <div class="section">
-        <div class="aaa">
-            <h2 class="section-title">Course Details</h2>
-            <div class="close">
-
-                <h2 id="croix" onclick="closeCourseForm()" class="section-title">&times;</h2>
-
-            </div>
-        </div>
-        
-        <div class="form-group">
-            <label for="courseTitle">Course Title</label>
-            <input type="text" id="courseTitle" placeholder="Enter course name">
-        </div>
-
-        <div class="form-group">
-            <label for="description">Description</label>
-            <textarea id="description" placeholder="Brief course summary"></textarea>
-        </div>
-
-        <div class="form-group">
-            <label for="objectives">Learning Objectives</label>
-            <textarea id="objectives" placeholder="List key outcomes (one per line)"></textarea>
-        </div>
-
-        <div class="form-row">
-            <div class="form-group">
-                <label for="category">Category</label>
-                <select id="category">
-                    <option value="">Select category</option>
-                    <option value="technology">Technology</option>
-                    <option value="business">Business</option>
-                    <option value="design">Design</option>
-                    <option value="marketing">Marketing</option>
-                    <option value="development">Development</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="level">Level</label>
-                <select id="level">
-                    <option value="">Beginner, Intermediate, Advanced</option>
-                    <option value="beginner">Beginner</option>
-                    <option value="intermediate">Intermediate</option>
-                    <option value="advanced">Advanced</option>
-                </select>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label for="prerequisites">Prerequisites</label>
-            <textarea id="prerequisites" placeholder="List key outcomes (one per line)"></textarea>
-        </div>
-
-        <div class="form-group">
-            <label for="duration">Estimated Duration</label>
-            <div class="duration-container">
-                <input type="text" id="duration" placeholder="e.g. 8 weeks, 10 hours">
-            </div>
-        </div>
-    </div>
-
-    
-    <div class="section">
-        <h2 class="section-title">Course Media</h2>
-
-            <label for="">Cover Image</label>
-        <div class="form-group" id="image-area">
-            <div class="image-upload-area">
-                
-                <img src="{% static 'assets/img/Course cover' %} " 
-                     alt="Cover Image" 
-                     style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px; border: 2px solid #e5e7eb;">
-                
-                
-                <div style="position: absolute; bottom: 16px; right: 16px;">
-                    <button type="button" class="btn btn-primary" onclick="document.getElementById('coverImage').click()">
-                        📝 Change Image
-                    </button>
-                    <input type="file" id="coverImage" class="hidden-input" accept="image/*">
-                </div>
-                
-                <!-- <div style="position: absolute; top: 16px; left: 16px; background: rgba(59, 130, 246, 0.9); color: white; padding: 8px 12px; border-radius: 6px; font-size: 12px;">
-                    
-                </div> -->
-            </div>
-        </div>
-
-        
-    </div>
-
-    
-    <div class="bottom-section">
-        <div class="left-column">
-            <div class="form-group">
-                <label for="creeSection">Create Section</label>
-                <input type="text" id="creeSection" placeholder="e.g. 8 weeks, 10 hours">
-            </div>
-            
-            <div class="create-btn-container">
-                <button type="button" class="btn btn-primary" onclick="createSection()">Create</button>
-            </div>
-
-            <div class="form-group">
-                <label for="section">Section</label>
-                <select id="section">
-                    <option value="">Select Section</option>
-                    
-                </select>
-            </div>
-
-            
-        </div>
-
-        <div class="right-column">
-            <div class="media-section">
-                <div class="form-group">
-                    <label>Course Materials</label>
-                    <button type="button" class="btn btn-primary" onclick="document.getElementById('courseMaterials').click()">
-                        Upload files
-                    </button>
-                    <div class="file-info">PDF, DOCX, PPTX</div>
-                    <input type="file" id="courseMaterials" class="hidden-input" multiple accept=".pdf,.docx,.pptx">
-                </div>
-
-                <div class="form-group">
-                    <label>Videos</label>
-                    <button type="button" class="btn btn-primary" onclick="document.getElementById('videos').click()">
-                        Upload video
-                    </button>
-                    <input type="file" id="videos" class="hidden-input" multiple accept="video/*">
-                </div>
-
-                <div class="form-group">
-                    <button type="button" class="btn btn-success">
-                        Soumettre pour validation
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="validation-note">
-        Après soumission, votre cours sera examiné par notre équipe d'administration. Vous recevrez un e-mail une fois qu'il sera approuvé ou si des informations supplémentaires sont nécessaires.
-    </div>
-</div>
-</div>
-
-<div class="all-carousel-container">
-
-    <div class="carousel-container">
-
-
-        <div class="controls">
-            <button onclick="prev()" id="prevBtn"> ← </button>
-            <button onclick="next()" id="nextBtn"> → </button>
-        </div>
-
-  
-  <div class="carousel-track" id="carouselTrack">
-      <div class="carousel-item">
-        <div class="carousel-card">
-            <div class="p-course-box">
-                <div class="p-course-box-img"><img src="{% static 'assets/img/courseJs.png' %}" alt=""></div>
-            <div class="p-course-details">
-                <h1 class="p-title">front-end Development</h1>
-                <div class="p-views">
-                    <p id="status" class="a">Accepted</p>
-                    <p id="viewers">215 vues</p>
-                    <p id="ratings">72 ratings</p>
-                </div>
-            </div>
-        </div>
-        </div>
+    <form method="POST" enctype="multipart/form-data" action="{% url 'courses:add_course' %}">
+  {% csrf_token %}
+  <div class="section">
+    <div class="aaa">
+      <h2 class="section-title">Course Details</h2>
+      <div class="close">
+        <h2 id="croix" onclick="closeCourseForm()" class="section-title">&times;</h2>
       </div>
-      <div class="carousel-item">
-        <div class="carousel-card">
-            <div class="p-course-box">
-                <div class="p-course-box-img"><img src="{% static 'assets/img/courseJs.png' %}" alt=""></div>
-            <div class="p-course-details">
-                <h1 class="p-title">front-end Development</h1>
-                <div class="p-views">
-                    <p id="status" class="a">Accepted</p>
-                    <p id="viewers">215 vues</p>
-                    <p id="ratings">72 ratings</p>
-                </div>
-            </div>
-        </div>
-        </div>
-      </div>
-      <div class="carousel-item">
-        <div class="carousel-card">
-            <div class="p-course-box">
-                <div class="p-course-box-img"><img src="{% static 'assets/img/courseJs.png' %}" alt=""></div>
-            <div class="p-course-details">
-                <h1 class="p-title">front-end Development</h1>
-                <div class="p-views">
-                    <p id="status" class="a">Accepted</p>
-                    <p id="viewers">215 vues</p>
-                    <p id="ratings">72 ratings</p>
-                </div>
-            </div>
-        </div>
-        </div>
-      </div>
-      <div class="carousel-item">
-        <div class="carousel-card">
-            <div class="p-course-box">
-                <div class="p-course-box-img"><img src="{% static 'assets/img/courseJs.png' %}" alt=""></div>
-            <div class="p-course-details">
-                <h1 class="p-title">front-end Development</h1>
-                <div class="p-views">
-                    <p id="status" class="a">Accepted</p>
-                    <p id="viewers">215 vues</p>
-                    <p id="ratings">72 ratings</p>
-                </div>
-            </div>
-        </div>
-        </div>
-      </div>
-
-
-      <div class="carousel-item">
-        <div class="carousel-card">
-            <div class="p-course-box">
-                <div class="p-course-box-img"><img src="{% static 'assets/img/courseJs.png' %}" alt=""></div>
-            <div class="p-course-details">
-                <h1 class="p-title">front-end Development</h1>
-                <div class="p-views">
-                    <p id="status" class="a">Accepted</p>
-                    <p id="viewers">215 vues</p>
-                    <p id="ratings">72 ratings</p>
-                </div>
-            </div>
-        </div>
-        </div>
-      </div>
-
     </div>
-  </div>
-                </div>
-
-    
-        </div>
-
-
-    <div class="jobs-page" id="page3">
-        <div class="job-left">
-
-            <div class="job-skills">
-                    <h1 id="jp">Skills</h1>
-                    <ul class="skill-wrraper">
-                        <li class="skill">CSS</li>
-                        <li class="skill">Figma</li>
-                        <li class="skill">ReactJs</li>
-                        <li class="skill">Django</li>
-                        <div class="add">+</div>
-                    </ul>
-                </div>
-
-            <h1 id="jp">Jobs I've applied to</h1>
-        <div class="job-container">
-            <div class="job-item">
-                <div class="job-item-img">
-                    <img src="{% static 'assets/img/company.svg' %}" alt="">
-                </div>
-                <div class="job-item-details">
-                    <h1 id="title">ui/ux designer</h1>
-                    <h1 id="salary">921$</h1>
-                    <p class="status a">Accepted</p>
-                </div>
-            </div>
-
-            <div class="job-item">
-                <div class="job-item-img">
-                    <img src="{% static 'assets/img/company.svg' %}" alt="">
-                </div>
-                <div class="job-item-details">
-                    <h1 id="title">video editor</h1>
-                    <h1 id="salary">100$</h1>
-                    <p class="status r">rejected</p>
-                </div>
-            </div>
-
-            <div class="job-item">
-                <div class="job-item-img">
-                    <img src="{% static 'assets/img/company.svg' %}" alt="">
-                </div>
-                <div class="job-item-details">
-                    <h1 id="title">front-end developper</h1>
-                    <h1 id="salary">50$</h1>
-                    <p class="status p">pending</p>
-                </div>
-            </div>
-        </div>
-        <button id="new-job-btn" onclick="showJobForm()">+ new jobs</button>
-
-<div class="add-job">
-<div class="add-job-page " id="JobForm">
- <div class="bbb">
-    <h2 id="job-off-details">
-        <h2>Job Offer Details</h2>
-        <div class="close">
-                    <h2 id="croix" onclick="closeJobForm()" class="section-title">&times;</h2>
-                </div>
-    </h2>
- </div>
-  <form>
-    <div>
-      <label for="titre">Job Title</label>
-      <input type="text" id="titre" placeholder="e.g., Web Developer, HR Assistant...">
+    <div class="form-group">
+      <label for="courseTitle">Course Title</label>
+      <input type="text" id="courseTitle" name="title" placeholder="Enter course name" required>
     </div>
 
-    <div>
-      <label for="description">Job Description</label>
-      <textarea id="description" rows="5" placeholder="Describe the tasks, goals, and context"></textarea>
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea id="description" name="description" placeholder="Brief course summary" required></textarea>
     </div>
-
-    <div class="add-job-row">
-      <div>
-        <label for="contrat">Contract Type</label>
-        <select id="contrat">
-          <option>Internship</option>
-          <option>Fixed-term</option>
-          <option>Permanent</option>
-          <option>Freelance</option>
+    <div class="form-group">
+      <label for="objectives">Learning Objectives</label>
+      <textarea id="objectives" name="objectives" placeholder="List key outcomes (one per line)"></textarea>
+    </div>
+    <div class="form-group">
+        <label for="Price">Price</label>
+        <input type="number" id="Price" step="0.01" name="price" placeholder="Course Price" required>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label for="category">Category</label>
+        <select id="category" name="category">
+          <option value="" disabled selected>Select Category</option>
+          <option value="technology">Technology</option>
+          <option value="business">Business</option>
+          <option value="design">Design</option>
+          <option value="marketing">Marketing</option>
+          <option value="development">Development</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="level">Level</label>
+        <select id="level" name="level">
+          <option value="">Beginner, Intermediate, Advanced</option>
+          <option value="Beginner">Beginner</option>
+          <option value="Intermediate">Intermediate</option>
+          <option value="Advanced">Advanced</option>
         </select>
       </div>
     </div>
-
-    <div class="add-job-row">
-      <div>
-        <label for="date">Expiration Date</label>
-        <input type="date" id="date">
-      </div>
-      <div>
-        <label for="lieu">Location</label>
-        <input type="text" id="lieu" placeholder="Remote or City">
-      </div>
+    <div class="form-group">
+      <label for="prerequisites">Prerequisites</label>
+      <textarea id="prerequisites" name="prerequisites" placeholder="List prerequisites"></textarea>
     </div>
-
-    <h3>Skills & Profile</h3>
-    <div>
-      <label for="competences">Required Skills</label>
-      <input type="text" id="competences" placeholder="List the skills (e.g., Python, project management...)">
-    </div>
-
-    <div>
-      <label for="secteur">Industry Sector</label>
-      <input type="text" id="secteur" placeholder="e.g., IT, Healthcare, Finance...">
-    </div>
-
-    <div class="add-job-row">
-      <div>
-        <label for="education">Education Level</label>
-        <input type="text" id="education" placeholder="e.g., Bachelor's, Master's, etc.">
-      </div>
-      <div>
-        <label for="level">Job Level</label>
-        <input type="text" id="level" placeholder="e.g., Junior, Mid, Senior">
+    <div class="form-group">
+      <label for="duration">Estimated Duration</label>
+      <div class="duration-container">
+        <input type="text" id="duration" name="duration" placeholder="e.g. 8 weeks, 10 hours">
       </div>
     </div>
-
-    <h3>Company / Organization</h3>
-    <div>
-      <label for="nom_entreprise">Company Name</label>
-      <input type="text" id="nom_entreprise" placeholder="Legal name or brand">
+  </div>
+  <div class="section">
+    <h2 class="section-title">Course Media</h2>
+    <label for="coverImage">Cover Image</label>
+    <div class="form-group" id="image-area">
+      <div class="image-upload-area">
+        <img src="{% static 'assets/img/Course cover' %}" alt="Cover Image"
+             style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px; border: 2px solid #e5e7eb;">
+        <div style="position: absolute; bottom: 16px; right: 16px;">
+          <button type="button" class="btn btn-primary" onclick="document.getElementById('coverImage').click()">
+            📝 Change Image
+          </button>
+          <input type="file" id="coverImage" name="cover_image" class="hidden-input" accept="image/*">
+        </div>
+      </div>
     </div>
-
-    <div>
-      <label for="presentation">Introduction</label>
-      <textarea id="presentation" rows="3" placeholder="Brief description of the company or organization"></textarea>
+  </div>
+  <div class="bottom-section">
+    <div class="left-column">
+      <div class="form-group">
+        <label for="creeSection">Create Section</label>
+        <input type="text" id="creeSection" name="section_title" placeholder="e.g. Introduction">
+      </div>
+      <div class="create-btn-container">
+        <button type="button" class="btn btn-primary" onclick="createSection()">Create</button>
+      </div>
+      <div class="form-group">
+        <label for="section">Section</label>
+        <select id="section" name="section">
+          <option value="">Select Section</option>
+        </select>
+      </div>
     </div>
-
-    <div>
-      <label for="email">Contact Email Address</label>
-      <input type="email" id="email" placeholder="contact@company.com">
+    <div class="right-column">
+      <div class="media-section">
+        <div class="form-group">
+          <label>Course Materials</label>
+          <button type="button" class="btn btn-primary" onclick="document.getElementById('courseMaterials').click()">
+            Upload files
+          </button>
+          <div class="file-info">PDF, DOCX, PPTX</div>
+          <input type="file" id="courseMaterials" name="materials" class="hidden-input" multiple accept=".pdf,.docx,.pptx">
+        </div>
+        <div class="form-group">
+          <label>Videos</label>
+          <button type="button" class="btn btn-primary" onclick="document.getElementById('videos').click()">
+            Upload video
+          </button>
+          <input type="file" id="videos" name="videos" class="hidden-input" multiple accept="video/*">
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-success">
+            Soumettre pour validation
+          </button>
+        </div>
+      </div>
     </div>
-
-    <h3>Attachments</h3>
-    <div>
-      <label for="fichier">Brochure, visual or logo (PDF, JPG, PNG)</label><br>
-      <label class="add-job-custom-file-upload">
-        <input type="file" id="fichier" accept=".pdf,.jpg,.jpeg,.png">
-        Choose File
-      </label>
-    </div>
-
-    <button type="submit" class="add-job-button">Submit Offer</button>
-    <p class="add-job-info">
-      Your offer will be reviewed by the administrator before being published. You will receive a confirmation email.
-    </p>
-  </form>
+  </div>
+  <div class="validation-note">
+    Après soumission, votre cours sera examiné par notre équipe d'administration. Vous recevrez un e-mail une fois qu'il sera approuvé ou si des informations supplémentaires sont nécessaires.
+  </div>
+</form>
     </div>
    </div> 
 
@@ -1055,7 +784,14 @@
 
 
     <script src="{% static 'JS_files/Profile-script.js' %}"></script>
-    
+    <script>
+function showCourseForm() {
+    document.querySelector('.add-course').style.display = 'block';
+}
+function closeCourseForm() {
+    document.querySelector('.add-course').style.display = 'none';
+}
+</script>
 </body>
 
 </html>
