@@ -3,7 +3,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
-from .models import Course, Section, Video, CourseMaterial
+from .models import Course, Section, Video, CourseMaterial, Category
 from django.contrib import messages
 from courses.models import Rating, Lesson, WhatYouLearn
 from django.db.models import Q, Avg, Count
@@ -172,7 +172,7 @@ def add_course(request):
         title = request.POST.get('title')
         description = request.POST.get('description')
         objectives = request.POST.get('objectives')
-        category = request.POST.get('category')
+        category_name = request.POST.get('category')
         level = request.POST.get('level')
         prerequisites = request.POST.get('prerequisites')
         duration = request.POST.get('duration')
@@ -181,6 +181,13 @@ def add_course(request):
 
         if not title or not description or not price:
             messages.error(request, "Title, description, and price are required.")
+            return redirect('courses:add_course')
+
+        try:
+            # Get the Category instance using the category name
+            category = Category.objects.get(name=category_name)
+        except Category.DoesNotExist:
+            messages.error(request, f"Category '{category_name}' does not exist.")
             return redirect('courses:add_course')
 
         course = Course.objects.create(
@@ -199,7 +206,9 @@ def add_course(request):
         messages.success(request, "Course created successfully! Now add sections and materials.")
         return render(request, 'users/Profile.html')
 
-    return render(request, 'courses/Courses.html')
+    # Handle GET request - show the form
+    categories = Category.objects.all()
+    return render(request, 'users/Profile.html', {'categories': categories})
 
 @login_required
 @csrf_exempt

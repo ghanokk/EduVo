@@ -4,7 +4,7 @@ from django.contrib.auth import authenticate, login as auth_login, logout as aut
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
-from courses.models import Course, Enrollment
+from courses.models import Course, Enrollment, Category
 from jobs.models import Job, JobApplication
 from skills.models import Skill, UserSkill
 from users.models import User
@@ -69,6 +69,7 @@ def profile(request):
     context = {
         "user": user,
         "profile": profile,
+        "categories": Category.objects.all(),
     }
 
     # nverifio l'type dyal l'user (student, teacher, company)

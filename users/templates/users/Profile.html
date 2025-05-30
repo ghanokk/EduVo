@@ -131,31 +131,34 @@
 
     <div class="summary-page page yes" id="page1">
 
-        <div class="my-stats-shorted">
-            <div class="box">
-                <div class="icone"><img src="{% static 'assets/img/Course.png' %}" alt=""></div>
-                <h1 class="value">20</h1>
-                <p class="content">Tracked course</p>
-            </div>
+<div class="my-stats-shorted">
+    <div class="box">
+        <div class="icone"><img src="{% static 'assets/img/Course.png' %}" alt=""></div>
+        <h1 class="value">{{ user.enrollments.all|length }}</h1>
+        <p class="content">Tracked course</p>
+    </div>
 
-            <div class="box">
-                <div class="icone"><img src="{% static 'assets/img/Certificate.png' %}" alt=""></div>
-                <h1 class="value">15</h1>
-                <p class="content">Certificate</p>
-            </div>
+    <div class="box">
+        <div class="icone"><img src="{% static 'assets/img/Certificate.png' %}" alt=""></div>
+        <h1 class="value">
+            {{ stats.certificates_count }}
 
-            <div class="box">
-                <div class="icone"><img src="{% static 'assets/img/New Job.png' %}" alt=""></div>
-                <h1 class="value">3</h1>
-                <p class="content">Jobs postule</p>
-            </div>
+        </h1>
+        <p class="content">Certificate</p>
+    </div>
 
-            <div class="box">
-                <div class="icone"><img src="{% static 'assets/img/skills.png' %}" alt=""></div>
-                <h1 class="value">5</h1>
-                <p class="content">Skills</p>
-            </div>
-        </div>
+    <div class="box">
+        <div class="icone"><img src="{% static 'assets/img/New Job.png' %}" alt=""></div>
+        <h1 class="value">{{ user.applications.all|length }}</h1>
+        <p class="content">Jobs postule</p>
+    </div>
+
+    <div class="box">
+        <div class="icone"><img src="{% static 'assets/img/skills.png' %}" alt=""></div>
+        <h1 class="value">{{ user.profile.skill_proficiencies.all|length }}</h1>
+        <p class="content">Skills</p>
+    </div>
+</div>
 
         <div class="my-stats-extended">
 
@@ -605,12 +608,9 @@
         <label for="category">Category</label>
         <select id="category" name="category">
           <option value="" disabled selected>Select Category</option>
-          <option value="technology">Technology</option>
-          <option value="business">Business</option>
-          <option value="design">Design</option>
-          <option value="marketing">Marketing</option>
-          <option value="development">Development</option>
-          <option value="Other">Other</option>
+          {% for category in categories %}
+            <option value="{{ category.name }}">{{ category.name }}</option>
+          {% endfor %}
         </select>
       </div>
       <div class="form-group">
@@ -805,7 +805,7 @@
             <div class="job-skills">
                     <h1 id="jp">Skills</h1>
                     <ul class="skill-wrraper">
-                        {% for skill in user.studentprofile.skill_proficiencies.all %}
+                        {% for skill in user.profile.skill_proficiencies.all %}
                             <li class="skill">
                                 <span class="skill-name">{{ skill.skill.name }}</span>
                                 <span class="skill-level">{{ skill.get_proficiency_level_display }}</span>
