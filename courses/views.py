@@ -1,6 +1,11 @@
 import os
-from django.shortcuts import render, get_object_or_404
-from courses.models import Course, Rating,Lesson,WhatYouLearn
+from django.shortcuts import render, get_object_or_404, redirect
+from django.http import JsonResponse
+from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_exempt
+from .models import Course, Section, Video, CourseMaterial
+from django.contrib import messages
+from courses.models import Rating, Lesson, WhatYouLearn
 from django.db.models import Q, Avg, Count
 from django.apps import apps
 from django.conf import settings
@@ -164,3 +169,80 @@ def course_model(request, course_id):
     }
 
     return render(request, 'Course-model.html', context)
+
+@login_required
+def add_course(request):
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        description = request.POST.get('description')
+        objectives = request.POST.get('objectives')
+        category = request.POST.get('category')
+        level = request.POST.get('level')
+        prerequisites = request.POST.get('prerequisites')
+        duration = request.POST.get('duration')
+        cover_image = request.FILES.get('cover_image')
+        price = request.POST.get('price')  
+
+        if not title or not description or not price:
+            messages.error(request, "Title, description, and price are required.")
+            return redirect('courses:add_course')
+
+        course = Course.objects.create(
+            title=title,
+            description=description,
+            objectives=objectives,
+            category=category,
+            level=level,
+            prerequisites=prerequisites,
+            duration=duration,
+            cover_image=cover_image,
+            price=price,
+            creator=request.user,
+            teacher=request.user 
+        )
+        messages.success(request, "Course created successfully! Now add sections and materials.")
+        return render(request, 'users/Profile.html')
+
+    return render(request, 'courses/Courses.html')
+
+@login_required
+@csrf_exempt
+def create_section(request):
+    if request.method == 'POST':
+        course_id = request.POST.get('course_id')
+        title = request.POST.get('section_title')
+        course = get_object_or_404(Course, id=course_id, creator=request.user)
+        section = Section.objects.create(course=course, title=title)
+        return JsonResponse({'id': section.id, 'title': section.title})
+
+@login_required
+@csrf_exempt
+def upload_video(request):
+    if request.method == 'POST':
+        section_id = request.POST.get('section_id')
+        video_file = request.FILES.get('video')
+        title = request.POST.get('video_title', '')
+        section = get_object_or_404(Section, id=section_id, course__creator=request.user)
+        video = Video.objects.create(section=section, file=video_file, title=title)
+        return JsonResponse({'id': video.id, 'title': video.title, 'url': video.file.url})
+
+@login_required
+@csrf_exempt
+def upload_material(request):
+    if request.method == 'POST':
+        section_id = request.POST.get('section_id')
+        material_file = request.FILES.get('material')
+        title = request.POST.get('material_title', '')
+        section = get_object_or_404(Section, id=section_id, course__creator=request.user)
+        material = CourseMaterial.objects.create(section=section, file=material_file, title=title)
+        return JsonResponse({'id': material.id, 'title': material.title, 'url': material.file.url})
+
+def courses(request):
+    courses = Course.objects.all()  # or filter as needed
+    top_courses = Course.objects.order_by('-views')[:3]  # or your logic
+    level_choices = Course.LEVEL_CHOICES
+    return render(request, 'Courses.html', {
+        'courses': courses,
+        'top_courses': top_courses,
+        'level_choices': level_choices,
+    })
