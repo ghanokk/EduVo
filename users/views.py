@@ -26,10 +26,6 @@ def logout_view(request):
     auth_logout(request)
     return redirect('homePage')
 
-# had l'function li t3aml m3a l'forgot password
-def forgotPass(request):
-    return render(request, 'users/forgotPass.html')
-
 def Register(request):
     return render(request, 'users/register.html')
 
