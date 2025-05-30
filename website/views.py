@@ -3,6 +3,7 @@ from courses.models import Course, Rating, Category
 from django.db.models import Q, Avg, Count
 from django.apps import apps
 from django.conf import settings
+from collections import Counter
 
 
 
@@ -14,10 +15,15 @@ def homePage(request):
         student_count=Count('enrollments')
     ).order_by('-views')[:3]
 
-    # Get top categories with their course counts
-    top_categories = Category.objects.annotate(
-        course_count=Count('courses')
-    ).order_by('-course_count')[:4]
+    # Get all categories used in courses
+    course_categories = Course.objects.values_list('category', flat=True)
+    category_counts = Counter(course_categories)
+
+    # Get top categories by count
+    top_categories = sorted(
+        [{'name': name, 'count': count} for name, count in category_counts.items()],
+        key=lambda x: -x['count']
+    )[:4]
 
     # Get latest jobs
     from jobs.models import Job
