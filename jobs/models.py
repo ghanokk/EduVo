@@ -13,8 +13,7 @@ STATUS_CHOICES = [
 # Application Status choices
 APPLICATION_STATUS_CHOICES = [
     ('pending', 'Pending'),
-    ('reviewing', 'Reviewing'),
-    ('shortlisted', 'Shortlisted'),
+    
     ('rejected', 'Rejected'),
     ('accepted', 'Accepted')
 ]

@@ -23,6 +23,7 @@ const localisationSaved = document.querySelector('#location1')
 
 
 
+
 function showSettings(){
 settingPage.classList.add('shown')
 settingPage.classList.remove('hidden')
@@ -82,207 +83,36 @@ function hideEditForm(){
 }
 
 
-document.getElementById('edit-profile-form').addEventListener('submit', async function(e) {
-    e.preventDefault();
+function edit(){
+    if(userInput.value == ""){
+        userInput.value = username.textContent
+    }
+
+    if(bioField.value == ""){
+        bioField.value = bio.textContent
+    }
     
-    const username = userInput.value;
-    const wilaya = document.getElementById('wilaya').value;
-    const bio = bioField.value;
+    
+    username.textContent =inputForm.value ; 
+    localisation.textContent = country.textContent +', ' + wilaya.options[wilaya.selectedIndex].textContent;
+    // bioField = bio
+    hideEditForm()
 
-    try {
-        // Validate username first
-        const isValidUsername = await validateUsername(username);
-        if (!isValidUsername) return;
-
-        // Prepare data to send
-        const formData = new FormData();
-        formData.append('username', username);
-        formData.append('wilaya', wilaya);
-        formData.append('bio', bio);
-
-        // Send update request
-        const response = await fetch('/profile/update-profile/', {
-            method: 'POST',
-            headers: {
-                'X-CSRFToken': document.querySelector('input[name="csrfmiddlewaretoken"]').value
-            },
-            body: formData
-        });
-        const data = await response.json();
-
-        if (data.success) {
-            // Update the UI
-            username.textContent = username;
-            localisation.textContent = `Algeria, ${data.wilaya_display}`;
-            bioField.textContent = bio;
-            hideEditForm();
-        } else {
-            alert('Error updating profile');
-        }
-    } catch (error) {
-        console.error('Error:', error);
-        alert('Error updating profile');
-    }
-});
-
-async function saveEdit() {
-    const username = document.getElementById('user-input').value;
-    const wilaya = document.getElementById('wilaya').value;
-    const bio = document.getElementById('biographie-field').value;
-    const messageElement = document.getElementById('save-message');
-
-    if (!username.trim()) {
-        messageElement.textContent = 'Username cannot be empty';
-        messageElement.style.color = 'red';
-        return;
-    }
-
-    try {
-        // Validate username first
-        const response = await fetch('/profile/validate-username/', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-                'X-CSRFToken': document.querySelector('input[name="csrfmiddlewaretoken"]').value
-            },
-            body: new URLSearchParams({
-                username: username
-            })
-        });
-        const data = await response.json();
-
-        if (!data.is_valid) {
-            messageElement.textContent = data.message;
-            messageElement.style.color = 'red';
-            return;
-        }
-
-        // Prepare data to send
-        const formData = new FormData();
-        formData.append('username', username);
-        formData.append('wilaya', wilaya);
-        formData.append('bio', bio);
-
-        // Send update request
-        const updateResponse = await fetch('/profile/update-profile/', {
-            method: 'POST',
-            headers: {
-                'X-CSRFToken': document.querySelector('input[name="csrfmiddlewaretoken"]').value
-            },
-            body: formData
-        });
-        const updateData = await updateResponse.json();
-
-        if (updateData.success) {
-            // Update the UI
-            document.getElementById('username-value').textContent = updateData.username;
-            document.getElementById('loc').textContent = updateData.wilaya_display;
-            document.getElementById('bio-space').textContent = updateData.bio;
-            hideEditForm();
-            messageElement.textContent = updateData.message;
-            messageElement.style.color = 'green';
-            setTimeout(() => {
-                messageElement.textContent = '';
-            }, 3000);
-        } else {
-            messageElement.textContent = updateData.error || 'Error updating profile';
-            messageElement.style.color = 'red';
-        }
-    } catch (error) {
-        console.error('Error:', error);
-        messageElement.textContent = 'Error updating profile';
-        messageElement.style.color = 'red';
-    }
-}
-
-// Username validation
-async function validateUsername(username) {
-    const response = await fetch('/profile/validate-username/', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRFToken': getCookie('csrftoken')
-        },
-        body: JSON.stringify({ username: username })
-    });
-    const data = await response.json();
-    if (data.exists) {
-        alert('Username already exists');
-        return false;
-    }
-    return true;
-}
-
-// Utility function to get CSRF token
-function getCookie(name) {
-    let cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-        const cookies = document.cookie.split(';');
-        for (let i = 0; i < cookies.length; i++) {
-            const cookie = cookies[i].trim();
-            if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
-            }
-        }
-    }
-    return cookieValue;
+    
 }
 
 function showImgForm(){
-    document.querySelector('.add-picture').classList.remove('hidden');
-}
-
-// Handle file selection
-document.getElementById('fileInput').addEventListener('change', function(e) {
-    const file = e.target.files[0];
-    if (file) {
-        document.getElementById('fileName').textContent = file.name;
-        
-        // Show file preview
-        const previewImg = document.getElementById('preview-img');
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            previewImg.src = e.target.result;
-            previewImg.style.display = 'block';
-        }
-        reader.readAsDataURL(file);
-    }
-});
-
-function uploadProfilePicture() {
-    const file = document.getElementById('fileInput').files[0];
-    if (!file) {
-        alert('Please select a file first');
-        return;
-    }
-
-    const formData = new FormData();
-    formData.append('profile_picture', file);
     
-    fetch('/profile/update-picture/', {
-        method: 'POST',
-        headers: {
-            'X-CSRFToken': document.querySelector('input[name="csrfmiddlewaretoken"]').value
-        },
-        body: formData
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            // Update the profile picture in the UI
-            document.getElementById('pro-pic').src = data.image_url;
-            document.querySelector('.add-picture').classList.add('hidden');
-            document.getElementById('preview-img').style.display = 'none';
-            document.getElementById('fileName').textContent = 'No file chosen';
-        } else {
-            alert('Error updating profile picture');
-        }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        alert('Error uploading profile picture');
-    });
+    if(imgForm.classList.contains('hidden')){
+        imgForm.classList.remove('hidden')
+        imgForm.classList.add('shown')
+    }
+
+    else{
+        hideImgForm()
+    }
+
+    
 }
 
 function hideImgForm(){
@@ -298,21 +128,9 @@ function saveEdit(){
     localisationSaved.textContent = country.textContent +', ' + wilaya.options[wilaya.selectedIndex].textContent;
     bioField.textContent = bio.textContent
 
-
+    
     hideEdit()
 }
-
-const listStats = document.querySelector('.clickable')
-
-document.querySelectorAll('.clickable').forEach(listStats => {
-  listStats.addEventListener('click', () => {
-    // Enlève la classe active des autres
-    document.querySelectorAll('.clickable').forEach(s => s.classList.remove('active'));
-
-    // Ajoute l'animation de soulignement avec radius
-    listStats.classList.add('active');
-  });
-});
 
 
 
@@ -396,7 +214,32 @@ const track = document.getElementById("carouselTrack");
 // }
 
 
+const listStats = document.querySelector('.clickable')
+
+document.querySelectorAll('.clickable').forEach(listStats => {
+  listStats.addEventListener('click', () => {
+    // Enlève la classe active des autres
+    document.querySelectorAll('.clickable').forEach(s => s.classList.remove('active'));
+
+    // Ajoute l'animation de soulignement avec radius
+    listStats.classList.add('active');
+  });
+});
+
+
+
 function showCC(){
+
+  window.scrollTo({
+  top: 0,
+  behavior: 'smooth'
+});
+
+  document.getElementById('btn-page2').classList.remove('active')
+  document.getElementById('btn-page3').classList.remove('active')
+  document.getElementById('btn-page1').classList.remove('active')
+
+  document.getElementById('btn-page2').classList.add('active')
     document.querySelector('.course-and-certifications').style.display = 'block'
     document.querySelector('.summary-page').style.display = 'none'
     document.querySelector('.jobs-page').style.display = 'none'
@@ -405,6 +248,17 @@ function showCC(){
 
 
 function showSS(){
+  window.scrollTo({
+  top: 0,
+  behavior: 'smooth'
+});
+
+
+  document.getElementById('btn-page2').classList.remove('active')
+  document.getElementById('btn-page3').classList.remove('active')
+  document.getElementById('btn-page1').classList.remove('active')
+
+  document.getElementById('btn-page2').classList.add('active')
     document.querySelector('.course-and-certifications').style.display = 'none'
     document.querySelector('.summary-page').style.display = 'block'
     document.querySelector('.jobs-page').style.display = 'none'
@@ -413,6 +267,17 @@ function showSS(){
 
 
 function showJS(){
+  window.scrollTo({
+  top: 0,
+  behavior: 'smooth'
+});
+
+
+  document.getElementById('btn-page2').classList.remove('active')
+  document.getElementById('btn-page3').classList.remove('active')
+  document.getElementById('btn-page1').classList.remove('active')
+
+  document.getElementById('btn-page3').classList.add('active')
      document.querySelector('.course-and-certifications').style.display = 'none'
     document.querySelector('.summary-page').style.display = 'none'
     document.querySelector('.jobs-page').style.display = 'block'
@@ -469,6 +334,8 @@ function closeCourseForm(){
 }
 
 
+
+
 window.onload = () => {
   const values = document.querySelectorAll(".progression-value");
   const bars = document.querySelectorAll(".progression-bar");
@@ -490,6 +357,7 @@ window.onload = () => {
     }
   });
 };
+
 
 
 

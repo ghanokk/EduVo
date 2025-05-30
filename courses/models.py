@@ -1,6 +1,7 @@
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db.models import Avg, Count
+from users.models import User
 
 class Category(models.Model):
     name = models.CharField(max_length=100, unique=True)
@@ -39,9 +40,25 @@ class Course(models.Model):
     title = models.CharField(max_length=255)  # lism t3 l'cours
     description = models.TextField()  # l'description  l'cours
     price = models.DecimalField(max_digits=10, decimal_places=2)  # l'prix dyal l'cours
-    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, related_name='courses')  # l'catégorie dyal l'cours
-    duration = models.DurationField(blank=True, null=True)  # l'durée dyal l'cours
+    category = models.ForeignKey(
+        Category,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='courses'
+    )  # l'catégorie dyal l'cours
+    duration = models.CharField(max_length=100, blank=True, null=True)  # l'durée dyal l'cours
     image = models.ImageField(upload_to='course_images/', blank=True, null=True)  # l'image dyal l'cours
+
+    @property
+    def image_url(self):
+        try:
+            if self.image and hasattr(self.image, 'url'):
+                return self.image.url
+            return '/static/assets/img/default-course.jpg'
+        except ValueError:
+            return '/static/assets/img/default-course.jpg'
+
     level = models.CharField(max_length=20, choices=LEVEL_CHOICES, default='Beginner')  # l'level dyal l'cours
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='draft')  # l'status dyal l'cours
     teacher = models.ForeignKey(  # l'professeur li kay3lem l'cours
@@ -49,12 +66,15 @@ class Course(models.Model):
         on_delete=models.CASCADE,
         related_name='taught_courses'
     )
-    video = models.FileField(upload_to='course_videos/', blank=True, null=True)  # l'vidéo dyal l'cours
-    image = models.ImageField(upload_to='course_images/', blank=True, null=True)  # l'image dyal l'cours
+    
     views = models.PositiveIntegerField(default=0)  # ch7al men wa7ed chaf l'cours
     created_at = models.DateTimeField(auto_now_add=True)  # l'date li t3mer fih l'cours
     updated_at = models.DateTimeField(auto_now=True)  # l'date li tbedel fih l'cours
     skills = models.ManyToManyField('skills.Skill', related_name='courses')  # l'skills li kay3tina f'l'cours
+    objectives = models.TextField(blank=True)  # l'objectifs dyal l'cours
+    prerequisites = models.TextField(blank=True)  # l'exigences préalables dyal l'cours
+    cover_image = models.ImageField(upload_to='course_covers/', blank=True, null=True)  # l'image dyal l'cours
+    creator = models.ForeignKey(User, on_delete=models.CASCADE)  # l'mostakhdim li khala9 l'cours
     def __str__(self):
         # hadi bach tban l'ism dyal l'cours f'l'admin w f'l'affichage
         return self.title
@@ -89,7 +109,7 @@ class Course(models.Model):
 
 class Section(models.Model):
     # had l'model kay7fed fih l'sections dyal l'cours
-    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='sections')  # l'cours li kayn fih had l'section
+    course = models.ForeignKey(Course, related_name='sections', on_delete=models.CASCADE)  # l'cours li kayn fih had l'section
     title = models.CharField(max_length=255)  # l'ism dyal l'section
     order = models.PositiveIntegerField(default=0)  # l'ordre dyal l'section f'l'cours
 
@@ -205,3 +225,15 @@ class WhatYouLearn(models.Model):
 
     def __str__(self):
         return self.description
+
+
+class Video(models.Model):
+    section = models.ForeignKey(Section, related_name='videos', on_delete=models.CASCADE)
+    file = models.FileField(upload_to='course_videos/')
+    title = models.CharField(max_length=255, blank=True)
+
+
+class CourseMaterial(models.Model):
+    section = models.ForeignKey(Section, related_name='materials', on_delete=models.CASCADE)
+    file = models.FileField(upload_to='course_materials/')
+    title = models.CharField(max_length=255, blank=True)

@@ -142,6 +142,8 @@ class AlgerianCardPayment(models.Model):  # (paiement avec carte algérienne)
         ('badr', 'Banque Al Baraka'),
     ]
 
+
+
     payment = models.OneToOneField(
         Payment,
         on_delete=models.CASCADE,  # (ila tmas7 paiement, tmas7 les détails aussi)

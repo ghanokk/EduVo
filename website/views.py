@@ -25,10 +25,7 @@ def homePage(request):
 
     # Process course data
     for course in top_courses:
-        if course.image:
-            course.image_url = course.image.url
-        else:
-            course.image_url = settings.STATIC_URL + 'assets/img/default-course.jpg'
+        
         course.rating = range(int(course.avg_rating or 0))
 
     # Get statistics

@@ -23,6 +23,7 @@ const localisationSaved = document.querySelector('#location1')
 
 
 
+
 function showSettings(){
 settingPage.classList.add('shown')
 settingPage.classList.remove('hidden')
@@ -127,21 +128,9 @@ function saveEdit(){
     localisationSaved.textContent = country.textContent +', ' + wilaya.options[wilaya.selectedIndex].textContent;
     bioField.textContent = bio.textContent
 
-
+    
     hideEdit()
 }
-
-const listStats = document.querySelector('.clickable')
-
-document.querySelectorAll('.clickable').forEach(listStats => {
-  listStats.addEventListener('click', () => {
-    // Enlève la classe active des autres
-    document.querySelectorAll('.clickable').forEach(s => s.classList.remove('active'));
-
-    // Ajoute l'animation de soulignement avec radius
-    listStats.classList.add('active');
-  });
-});
 
 
 
@@ -225,7 +214,32 @@ const track = document.getElementById("carouselTrack");
 // }
 
 
+const listStats = document.querySelector('.clickable')
+
+document.querySelectorAll('.clickable').forEach(listStats => {
+  listStats.addEventListener('click', () => {
+    // Enlève la classe active des autres
+    document.querySelectorAll('.clickable').forEach(s => s.classList.remove('active'));
+
+    // Ajoute l'animation de soulignement avec radius
+    listStats.classList.add('active');
+  });
+});
+
+
+
 function showCC(){
+
+  window.scrollTo({
+  top: 0,
+  behavior: 'smooth'
+});
+
+  document.getElementById('btn-page2').classList.remove('active')
+  document.getElementById('btn-page3').classList.remove('active')
+  document.getElementById('btn-page1').classList.remove('active')
+
+  document.getElementById('btn-page2').classList.add('active')
     document.querySelector('.course-and-certifications').style.display = 'block'
     document.querySelector('.summary-page').style.display = 'none'
     document.querySelector('.jobs-page').style.display = 'none'
@@ -234,6 +248,17 @@ function showCC(){
 
 
 function showSS(){
+  window.scrollTo({
+  top: 0,
+  behavior: 'smooth'
+});
+
+
+  document.getElementById('btn-page2').classList.remove('active')
+  document.getElementById('btn-page3').classList.remove('active')
+  document.getElementById('btn-page1').classList.remove('active')
+
+  document.getElementById('btn-page2').classList.add('active')
     document.querySelector('.course-and-certifications').style.display = 'none'
     document.querySelector('.summary-page').style.display = 'block'
     document.querySelector('.jobs-page').style.display = 'none'
@@ -242,6 +267,17 @@ function showSS(){
 
 
 function showJS(){
+  window.scrollTo({
+  top: 0,
+  behavior: 'smooth'
+});
+
+
+  document.getElementById('btn-page2').classList.remove('active')
+  document.getElementById('btn-page3').classList.remove('active')
+  document.getElementById('btn-page1').classList.remove('active')
+
+  document.getElementById('btn-page3').classList.add('active')
      document.querySelector('.course-and-certifications').style.display = 'none'
     document.querySelector('.summary-page').style.display = 'none'
     document.querySelector('.jobs-page').style.display = 'block'
@@ -298,6 +334,8 @@ function closeCourseForm(){
 }
 
 
+
+
 window.onload = () => {
   const values = document.querySelectorAll(".progression-value");
   const bars = document.querySelectorAll(".progression-bar");
@@ -319,6 +357,7 @@ window.onload = () => {
     }
   });
 };
+
 
 
 

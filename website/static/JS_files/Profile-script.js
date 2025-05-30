@@ -21,6 +21,9 @@ const localisationSaved = document.querySelector('#location1')
 
 
 
+
+
+
 function showSettings(){
 settingPage.classList.add('shown')
 settingPage.classList.remove('hidden')
@@ -125,21 +128,9 @@ function saveEdit(){
     localisationSaved.textContent = country.textContent +', ' + wilaya.options[wilaya.selectedIndex].textContent;
     bioField.textContent = bio.textContent
 
-
+    
     hideEdit()
 }
-
-const listStats = document.querySelector('.clickable')
-
-document.querySelectorAll('.clickable').forEach(listStats => {
-  listStats.addEventListener('click', () => {
-    // Enlève la classe active des autres
-    document.querySelectorAll('.clickable').forEach(s => s.classList.remove('active'));
-
-    // Ajoute l'animation de soulignement avec radius
-    listStats.classList.add('active');
-  });
-});
 
 
 
@@ -223,7 +214,32 @@ const track = document.getElementById("carouselTrack");
 // }
 
 
+const listStats = document.querySelector('.clickable')
+
+document.querySelectorAll('.clickable').forEach(listStats => {
+  listStats.addEventListener('click', () => {
+    // Enlève la classe active des autres
+    document.querySelectorAll('.clickable').forEach(s => s.classList.remove('active'));
+
+    // Ajoute l'animation de soulignement avec radius
+    listStats.classList.add('active');
+  });
+});
+
+
+
 function showCC(){
+
+  window.scrollTo({
+  top: 0,
+  behavior: 'smooth'
+});
+
+  document.getElementById('btn-page2').classList.remove('active')
+  document.getElementById('btn-page3').classList.remove('active')
+  document.getElementById('btn-page1').classList.remove('active')
+
+  document.getElementById('btn-page2').classList.add('active')
     document.querySelector('.course-and-certifications').style.display = 'block'
     document.querySelector('.summary-page').style.display = 'none'
     document.querySelector('.jobs-page').style.display = 'none'
@@ -232,6 +248,17 @@ function showCC(){
 
 
 function showSS(){
+  window.scrollTo({
+  top: 0,
+  behavior: 'smooth'
+});
+
+
+  document.getElementById('btn-page2').classList.remove('active')
+  document.getElementById('btn-page3').classList.remove('active')
+  document.getElementById('btn-page1').classList.remove('active')
+
+  document.getElementById('btn-page2').classList.add('active')
     document.querySelector('.course-and-certifications').style.display = 'none'
     document.querySelector('.summary-page').style.display = 'block'
     document.querySelector('.jobs-page').style.display = 'none'
@@ -240,6 +267,17 @@ function showSS(){
 
 
 function showJS(){
+  window.scrollTo({
+  top: 0,
+  behavior: 'smooth'
+});
+
+
+  document.getElementById('btn-page2').classList.remove('active')
+  document.getElementById('btn-page3').classList.remove('active')
+  document.getElementById('btn-page1').classList.remove('active')
+
+  document.getElementById('btn-page3').classList.add('active')
      document.querySelector('.course-and-certifications').style.display = 'none'
     document.querySelector('.summary-page').style.display = 'none'
     document.querySelector('.jobs-page').style.display = 'block'
@@ -276,38 +314,26 @@ function createSection(){
     
 }
 
-<<<<<<< HEAD
+const addJobForm = document.querySelector('.add-job')
+function showJobForm(){
+  addJobForm.style.display ='block'
+}
+
+function closeJobForm(){
+  addJobForm.style.display = 'none'
+}
 
 
-=======
-const showJobFormButton = document.getElementById('new-job-btn');
-  const addJobContainer = document.querySelector('.add-job');
+const addCourseForm = document.querySelector('.add-course')
+function showCourseForm(){
+addCourseForm.style.display='block'
+}
 
-  showJobFormButton.addEventListener('click', () => {
-    addJobContainer.classList.toggle('expand');
-  });
->>>>>>> origin/Back2_latest
+function closeCourseForm(){
+  addCourseForm.style.display='none'
+}
 
 
-const addCourseBtn = document.getElementById("showPageBtn");
-const hiddenPage = document.getElementById("hiddenPage");
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/Back2_latest
-const closeBtn = document.querySelector('.close')
-
-addCourseBtn.addEventListener("click", () => {
-  hiddenPage.classList.add("active");
-  hiddenPage.style.minHeight ='1700px';
-
-//   document.body.style.overflow = 'hidden'
-});
-
-closeBtn.addEventListener("click" , ()=>{
-    hiddenPage.classList.remove("active");
-  hiddenPage.style.minHeight ='0';
-})
 
 
 window.onload = () => {
@@ -333,7 +359,6 @@ window.onload = () => {
 };
 
 
-<<<<<<< HEAD
 
-=======
->>>>>>> origin/Back2_latest
+
+

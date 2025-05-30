@@ -5,9 +5,11 @@
 
 
 
-
-
 <!DOCTYPE html>
+
+
+
+
 
 
 <html lang="en">
@@ -21,11 +23,80 @@
 </head>
 
 <body>
-    
-    
-<!-- --------------------profile header----------------- -->
+    <!-- if profile updated -->
 
-    <div class="profile-header">
+    <style>
+        .messages-container {
+            margin: 20px auto;
+            max-width: 400px;
+        }
+
+        .message {
+            display: flex;
+            align-items: center;
+            padding: 12px 20px;
+            border-radius: 6px;
+            margin-bottom: 12px;
+            font-size: 16px;
+            font-weight: 500;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+        }
+
+        .message-icon {
+            font-size: 22px;
+            margin-right: 12px;
+        }
+
+        .alert-success {
+            background: #e8f5e9;
+            color: #256029;
+            border-left: 5px solid #4CAF50;
+        }
+
+        .alert-error,
+        .alert-danger {
+            background: #ffebee;
+            color: #b71c1c;
+            border-left: 5px solid #f44336;
+        }
+
+        .alert-warning {
+            background: #fff8e1;
+            color: #b26a00;
+            border-left: 5px solid #ff9800;
+        }
+
+        .alert-info {
+            background: #f0f4f8;
+            color: #222;
+            border-left: 5px solid #2196F3;
+        }
+    </style>
+
+    {% if messages %}
+        <div class="messages-container">
+            {% for message in messages %}
+                <div class="message alert-{{ message.tags }}">
+                    <span class="message-icon">
+                        {% if message.tags == "success" %}
+                            ✔️
+                        {% elif message.tags == "error" or message.tags == "danger" %}
+                            ❌
+                        {% elif message.tags == "warning" %}
+                            ⚠️
+                        {% else %}
+                            ℹ️
+                        {% endif %}
+                    </span>
+                    <span class="message-text">{{ message }}</span>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <!-- --------------------profile header----------------- -->
+
+<div class="profile-header">
         <div class="profile">
             <div class="profile-grp1">
                 <div class="profile-pic">
@@ -52,15 +123,15 @@
             </div>
         </div>
         <div class="profile-stats">
-        <p class="clickable active" data-page="page1" onclick="showSS()">Summary & Statistics</p>
-        <p class="clickable" data-page="page2" onclick="showCC()">Courses & Certifications</p>
-        <p class="clickable" data-page="page3" onclick="showJS()" > Jobs & Skills </p>
+            <p class="clickable active" data-page="page1" onclick="showSS()" id="btn-page1">Summary & Statistics</p>
+            <p class="clickable" data-page="page2" onclick="showCC()" id="btn-page2">Courses & Certifications</p>
+            <p class="clickable" data-page="page3" onclick="showJS()" id="btn-page3"> Jobs & Skills </p>
         </div>
     </div>
 
     <div class="summary-page page yes" id="page1">
 
-            <div class="my-stats-shorted">
+        <div class="my-stats-shorted">
             <div class="box">
                 <div class="icone"><img src="{% static 'assets/img/Course.png' %}" alt=""></div>
                 <h1 class="value">20</h1>
@@ -91,15 +162,14 @@
                 <div class="skills">
                     <h1 id="scjc">Skills</h1>
                     <ul class="skill-wrraper">
-                        {% for skill in user.studentprofile.skill_proficiencies.all %}
+                        {% for skill in user.profile.skill_proficiencies.all %}
                             <li class="skill">
                                 <span class="skill-name">{{ skill.skill.name }}</span>
                                 <span class="skill-level">{{ skill.get_proficiency_level_display }}</span>
                             </li>
                         {% endfor %}
                     </ul>
-                </div>
-                
+                </div>                
                 <div class="course-grp">
                 <div class="courses">
 
@@ -129,9 +199,7 @@
                         {% endfor %}
                     </div>
                 </div>
-            </div>
-                        
-                        
+            </div>                                                
                             <div class="see-more">
                                 <p id="txt">see more</p>
                                 <div id="arrow">→</div>
@@ -141,11 +209,11 @@
 
                         
                        
-                    </div>
+                    
                 
                     
 
-                </div>
+                
             <div class="cert-job-grp">
                 
                 <div class="certificates">
@@ -171,23 +239,20 @@
                             <p>No certificates yet. Complete courses to earn your certificates!</p>
                         </div>
                         {% endif %}
-
-                        <div class="see-more">
+                        <div class="see-more" onclick="showCC()">
                                 <p id="txt">see more</p>
                                 <div id="arrow">→</div>
-                            </div>
+                                
+                        </div>
 
-                    </div>
-
-                    
-
+                    </div>                
                 </div>
                 
 
                 <div class="jobs">
                     <h1 id="scjc">Job Postule</h1>
                     <div class="jobs-container">
-                        {% for application in user.job_applications.all %}
+                        {% for application in user.applications.all %}
                         <div class="job">
                             <div class="job-img">
                                 <img src="{% static 'assets/img/company.svg' %}" alt="{{ application.job.company_name }} Logo">
@@ -196,9 +261,12 @@
                                 <h1 class="job-title">{{ application.job.title }}</h1>
                                 <p class="company-name">{{ application.job.company_name }}</p>
                                 <p class="status">
-                                    <span class="{{ application.status }}">{{ application.get_status_display }}</span>
+                                    <span class="status-badge {{ application.status }}">
+                                        
+                                        {{ application.get_status_display }}
+                                    </span>
                                 </p>
-                                <p class="application-date">Applied: {{ application.application_date|date:"F j, Y" }}</p>
+                                
                             </div>
                         </div>
                         {% empty %}
@@ -211,572 +279,429 @@
                          
                         
 
-                        <div class="see-more">
+                        <div class="see-more" onclick="showJS()">
                                 <p id="txt">see more</p>
                                 <div id="arrow">→</div>
                             </div>
                     </div>
+
                 </div>
-            </div>
-        </div>
 
-    </div>
-
-    
-    
-
-    <div class="settings-page hidden">
-        <div class="back">
-            <img src="{% static 'assets/img/Back.png' %}" alt="" onclick="hideSettings()" >
-            <h1>Settings</h1>
-        </div>
-
-        <div class="settings-wrapper">
-            <div class="notifications">
-                <div class="params">
-                <img src="{% static 'assets/img/Notifications.png' %}" alt="">
-                <p>Notifications</p>
-                </div>
-                <div class="toggle">
-                    <div class="toggle-btn disabled" onclick="toggleBtn(this)">
-                        <div class="circle off"></div>
-                    </div>
-                </div>
             </div>
 
-            <div class="language">
-                <div class="params">
-                    <img style="margin: 0 10px;
-                                " src="{% static 'assets/img/Language.png' %}" alt="" >
-                    <p>Language</p>
-                </div>
-                <button id="btn">
-                    <p>english</p>
-                    <img id="reversed" src="{% static 'assets/img/Back.png' %}" alt="">
-                </button>
-            </div>
-            <div class="password">
-               <div class="params">
-                    <img src="{% static 'assets/img/Lock.png' %}" alt="">
-                    <p>Password</p>
-               </div>
-               <button id="btn">Change</button>
-            </div>
-        </div>
-    </div>
 
-    <div class="edit-profile-page hidden">
-        <div class="edit-container">
-            <div class="edit-back">
-                <img src="{% static 'assets/img/Back.png' %}" alt="" onclick="hideEdit()" id="backbtn">
-                <h1>Edit profile</h1>
-            </div>
-        </div>
-        <div class="profile-wrapper">
-            <div class="profile-pic-handler" onclick="showImgForm()">
-                <img src="{% if user.get_profile.profile_picture %}{{ user.get_profile.profile_picture.url }}{% else %}{% static 'assets/img/default-profile.png' %}{% endif %}" 
-                     alt="profile img" 
-                     id="pro-pic"
-                     style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover;">
-                <img src="{% static 'assets/img/edit gray.png' %}" alt="" id="edit-pen">
-            </div>
-            <div id="username">
-                <h1 id="username-value">{{ username }}</h1>
-                <img src="{% static 'assets/img/edit gray.png' %}" alt="" id="edit-username" onclick="showEditForm()">
-            </div>
 
-            <div id="location">
-                <p id="loc">{{ user.get_profile.wilaya }}</p>
-            </div>
-            <div class="details">
-                <div class="biographie">
-                    <h1>Bio :</h1>
-                </div>
-                <textarea name="" id="bio-space" placeholder="introduce yourself in few words!" readonly>{{ user.get_profile.bio }}</textarea>
-            </div>
-            <div class="validation-messages">
-                <p id="save-message" class="message"></p>
-            </div>
-            <div class="edit-btn">
-                <button id="save-changes" onclick="saveEdit()" class="blue">Save</button>
-            </div>
-        </div>
-    </div>
 
-    <div class="edit-form-container hidden">
-        <div class="edit-form">
 
-            <div class="username-input-container">
-                
-                <input type="text" placeholder="new user name" id="user-input" class="item" name="new_username">
-                <p id="username-validation" class="validation-message"></p>
-            </div>
-            
-            <div class="choice-input">
-                <select name="" id="country">
-                <option value="DZ">Algeria</option>
-            </select>
-            <select id="wilaya" class="item">
-                <option value="0">Blida</option>
-                <option value="1">Adrar</option>
-                <option value="2">Chlef</option>
-                <option value="3">Laghouat</option>
-                <option value="4">Oum El Bouaghi</option>
-                <option value="5">Batna</option>
-                <option value="6">Béjaïa</option>
-                <option value="7">Biskra</option>
-                <option value="8">Béchar</option>
-                <option value="9">Blida</option>
-                <option value="10">Bouira</option>
-                <option value="11">Tamanrasset</option>
-                <option value="12">Tébessa</option>
-                <option value="13">Tlemcen</option>
-                <option value="14">Tiaret</option>
-                <option value="15">Tizi Ouzou</option>
-                <option value="16">Alger</option>
-                <option value="17">Djelfa</option>
-                <option value="18">Jijel</option>
-                <option value="19">Sétif</option>
-                <option value="20">Saïda</option>
-                <option value="21">Skikda</option>
-                <option value="22">Sidi Bel Abbès</option>
-                <option value="23">Annaba</option>
-                <option value="24">Guelma</option>
-                <option value="25">Constantine</option>
-                <option value="26">Médéa</option>
-                <option value="27">Mostaganem</option>
-                <option value="28">M’Sila</option>
-                <option value="29">Mascara</option>
-                <option value="30">Ouargla</option>
-                <option value="31">Oran</option>
-                <option value="32">El Bayadh</option>
-                <option value="33">Illizi</option>
-                <option value="34">Bordj Bou Arréridj</option>
-                <option value="35">Boumerdès</option>
-                <option value="36">El Tarf</option>
-                <option value="37">Tindouf</option>
-                <option value="38">Tissemsilt</option>
-                <option value="39">El Oued</option>
-                <option value="40">Khenchela</option>
-                <option value="41">Souk Ahras</option>
-                <option value="42">Tipaza</option>
-                <option value="43">Mila</option>
-                <option value="44">Aïn Defla</option>
-                <option value="45">Naâma</option>
-                <option value="46">Aïn Témouchent</option>
-                <option value="47">Ghardaïa</option>
-                <option value="48">Relizane</option>
-                <option value="49">Timimoun</option>
-                <option value="50">Bordj Badji Mokhtar</option>
-                <option value="51">Ouled Djellal</option>
-                <option value="52">Béni Abbès</option>
-                <option value="53">In Salah</option>
-                <option value="54">In Guezzam</option>
-                <option value="55">Touggourt</option>
-                <option value="56">Djanet</option>
-                <option value="57">El M'Ghair</option>
-                <option value="58">El Meniaa</option>
-            </select>
-            </div>
 
-            <textarea name="" id="biographie-field">
-                dqzdz
-            </textarea>
 
-            <div class="edit-btn">
-                <button id="save-edit" class="red" onclick="hideEditForm()">✖</button>
-                <button id="save-edit" class="blue" onclick="edit()">✓</button>
-            </div>
+
+
 
             
+        
 
-        </div>
     </div>
 
-    <div class="add-picture hidden">
-        <label class="custom-file-upload">
-        <input type="file" id="fileInput" />
-            Choisir un fichier
-        </label>
-        <p id="fileName">file name</p>
-        <style>
-        /* Add your existing styles here */
-        
-        .validation-messages {
-            margin: 10px 0;
-            text-align: center;
-        }
-        
-        .message {
-            padding: 8px 16px;
-            border-radius: 4px;
-            font-size: 14px;
-            font-weight: 500;
-        }
+<div class="settings-page hidden">
+    <div class="back">
+        <img src="{% static 'assets/img/Back.png' %}" alt="" onclick="hideSettings()" >
+        <h1>Settings</h1>
+    </div>
+
+    <div class="settings-wrapper">
+        <div class="notifications">
+            <div class="params">
+            <img src="{% static 'assets/img/Notifications.png' %}" alt="">
+            <p>Notifications</p>
+            </div>
+            <div class="toggle">
+                <div class="toggle-btn disabled" onclick="toggleBtn(this)">
+                    <div class="circle off"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="language">
+            <div class="params">
+                <img style="margin: 0 10px;
+                            " src="{% static 'assets/img/Language.png' %}" alt="" >
+                <p>Language</p>
+            </div>
+            <button id="btn">
+                <p>english</p>
+                <img id="reversed" src="{% static 'assets/img/Back.png' %}" alt="">
+            </button>
+        </div>
+        <div class="password">
+           <div class="params">
+                <img src="{% static 'assets/img/Lock.png' %}" alt="">
+                <p>Password</p>
+           </div>
+           <a href="{% url 'users:forgot_password' %}" id="btn" style="display:inline-block;text-decoration:none;">
+            Change
+           </a>
+        </div>
+    </div>
+</div>
+
+<div class="edit-profile-page hidden">
+    <div class="edit-container">
+        <div class="edit-back">
+            <img src="{% static 'assets/img/Back.png' %}" alt="" onclick="hideEdit()" id="backbtn">
+            <h1>Edit profile</h1>
+        </div>
+    </div>
+    <div class="profile-wrapper">
+        <div class="profile-pic-handler" onclick="showImgForm()">
+            <img src="{% if user.profile.profile_picture %}{{ user.profile.profile_picture.url }}{% else %}{% static 'assets/img/default-profile.png' %}{% endif %}" 
+                 alt="profile img" 
+                 id="pro-pic"
+                 style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover;">
+            <img src="{% static 'assets/img/edit gray.png' %}" alt="" id="edit-pen">
+        </div>
+        <div id="username">
+            <h1 id="username-value">{{ user.username }}</h1>
+            <img src="{% static 'assets/img/edit gray.png' %}" alt="" id="edit-username" onclick="showEditForm()">
+        </div>
+
+        <div id="location">
+            <p id="loc">{{ user.profile.wilaya }}</p>
+        </div>
+        <div class="details">
+            <div class="biographie">
+                <h1>Bio :</h1>
+            </div>
+            <textarea name="" id="bio-space" placeholder="introduce yourself in few words!" readonly>{{ user.profile.bio }}</textarea>
+        </div>
+        <div class="validation-messages">
+            <p id="save-message" class="message"></p>
+        </div>
+        <div class="edit-btn">
+            <button id="save-changes" onclick="saveEdit()" class="blue">Save</button>
+        </div>
+    </div>
+</div>
+
+<div class="edit-form-container hidden">
+<div class="edit-form">
+    <form method="POST" enctype="multipart/form-data" class="edit-form" action="{% url 'users:update_profile' %}">
+        {% csrf_token %}
+        <div class="username-input-container">
+            <input type="text" placeholder="new user name" id="user-input" class="item" name="new_username" value="{{ user.username }}">
+            <p id="username-validation" class="validation-message"></p>
+        </div>
+        <div class="choice-input">
+            <select name="country" id="country">
+                <option value="DZ" {% if user.profile.country == "DZ" %}selected{% endif %}>Algeria</option>
+                <option value="MA" {% if user.profile.country == "MA" %}selected{% endif %}>Morocco</option>
+                <option value="TN" {% if user.profile.country == "TN" %}selected{% endif %}>Tunisia</option>
+                <option value="FR" {% if user.profile.country == "FR" %}selected{% endif %}>France</option>
+                <option value="US" {% if user.profile.country == "US" %}selected{% endif %}>United States</option>
+                <option value="GB" {% if user.profile.country == "GB" %}selected{% endif %}>United Kingdom</option>
+                <option value="CA" {% if user.profile.country == "CA" %}selected{% endif %}>Canada</option>
+                <option value="DE" {% if user.profile.country == "DE" %}selected{% endif %}>Germany</option>
+                <option value="ES" {% if user.profile.country == "ES" %}selected{% endif %}>Spain</option>
+                <option value="IT" {% if user.profile.country == "IT" %}selected{% endif %}>Italy</option>
+                <option value="TR" {% if user.profile.country == "TR" %}selected{% endif %}>Turkey</option>
+                <option value="SA" {% if user.profile.country == "SA" %}selected{% endif %}>Saudi Arabia</option>
+                <option value="EG" {% if user.profile.country == "EG" %}selected{% endif %}>Egypt</option>
+                <option value="NG" {% if user.profile.country == "NG" %}selected{% endif %}>Nigeria</option>
+                <option value="IN" {% if user.profile.country == "IN" %}selected{% endif %}>India</option>
+                <option value="CN" {% if user.profile.country == "CN" %}selected{% endif %}>China</option>
+                <option value="JP" {% if user.profile.country == "JP" %}selected{% endif %}>Japan</option>
+                <option value="RU" {% if user.profile.country == "RU" %}selected{% endif %}>Russia</option>
+                <!--  more as needed -->
+            </select>
+            <label for="wilaya"></label>
+    <select name="wilaya" id="wilaya">
+        <option value="1">Adrar</option>
+        <option value="2">Chlef</option>
+        <option value="3">Laghouat</option>
+        <option value="4">Oum El Bouaghi</option>
+        <option value="5">Batna</option>
+        <option value="6">Béjaïa</option>
+        <option value="7">Biskra</option>
+        <option value="8">Béchar</option>
+        <option value="9">Blida</option>
+        <option value="10">Bouira</option>
+        <option value="11">Tamanrasset</option>
+        <option value="12">Tébessa</option>
+        <option value="13">Tlemcen</option>
+        <option value="14">Tiaret</option>
+        <option value="15">Tizi Ouzou</option>
+        <option value="16">Alger</option>
+        <option value="17">Djelfa</option>
+        <option value="18">Jijel</option>
+        <option value="19">Sétif</option>
+        <option value="20">Saïda</option>
+        <option value="21">Skikda</option>
+        <option value="22">Sidi Bel Abbès</option>
+        <option value="23">Annaba</option>
+        <option value="24">Guelma</option>
+        <option value="25">Constantine</option>
+        <option value="26">Médéa</option>
+        <option value="27">Mostaganem</option>
+        <option value="28">M’Sila</option>
+        <option value="29">Mascara</option>
+        <option value="30">Ouargla</option>
+        <option value="31">Oran</option>
+        <option value="32">El Bayadh</option>
+        <option value="33">Illizi</option>
+        <option value="34">Bordj Bou Arréridj</option>
+        <option value="35">Boumerdès</option>
+        <option value="36">El Tarf</option>
+        <option value="37">Tindouf</option>
+        <option value="38">Tissemsilt</option>
+        <option value="39">El Oued</option>
+        <option value="40">Khenchela</option>
+        <option value="41">Souk Ahras</option>
+        <option value="42">Tipaza</option>
+        <option value="43">Mila</option>
+        <option value="44">Aïn Defla</option>
+        <option value="45">Naâma</option>
+        <option value="46">Aïn Témouchent</option>
+        <option value="47">Ghardaïa</option>
+        <option value="48">Relizane</option>
+        <option value="49">Timimoun</option>
+        <option value="50">Bordj Badji Mokhtar</option>
+        <option value="51">Ouled Djellal</option>
+        <option value="52">Béni Abbès</option>
+        <option value="53">In Salah</option>
+        <option value="54">In Guezzam</option>
+        <option value="55">Touggourt</option>
+        <option value="56">Djanet</option>
+        <option value="57">El M'Ghair</option>
+        <option value="58">El Meniaa</option>
+    </select>
+        </div>
+        <textarea name="bio" id="biographie-field" placeholder="Introduce yourself in a few words!">{{ user.profile.bio }}</textarea>
+        <div class="edit-btn">
+            <button type="button" class="red" onclick="hideEditForm()">✖</button>
+            <button type="submit" class="blue">✓</button>
+        </div>
+    </form>
+</div>
+</div>
+
+<div class="add-picture hidden">
+    <label class="custom-file-upload">
+    <input type="file" id="fileInput" />
+        Choisir un fichier
+    </label>
+    <p id="fileName">file name</p>
+    <style>
+    /* Add your existing styles here */
+    
+    .validation-messages {
+        margin: 10px 0;
+        text-align: center;
+    }
+    
+    .message {
+        padding: 8px 16px;
+        border-radius: 4px;
+        font-size: 14px;
+        font-weight: 500;
+    }
     </style>
-    </div>
+</div>
+
+<div class="course-and-certifications page" id="page2">
     
-    <div class="course-and-certifications page" id="page2">
-        
         <h1 id="jp">Certifications i've got</h1>
         <div class="course-certificate-container">
-            
-                        <div class="course-certificate">
-                            <div class="certificate-img"><img src="{% static 'assets/img/Certificate.png' %}" alt=""></div>
-                            <div class="certificate-infos">
-                                <h1 class="certif-title">
-                                    build your first web site with HTML & CSS
-                                </h1>
-                                <p class="company">
-                                    By web school
-                                </p>
-                            </div>
+            {% for enrollment in user.enrollments.all %}
+                {% if enrollment.progress == 100 %}
+                    <div class="course-certificate">
+                        <div class="certificate-img">
+                            <img src="{% static 'assets/img/Certificate.png' %}" alt="{{ enrollment.course.title }} Certificate">
                         </div>
-
-                        <div class="course-certificate">
-                            <div class="certificate-img"><img src="{% static 'assets/img/Certificate.png' %}" alt=""></div>
-                            <div class="certificate-infos">
-                                <h1 class="certif-title">
-                                    build your first web site with HTML & CSS
-                                </h1>
-                                <p class="company">
-                                    By web school
-                                </p>
-                            </div>
+                        <div class="certificate-infos">
+                            <h1 class="certif-title">{{ enrollment.course.title }}</h1>
+                            <p class="company">By {{ enrollment.course.teacher.get_full_name }}</p>
+                            <p class="issue-date">Completed: {{ enrollment.completion_date|date:"F j, Y" }}</p>
                         </div>
-
-                        <div class="course-certificate">
-                            <div class="certificate-img"><img src="{% static 'assets/img/Certificate.png' %}" alt=""></div>
-                            <div class="certificate-infos">
-                                <h1 class="certif-title">
-                                    build your first web site with HTML & CSS
-                                </h1>
-                                <p class="company">
-                                    By web school
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="course-certificate">
-                            <div class="certificate-img"><img src="{% static 'assets/img/Certificate.png' %}" alt=""></div>
-                            <div class="certificate-infos">
-                                <h1 class="certif-title">
-                                    build your first web site with HTML & CSS
-                                </h1>
-                                <p class="company">
-                                    By web school
-                                </p>
-                            </div>
-                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+            {% if not user.enrollments.all|length > 0 %}
+                <div class="no-certificates">
+                    <p>No certificates yet. Complete courses to earn your certificates!</p>
+                </div>
+            {% endif %}
         </div>
 
         <h1 id="jp">Courses im Learning</h1>
         <div class="learning-courses-container aqcuired">
-                        <div class="learning-course-box">
-                            <div class="learningcourse-box-infos">
-                                <div class="learning-course-img"><img src="{% static 'assets/img/courseJs.png' %}" alt="">
-                                </div>
-                                <div class="learning-course-details">
-
-                                    <h1 class="title">The Complete Full-Stack Web Development Bootcamp</h1>
-
-                                    <p> class="tutor">By Jonas Schmedtmann</p>
-
-                                  <div class="progression">
-                                    <p>20/40 Chapter</p>
-                                    <p class="l-progression-value">42%</p>
-                                  </div>
-
-                                <div class="l-progression-container">
-                                    <div class="l-progression-bar" id="progress-bar">
-                                    
-                                    </div>
-                                </div>
-                                </div>
+            {% for enrollment in user.enrollments.all %}
+                {% if enrollment.progress < 100 %}
+                    <div class="learning-course-box">
+                        <div class="learningcourse-box-infos">
+                            <div class="learning-course-img">
+                                <img src="{{ enrollment.course.image.url }}" alt="{{ enrollment.course.title }}">
                             </div>
-                        </div>
-
-                            
-
-                        <div class="learning-course-box">
-                            <div class="learningcourse-box-infos">
-                                <div class="learning-course-img"><img src="{% static 'assets/img/courseJs.png' %}" alt="">
-                                </div>
-                                <div class="learning-course-details">
-                                <h1 class="title">The Complete Full-Stack Web Development Bootcamp</h1>
-                                <p class="tutor">By Jonas Schmedtmann</p>
+                            <div class="learning-course-details">
+                                <h1 class="title">{{ enrollment.course.title }}</h1>
+                                <p class="tutor">By {{ enrollment.course.teacher.get_full_name }}</p>
                                 <div class="progression">
-                                    <p>20/40 Chapter</p>
-                                    <p class="l-progression-value">26%</p>
+                                    <p>{{ enrollment.completed_chapters }}/{{ enrollment.course.total_chapters }} Chapters</p>
+                                    <p class="l-progression-value">{{ enrollment.progress }}%</p>
                                 </div>
 
                                 <div class="l-progression-container">
-                                    <div class="l-progression-bar" id="progress-bar">
-                                    
+                                    <div class="l-progression-bar" data-progress="{{ enrollment.progress }}">
                                     </div>
-                                </div>
+                                    
                                 </div>
                             </div>
                         </div>
-
-                        <div class="learning-course-box">
-                            <div class="learningcourse-box-infos">
-                                <div class="learning-course-img"><img src="{% static 'assets/img/courseJs.png' %}" alt="">
-                                </div>
-                                <div class="learning-course-details">
-                                <h1 class="title">The Complete Full-Stack Web Development Bootcamp</h1>
-                                <p class="tutor">By Jonas Schmedtmann</p>
-                                <div class="progression">
-                                    <p>20/40 Chapter</p>
-                                    <p class="l-progression-value">09%</p>
-                                </div>
-
-                                <div class="l-progression-container">
-                                    <div class="l-progression-bar" id="progress-bar">
-                                    
-                                    </div>
-                                </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="learning-course-box">
-                            <div class="learningcourse-box-infos">
-                                <div class="learning-course-img"><img src="{% static 'assets/img/courseJs.png' %}" alt="">
-                                </div>
-                                <div class="learning-course-details">
-                                <h1 class="title">The Complete Full-Stack Web Development Bootcamp</h1>
-                                <p class="tutor">By Jonas Schmedtmann</p>
-                                <div class="progression">
-                                    <p>20/40 Chapter</p>
-                                    <p class="l-progression-value">09%</p>
-                                </div>
-
-                                <div class="l-progression-container">
-                                    <div class="l-progression-bar" id="progress-bar">
-                                    
-                                    </div>
-                                </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        
-        </div>
-
-        
-
-        <h1 id="jp">Posted courses</h1>
-            <button id="showPageBtn" onclick="showCourseForm()">+ new course</button>
-        
-        <div class="add-course">
-        <div class="container">
-        
-        <div class="section">
-            <div class="aaa">
-                <h2 class="section-title">Course Details</h2>
-                <div class="close">
-
-                    <h2 id="croix" onclick="closeCourseForm()" class="section-title">&times;</h2>
-
-                </div>
-            </div>
-            
-            <div class="form-group">
-                <label for="courseTitle">Course Title</label>
-                <input type="text" id="courseTitle" placeholder="Enter course name">
-            </div>
-
-            <div class="form-group">
-                <label for="description">Description</label>
-                <textarea id="description" placeholder="Brief course summary"></textarea>
-            </div>
-
-            <div class="form-group">
-                <label for="objectives">Learning Objectives</label>
-                <textarea id="objectives" placeholder="List key outcomes (one per line)"></textarea>
-            </div>
-
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="category">Category</label>
-                    <select id="category">
-                        <option value="">Select category</option>
-                        <option value="technology">Technology</option>
-                        <option value="business">Business</option>
-                        <option value="design">Design</option>
-                        <option value="marketing">Marketing</option>
-                        <option value="development">Development</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="level">Level</label>
-                    <select id="level">
-                        <option value="">Beginner, Intermediate, Advanced</option>
-                        <option value="beginner">Beginner</option>
-                        <option value="intermediate">Intermediate</option>
-                        <option value="advanced">Advanced</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label for="prerequisites">Prerequisites</label>
-                <textarea id="prerequisites" placeholder="List key outcomes (one per line)"></textarea>
-            </div>
-
-            <div class="form-group">
-                <label for="duration">Estimated Duration</label>
-                <div class="duration-container">
-                    <input type="text" id="duration" placeholder="e.g. 8 weeks, 10 hours">
-                </div>
-            </div>
-        </div>
-
-        
-        <div class="section">
-            <h2 class="section-title">Course Media</h2>
-
-                <label for="">Cover Image</label>
-            <div class="form-group" id="image-area">
-                <div class="image-upload-area">
-                    
-                    <img src="{% static 'assets/img/Course cover' %} " 
-                         alt="Cover Image" 
-                         style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px; border: 2px solid #e5e7eb;">
-                    
-                    
-                    <div style="position: absolute; bottom: 16px; right: 16px;">
-                        <button type="button" class="btn btn-primary" onclick="document.getElementById('coverImage').click()">
-                            📝 Change Image
-                        </button>
-                        <input type="file" id="coverImage" class="hidden-input" accept="image/*">
                     </div>
-                    
-                    <!-- <div style="position: absolute; top: 16px; left: 16px; background: rgba(59, 130, 246, 0.9); color: white; padding: 8px 12px; border-radius: 6px; font-size: 12px;">
-                        
-                    </div> -->
+                {% endif %}
+            {% endfor %}
+            {% if not user.enrollments.all|length > 0 %}
+                <div class="no-courses">
+                    <p>No courses in progress. Start learning now!</p>
                 </div>
-            </div>
-
-            
+            {% endif %}
         </div>
 
-        
-        <div class="bottom-section">
-            <div class="left-column">
-                <div class="form-group">
-                    <label for="creeSection">Create Section</label>
-                    <input type="text" id="creeSection" placeholder="e.g. 8 weeks, 10 hours">
-                </div>
-                
-                <div class="create-btn-container">
-                    <button type="button" class="btn btn-primary" onclick="createSection()">Create</button>
-                </div>
+    <!-- -------------------------------add course-------------------------- -->
+    
 
-                <div class="form-group">
-                    <label for="section">Section</label>
-                    <select id="section">
-                        <option value="">Select Section</option>
-                        
-                    </select>
-                </div>
-
-                
-            </div>
-
-            <div class="right-column">
-                <div class="media-section">
-                    <div class="form-group">
-                        <label>Course Materials</label>
-                        <button type="button" class="btn btn-primary" onclick="document.getElementById('courseMaterials').click()">
-                            Upload files
-                        </button>
-                        <div class="file-info">PDF, DOCX, PPTX</div>
-                        <input type="file" id="courseMaterials" class="hidden-input" multiple accept=".pdf,.docx,.pptx">
-                    </div>
-
-                    <div class="form-group">
-                        <label>Videos</label>
-                        <button type="button" class="btn btn-primary" onclick="document.getElementById('videos').click()">
-                            Upload video
-                        </button>
-                        <input type="file" id="videos" class="hidden-input" multiple accept="video/*">
-                    </div>
-
-                    <div class="form-group">
-                        <button type="button" class="btn btn-success">
-                            Soumettre pour validation
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="validation-note">
-            Après soumission, votre cours sera examiné par notre équipe d'administration. Vous recevrez un e-mail une fois qu'il sera approuvé ou si des informations supplémentaires sont nécessaires.
-        </div>
+    <h1 id="jp">Posted courses</h1>
+        <button id="showPageBtn" onclick="showCourseForm()">+ new course</button>
+    
+    <div class="add-course" style="display:none;">
+    <div class="container">
+    <form method="POST" enctype="multipart/form-data" action="{% url 'courses:add_course' %}">
+  {% csrf_token %}
+  <div class="section">
+    <div class="aaa">
+      <h2 class="section-title">Course Details</h2>
+      <div class="close">
+        <h2 id="croix" onclick="closeCourseForm()" class="section-title">&times;</h2>
+      </div>
     </div>
+    <div class="form-group">
+      <label for="courseTitle">Course Title</label>
+      <input type="text" id="courseTitle" name="title" placeholder="Enter course name" required>
     </div>
+
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea id="description" name="description" placeholder="Brief course summary" required></textarea>
+    </div>
+    <div class="form-group">
+      <label for="objectives">Learning Objectives</label>
+      <textarea id="objectives" name="objectives" placeholder="List key outcomes (one per line)"></textarea>
+    </div>
+    <div class="form-group">
+        <label for="Price">Price</label>
+        <input type="number" id="Price" step="0.01" name="price" placeholder="Course Price" required>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label for="category">Category</label>
+        <select id="category" name="category">
+          <option value="" disabled selected>Select Category</option>
+          <option value="technology">Technology</option>
+          <option value="business">Business</option>
+          <option value="design">Design</option>
+          <option value="marketing">Marketing</option>
+          <option value="development">Development</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="level">Level</label>
+        <select id="level" name="level">
+          <option value="">Beginner, Intermediate, Advanced</option>
+          <option value="Beginner">Beginner</option>
+          <option value="Intermediate">Intermediate</option>
+          <option value="Advanced">Advanced</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="prerequisites">Prerequisites</label>
+      <textarea id="prerequisites" name="prerequisites" placeholder="List prerequisites"></textarea>
+    </div>
+    <div class="form-group">
+      <label for="duration">Estimated Duration</label>
+      <div class="duration-container">
+        <input type="text" id="duration" name="duration" placeholder="e.g. 8 weeks, 10 hours">
+      </div>
+    </div>
+  </div>
+  <div class="section">
+    <h2 class="section-title">Course Media</h2>
+    <label for="coverImage">Cover Image</label>
+    <div class="form-group" id="image-area">
+      <div class="image-upload-area">
+        <img src="{% static 'assets/img/Course cover' %}" alt="Cover Image"
+             style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px; border: 2px solid #e5e7eb;">
+        <div style="position: absolute; bottom: 16px; right: 16px;">
+          <button type="button" class="btn btn-primary" onclick="document.getElementById('coverImage').click()">
+            📝 Change Image
+          </button>
+          <input type="file" id="coverImage" name="cover_image" class="hidden-input" accept="image/*">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="bottom-section">
+    <div class="left-column">
+      <div class="form-group">
+        <label for="creeSection">Create Section</label>
+        <input type="text" id="creeSection" name="section_title" placeholder="e.g. Introduction">
+      </div>
+      <div class="create-btn-container">
+        <button type="button" class="btn btn-primary" onclick="createSection()">Create</button>
+      </div>
+      <div class="form-group">
+        <label for="section">Section</label>
+        <select id="section" name="section">
+          <option value="">Select Section</option>
+        </select>
+      </div>
+    </div>
+    <div class="right-column">
+      <div class="media-section">
+        <div class="form-group">
+          <label>Course Materials</label>
+          <button type="button" class="btn btn-primary" onclick="document.getElementById('courseMaterials').click()">
+            Upload files
+          </button>
+          <div class="file-info">PDF, DOCX, PPTX</div>
+          <input type="file" id="courseMaterials" name="materials" class="hidden-input" multiple accept=".pdf,.docx,.pptx">
+        </div>
+        <div class="form-group">
+          <label>Videos</label>
+          <button type="button" class="btn btn-primary" onclick="document.getElementById('videos').click()">
+            Upload video
+          </button>
+          <input type="file" id="videos" name="videos" class="hidden-input" multiple accept="video/*">
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-success">
+            Submit for validation
+
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="validation-note">
+    After submission, your course will be reviewed by our administration team. You will receive an email once it is approved or if additional information is required.
+  </div>
+</form>
+    </div>
+   </div> 
 
     <div class="all-carousel-container">
                 
-                <!-- <button class="prev">&#10094;</button>
-                <button class="next">&#10095;</button> -->
-                    <!-- <div class="carousel-container">
-                        <div class="carousel">
-                            
-                            <div class="carousel-item">
-                                <div class="item-img">
-                                    <img src="../static/assets/img/course-p.png" alt="">
-                                </div>
-                                <div class="item-info">
-                                    <p id="title">course javascript</p>
-                                    <p class="status a" >Accepted</p>
-                                </div>
-                            </div>
-                            
-                            <div class="carousel-item">
-                                <div class="item-img">
-                                    <img src="../static/assets/img/course-p.png" alt="">
-                                </div>
-                                <div class="item-info">
-                                    <p id="title">course premiere pro</p>
-                                    <p class="status p" >Pending</p>
-                                </div>
-                            </div>
 
-                            <div class="carousel-item">
-                                <div class="item-img">
-                                    <img src="../static/assets/img/course-p.png" alt="">
-                                </div>
-                                <div class="item-info">
-                                    <p id="title">course javascript</p>
-                                    <p class="status r" >rejected</p>
-                                </div>
-                            </div>
-
-                            <div class="carousel-item">
-                                <div class="item-img">
-                                    <img src="../static/assets/img/course-p.png" alt="">
-                                </div>
-                                <div class="item-info">
-                                    <p id="title">course javascript</p>
-                                    <p class="status r" >rejected</p>
-                                </div>
-                            </div>
-
-                            <div class="carousel-item">
-                                <div class="item-img">
-                                    <img src="../static/assets/img/course-p.png" alt="">
-                                </div>
-                                <div class="item-info">
-                                    <p id="title">course javascript</p>
-                                    <p class="status r" >rejected</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div> -->
 
         <div class="carousel-container">
 
@@ -880,48 +805,34 @@
             <div class="job-skills">
                     <h1 id="jp">Skills</h1>
                     <ul class="skill-wrraper">
-                        <li class="skill">CSS</li>
-                        <li class="skill">Figma</li>
-                        <li class="skill">ReactJs</li>
-                        <li class="skill">Django</li>
-                        <div class="add">+</div>
+                        {% for skill in user.studentprofile.skill_proficiencies.all %}
+                            <li class="skill">
+                                <span class="skill-name">{{ skill.skill.name }}</span>
+                                <span class="skill-level">{{ skill.get_proficiency_level_display }}</span>
+                            </li>
+                        {% endfor %}
                     </ul>
-                </div>
+            </div>
 
             <h1 id="jp">Jobs I've applied to</h1>
         <div class="job-container">
+            {% for application in user.applications.all %}
             <div class="job-item">
                 <div class="job-item-img">
-                    <img src="{% static 'assets/img/company.svg' %}" alt="">
+                    <img src="{% static 'assets/img/company.svg' %}" alt="{{ application.job.company_name }} Logo">
                 </div>
                 <div class="job-item-details">
-                    <h1 id="title">ui/ux designer</h1>
-                    <h1 id="salary">921$</h1>
-                    <p class="status a">Accepted</p>
+                    <h1 id="title">{{ application.job.title }}</h1>
+                    <h1 id="company-name">{{ application.job.company_name }}</h1>
+                    <p class="status {{ application.status }}">{{ application.get_status_display }}</p>
                 </div>
             </div>
-
-            <div class="job-item">
-                <div class="job-item-img">
-                    <img src="{% static 'assets/img/company.svg' %}" alt="">
-                </div>
-                <div class="job-item-details">
-                    <h1 id="title">video editor</h1>
-                    <h1 id="salary">100$</h1>
-                    <p class="status r">rejected</p>
-                </div>
+            
+            {% empty %}
+            <div class="no-applications">
+                <p>No job applications yet. Apply to jobs to track your applications!</p>
             </div>
-
-            <div class="job-item">
-                <div class="job-item-img">
-                    <img src="{% static 'assets/img/company.svg' %}" alt="">
-                </div>
-                <div class="job-item-details">
-                    <h1 id="title">front-end developper</h1>
-                    <h1 id="salary">50$</h1>
-                    <p class="status p">pending</p>
-                </div>
-            </div>
+            {% endfor %}
         </div>
         <button id="new-job-btn" onclick="showJobForm()">+ new jobs</button>
 
@@ -1074,6 +985,14 @@
 
 
     <script src="{% static 'JS_files/Profile-script.js' %}"></script>
+    <script>
+function showCourseForm() {
+    document.querySelector('.add-course').style.display = 'block';
+}
+function closeCourseForm() {
+    document.querySelector('.add-course').style.display = 'none';
+}
+</script>
 </body>
 
 </html>
@@ -1082,110 +1001,3 @@
 
 
 
-
-
-
-
-
-<!-- <div class="published accepted">
-                        <div class="published-course-box">
-                            <div class="published-course-box-infos">
-                                <div class="published-course-img"><img src="../static/assets/img/course-p.png" alt=""></div>
-                            <div class="published-course-details">
-                                <h1 class="title">The Complete Full-Stack Web Development Bootcamp</h1>
-                                <div class="views">
-                                    <p id="viewers">10K Views</p>
-                                    <p id="ratings">2347 ratings</p>
-                                    <p id="status">accepted</p>    
-                                </div>
-                            </div>
-                            </div>
-                        </div>
-
-                        <div class="published-course-box">
-                            <div class="published-course-box-infos">
-                                <div class="published-course-img"><img src="../static/assets/img/course-p.png" alt=""></div>
-                            <div class="published-course-details">
-                                <h1 class="title">The Complete Full-Stack Web Development Bootcamp</h1>
-                                <div class="views">
-                                    <p id="viewers">10K Views</p>
-                                    <p id="ratings">2347 ratings</p>
-                                    <p id="status">accepted</p>    
-                                </div>
-                            </div>
-                            </div>
-                        </div>
-
-                        <div class="published-course-box">
-                            <div class="published-course-box-infos">
-                                <div class="published-course-img"><img src="../static/assets/img/course-p.png" alt=""></div>
-                            <div class="published-course-details">
-                                <h1 class="title">The Complete Full-Stack Web Development Bootcamp</h1>
-                                <div class="views">
-                                    <p id="viewers">10K Views</p>
-                                    <p id="ratings">2347 ratings</p>
-                                    <p id="status">accepted</p>    
-                                </div>
-                            </div>
-                            </div>
-                        </div>
-
-
-                        <div class="published-course-box">
-                            <div class="published-course-box-infos">
-                                <div class="published-course-img"><img src="../static/assets/img/course-p.png" alt=""></div>
-                            <div class="published-course-details">
-                                <h1 class="title">The Complete Full-Stack Web Development Bootcamp</h1>
-                                <div class="views">
-                                    <p id="viewers">10K Views</p>
-                                    <p id="ratings">2347 ratings</p>
-                                    <p id="status">accepted</p>    
-                                </div>
-                            </div>
-                            </div>
-                        </div>
-
-                            
-                        
-        </div> -->
-
-        
-        <!-- <div class="published pending">
-                        <div class="published-course-box">
-                            <div class="published-course-box-infos">
-                                <div class="published-course-img"><img src="../static/assets/img/course-p.png" alt=""></div>
-                            <div class="published-course-details">
-                                <h1 class="title">The Complete Full-Stack Web Development Bootcamp</h1>
-                                <div class="views">
-                                    <p id="viewers">10K Views</p>
-                                    <p id="ratings">2347 ratings</p>
-                                    <p id="status">accepted</p>    
-                                </div>
-                            </div>
-                            </div>
-                        </div>
-
-                        <div class="published-course-box">
-                            <div class="published-course-box-infos">
-                                <div class="published-course-img"><img src="../static/assets/img/course-p.png" alt=""></div>
-                            <div class="published-course-details">
-                                <h1 class="title">The Complete Full-Stack Web Development Bootcamp</h1>
-                                <div class="views">
-                                    <p id="viewers">10K Views</p>
-                                    <p id="ratings">2347 ratings</p>
-                                    <p id="status">accepted</p>    
-                                </div>
-                            </div>
-                            </div>
-                        </div>
-
-                        
-
-                        
-
-                            
-                        
-        </div> -->
-
-
-        

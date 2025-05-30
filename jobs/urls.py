@@ -10,3 +10,4 @@ urlpatterns = [
    # page liste ta3 l'offres
     path('historie/', views.Historie, name='Historie'),
 ]
+

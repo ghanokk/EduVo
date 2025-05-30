@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Course, Section, Lesson, Enrollment, Rating, WhatYouLearn, Category
+from .models import Course, Section, Lesson, Enrollment, Rating, WhatYouLearn, Category, Video, CourseMaterial
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
@@ -25,13 +25,13 @@ class CourseAdmin(admin.ModelAdmin):
     readonly_fields = ('get_rating', 'get_student_count', 'views', 'created_at', 'updated_at')
     fieldsets = (
         ('Basic Information', {
-            'fields': ('title', 'description', 'teacher', 'price', 'category', 'level')
+            'fields': ('title', 'description', 'teacher', 'price', 'category', 'level', 'creator')
         }),
         ('Course Details', {
             'fields': ('duration', 'skills')
         }),
         ('Media', {
-            'fields': ('image', 'video')
+            'fields': ('image',)
         }),
         ('Statistics', {
             'fields': ('get_rating', 'get_student_count', 'views')
@@ -98,3 +98,13 @@ class WhatYouLearnAdmin(admin.ModelAdmin):
     def get_description(self, obj):
         return obj.description
     get_description.short_description = 'Learning Objective'
+
+@admin.register(Video)
+class VideoAdmin(admin.ModelAdmin):
+    list_display = ('title', 'section', 'file')
+    search_fields = ('title', 'section__title')
+
+@admin.register(CourseMaterial)
+class CourseMaterialAdmin(admin.ModelAdmin):
+    list_display = ('title', 'section', 'file')
+    search_fields = ('title', 'section__title')

@@ -2,80 +2,61 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils import timezone
 
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+
 # ✅ Classe principale des utilisateurs
 # hadi t'étend l'utilisateur standard dyal Django (AbstractUser)
 class User(AbstractUser):
-    USER_TYPE_CHOICES = [
-        ('student', 'Student'),   # 👨‍🎓 étudiant
-        ('teacher', 'Teacher'),   # 👨‍🏫 enseignant
-        ('company', 'Company'),   # 🏢 entreprise
-    ]
-    user_type = models.CharField(max_length=10, choices=USER_TYPE_CHOICES)
-    is_freelancer = models.BooleanField(default=False) 
+    USER_TYPES = (
+        ('student', 'Student'),
+        ('teacher', 'Teacher'),
+        ('company', 'Company'),
+    )
+    user_type = models.CharField(max_length=20, choices=USER_TYPES, blank=True, null=True)
+    is_freelancer = models.BooleanField(default=False)
 
 
-    # ✅ Fonction pour retourner le bon profil selon le type
-    def get_profile(self):
-        if self.user_type == 'student':
-            return self.studentprofile  # wch user student, rj3 profil ta3 étudiant
-        elif self.user_type == 'teacher':
-            return self.teacherprofile  # wch prof, rj3 profil ta3 prof
-        elif self.user_type == 'company':
-            return self.companyprofile  # wch entreprise, rj3 profil entreprise
-        return None
 
 
 # ✅ Classe abstraite pour les profils (ta3 les users)
 # hadi makhdamnach biha direct, mais les autres profils héritent menha
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="%(class)s")#to avoid clashes and make reverse lookups easier
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="profile")#to avoid clashes and make reverse lookups easier
     profile_picture = models.ImageField(upload_to='profile_pics/', blank=True, null=True)  # photo profil
     bio = models.TextField(blank=True)  # un petit texte 3la l'utilisateur
     created_at = models.DateTimeField(default=timezone.now)  # date de création
+    country = models.CharField(max_length=10, blank=True)  # <-- ADD THIS LINE
+    wilaya = models.CharField(max_length=50, blank=True)  
+    
+    # Role flags
+    is_student = models.BooleanField(default=True)
+    is_teacher = models.BooleanField(default=False)
+    is_company = models.BooleanField(default=False)
+
+    # Student/Teacher fields
+    is_freelancer = models.BooleanField(default=False)  
+    skills = models.ManyToManyField('skills.Skill', through='skills.UserSkill', blank=True, related_name='user_skills')
+
+    # Teacher fields
+    expertise = models.TextField(blank=True)
+    reputation_score = models.IntegerField(default=0)
+    # Company fields
+    company_name = models.CharField(max_length=255, blank=True)
+    description = models.TextField(blank=True)
+    company_image = models.ImageField(upload_to='company_pics/', blank=True, null=True)
 
     def get_full_name(self):
         return self.user.get_full_name() or self.user.username
 
     def get_location(self):
-        # You can add a location field to Profile or its children if needed
-        if hasattr(self, 'country'):
-            return self.country
-        return "Not set"
-
-    class Meta:
-        abstract = True  # 👈 ma ttsajelch f la base directement
-
-# ✅ Profil étudiant
-class StudentProfile(Profile):
-    skills = models.ManyToManyField('skills.Skill', through='skills.UserSkill')  # les compétences ta3 l'étudiant
-    is_freelancer = models.BooleanField(default=False)
-    def __str__(self):
-        return f"{self.user.username}'s Student Profile"
-    
-    def get_skills(self):
-        return self.skills.all()
-
-# ✅ Profil prof
-class TeacherProfile(Profile):
-    expertise = models.TextField(blank=True)  # domaine d'expertise
-    reputation_score = models.IntegerField(default=0)  # note de réputation (tbda 0)
-    is_freelancer = models.BooleanField(default=False)
-    def __str__(self):
-        return f"{self.user.username}'s Teacher Profile"
-    
-    def get_skills(self):
-        # If you want to show expertise as a skill
-        return [self.expertise] if self.expertise else []
-
-# ✅ Profil entreprise
-class CompanyProfile(Profile):
-    company_name = models.CharField(max_length=255)  # nom ta3 la société
-    description = models.TextField()  # un petit résumé 3la la boîte
-    image = models.ImageField(upload_to='company_pics/', blank=True, null=True)
-    country=models.CharField(max_length=10,null=False)
+        return self.country or "Not set"
 
     def __str__(self):
-        return f"{self.company_name} ({self.user.username})"
-    
-    def get_skills(self):
-        return []
+        return f"{self.user.username}'s Profile"
+
+
+@receiver(post_save, sender=User)
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        Profile.objects.create(user=instance)

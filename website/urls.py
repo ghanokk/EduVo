@@ -1,13 +1,11 @@
-from django.urls import path,include
+from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from . import views
 
+
 urlpatterns = [
-    
-    path('', views.homePage, name='homePage'),\
-
-
+    path('', views.homePage, name='homePage'),
 ]
 
 if settings.DEBUG:
