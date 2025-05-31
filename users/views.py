@@ -187,6 +187,18 @@ def update_profile(request):
             elif len(new_username) < 3:
                 errors.append("Username must be at least 3 characters long.")
 
+        # Profile picture validation
+        profile_picture = request.FILES.get('profile_picture')
+        if profile_picture:
+            allowed_extensions = ['png', 'jpg', 'jpeg', 'gif']
+            ext = profile_picture.name.split('.')[-1].lower()
+            if ext not in allowed_extensions:
+                errors.append("Profile picture must be a PNG, JPG, JPEG, or GIF file.")
+            elif profile_picture.size > 2 * 1024 * 1024:  # 2MB limit
+                errors.append("Profile picture must be less than 2MB.")
+            else:
+                profile.profile_picture = profile_picture
+
         if errors:
             for error in errors:
                 messages.error(request, error)
