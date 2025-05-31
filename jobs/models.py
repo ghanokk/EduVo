@@ -1,7 +1,7 @@
 from django.db import models
 from django.urls import reverse
 from django.conf import settings
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 
 # Status choices
 STATUS_CHOICES = [
@@ -141,3 +141,21 @@ class JobApplication(models.Model):
 
     class Meta:
         ordering = ['-created_at']
+
+# Job Offer model
+class JobOffer(models.Model):
+    title = models.CharField(max_length=255)
+    description = models.TextField()
+    contract_type = models.CharField(max_length=50)
+    expiration_date = models.DateField()
+    location = models.CharField(max_length=255)
+    required_skills = models.CharField(max_length=255)
+    industry_sector = models.CharField(max_length=255)
+    education_level = models.CharField(max_length=255)
+    job_level = models.CharField(max_length=255)
+    company_name = models.CharField(max_length=255)
+    introduction = models.TextField()
+    contact_email = models.EmailField()
+    attachment = models.FileField(upload_to='job_attachments/', blank=True, null=True)
+    posted_by = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
