@@ -115,6 +115,33 @@ def courses(request):
 
     return render(request, 'Courses.html', context)
 
+# Watch course view
+def watch_course(request, course_id):
+    course = get_object_or_404(Course, id=course_id)
+    sections = course.sections.all().order_by('order')
+    videos = Video.objects.filter(section__course=course).order_by('section__order')
+    
+    # Get course statistics
+    total_duration = course.get_total_duration()
+    total_lessons = course.get_total_lessons()
+    
+    # Get ratings and counts
+    avg_rating = course.ratings.aggregate(Avg('rating_value'))['rating_value__avg'] or 0
+    rating_count = course.ratings.count()
+    student_count = course.enrollments.count()
+    
+    context = {
+        'course': course,
+        'sections': sections,
+        'videos': videos,
+        'total_duration': total_duration,
+        'total_lessons': total_lessons,
+        'rating': range(int(avg_rating)),
+        'rating_count': rating_count,
+        'student_count': student_count,
+    }
+    return render(request, 'Watch-course.html', context)
+
 # function li taffichi wahad lcourse selon l'id
 def course_model(request, course_id):
     # njibou cours wla ndirou erreur 404 si makaynach

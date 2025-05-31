@@ -1,0 +1,295 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ course.title }}</title>
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="{% static 'CSS_files/Watch-course.css' %}">
+    <script src="{% static 'JS_files/Watch-course.js' %}"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    
+    <main class="video-container">
+        <div class="video-box">
+            <div class="video-screen">
+                <p class="video-caption">What am i going to get out of this course?</p>
+                <button class="arrow-btn">›</button>
+            </div>
+            <div class="video-controls">
+                <div class="play-icon">▶</div>
+                <span class="time">0:02 / 8:07</span>
+                <div class="progress-bar">
+                    <div class="progress"></div>
+                </div>
+                <div class="right-controls">
+                    <div class="mute-icon">🔈</div>
+                    <div class="fullscreen-icon">⛶</div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <div class="container">
+        <div class="main-content">
+            <h1 class="course-title">{{ course.title }}</h1>
+            
+            <div class="rating-section">
+                <span class="rating">{{ rating }}</span>
+                <span class="stars">{% for i in "12345" %}{% if forloop.counter <= rating %}★{% else %}☆{% endif %}{% endfor %}</span>
+                <span class="rating-count">{{ rating_count }} ratings</span>
+                <span class="students-count">{{ student_count }} Students</span>
+                <span class="students-count">{{ total_duration }} Total</span>
+            </div>
+            
+            <div class="course-meta">
+                📅 Last updated March 2019
+            </div>
+            
+            <div class="language-info">
+                <span>🌐 English</span>
+                <span>🔊 English [Auto]</span>
+            </div>
+            
+            <div class="instructor-card">
+                <img src="{% static 'assets/img/instructor-avatar.jpg' %}" alt="Diaa messaoudi" class="instructor-avatar">
+                <div class="instructor-info">
+                    <h3>Diaa messaoudi</h3>
+                    <div class="instructor-location">Algeria , blida</div>
+                    <div class="social-icons">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/facebook/facebook-original.svg" alt="Facebook" class="social-icon">
+                        <img src="52e3b5bab1fb3c7f65140baad164a7df2c01e04c.png" alt="Instagram" class="social-icon" style="filter: invert(25%) sepia(85%) saturate(6500%) hue-rotate(315deg);">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/twitter/twitter-original.svg" alt="Twitter" class="social-icon">
+                        <img src="be0bf57d3c4d01c178406ba55f7dc7b5249236b9.png" alt="YouTube" class="social-icon">
+                    </div>
+                </div>
+                <div class="instructor-stats">
+                    <div class="stat">
+                        <div class="stat-number">{{ course.sections.count }}</div>
+                        <div class="stat-label">course</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">{{ student_count }}</div>
+                        <div class="stat-label">student</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">{{ course.ratings.count }}</div>
+                        <div class="stat-label">ratings</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="course-stats">
+                <div class="stats-left">
+                    <h4>By the numbers</h4>
+                    <p>Skill level: All Levels</p>
+                    <p>Students: 23319</p>
+                    <p>Languages: English</p>
+                    <p>Captions: Yes</p>
+                </div>
+                <div class="stats-right">
+                    <p>Lectures: 34</p>
+                    <p>Video: 1.5 total hours</p>
+                </div>
+            </div>
+            
+            <div class="features">
+                <h4>Features</h4>
+                <div class="features-content">Available on 
+                    <span class="platform-link">iOS</span> and 
+                    <span class="platform-link">Android</span> and 
+                    <span class="platform-link">PC</span>
+                </div>
+            </div>
+            
+            <div class="description">
+                <h4>Description</h4>
+                <div class="description-content">
+                    <p>If you have always wanted to make websites, but never knew where to start, this course is for you. This course will teach you everything you need to know to start creating websites - <strong>No coding experience needed!</strong> Even if you know nothing about code or computers, when you are finished with this course, you will be a complete expert in HTML. We go all the way from the theory behind HTML, to created complex forms and web pages with HTML.</p>
+                    
+                    <p>On top of that, throughout this course, there are countless quizzes, exercises, and projects to help you really get the feel for HTML. With this course, whether you are an experienced programmer, or a complete beginner, <strong>by the end of this course, you will be a complete expert in HTML.</strong></p>
+                    
+                    <p>In the first section, I will not be covering anything related to HTML, instead giving a comprehensive view on what the course is about and how it will be played out. This</p>
+                    
+                    <span class="show-more">Show more</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h2 class="sidebar-title">Course content</h2>
+                <button class="close-btn">×</button>
+            </div>
+            
+            <div class="course-progress">
+                <div class="progress-info">
+                    <span>0 / 9</span>
+                    <span>7min</span>
+                </div>
+            </div>
+            
+            <div class="section" id="section1">
+                <div class="section-header" onclick="toggleSection('section1')">
+                    <div>
+                        <div class="section-title">Section 1: Introduction to Course</div>
+                        <div class="section-info">0 / 3 | 7min</div>
+                    </div>
+                    <div class="section-arrow">▼</div>
+                </div>
+                <div class="section-content">
+                    <div class="lesson">
+                        <input type="checkbox" class="lesson-checkbox">
+                        <div class="lesson-info">
+                            <div class="lesson-title">1. What am I going to get out of this course?</div>
+                            <div class="lesson-duration">🎬 3min</div>
+                        </div>
+                        <span class="lesson-resources">Resources</span>
+                    </div>
+                    <div class="lesson">
+                        <input type="checkbox" class="lesson-checkbox">
+                        <div class="lesson-info">
+                            <div class="lesson-title">2. Full Introduction to Course</div>
+                            <div class="lesson-duration">🎬 4min</div>
+                        </div>
+                    </div>
+                    <div class="lesson">
+                        <input type="checkbox" class="lesson-checkbox">
+                        <div class="lesson-info">
+                            <div class="lesson-title">3. Text Editor: Link to Download</div>
+                            <div class="lesson-duration">📄 1min</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section" id="section2">
+                <div class="section-header" onclick="toggleSection('section2')">
+                    <div>
+                        <div class="section-title">Section 2: Introduction to HTML</div>
+                        <div class="section-info">0 / 6 | 13min</div>
+                    </div>
+                    <div class="section-arrow">▼</div>
+                </div>
+                <div class="section-content">
+                    <div class="lesson">
+                        <input type="checkbox" class="lesson-checkbox">
+                        <div class="lesson-info">
+                            <div class="lesson-title">4. What is HTML?</div>
+                            <div class="lesson-duration">🎬 2min</div>
+                        </div>
+                    </div>
+                    <div class="lesson">
+                        <input type="checkbox" class="lesson-checkbox">
+                        <div class="lesson-info">
+                            <div class="lesson-title">5. HTML Structure</div>
+                            <div class="lesson-duration">🎬 3min</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section" id="section3">
+                <div class="section-header" onclick="toggleSection('section3')">
+                    <div>
+                        <div class="section-title">Section 3: Getting Started with HTML</div>
+                        <div class="section-info">0 / 7 | 13min</div>
+                    </div>
+                    <div class="section-arrow">▼</div>
+                </div>
+                <div class="section-content">
+                    <div class="lesson">
+                        <input type="checkbox" class="lesson-checkbox">
+                        <div class="lesson-info">
+                            <div class="lesson-title">6. Creating Your First HTML File</div>
+                            <div class="lesson-duration">🎬 5min</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section" id="section4">
+                <div class="section-header" onclick="toggleSection('section4')">
+                    <div>
+                        <div class="section-title">Section 4: More Tags In HTML</div>
+                        <div class="section-info">0 / 6 | 16min</div>
+                    </div>
+                    <div class="section-arrow">▼</div>
+                </div>
+                <div class="section-content">
+                    <div class="lesson">
+                        <input type="checkbox" class="lesson-checkbox">
+                        <div class="lesson-info">
+                            <div class="lesson-title">7. Headings and Paragraphs</div>
+                            <div class="lesson-duration">🎬 4min</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section" id="section5">
+                <div class="section-header" onclick="toggleSection('section5')">
+                    <div>
+                        <div class="section-title">Section 5: Tables</div>
+                        <div class="section-info">0 / 4 | 12min</div>
+                    </div>
+                    <div class="section-arrow">▼</div>
+                </div>
+                <div class="section-content">
+                    <div class="lesson">
+                        <input type="checkbox" class="lesson-checkbox">
+                        <div class="lesson-info">
+                            <div class="lesson-title">8. Creating Tables</div>
+                            <div class="lesson-duration">🎬 6min</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section" id="section6">
+                <div class="section-header" onclick="toggleSection('section6')">
+                    <div>
+                        <div class="section-title">Section 6: Forms</div>
+                        <div class="section-info">0 / 9 | 32min</div>
+                    </div>
+                    <div class="section-arrow">▼</div>
+                </div>
+                <div class="section-content">
+                    <div class="lesson">
+                        <input type="checkbox" class="lesson-checkbox">
+                        <div class="lesson-info">
+                            <div class="lesson-title">9. Introduction to Forms</div>
+                            <div class="lesson-duration">🎬 3min</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section" id="section7">
+                <div class="section-header" onclick="toggleSection('section7')">
+                    <div>
+                        <div class="section-title">Section 7: Final Exam</div>
+                        <div class="section-info">0 / 5 | 5min</div>
+                    </div>
+                    <div class="section-arrow">▼</div>
+                </div>
+                <div class="section-content">
+                    <div class="lesson">
+                        <input type="checkbox" class="lesson-checkbox">
+                        <div class="lesson-info">
+                            <div class="lesson-title">10. Final Test</div>
+                            <div class="lesson-duration">📝 5min</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}

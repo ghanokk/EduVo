@@ -50,7 +50,7 @@
         </div>
         <div class="purchase-btns">
             <button class="purchase-btn add">Add to cart</button>
-            <button class="purchase-btn buy">Buy Now!</button>
+            <a href="{% url 'courses:watch-course' course.id %}" class="purchase-btn buy">Buy Now!</a>
         </div>
     </div>
 </div>

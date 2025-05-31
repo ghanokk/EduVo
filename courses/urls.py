@@ -9,5 +9,6 @@ urlpatterns = [
     path('create-section/', views.create_section, name='create_section'),
     path('upload-video/', views.upload_video, name='upload_video'),
     path('upload-material/', views.upload_material, name='upload_material'),
-    path('<int:course_id>/', views.course_model, name='course-model'),  # <-- Add this line
+    path('<int:course_id>/', views.course_model, name='course-model'),
+    path('watch/<int:course_id>/', views.watch_course, name='watch-course')
 ]
