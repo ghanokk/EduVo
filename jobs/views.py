@@ -6,6 +6,9 @@ from django.views.decorators.csrf import csrf_exempt
 from django.db.models import F #to increment applications_count atomically
 from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
+from django.core.mail import EmailMessage
+from django.template.loader import render_to_string
+from django.conf import settings
 
 
 def Jobs(request):
@@ -87,6 +90,22 @@ def submit_application(request, job_id):
             applicant=request.user if request.user.is_authenticated else None
         )
         application.save()
+
+        # Render HTML email
+        html_message = render_to_string(
+            'jobs/application_email.html',
+            {'job': job, 'application': application}
+        )
+
+        email = EmailMessage(
+            subject=f"New Application for {job.title}",
+            body=html_message,
+            from_email=settings.EMAIL_HOST_USER,
+            to=[job.posted_by.email],
+        )
+        email.content_subtype = "html"  # Main content is now text/html
+        email.send()
+
         messages.success(request, "Application submitted successfully!")
         return redirect(request.META.get('HTTP_REFERER', '/'))
 
