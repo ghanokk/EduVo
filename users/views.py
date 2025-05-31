@@ -17,14 +17,14 @@ def login(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             auth_login(request, user)
-            return redirect('homePage')
+            return redirect('website:homePage')
     return render(request, 'users/register.html')
 
 
 # Logout view
 def logout_view(request):
     auth_logout(request)
-    return redirect('homePage')
+    return redirect('website:homePage')
 
 def Register(request):
     return render(request, 'users/register.html')

@@ -183,7 +183,7 @@ body {
 </head>
 <body>
     <nav class="nav-bar">
-        <a href="{% url 'homePage' %}" style="text-decoration: none; color: inherit;">
+        <a href="{% url 'website:homePage' %}" style="text-decoration: none; color: inherit;">
             <div class="logo">
                 <img class="logo-image" src="{% static './assets/image/Clippathgroup.png' %}"
                     style="filter: brightness(0) invert(1);" />
@@ -191,7 +191,7 @@ body {
             </div>
         </a>
         <div class="nav-links">
-            <a href="{% url 'homePage' %}">Home</a>
+            <a href="{% url 'website:homePage' %}">Home</a>
             <a href="{% url 'courses:Courses' %}">Courses</a>
             <a href="{% url 'jobs:Jobs' %}">Jobs</a>
         </div>
@@ -245,7 +245,7 @@ body {
     <!-- Footer -->
     <div class="footer">
         <div class="footer-hero">
-            <a href="{% url 'homePage' %}" style="text-decoration: none;">
+            <a href="{% url 'website:homePage' %}" style="text-decoration: none;">
                 <div class="logo"><img src="{% static './assets/image/logo project.png' %}" alt=""></div>
             </a>
             <link rel="stylesheet" href="{% static 'CSS_files/styl.css' %}">
@@ -260,7 +260,7 @@ body {
         </div>
         <div class="explore">
             <h1>Explore</h1>
-            <a href="{% url 'homePage'%}">Home</a>
+            <a href="{% url 'website:homePage'%}">Home</a>
             <a href="{% url 'courses:Courses' %}">Courses</a>
             <a href="{% url 'jobs:Jobs' %}">Jobs</a>
         </div>

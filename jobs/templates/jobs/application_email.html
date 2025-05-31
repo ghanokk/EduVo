@@ -1,8 +1,94 @@
-<h2>New Application for {{ job.title }}</h2>
-<p><strong>Applicant Name:</strong> {{ application.full_name }}</p>
-<p><strong>Email:</strong> {{ application.email }}</p>
-<p><strong>Phone:</strong> {{ application.phone }}</p>
-<p><strong>Preferred Contact:</strong> {{ application.preferred_contact }}</p>
-<p><strong>Cover Letter:</strong></p>
-<p>{{ application.cover_letter|linebreaks }}</p>
-<!-- Add more fields as needed -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>New Job Application</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+        .header { background-color: #f5f5f5; padding: 20px; border-bottom: 2px solid #e0e0e0; }
+        .container { max-width: 800px; margin: 0 auto; padding: 20px; }
+        .section { margin-bottom: 25px; }
+        .section h3 { color: #2c3e50; margin-top: 20px; }
+        .job-info { background-color: #f8f9fa; padding: 15px; border-radius: 5px; }
+        .applicant-info { background-color: #fff; padding: 15px; border-radius: 5px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .skills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+        .skill-tag { background-color: #e1f5fe; padding: 5px 10px; border-radius: 15px; font-size: 0.9em; }
+        .attachments { margin-top: 15px; }
+        .attachment-item { margin: 5px 0; padding: 5px; background: #f8f9fa; border-radius: 4px; }
+        .status { color: #28a745; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>New Job Application Received</h1>
+        <p class="status">Status: Pending Review</p>
+    </div>
+    
+    <div class="container">
+        <div class="section">
+            <h2>Job Information</h2>
+            <div class="job-info">
+                <p><strong>Position:</strong> {{ job.title }}</p>
+                <p><strong>Company:</strong> {{ job.company_name }}</p>
+                <p><strong>Location:</strong> {{ job.location }}, {{ job.city }}, {{ job.country }}</p>
+                <p><strong>Work Mode:</strong> {{ job.get_work_mode_display }}</p>
+                <p><strong>Experience Level:</strong> {{ job.get_experience_level_display }}</p>
+                <p><strong>Contract Type:</strong> {{ job.get_contract_type_display }}</p>
+                <p><strong>Industry:</strong> {{ job.company_industry }}</p>
+                <p><strong>Required Education:</strong> {{ job.get_education_level_display }}</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Applicant Information</h2>
+            <div class="applicant-info">
+                <div class="applicant-details">
+                    <p><strong>Full Name:</strong> {{ application.full_name }}</p>
+                    <p><strong>Email:</strong> {{ application.email }}</p>
+                    <p><strong>Phone:</strong> {{ application.phone }}</p>
+                    <p><strong>Preferred Contact:</strong> {{ application.preferred_contact }}</p>
+                    <p><strong>Current Location:</strong> {{ application.location }}</p>
+                    <p><strong>Availability:</strong> {{ application.availability }}</p>
+                </div>
+
+                <div class="skills-section">
+                    <h3>Skills & Experience</h3>
+                    <div class="skills">
+                        {% if application.skills %}
+                            <span class="skill-tag">{{ application.skills }}</span>
+                        {% else %}
+                            <span class="skill-tag">No skills specified</span>
+                        {% endif %}
+                    </div>
+                    <p><strong>Years of Experience:</strong> {{ application.experience }}</p>
+                </div>
+
+                <div class="cover-letter">
+                    <h3>Cover Letter</h3>
+                    <p>{{ application.cover_letter|linebreaks }}</p>
+                </div>
+
+                <div class="attachments">
+                    <h3>Attachments</h3>
+                    {% if application.cv %}
+                        <div class="attachment-item">
+                            <strong>CV:</strong> {{ application.cv.name }}
+                        </div>
+                    {% endif %}
+                    {% if application.certificates %}
+                        <div class="attachment-item">
+                            <strong>Certificates:</strong> {{ application.certificates.name }}
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Next Steps</h2>
+            <p>The application is now pending review. We will contact the candidate regarding the next steps.</p>
+            <p><strong>Application Date:</strong> {{ application.created_at|date:"F j, Y" }}</p>
+        </div>
+    </div>
+</body>
+</html>
