@@ -1,3 +1,4 @@
+
 {% load static%}
 <!DOCTYPE html>
 <html lang="en">
@@ -19,8 +20,12 @@
         <input type="email" placeholder="Enter your email adress" id="email" name="email">
         <label for="password">password</label>
         <input type="password" placeholder="Enter your password" id="password" name="password">
-         {% include 'users/msg.html' %}
+
+        {% include 'users/msg.html' %}
         <button type="submit">Login</button>
+        <div class="forgot-pass">
+            <a href="{% url 'users:password_reset' %}">Forgot password?</a>
+        </div>
         </form>
         <div class="dont-have-acc">
         <span>don't have an account <a href="{% url 'users:Signup' %}">Sign up</a></span>
@@ -30,5 +35,3 @@
     </div>
 </body>
 </html>
-    </div>
-</body></html>

@@ -2,10 +2,10 @@ from django.shortcuts import render, redirect
 from .models import User
 from django.contrib import messages
 from users.EmailBackEnd import EmailBackEnd
-import re
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.views import PasswordResetView
 from django.urls import reverse_lazy
+
 
 def DO_SIGNUP(request):
   if request.method == "POST":
@@ -65,11 +65,11 @@ def DO_LOGIN(request):
 
     if user != None:
       login(request, user)
-      return redirect('homePage')
+      return redirect('website:homePage')
     else:
       messages.error(request, 'Email And Password Are Invalid')
       return redirect('users:Login')
-
+    
 def FORGOT_PASS(request):
     if request.method == "POST":
         email = request.POST.get('email')
@@ -90,4 +90,3 @@ def FORGOT_PASS(request):
     return PasswordResetView.as_view(
         template_name='registration/password_reset_form.html'
     )(request)
-    

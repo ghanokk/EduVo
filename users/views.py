@@ -26,10 +26,6 @@ def logout_view(request):
     auth_logout(request)
     return redirect('homePage')
 
-# had l'function li t3aml m3a l'forgot password
-def forgotPass(request):
-    return render(request, 'users/forgotPass.html')
-
 def Register(request):
     return render(request, 'users/register.html')
 
@@ -38,7 +34,10 @@ def Register(request):
 def profile(request):
     user = request.user
     profile = user.profile
-
+    
+    # Get user's courses
+    user_courses = Course.objects.filter(creator=user).order_by('-created_at')
+    
     if request.method == "POST":
         new_username = request.POST.get("new_username")
         bio = request.POST.get("bio")
@@ -169,8 +168,7 @@ def Signup(request):
 
 # had l'function li t3aml m3a l'profile page
 
-def Profile(request):
-    return render(request, 'users/Profile.html')
+
 
 @login_required
 def update_profile(request):
@@ -190,6 +188,18 @@ def update_profile(request):
                 errors.append("Username already exists! Please choose another.")
             elif len(new_username) < 3:
                 errors.append("Username must be at least 3 characters long.")
+
+        # Profile picture validation
+        profile_picture = request.FILES.get('profile_picture')
+        if profile_picture:
+            allowed_extensions = ['png', 'jpg', 'jpeg', 'gif']
+            ext = profile_picture.name.split('.')[-1].lower()
+            if ext not in allowed_extensions:
+                errors.append("Profile picture must be a PNG, JPG, JPEG, or GIF file.")
+            elif profile_picture.size > 2 * 1024 * 1024:  # 2MB limit
+                errors.append("Profile picture must be less than 2MB.")
+            else:
+                profile.profile_picture = profile_picture
 
         if errors:
             for error in errors:

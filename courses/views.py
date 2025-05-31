@@ -3,7 +3,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
-from .models import Course, Section, Video, CourseMaterial, Category
+from .models import Course, Section, Video, CourseMaterial,Category
 from django.contrib import messages
 from courses.models import Rating, Lesson, WhatYouLearn
 from django.db.models import Q, Avg, Count
@@ -22,9 +22,9 @@ def courses(request):
     price_type = request.GET.get('price_type', '')
     level = request.GET.get('level', '')
 
-    # ndirou requête principale: ghir les cours publiés
+    # ndirou requête principale: ghir les cours acceptés
     # w nzidou avg_rating, rating_count, student_count b des annotations
-    courses = Course.objects.filter(status='published').annotate(
+    courses = Course.objects.filter(status='accepted').annotate(
         avg_rating=Avg('ratings__rating_value'),
         rating_count=Count('ratings'),
         student_count=Count('enrollments')
@@ -83,8 +83,8 @@ def courses(request):
     # njibou toutes les catégories distinctes (pour le menu dropdown)
     all_categories = Course.objects.values_list('category_id', 'category__name').distinct()
 
-    # njibou top 5 des cours les plus vus
-    top_courses = Course.objects.filter(status='published').order_by('-views')[:5]
+    # njibou top 5 des cours les plus vus (seulement les cours acceptés)
+    top_courses = Course.objects.filter(status='accepted').order_by('-views')[:5]
 
     # nkhdmou info zyada 3la chaque cours
     for course in courses:
@@ -94,18 +94,11 @@ def courses(request):
         course.total_hours = course.get_total_duration()
         # nombre de leçons
         course.lectures = course.get_total_lessons()
-        # traitement d'image: si kayna, ykhdemha, sinon default
-        if course.image:
-            course.image_url = course.image.url
-        else:
-            course.image_url = settings.STATIC_URL + 'assets/img/default-course.jpg'
+
 
     # meme traitement pour top_courses
     for course in top_courses:
-        if course.image:
-            course.image_url = course.image.url
-        else:
-            course.image_url = settings.STATIC_URL + 'assets/img/default-course.jpg'
+        pass
 
     # kol data ndakhlouha f context bach n'affichiha f template
     context = {
@@ -125,7 +118,7 @@ def courses(request):
 # function li taffichi wahad lcourse selon l'id
 def course_model(request, course_id):
     # njibou cours wla ndirou erreur 404 si makaynach
-    course = get_object_or_404(Course, id=course_id, status='published')
+    course = get_object_or_404(Course, id=course_id, status='accepted')
 
     # njibou les ratings dyal had lcourse, ordonnés par date de création
     ratings = course.ratings.all().order_by('-created_at')
@@ -166,13 +159,18 @@ def course_model(request, course_id):
 
     return render(request, 'Course-model.html', context)
 
+
+
 @login_required
 def add_course(request):
+    from users.views import profile  # Import here to avoid circular import
+    categories = Category.objects.all()
+    
     if request.method == 'POST':
         title = request.POST.get('title')
         description = request.POST.get('description')
         objectives = request.POST.get('objectives')
-        category_name = request.POST.get('category')
+        category_id = request.POST.get('category')
         level = request.POST.get('level')
         prerequisites = request.POST.get('prerequisites')
         duration = request.POST.get('duration')
@@ -181,14 +179,13 @@ def add_course(request):
 
         if not title or not description or not price:
             messages.error(request, "Title, description, and price are required.")
-            return redirect('courses:add_course')
+            return render(request, 'users/Profile.html', {'categories': categories})
 
-        try:
-            # Get the Category instance using the category name
-            category = Category.objects.get(name=category_name)
-        except Category.DoesNotExist:
-            messages.error(request, f"Category '{category_name}' does not exist.")
-            return redirect('courses:add_course')
+        category = Category.objects.filter(id=category_id).first() if category_id else None
+
+        if not category:
+            messages.error(request, "Please select a valid category.")
+            return render(request, 'users/Profile.html', {'categories': categories})
 
         course = Course.objects.create(
             title=title,
@@ -201,14 +198,14 @@ def add_course(request):
             cover_image=cover_image,
             price=price,
             creator=request.user,
-            teacher=request.user 
+            teacher=request.user,
+            status='pending'
         )
+        messages.success(request, "Course submitted successfully! It will be reviewed by our team.")
         messages.success(request, "Course created successfully! Now add sections and materials.")
-        return render(request, 'users/Profile.html')
-
-    # Handle GET request - show the form
-    categories = Category.objects.all()
+        return redirect('users:profile')  # Redirect to profile page
     return render(request, 'users/Profile.html', {'categories': categories})
+
 
 @login_required
 @csrf_exempt
@@ -242,12 +239,3 @@ def upload_material(request):
         material = CourseMaterial.objects.create(section=section, file=material_file, title=title)
         return JsonResponse({'id': material.id, 'title': material.title, 'url': material.file.url})
 
-def courses(request):
-    courses = Course.objects.all()  # or filter as needed
-    top_courses = Course.objects.order_by('-views')[:3]  # or your logic
-    level_choices = Course.LEVEL_CHOICES
-    return render(request, 'Courses.html', {
-        'courses': courses,
-        'top_courses': top_courses,
-        'level_choices': level_choices,
-    })

@@ -29,12 +29,37 @@ class Course(models.Model):
         ('all levels', 'All Levels'),
     ]
     
-    # had lchoices y3tina l'status t3 l'cours (msawd, mcharf, archivay)
+    # Course status choices
     STATUS_CHOICES = [
-        ('draft', 'Draft'),
-        ('published', 'Published'),
-        ('archived', 'Archived'),
+        ('accepted', 'Accepted'),
+        ('pending', 'Pending Review'),
+
+        ('rejected', 'Rejected'),
+
     ]
+    
+    # Add status field
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')
+    review_notes = models.TextField(blank=True, null=True)  # For admin to add rejection notes
+    
+    # Add methods for course approval
+    def approve(self):
+        self.status = 'accepted'
+        self.save()
+    
+    def reject(self, notes):
+        self.status = 'rejected'
+        self.review_notes = notes
+        self.save()
+    
+    def is_accepted(self):
+        return self.status == 'accepted'
+    
+    def is_rejected(self):
+        return self.status == 'rejected'
+    
+    def is_pending(self):
+        return self.status == 'pending'
 
     # had lfields y7fed fihom l'information t3 lcourses
     title = models.CharField(max_length=255)  # lism t3 l'cours
