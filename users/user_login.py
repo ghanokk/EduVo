@@ -4,6 +4,7 @@ from django.contrib import messages
 from users.EmailBackEnd import EmailBackEnd
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.views import PasswordResetView
+import re
 from django.urls import reverse_lazy
 
 

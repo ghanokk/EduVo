@@ -3,12 +3,11 @@ from courses.models import Course, Rating, Category
 from django.db.models import Q, Avg, Count
 from django.apps import apps
 from django.conf import settings
-
-
+from jobs.models import Job
 
 def homePage(request):
     # Get top courses (most viewed)
-    top_courses = Course.objects.filter(status='published').annotate(
+    top_courses = Course.objects.filter(status='accepted').annotate(
         avg_rating=Avg('ratings__rating_value'),
         rating_count=Count('ratings'),
         student_count=Count('enrollments')
@@ -20,7 +19,7 @@ def homePage(request):
     ).order_by('-course_count')[:4]
 
     # Get latest jobs
-    from jobs.models import Job
+
     latest_jobs = Job.objects.all().order_by('-created_at')[:6]
 
     # Process course data
@@ -29,8 +28,8 @@ def homePage(request):
         course.rating = range(int(course.avg_rating or 0))
 
     # Get statistics
-    total_courses = Course.objects.filter(status='published').count()
-    total_students = Course.objects.filter(status='published').aggregate(
+    total_courses = Course.objects.filter(status='accepted').count()
+    total_students = Course.objects.filter(status='accepted').aggregate(
         total=Count('enrollments', distinct=True)
     )['total'] or 0
     total_jobs = Job.objects.count()

@@ -107,16 +107,11 @@
     <h1>Available Jobs</h1>
     <div class="jobs-wrraper">
         {% for job in latest_jobs %}
+        
         <a href="{% url 'jobs:job-model' job.id %}" class="job-box-link">
             <div class="job-box">
                 <div class="job-logo">
-                    {% with company_profile=job.posted_by.companyprofile|default_if_none:"" %}
-                        {% if company_profile.image %}
-                            <img src="{{ company_profile.image.url }}" alt="{{ job.company }} Logo">
-                        {% else %}
-                            <img src="{% static 'img/default-company-logo.png' %}" alt="{{ job.company }} Logo">
-                        {% endif %}
-                    {% endwith %}
+                    <img src="{% static 'assets/img/company__pic.jpg' %}" alt="Company Logo" width="40" height="40" class="job-logo-img">
                 </div>
                 <div class="job-badge asButton">{{ job.category }}</div>
                 <div class="job-details">
@@ -136,30 +131,121 @@
 
 
 <div class="feedbacks">
-    <h1>Client Feedbacks</h1>
+    <h1>Client FeedBacks</h1>
     <div class="feedbacks-wrraper">
-        {% for testimonial in testimonials %}
+
         <div class="feedback-box">
+
             <div class="feedback-rating">
-                {% for i in "12345" %}
+                
                 <i class="fa-solid fa-star rating"></i>
-                {% endfor %}
+                <i class="fa-solid fa-star rating"></i>
+                <i class="fa-solid fa-star rating"></i>
+                <i class="fa-solid fa-star rating"></i>
+                <i class="fa-solid fa-star rating"></i>
             </div>
             <div class="feedback-msg">
-                "{{ testimonial.content }}"
+                "Enrolling in the full-stack development
+                 course was a game-changer for me. The
+                  structured modules and hands-on projects made
+                   complex topics approachable. Within months,
+                    I landed my first freelance project,
+                     and I owe it all to this platform."
             </div>
             <div class="feedback-profile">
-                <img src="{{ testimonial.user.profile_image.url|default:'assets/img/default-profile.jpg' }}" alt="" class="feedback-profile-pic">
+                <img src="{% static './assets/img/pic1.jpg' %}" alt="" width="60" height="60" class="feedback-profile-pic">
                 <div class="feedback-profile-infos">
-                    <p>{{ testimonial.user.get_full_name }}</p>
-                    <p>{{ testimonial.user.job_title }}</p>
+                    <p style="font-weight: bold; color: #3B82F6; font-size: 18px; margin-bottom: 5px;">Ahmed Bouarbaoui</p>
+                    <p>Web Developer</p>
                 </div>
-
             </div>
-
-            
         </div>
-        {% endfor %}
+
+        <div class="feedback-box">
+            <div class="feedback-rating">
+                <i class="fa-solid fa-star rating"></i>
+                <i class="fa-solid fa-star rating"></i>
+                <i class="fa-solid fa-star rating"></i>
+                <i class="fa-solid fa-star rating"></i>
+                <i class="fa-solid fa-star rating"></i>
+            </div>
+            <div class="feedback-msg">
+                "Finding quality clients used to be
+                 a challenge. Since joining this
+                  platform, I've connected with 
+                  businesses that value my design skills.
+                   The seamless communication tools and
+                    secure payment system have made 
+                    freelancing a breeze."
+            </div>
+            <div class="feedback-profile">
+                <img src="{% static './assets/img/pic2.jpg' %}" alt="" width="60" height="60" class="feedback-profile-pic">
+                <div class="feedback-profile-infos">
+                    <p style="font-weight: bold; color: #3B82F6; font-size: 18px; margin-bottom: 5px;">Yacine Mohsen</p>
+                    <p>Graphic Designer</p>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <div class="feedback-box">
+            <div class="feedback-rating">
+                <i class="fa-solid fa-star rating"></i>
+                <i class="fa-solid fa-star rating"></i>
+                <i class="fa-solid fa-star rating"></i>
+                <i class="fa-solid fa-star rating"></i>
+                <i class="fa-solid fa-star rating"></i>
+            </div>
+            <div class="feedback-msg">
+                "After years in retail, I decided
+                 to pivot to digital marketing.
+                  The courses offered here were 
+                  comprehensive and up-to-date.
+                   The community support and mentorship
+                    helped me build a portfolio that
+                     impressed my first client."
+            </div>
+            <div class="feedback-profile">
+                <img src="{% static './assets/img/pic 3.jpg' %}" alt="" width="60" height="60" class="feedback-profile-pic">
+                <div class="feedback-profile-infos">
+                    <p style="font-weight: bold; color: #3B82F6; font-size: 18px; margin-bottom: 5px;">Hentabli Fatah 9</p>
+                    <p>Digital Marketing Specialist</p>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="feedback-box">
+            <div class="feedback-rating">
+                <i class="fa-solid fa-star rating"></i>
+                <i class="fa-solid fa-star rating"></i>
+                <i class="fa-solid fa-star rating"></i>
+                <i class="fa-solid fa-star rating"></i>
+                <i class="fa-solid fa-star rating"></i>
+            </div>
+            <div class="feedback-msg">
+                "As a startup founder, hiring
+                 skilled freelancers quickly is
+                  crucial. This platform's vetting
+                   process and user reviews give me
+                    confidence in my choices. It's 
+                    become my go-to resource for 
+                    building my remote team."
+            </div>
+            <div class="feedback-profile">
+                <img src="{% static './assets/img/pic4.jpg' %}" alt="" width="60" height="60" class="feedback-profile-pic">
+                <div class="feedback-profile-infos">
+                    <p style="font-weight: bold; color: #3B82F6; font-size: 18px; margin-bottom: 5px;">Atchi Yasser</p>
+                    <p>Entrepreneur</p>
+                </div>
+            </div>
+        </div>
+
+
+
+
     </div>
 </div>
 {% endblock content %}

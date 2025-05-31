@@ -701,27 +701,87 @@
                 <button onclick="next()" id="nextBtn"> → </button>
             </div>
 
-        <div class="carousel-track" id="carouselTrack">
-        {% for course in user_courses %}
-          <div class="carousel-item">
-            <div class="carousel-card">
-                <div class="p-course-box">
-                    <div class="p-course-box-img">
-                        <img src="{{ course.image.url }}" alt="{{ course.title }}">
-                    </div>
-                <div class="p-course-details">
-                    <h1 class="p-title">{{ course.title }}</h1>
-                    <div class="p-views">
-                        <p class="a">{{ course.get_status_display }}</p>
-                        <p>{{ course.enrollments.count }} vues</p>
-                        <p>{{ course.ratings.count }} ratings</p>
-                    </div>
+      
+  <div class="carousel-track" id="carouselTrack">
+      <div class="carousel-item">
+        <div class="carousel-card">
+            <div class="p-course-box">
+                <div class="p-course-box-img"><img src="{% static 'assets/img/courseJs.png' %}" alt=""></div>
+            <div class="p-course-details">
+                <h1 class="p-title">front-end Development</h1>
+                <div class="p-views">
+                    <p id="status" class="a">Accepted</p>
+                    <p id="viewers">215 vues</p>
+                    <p id="ratings">72 ratings</p>
                 </div>
             </div>
-            </div>
-          </div>
-        {% endfor %}
+        </div>
+        </div>
       </div>
+      <div class="carousel-item">
+        <div class="carousel-card">
+            <div class="p-course-box">
+                <div class="p-course-box-img"><img src="{% static 'assets/img/courseJs.png' %}" alt=""></div>
+            <div class="p-course-details">
+                <h1 class="p-title">front-end Development</h1>
+                <div class="p-views">
+                    <p id="status" class="a">Accepted</p>
+                    <p id="viewers">215 vues</p>
+                    <p id="ratings">72 ratings</p>
+                </div>
+            </div>
+        </div>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <div class="carousel-card">
+            <div class="p-course-box">
+                <div class="p-course-box-img"><img src="{% static 'assets/img/courseJs.png' %}" alt=""></div>
+            <div class="p-course-details">
+                <h1 class="p-title">front-end Development</h1>
+                <div class="p-views">
+                    <p id="status" class="a">Accepted</p>
+                    <p id="viewers">215 vues</p>
+                    <p id="ratings">72 ratings</p>
+                </div>
+            </div>
+        </div>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <div class="carousel-card">
+            <div class="p-course-box">
+                <div class="p-course-box-img"><img src="{% static 'assets/img/courseJs.png' %}" alt=""></div>
+            <div class="p-course-details">
+                <h1 class="p-title">front-end Development</h1>
+                <div class="p-views">
+                    <p id="status" class="a">Accepted</p>
+                    <p id="viewers">215 vues</p>
+                    <p id="ratings">72 ratings</p>
+                </div>
+            </div>
+        </div>
+        </div>
+      </div>
+
+
+      <div class="carousel-item">
+        <div class="carousel-card">
+            <div class="p-course-box">
+                <div class="p-course-box-img"><img src="{% static 'assets/img/courseJs.png' %}" alt=""></div>
+            <div class="p-course-details">
+                <h1 class="p-title">front-end Development</h1>
+                <div class="p-views">
+                    <p id="status" class="a">Accepted</p>
+                    <p id="viewers">215 vues</p>
+                    <p id="ratings">72 ratings</p>
+                </div>
+            </div>
+        </div>
+        </div>
+      </div>
+
+    </div>
   </div>
                 </div>
 
@@ -766,6 +826,7 @@
         </div>
         <button id="new-job-btn" onclick="showJobForm()">+ new jobs</button>
 
+            <!--------------- add job --------------->
 <div class="add-job">
 <div class="add-job-page " id="JobForm">
  <div class="bbb">
@@ -776,21 +837,22 @@
                 </div>
     </h2>
  </div>
-  <form>
+  <form method="POST" enctype="multipart/form-data" action="{% url 'jobs:add_job' %}">
+       {% csrf_token %}
     <div>
       <label for="titre">Job Title</label>
-      <input type="text" id="titre" placeholder="e.g., Web Developer, HR Assistant...">
+      <input type="text" id="titre" name="titre" placeholder="e.g., Web Developer, HR Assistant...">
     </div>
 
     <div>
       <label for="description">Job Description</label>
-      <textarea id="description" rows="5" placeholder="Describe the tasks, goals, and context"></textarea>
+      <textarea id="description" name="description" rows="5" placeholder="Describe the tasks, goals, and context"></textarea>
     </div>
 
     <div class="add-job-row">
       <div>
         <label for="contrat">Contract Type</label>
-        <select id="contrat">
+        <select id="contrat" name="contrat">
           <option>Internship</option>
           <option>Fixed-term</option>
           <option>Permanent</option>
@@ -802,57 +864,57 @@
     <div class="add-job-row">
       <div>
         <label for="date">Expiration Date</label>
-        <input type="date" id="date">
+        <input type="date" id="date" name="date">
       </div>
       <div>
         <label for="lieu">Location</label>
-        <input type="text" id="lieu" placeholder="Remote or City">
+        <input type="text" id="lieu" name="lieu" placeholder="Remote or City">
       </div>
     </div>
 
     <h3>Skills & Profile</h3>
     <div>
       <label for="competences">Required Skills</label>
-      <input type="text" id="competences" placeholder="List the skills (e.g., Python, project management...)">
+      <input type="text" id="competences" name="competences" placeholder="List the skills (e.g., Python, project management...)">
     </div>
 
     <div>
       <label for="secteur">Industry Sector</label>
-      <input type="text" id="secteur" placeholder="e.g., IT, Healthcare, Finance...">
+      <input type="text" id="secteur" name="secteur" placeholder="e.g., IT, Healthcare, Finance...">
     </div>
 
     <div class="add-job-row">
       <div>
         <label for="education">Education Level</label>
-        <input type="text" id="education" placeholder="e.g., Bachelor's, Master's, etc.">
+        <input type="text" id="education" name="education" placeholder="e.g., Bachelor's, Master's, etc.">
       </div>
       <div>
         <label for="level">Job Level</label>
-        <input type="text" id="level" placeholder="e.g., Junior, Mid, Senior">
+        <input type="text" id="level" name="level" placeholder="e.g., Junior, Mid, Senior">
       </div>
     </div>
 
     <h3>Company / Organization</h3>
     <div>
       <label for="nom_entreprise">Company Name</label>
-      <input type="text" id="nom_entreprise" placeholder="Legal name or brand">
+      <input type="text" id="nom_entreprise" name="nom_entreprise" placeholder="Legal name or brand">
     </div>
 
     <div>
       <label for="presentation">Introduction</label>
-      <textarea id="presentation" rows="3" placeholder="Brief description of the company or organization"></textarea>
+      <textarea id="presentation" name="presentation" rows="3" placeholder="Brief description of the company or organization"></textarea>
     </div>
 
     <div>
       <label for="email">Contact Email Address</label>
-      <input type="email" id="email" placeholder="contact@company.com">
+      <input type="email" id="email" name="email" placeholder="contact@company.com">
     </div>
 
     <h3>Attachments</h3>
     <div>
       <label for="fichier">Brochure, visual or logo (PDF, JPG, PNG)</label><br>
       <label class="add-job-custom-file-upload">
-        <input type="file" id="fichier" accept=".pdf,.jpg,.jpeg,.png">
+        <input type="file" id="fichier" name="fichier" accept=".pdf,.jpg,.jpeg,.png">
         Choose File
       </label>
     </div>
@@ -902,13 +964,7 @@
         </div>
         </div>
 
-    </div>
-
-    
-    
-   
-    <!-- -------------------------------add job-------------------------- -->
-   
+    </div>   
     
 
      
@@ -926,8 +982,4 @@ function closeCourseForm() {
 </body>
 
 </html>
-
-
-
-
 

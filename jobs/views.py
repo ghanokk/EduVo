@@ -1,9 +1,14 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .models import Job, JobApplication
+from .models import Job, JobApplication, JobOffer
 from django.views.decorators.csrf import csrf_exempt
 from django.db.models import F #to increment applications_count atomically
+from django.core.validators import validate_email
+from django.core.exceptions import ValidationError
+from django.core.mail import EmailMessage
+from django.template.loader import render_to_string
+from django.conf import settings
 
 
 def Jobs(request):
@@ -85,6 +90,22 @@ def submit_application(request, job_id):
             applicant=request.user if request.user.is_authenticated else None
         )
         application.save()
+
+        # Render HTML email
+        html_message = render_to_string(
+            'jobs/application_email.html',
+            {'job': job, 'application': application}
+        )
+
+        email = EmailMessage(
+            subject=f"New Application for {job.title}",
+            body=html_message,
+            from_email=settings.EMAIL_HOST_USER,
+            to=[job.posted_by.email],
+        )
+        email.content_subtype = "html"  # Main content is now text/html
+        email.send()
+
         messages.success(request, "Application submitted successfully!")
         return redirect(request.META.get('HTTP_REFERER', '/'))
 
@@ -122,5 +143,92 @@ def jobs_dashboard(request):
         'user': request.user,
         'new_jobs': new_jobs,
         'all_jobs': all_jobs,
-        'history_jobs': history_jobs,  # Pass to template
+        'history_jobs': history_jobs, 
     })
+
+def add_job(request):
+    if request.method == 'POST':
+        title = request.POST.get('titre', '').strip() # Remove white spaces from the input
+        description = request.POST.get('description', '').strip()
+        contract_type = request.POST.get('contrat', '').strip()
+        expiration_date = request.POST.get('date', '').strip()
+        location = request.POST.get('lieu', '').strip()
+        required_skills = request.POST.get('competences', '').strip()
+        industry_sector = request.POST.get('secteur', '').strip()
+        education_level = request.POST.get('education', '').strip()
+        job_level = request.POST.get('level', '').strip()
+        company_name = request.POST.get('nom_entreprise', '').strip()
+        introduction = request.POST.get('presentation', '').strip()
+        contact_email = request.POST.get('email', '').strip()
+        attachment = request.FILES.get('fichier')
+
+        errors = []
+
+        # Required fields check
+        if not title:
+            errors.append("Job title is required.")
+        if not description:
+            errors.append("Job description is required.")
+        if not contract_type:
+            errors.append("Contract type is required.")
+        if not expiration_date:
+            errors.append("Expiration date is required.")
+        if not location:
+            errors.append("Location is required.")
+        if not required_skills:
+            errors.append("Required skills are required.")
+        if not industry_sector:
+            errors.append("Industry sector is required.")
+        if not education_level:
+            errors.append("Education level is required.")
+        if not job_level:
+            errors.append("Job level is required.")
+        if not company_name:
+            errors.append("Company name is required.")
+        if not introduction:
+            errors.append("Introduction is required.")
+        if not contact_email:
+            errors.append("Contact email is required.")
+
+        # Email validation
+        if contact_email:
+            try:
+                validate_email(contact_email)
+            except ValidationError:
+                errors.append("Please enter a valid email address.")
+
+        # File validation (optional)
+        if attachment:
+            allowed_extensions = ['pdf', 'jpg', 'jpeg', 'png']
+            ext = attachment.name.split('.')[-1].lower()
+            if ext not in allowed_extensions:
+                errors.append("Attachment must be a PDF, JPG, or PNG file.")
+            elif attachment.size > 5 * 1024 * 1024:  # 5MB limit
+                errors.append("Attachment must be less than 5MB.")
+
+        if errors:
+            for error in errors:
+                messages.error(request, error)
+            return render(request, 'users/Profile.html')
+
+        # If all is good, save the job offer
+        JobOffer.objects.create(
+            title=title,
+            description=description,
+            contract_type=contract_type,
+            expiration_date=expiration_date,
+            location=location,
+            required_skills=required_skills,
+            industry_sector=industry_sector,
+            education_level=education_level,
+            job_level=job_level,
+            company_name=company_name,
+            introduction=introduction,
+            contact_email=contact_email,
+            attachment=attachment,
+            posted_by=request.user
+        )
+        messages.success(request, "Job offer submitted successfully!")
+        return redirect('users:profile')  
+
+    return render(request, 'users/Profile.html')

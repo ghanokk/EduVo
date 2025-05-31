@@ -1,0 +1,8 @@
+<h2>New Application for {{ job.title }}</h2>
+<p><strong>Applicant Name:</strong> {{ application.full_name }}</p>
+<p><strong>Email:</strong> {{ application.email }}</p>
+<p><strong>Phone:</strong> {{ application.phone }}</p>
+<p><strong>Preferred Contact:</strong> {{ application.preferred_contact }}</p>
+<p><strong>Cover Letter:</strong></p>
+<p>{{ application.cover_letter|linebreaks }}</p>
+<!-- Add more fields as needed -->
