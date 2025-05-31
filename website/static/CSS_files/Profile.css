@@ -405,17 +405,10 @@ margin: auto;
     width: 60%;
     margin: auto auto;
     scale: 0.7;
-<<<<<<< HEAD
     display: none;
     opacity: 0;
     transition: opacity 0.3s ease, visibility 0.3s ease;
     z-index: 999;
-=======
-    opacity: 0;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
-    z-index: 5;
-
->>>>>>> origin/Back2_latest
 }
 
 .back{
@@ -1029,15 +1022,9 @@ input[type="file"] {
 .job-container{
     display: flex;
     justify-content: baseline;
-<<<<<<< HEAD
     gap: 50px;
     flex-wrap: wrap;
     /* padding: 0 100px; */
-=======
-    gap: 10px;
-    flex-wrap: wrap;
-    /* padding: 0 10%; */
->>>>>>> origin/Back2_latest
     margin-bottom: 25px;
 }
 
@@ -1051,11 +1038,7 @@ input[type="file"] {
     display: flex;
     justify-content: baseline;
     gap: 50px;
-<<<<<<< HEAD
     border-radius: 20px;
-=======
-    border-radius: 10px;
->>>>>>> origin/Back2_latest
     width: 45%;
     box-shadow: -1px 1px 20px #dbdbdb;
     
@@ -1096,11 +1079,7 @@ input[type="file"] {
     margin-bottom: 50px;
     justify-content: baseline;
     flex-wrap: wrap;
-<<<<<<< HEAD
     gap: 50px;
-=======
-    gap: 20px;
->>>>>>> origin/Back2_latest
 }
 
 .job-elm{
@@ -1110,11 +1089,7 @@ height: 120px;
 display: flex;
 justify-content: baseline;
 gap: 50px;
-<<<<<<< HEAD
 border-radius: 20px;
-=======
-border-radius: 10px;
->>>>>>> origin/Back2_latest
 padding: 20px;
 box-shadow: -1px 1px 20px #dbdbdb;
 margin-left: 25px;
@@ -1551,14 +1526,8 @@ display: block;
 }
 
     .carousel-track {
-<<<<<<< HEAD
       display: flex;
       justify-content: space-evenly;
-=======
-      padding-left:50px ;
-      display: flex;
-      justify-content: center;
->>>>>>> origin/Back2_latest
       transition: transform 0.6s ease-in-out;
       width: 100%;
     }
@@ -1645,155 +1614,43 @@ width: 100%;
 .job-course-grp{
     display: flex;
     gap: 20px;
-<<<<<<< HEAD
-=======
+}
+.no-certificates {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #f8fafc;
+    border: 2px dashed #b6c2d1;
+    border-radius: 14px;
+    padding: 32px 16px;
+    margin: 32px auto;
+    max-width: 400px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+    transition: box-shadow 0.2s;
 }
 
-
-
-
-
-.add-job-page{
-    padding: 20px 0;
-    background: white;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-    border-radius: 20px;
-
+.no-certificates:hover {
+    box-shadow: 0 4px 24px rgba(61,178,255,0.08);
 }
 
-#job-off-details{
-    padding-left: 8%;
+.no-cert-img {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 18px;
+    opacity: 0.7;
 }
 
- h2, h3 {
-      font-weight: 600;
-      margin-top: 2rem;
-      margin-bottom: 1rem;
-    }
-    form {
-      max-width: 700px;
-      margin: 0 auto;
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-    }
-    label {
-      font-weight: 500;
-      font-size: 0.875rem;
-      margin-bottom: 0.25rem;
-    }
-    input[type="text"],
-    input[type="email"],
-    input[type="url"],
-    input[type="date"],
-    select,
-    textarea {
-      width: 100%;
-      padding: 0.75rem;
-      border: 1px solid #d1d5db;
-      border-radius: 0.5rem;
-      font-size: 0.875rem;
-      background-color: #f9fafb;
-      outline: none;
-      transition: box-shadow 0.2s, border-color 0.2s;
-      appearance: none;
-      -webkit-appearance: none;
-      -moz-appearance: none;
-    }
-    input:focus,
-    select:focus,
-    textarea:focus {
-      border-color: #93c5fd;
-      box-shadow: 0 0 0 3px rgba(147, 197, 253, 0.5);
-    }
-    input[type="date"]::-webkit-calendar-picker-indicator {
-      filter: invert(36%) sepia(97%) saturate(749%) hue-rotate(185deg) brightness(103%) contrast(102%);
-      cursor: pointer;
-    }
-    input[type="file"] {
-      display: none;
-    }
-    .add-job-custom-file-upload {
-      display: inline-block;
-      padding: 0.75rem 1rem;
-      cursor: pointer;
-      background-color: #f3f4f6;
-      border: 1px solid #d1d5db;
-      border-radius: 0.5rem;
-      font-size: 0.875rem;
-      color: #111827;
-      transition: background-color 0.2s;
-    }
-    .add-job-custom-file-upload:hover {
-      background-color: #e5e7eb;
-    }
-    textarea {
-      resize: vertical;
-    }
-    .add-job-row {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-    .add-job-row > div {
-      flex: 1;
-      min-width: 45%;
-    }
-    .add-job-button {
-      padding: 0.75rem 1.5rem;
-      background-color: #4338ca;
-      color: white;
-      font-weight: 500;
-      border: none;
-      border-radius: 0.5rem;
-      cursor: pointer;
-      font-size: 0.875rem;
-    }
-    .add-job-button:hover {
-      background-color: #3730a3;
-    }
-    .add-job-info {
-      font-size: 0.75rem;
-      color: #6b7280;
-    }
-
-
-    .add-job{
-        padding: 0 20%;
-        max-height: 0;
-        opacity: 0;
-        transition: 0.5s ease;
-        z-index: -6;
-        pointer-events: none ;
-    }
-
-
-    
-.add-job.expand {
-  max-height: 1700px;
-  opacity: 1;
-  z-index: 17;
-  pointer-events: fill;
+.no-cert-text h2 {
+    font-size: 1.4rem;
+    color: #3DB2FF;
+    margin-bottom: 6px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
 }
 
-#new-job-btn{
-    padding: 12px 24px;
-        background-color: #1a3f92;
-        color: white;
-        border: none;
-        border-radius: 8px;
-        font-size: 1.2rem;
-        cursor: pointer;
-        transition: background 0.3s;
-        margin: 20px auto;
-        width: 720px;
-        display: block;
-        height: 50px;
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1)
-}
-
-#new-job-btn:hover{
-    background-color: #2a53b4;
-    box-shadow: 0 8px 32px rgba(51, 121, 212, 0.1)
->>>>>>> origin/Back2_latest
+.no-cert-text p {
+    color: #6b7280;
+    font-size: 1rem;
+    margin: 0;
 }
